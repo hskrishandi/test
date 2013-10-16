@@ -1,0 +1,90 @@
+
+.div_inline {
+	float: left;
+	position: relative;
+}
+.change_pass{
+	margin-left: 20px;
+	margin-top: 20px;
+}
+.change_pass .title{
+	margin-left: 0px;
+	margin-top: 0px;
+	padding-top: 10px;
+}
+.change_pass .forms {
+	width: 799px;
+	min-height: 500px;
+	float: left;
+	position: relative;
+}
+.change_pass .forms .form_table td{
+	padding-top: 10px;
+	vertical-align: top;
+}
+.change_pass .forms input{
+	width: 250px;
+	border: 1px solid #9E9EC3;
+	margin-right:50px;
+}
+.change_pass .forms input.submit{
+	width: 75px;
+	height: 35px;
+	border: 1px solid #9E9EC3;
+}
+.change_pass .forms .err{
+	border: 1px solid red;
+}
+.change_pass .forms textarea{
+	width: 530px;
+	border: 1px solid #9E9EC3;
+}
+.change_pass .forms .error{
+	color: red;
+}
+.change_pass .forms .form_table .title{
+	width: 150px;
+	vertical-align: top;
+	font-weight: normal;
+}
+.change_pass .forms div.form_submit{
+    bottom: -140px;
+    left: -140px;
+	position:absolute;
+}
+.change_pass .float_right{
+	float: right;
+	position:relative;
+}
+.change_pass a.submit:after {
+    border-bottom: 11px solid transparent;
+    border-left: 11px solid #726FB2;
+    border-top: 11px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: -11px;
+    top: 0;
+}
+.change_pass a.submit {
+    background-color: #726FB2;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: default;
+    display: block;
+    float: right;
+    height: 22px;
+    line-height: 22px;
+    margin-right: 22px;
+    position: relative;
+    text-align: center;
+    width: 75px;
+}
+.change_pass td.submit {
+    padding-right: 40px;
+}
+
+.change_pass .verification{
+	margin-top:10px;
+}

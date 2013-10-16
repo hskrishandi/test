@@ -1,0 +1,96 @@
+
+.div_inline, .auth_err div.title{
+	float: left;
+	position: relative;
+}
+.auth_err{
+	margin-left: 20px;
+	margin-top: 20px;
+	float: left;
+	min-height: 500px;
+	position: relative;
+}
+.auth_err .title{
+	margin-left: 0px;
+	margin-top: 0px;
+}
+.auth_err .forms {
+	width: 799px;
+	float: left;
+	position: relative;
+}
+
+.auth_err div.title {
+	width: 110px;
+	font-weight: normal;
+	clear:both;
+}
+
+.auth_err div.forms {
+	padding-top: 10px;
+	width:550px;
+}
+
+.auth_err div.item {
+	padding-top: 30px;
+}
+
+.auth_err input.form-text  {
+	width: 420px;
+}
+.auth_err .page-item-list{
+	float: left;
+	position: relative;
+	
+}
+.auth_err .page-item-list ul{
+	list-style-type:none;
+}
+.auth_err .page-item-list li{
+	display: inline;
+	padding-right: 10px
+}
+.page-function-block{
+	clear: both;
+	margin-top:20px;
+}
+.auth_err .page-submit-block{
+	float: right;
+	margin-top:0px;
+}
+
+.auth_err form .submit:after {
+    border-bottom: 11px solid transparent;
+    border-left: 11px solid #726FB2;
+    border-top: 11px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: -11px;
+    top: 0;
+}
+
+.auth_err form .submit {
+    background-color: #726FB2;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: default;
+    display: block;
+    float: right;
+    height: 22px;
+    line-height: 22px;
+    margin-right: 22px;
+    position: relative;
+    text-align: center;
+    width: 75px;
+}
+
+.auth_err .redborder{
+	border: 2px solid #f00;
+}
+
+.auth_err #err{
+	color: #f00;
+	margin-top: 10px
+}
