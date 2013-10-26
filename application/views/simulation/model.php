@@ -24,7 +24,7 @@
 		<?php end_block_marker(); ?>
 		
 		<script src="<?php echo resource_url('js', 'txtsim/PlotToPNG.js'); ?>" type="text/javascript" charset="utf-8"></script>
-		<script src="<?php echo resource_url('js', 'common.js'); ?>" type="text/javascript" charset="utf-8"></script>
+		<script src="<?php echo resource_url('js', 'imos-addon.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/utilities.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/models.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/graphs.js'); ?>" type="text/javascript"></script>

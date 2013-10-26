@@ -20,6 +20,11 @@
 		tabcontainer.tabs();
 		tabcontainer.bind('tabsshow', function(event, ui) {
 			//Event for clicking output tab. Callback the server program.
+			if (ui.index == 1) {
+				$("#textModeList").cmApply(function(cm) {
+					cm.refresh();
+				}).change();
+			}
 		    if (ui.index == 3){
 			//Display the graph if there is any
 				if(jqPlotObject.length > 0){
@@ -114,7 +119,7 @@
 				console.log(data);
 				if(!data.error){
 					$('#textModeList').val(data.netlist);
-					$("#textModeList").trigger('autosize');
+					//$("#textModeList").trigger('autosize');
 					$(".data-persist").change();
 				}
 				else
@@ -197,8 +202,11 @@
 			});
 			return;
 		});
-		
-	$("<iframe name='my_iframe' style='display:none'></iframe>").appendTo('BODY');			
+
+		/* initialize CodeMirror*/
+		$(".code-mirror").cmInit();
+
+		$("<iframe name='my_iframe' style='display:none'></iframe>").appendTo('BODY');			
 	});
 	var CSVDownload = function(url,item_no){
 		var CSV = $("<form>").attr('method', 'POST').attr('target', 'my_iframe').addClass("hidden").attr('action',url);
@@ -613,9 +621,10 @@ var confirm;
 					data: $('#netlistModeForm').serialize(),
 					dataType: "json"
 				}).done(function(data) {
+					console.log(data);
 					if (!_simerr(data)){
 						$("#textModeList").val(data.netlist);
-						$("#textModeList").trigger('autosize');
+						//$("#textModeList").trigger('autosize');
 						$(".data-persist").change();
 					}
 				});

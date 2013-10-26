@@ -43,6 +43,12 @@
 		<script src="<?php echo resource_url('js', 'library/knockout.localPersist.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/json2.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/jquery.blockUI.js'); ?>" type="text/javascript"></script>
+		<script src="<?php echo resource_url('js', 'library/codemirror/codemirror.js'); ?>" type="text/javascript"></script>
+		<script src="<?php echo resource_url('js', 'library/codemirror/codemirror-ui.js'); ?>" type="text/javascript"></script>
+		<script src="<?php echo resource_url('js', 'library/codemirror/codemirror-ui-find.js'); ?>" type="text/javascript"></script>
+		<script src="<?php echo resource_url('js', 'library/codemirror/jquery.codemirror.js'); ?>" type="text/javascript"></script>
+		<script src="<?php echo resource_url('js', 'library/codemirror/selection/active-line.js'); ?>" type="text/javascript"></script>
+		<script src="<?php echo resource_url('js', 'library/codemirror/search/searchcursor.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'autosize/jquery.autosize.js'); ?>" type="text/javascript"></script>
 		<!--[if lt IE 9]><script src="<?php echo resource_url('js', 'library/excanvas.min.js'); ?>" type="text/javascript"></script><![endif]-->
 		<script src="<?php echo resource_url('js', 'txtsim/plot_new.js'); ?>" type="text/javascript"></script>
@@ -55,10 +61,10 @@
 		<script src="<?php echo resource_url('js', 'txtsim/dist/plugins/jqplot.logAxisRenderer.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'txtsim/dist/plugins/jqplot.cursor.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'txtsim/dist/plugins/jqplot.logAxisRenderer.js'); ?>" type="text/javascript"></script>
-		<script src="<?php echo resource_url('js', 'common.js'); ?>" type="text/javascript" charset="utf-8"></script>
+		<script src="<?php echo resource_url('js', 'imos-addon.js') . "?" . time(); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/utilities.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/models.js'); ?>" type="text/javascript"></script>
-		<script src="<?php echo resource_url('js', 'txtsim/doc_ready.js'); ?>" type="text/javascript"></script>
+		<script src="<?php echo resource_url('js', 'txtsim/doc_ready.js') . "?" . time(); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'txtsim/param_set.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'txtsim/PlotToPNG.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'txtsim/helper.js'); ?>" type="text/javascript"></script>
@@ -79,6 +85,8 @@
 		<!-- <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'node_sim.css'); ?>" media="all" /> -->
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'font/font-awesome.min.css'); ?>">
 		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'font/font-awesome-ie7.min.css'); ?>"><![endif]-->
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'lib/codemirror.css')?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'lib/codemirror-ui.css')?>">
 	<?php endblock(); ?>
 	
   <?php startblock('content'); ?>
@@ -220,7 +228,7 @@
 					<div class="formContent">
 						<input name="mode" value="RAW" type="hidden"/>
 						<span>Raw Input:</span>
-						<textarea id="textModeList" class="editorCommonDesign clear-area-1 data-persist" name="RAWlist"></textarea>
+						<textarea id="textModeList" class="editorCommonDesign clear-area-1 data-persist code-mirror" name="RAWlist"></textarea>
 						<br /> <br />
 					</div>
 				</div>
