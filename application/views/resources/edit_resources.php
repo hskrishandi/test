@@ -49,6 +49,11 @@ $(document).ready(function(){
                             <td><input name="title" type="text" id="cname"  class="required" value="<?php  echo $entry->title;?>"/></td>
                           </tr>
                           <tr>
+
+                            <td class="label">Source Link:</td>
+                            <td><input name="slink" type="text" id="cname"  class="required" value="<?php  echo $entry->source_link;?>"/></td>
+                          </tr>
+                          <tr>
                             <td colspan="2">Content:</td>
                           </tr>
                           <tr>

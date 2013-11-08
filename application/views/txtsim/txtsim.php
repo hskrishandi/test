@@ -244,7 +244,7 @@
 		</div>
 	</div>
 	<div id="loading" class="hidden" style="">
-		<img src="http://www.i-mos.org/develop/cyrixtam/imos2_model/images/loading.gif"><p>
+		<img src="<?php echo base_url('images/loading.gif'); ?>"><p>
 		Press F5 to refresh if<br>no response</p>
 	</div>
   <?php endblock(); ?>

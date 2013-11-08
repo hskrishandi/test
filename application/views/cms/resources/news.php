@@ -29,7 +29,10 @@
                     	<h4 class="title"><?php echo $entry->title;?></h4>
                   
                         <div><?php echo nl2br($entry->content);?></div>
-      
+      				<br /><br />
+      				<?php if($entry->source_link != "") { ?>
+      				Source: <a href="<?php echo $entry->source_link; ?>" target="_blank"><?php echo $entry->source_link; ?></a>
+      				<?php } ?>
         <a class="return-link" href="<?php echo base_url('cms/resources'); ?>">
 					Back
 				</a>

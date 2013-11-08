@@ -8,8 +8,9 @@ class home extends CI_Controller {
 		
 		$this->load->helper(array('template_inheritance', 'html', 'credits', 'form', 'url'));
 		$this->load->model(array('Account_model', 'Resources_model'));
-		//$this->load->library('session');
-		$this->load->driver('session');
+		$this->load->library('session');
+		$this->load->library('MY_Session');
+		//$this->load->driver('session');
 		$this->config->load('home');
 	}
 
@@ -63,12 +64,12 @@ class home extends CI_Controller {
 			
 			if ($this->form_validation->run()) {
 				$this->Resources_model->add_user_experience($user_id, $this->input->post('comment'));
-				$this->session->native->set_flashdata('post_experience_msg', 'Your comment is submited. Thank you.');
+				$this->session->set_flashdata('post_experience_msg', 'Your comment is submited. Thank you.');
 				redirect(current_url());
 			}
 		}
 		
-		$data['msg'] = $this->session->native->flashdata('post_experience_msg');
+		$data['msg'] = $this->session->flashdata('post_experience_msg');
 		
 		$this->load->view('home/post_experience', $data);
 	}

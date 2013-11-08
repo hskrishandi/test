@@ -8,9 +8,9 @@ class Account_model extends CI_Model {
 		require_once dirname(__FILE__) . '/includes/password.inc';
 		$this->load->database();
 		$this->load->library('email');
-		$this->load->driver('session');
-		//$this->session->native->select_driver('native');
-		//$this->load->library('session');
+		$this->load->library('session');
+		$this->load->library('MY_Session');
+		//$this->session->select_driver('native');
 		$this->load->library('LoginPass');
 		$this->load->helper('url');
 	}
@@ -28,8 +28,8 @@ class Account_model extends CI_Model {
 			$row = $query->first_row();
 			if ($this->_isPassVaild($row->password, $pwd)){
 				if ($row->isactivated=='1'){
-					//$this->db->where('id',$row->id)->update('users', array("sessionid"=>$this->session->native->userdata['session_id']));
-					$this->session->native->set_userdata(array('id'=>$row->id));
+					//$this->db->where('id',$row->id)->update('users', array("sessionid"=>$this->session->userdata['session_id']));
+					$this->session->set_userdata(array('id'=>$row->id));
 					return "ok";
 				}else{
 					return "noactive";
@@ -43,9 +43,9 @@ class Account_model extends CI_Model {
 	}
 
 	public function logout(){
-	var_dump($this->session->native->all_userdata());
-		$this->session->native->sess_destroy();
-		var_dump($this->session->native->all_userdata());
+	var_dump($this->session->all_userdata());
+		$this->session->sess_destroy();
+		var_dump($this->session->all_userdata());
 	}
 	public function isEmailDup($email){
 		$this->db->select('id')->from('users')->where(array("email" => $email));
@@ -57,14 +57,14 @@ class Account_model extends CI_Model {
 			return false;
 	}
 	public function islogin(){
-		$id = $this->session->native->userdata('id');
+		$id = $this->session->userdata('id');
 		if (isset($id)){
 			$query = $this->db->get_where("users", array('id'=>$id),1,0);
 			if ($query->num_rows > 0 ){
 				$row = $query->first_row();
 				return $row;
 				/*
-				if ($row->id == $this->session->native->userdata['id']){
+				if ($row->id == $this->session->userdata['id']){
 					return $row;
 				}else{
 					return false;
@@ -167,7 +167,7 @@ class Account_model extends CI_Model {
 		$row = $query->result();
 		if ($query->num_rows() > 0){
 
-			$data = array('isactivated' => 1, 'sessionid'=>$this->session->native->userdata['session_id']);
+			$data = array('isactivated' => 1, 'sessionid'=>$this->session->userdata['session_id']);
 
 			$where = "id = ".$row[0]->id;
 
@@ -176,7 +176,7 @@ class Account_model extends CI_Model {
 
 			$this->db->delete("activation_page", array("page" => $page));
 
-			$this->session->native->set_userdata(array('id'=>$row[0]->id));
+			$this->session->set_userdata(array('id'=>$row[0]->id));
 
 			return true;
 		}else{
@@ -187,7 +187,7 @@ class Account_model extends CI_Model {
 	public function isAuth($userlevel=0){
 		$info = $this->Account_model->islogin();
 		if (uri_string() !=="account/authErr")
-			$this->session->native->set_userdata('refer', uri_string());
+			$this->session->set_userdata('refer', uri_string());
 		if ($info === false){
 				redirect('/account/authErr');
 		} else {

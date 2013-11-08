@@ -11,6 +11,7 @@ class cms extends CI_Controller {
 		$this->load->model('Resources_model');
 		$this->load->model('Account_model');	
 		$this->load->model('modelsim_model');	
+		$this->load->model('server_model');
 		$this->config->load('resources');
 		$this->config->load('account_info_update');
 		$this->load->library('form_validation');
@@ -278,6 +279,138 @@ class cms extends CI_Controller {
 			$this->modelsim_model->delRes($type,$id,NULL);			
 			
 		}
+	}
+
+	/*
+	 * CMS Page to list all the computer nodes
+	 *
+	 */
+	public function monitor() {
+		if (!$this->Account_model->isAuth()) return;
+		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+
+		$this->load->view('cms/node_monitor');
+	}
+
+	/*
+	 * Ajax Request to load all the status of computer nodes
+	 *
+	 */
+	public function loadStatus() {
+		if (!$this->Account_model->isAuth()) return;
+		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+
+		$nodes = $this->server_model->loadnodes();
+
+		$status = array();
+		foreach($nodes as $node) {
+			$status[$node->nodename]["hostname"] = $node->hostname;
+			$status[$node->nodename]["mysqld"] = false;
+			$status[$node->nodename]["httpd"] = false;
+			$status[$node->nodename]["ngspice"] = array();
+
+			/* CHECKING SERVER CONNECTIVITY */
+			exec("ping " . $node->hostname . " -c 1 -w 1", $result);
+			if(stripos($result[count($result) - 2], "0% packet loss") === false) {
+				$status[$node->nodename]["ping"] = false;
+				continue;
+			}
+			else
+				$status[$node->nodename]["ping"] = true;
+
+			/* GET INFORMATION FROM NODE */
+			$root = "http://" . $node->hostname . $node->path . "/cms/execute/";
+			$content = $this->server_model->remotelogin($node, array(
+				$root . "ps",
+				$root . "apache"
+			));
+
+			if($content) {
+				/* CHECK APACHE */
+				$ps = json_decode($content[0]);
+				$httpd = $content[1];
+				if(isset($ps))
+					foreach($ps as $p) {
+						if(preg_match("/mysqld/", $p))
+							$status[$node->nodename]["mysqld"] = true;
+						if(preg_match("/httpd/", $p) && preg_match("/" . $httpd . "/", $p))
+							$status[$node->nodename]["httpd"] = true;
+						if(preg_match("/ngspice/", $p)) {
+							$parts = preg_split('/\s+/', $p);
+							$status[$node->nodename]["ngspice"][] = array(
+								"pid" => $parts[1],
+								"time" => $parts[9]);
+						}
+
+					}
+			}
+		}
+		echo json_encode($status);
+	}
+
+	/*
+	 * Ajax request to execute command
+	 */
+	public function preexecute($action) {
+		if (!$this->Account_model->isAuth()) return;
+		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+
+		$node = $this->input->post("node");
+		$node = $this->server_model->selectnode($node);
+		if(!$node) {
+			$this->output->set_status_header('405');
+			return;
+		}
+		switch($action) {
+			case "cleartemp":
+				$content = $this->server_model->remotelogin($node, array(
+						"http://" . $node->hostname . $node->path . "/cms/execute/cleartemp"
+					)
+				);
+				echo json_encode($content[0]);
+				break;
+			case "terminatengspice":
+				$pid = $this->input->post("pid");
+				$content = $this->server_model->remotelogin($node, array(
+						"http://" . $node->hostname . $node->path . "/cms/execute/terminatengspice?pid=" . $pid
+					)
+				);
+				echo json_encode($content[0]);
+				break;
+
+		}
+	}
+
+
+
+	public function execute($action) {
+		if (!$this->Account_model->isAuth()) return;
+		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+
+		switch($action) {
+			case "ps":
+				$this->server_model->checkps();
+				break;
+			case "apache":
+				$this->server_model->checkapache();
+				break;
+			case "cleartemp":
+				if($this->server_model->cleartemp())
+					echo "DELETE";
+				else
+					echo "FAIL";
+				break;
+			case "terminatengspice":
+				$pid = $this->input->get("pid");
+				if($this->server_model->terminatengspice($pid))
+					echo "KILL";
+				else
+					echo "FAIL";
+				break;
+			default:
+				break;
+		}
+
 	}
 	
 }

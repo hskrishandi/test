@@ -8,8 +8,9 @@ class search extends CI_Controller {
 		
 		$this->load->helper(array('template_inheritance', 'html', 'credits', 'form', 'url'));
 		$this->load->model(array('Account_model', 'Resources_model'));
-		//$this->load->library('session');
-		$this->load->driver('session');
+		$this->load->library('session');
+		$this->load->library('MY_Session');
+		//$this->load->driver('session');
 		$this->config->load('home');
 	}
 

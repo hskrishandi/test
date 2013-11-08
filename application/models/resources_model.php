@@ -229,7 +229,7 @@ class Resources_model extends CI_Model {
 	*/
 	public function get_news_details($id){
 		if($id!=NULL){
-			$query = $this->db->query("SELECT id, UNIX_TIMESTAMP(post_date) as post_date, title, content,approval_status FROM news WHERE id='$id'");
+			$query = $this->db->query("SELECT id, UNIX_TIMESTAMP(post_date) as post_date, title, source_link, content,approval_status FROM news WHERE id='$id'");
 			
 		return $query->result();
 		}
@@ -274,9 +274,9 @@ class Resources_model extends CI_Model {
 		
 	}
 	
-	public function edit_news($news_id,$title,$content){
-		$this->db->query("UPDATE `news` SET  `title` =  '$title',
-`content` =  '$content' WHERE  `news`.`id`='$news_id'");
+	public function edit_news($news_id,$title,$sourcelink, $content){
+		$this->db->query("UPDATE `news` SET  `title` =  ?,
+			`content` =  ?, `source_link` = ? WHERE  `news`.`id`=?", array($title, $content, $sourcelink, $news_id));
 		
 	}
 

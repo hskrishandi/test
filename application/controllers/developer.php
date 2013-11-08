@@ -7,14 +7,15 @@ class developer extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->helper(array('template_inheritance', 'html', 'form', 'url'));
-		$this->load->driver('session');
-		//$this->load->library('session');
+		//$this->load->driver('session');
+		$this->load->library('session');
+		$this->load->library('MY_Session');
 	}
 
 	public function index()
 	{
     /*
-		if (!$this->session->native->flashdata('developer_tos')) {
+		if (!$this->session->flashdata('developer_tos')) {
 			redirect('developer/tos');
 		}
     */
@@ -25,7 +26,7 @@ class developer extends CI_Controller {
 	{
 		if ($this->input->post()) {
 			if ($this->input->post('response') === "I Agree") {
-				$this->session->native->set_flashdata('developer_tos', 1);
+				$this->session->set_flashdata('developer_tos', 1);
 				redirect('developer');
 			} else {
 				redirect('');

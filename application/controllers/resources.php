@@ -255,7 +255,8 @@ class resources extends CI_Controller {
 				$news_id=$this->input->get_post('newsid', TRUE);	
 				$title=$this->input->get_post('title', TRUE);
 				$content=$this->input->get_post('content', TRUE);
-				$this->Resources_model->edit_news($news_id,$title,$content);
+				$slink = $this->input->get_post('slink', TRUE);
+				$this->Resources_model->edit_news($news_id,$title,$slink, $content);
 				redirect(base_url('cms/resources/news/?id='.$news_id), 'refresh');			
 			}
 			else if($res=='events'){
