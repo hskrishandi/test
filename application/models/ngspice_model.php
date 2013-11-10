@@ -16,7 +16,6 @@ class Ngspice_model extends CI_Model {
 		// Save netlist file to tmp
 		$id = uniqid('sim_', true);
 		$folder = realpath(getcwd() . '/application/simulation/tmp/') . '/' . $id;
-		
 		$old = umask(0);
 		
 		mkdir($folder, 0777);

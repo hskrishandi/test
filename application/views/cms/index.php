@@ -36,10 +36,10 @@
     	    <td><a href="<?php echo base_url('cms/resources');?>">Resources(<?php echo $disapproved_res;?>)</a></td>
     	    <td><a href="<?php echo base_url('/cms/users');?>">Users(0)</a></td>
     	    <td>Sitemap(0)</td>
-    	    <td><a href="<?php echo base_url('/cms/monitor'); ?>">Computer Nodes Monitor</a></td>
+    	    <td><a href="<?php echo base_url('/cms/monitor'); ?>">Nodes Monitor</a></td>
   	    </tr>
     	  <tr>
-    	    <td><a href="">Computer Nodes Management</a></td>
+    	    <td><a href="">Nodes Management</a></td>
     	    <td>&nbsp;</td>
     	    <td>&nbsp;</td>
     	    <td>&nbsp;</td>

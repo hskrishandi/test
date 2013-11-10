@@ -388,6 +388,7 @@ class resources extends CI_Controller {
 				'title' => $this->input->get_post('title', TRUE),
 				'content' => $this->input->get_post('content', TRUE),
 				'post_date' => $this->input->get_post('post_date', TRUE),
+				'source_link' => $this->input->get_post('slink', TRUE),
 				'approval_status' => $approval_status
 			);
 				

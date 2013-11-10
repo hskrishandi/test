@@ -64,6 +64,7 @@ class process_model extends CI_Model {
 	public function RecordPID($pid, $folder = null)
 	{
 		$folder = $this->_GetWorkingFolder($folder);
+		
 		if(file_put_contents("$folder/" . $this->_tmpname["processid"], $pid) !== false)
 			return true;
 		return false;
