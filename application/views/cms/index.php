@@ -39,7 +39,7 @@
     	    <td><a href="<?php echo base_url('/cms/monitor'); ?>">Nodes Monitor</a></td>
   	    </tr>
     	  <tr>
-    	    <td><a href="">Nodes Management</a></td>
+    	    <td><a href="<?php echo base_url('/cms/nodes'); ?>">Nodes</a></td>
     	    <td>&nbsp;</td>
     	    <td>&nbsp;</td>
     	    <td>&nbsp;</td>

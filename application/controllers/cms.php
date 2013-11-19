@@ -282,6 +282,56 @@ class cms extends CI_Controller {
 	}
 
 	/*
+	 * Nodes management
+	 *
+	 */
+	public function nodes($action = null) {
+		if (!$this->Account_model->isAuth()) return;
+		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+
+		if($action == null) {
+			$data["nodes"] = $this->server_model->loadnodes();
+			$this->load->view('cms/nodes', $data);
+		}
+		else if($action == "edit") {
+			if($this->input->post("edit")) {
+				$id = $this->input->post("id");
+				$nodename = $this->input->post("nodename");
+				$hostname = $this->input->post("hostname");
+				$path = $this->input->post("path");
+				$this->server_model->updatenode($id, $nodename, $hostname, $path);
+				header("location: " . base_url("/cms/nodes/"));
+				exit;
+			}
+			else
+				$name = $this->input->get("name");
+			$data = array("edit" => true, "node" => $this->server_model->selectnode($name));
+			$this->load->view('cms/nodes_edit', $data);
+		}
+		else if($action == "add") {
+			if($this->input->post("add")) {
+				$nodename = $this->input->post("nodename");
+				$hostname = $this->input->post("hostname");
+				$path = $this->input->post("path");
+
+				if($nodename != "" && $hostname != "" && $path != "") {
+					$this->server_model->addnode($nodename, $hostname, $path);
+					header("location: " . base_url("/cms/nodes/"));
+					exit;
+				}
+			}
+			$data = array("add" => true);
+			$this->load->view('cms/nodes_edit', $data);
+		}
+		else if($action == "delete") {
+			$name = $this->input->get("name");
+			$this->server_model->deletenode($name);
+			header("location: " . base_url("/cms/nodes/"));
+			exit;
+		}
+	}
+
+	/*
 	 * CMS Page to list all the computer nodes
 	 *
 	 */

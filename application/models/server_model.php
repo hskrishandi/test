@@ -14,6 +14,20 @@ class Server_model extends CI_Model {
 		return $query->result();
 	}
 
+	public function updatenode($id, $nodename, $hostname, $path) {
+		$this->db->query("UPDATE computer_nodes SET nodename=?, hostname=?, path=? WHERE id=?",
+			array($nodename, $hostname, $path, $id));
+	}
+
+	public function addnode($nodename, $hostname, $path) {
+		$this->db->query("INSERT INTO computer_nodes(nodename, hostname, path) VALUES(?, ?, ?)",
+			array($nodename, $hostname, $path));
+	}
+
+	public function deletenode($name) {
+		$this->db->query("DELETE FROM computer_nodes WHERE nodename=?", array($name));
+	}
+
 	public function selectnode($nodename) {
 		$query = $this->db->query("SELECT * FROM computer_nodes WHERE nodename=?", array($nodename));
 		if($query->num_rows() == 0)
