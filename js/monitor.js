@@ -24,37 +24,44 @@ $(function() {
 		var self = this;
 
 		this.clearTemp = function() {
-			confirm("Are you sure to delete temporary folder for node=" + self.hostname + "?", function(t) {
-				if(t) {
-					$.ajax({
-						type: "POST",
-						url: CI_ROOT + "cms/preexecute/cleartemp",
-						data: {
-							"node" : self.name
-						},
-						success: function(data) {
-						},
-						error: function() {
+			if(confirm("Are you sure to delete temporary folder for node=" + self.hostname + "?")) {
+				$.ajax({
+					type: "POST",
+					url: CI_ROOT + "cms/preexecute/cleartemp",
+					data: {
+						node : self.name
+					},
+					success: function(data) {
+						try {
+							data = JSON.parse(data);
 						}
-					});
-				}
-			});
+						catch (e){}
+						console.log(data);
+						if(data == "DELETE")
+							alert("Cleared.");
+					},
+					error: function() {
+					}
+				});
+			}
 		};
 
 		this.terminate = function(pid) {
-			$.ajax({
-				type: "POST",
-				url: CI_ROOT + "cms/preexecute/terminatengspice",
-				data: {
-					"node" : self.name,
-					"pid" : pid
-				},
-				success: function(data) {
-
-				},
-				error: function() {
-				}
-			});
+			if(confirm("Are you sure to terminate the ngspice process id=" + pid + " for node=" + self.name + "?")) {
+				$.ajax({
+					type: "POST",
+					url: CI_ROOT + "cms/preexecute/terminatengspice",
+					data: {
+						"node" : self.name,
+						"pid" : pid
+					},
+					success: function(data) {
+						alert("Terminated.");
+					},
+					error: function() {
+					}
+				});
+			};
 		};
 	};
 	var model = new monitorModel();
@@ -73,7 +80,7 @@ $(function() {
 				
 				setTimeout(function() {
 					update();
-				}, 10000);
+				}, 6000);
 			},
 			error: function() {
 				console.log("ERROR WHEN SYNCING");
