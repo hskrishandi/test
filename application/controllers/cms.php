@@ -406,7 +406,9 @@ class cms extends CI_Controller {
 		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
 
 		$node = $this->input->post("node");
-		$node = $this->server_model->selectnode($node);
+		if($node)
+			$node = $this->server_model->selectnode($node);
+		
 		if(!$node) {
 			$this->output->set_status_header('405');
 			return;

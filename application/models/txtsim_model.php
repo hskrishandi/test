@@ -15,7 +15,7 @@ class Txtsim_model extends CI_Model{
 	{
 		return $this->load->view('txtsim/txtsim_temple.php',array_merge($this->input->post(), array("modelCard"=>$modelCard)),true);
 	}
-	public function replacePlotToWRDATA($netlist)
+	public function replacePlotToWRDATA(&$netlist)
 	{
 		//Parsing the plot commard in CONTROL CARDS
 		return preg_replace_callback('/^plot/im',create_function('$matchs','global $count1; return "wrdata output".$count1++.".data";'),$netlist);
@@ -35,6 +35,8 @@ class Txtsim_model extends CI_Model{
 			$netlist = substr($netlist, 0, $pos)."\n.CONTROL\nsave all\nrun\n.endc\n".substr($netlist, $pos);
 		}
 		
+		//replace all the comment plot
+		$netlist = preg_replace("/\*( +)?\.plot.+/im", "", $netlist);
 		//MOVE .plot to .CONTROL card
 		$netlist = preg_replace_callback('/\.plot[^\n]+/im',create_function('$matchs','global $plotstring; $plotstring.=substr($matchs[0],1)."\n";return "";'),$netlist);
 		//append the control card
