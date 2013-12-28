@@ -54,6 +54,23 @@ class modelsim extends CI_Controller {
 				
 		$this->load->view('simulation/model.php', $data);
 	}
+
+	public function benchmarking($method) {
+        $response = null;
+		if ($this->Account_model->isLogin()) {
+			switch ($method) {
+			case "GET":
+				$response = $this->Modelsim_model->getBenchmarkingInfo();
+				break;
+			default:
+				$this->output->set_status_header('404');
+			}
+        } else {
+            $this->output->set_status_header('401');
+        }
+
+        $this->outputJSON($response);
+	}
 	
     public function modelLibrary($method, $id = 0) 
     {

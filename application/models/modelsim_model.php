@@ -8,6 +8,20 @@ class Modelsim_model extends CI_Model {
 		$this->load->database();
 		$this->config->load('simulation');
 	}
+
+	public function getBenchmarkingInfo() {
+		$query = $this->db->query("SELECT mb.id, mb.name,mb.display_name,COALESCE(result.outputs, \"[]\") AS output FROM `model_benchmark` AS mb
+			LEFT JOIN
+			(
+			    SELECT mbo.benchmark_id AS id,
+			    CONCAT('[', GROUP_CONCAT(
+			        '{\"name\":\"', name, '\",\"unit\":\"', unit, '\",\"variable\":\"', variable, '\"}' ORDER BY orders SEPARATOR ','
+			    ), ']') AS outputs FROM `model_benchmark_outputs` AS mbo
+			    GROUP BY benchmark_id
+			) AS result ON mb.id=result.id
+			ORDER BY mb.orders");
+		return $query->result_array();
+	}
         	
 	public function getModelsInfo()
 	{
