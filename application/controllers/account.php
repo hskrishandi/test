@@ -127,13 +127,13 @@ class account extends CI_Controller {
 		if ($userinfo  === false){
 			$msg = $this->Account_model->login($email,$pwd);
 			if ($msg === "ok"){
-				$this->session->native->set_userdata('relogined', '1');
+				$this->session->set_userdata('relogined', '1');
 			}
 			echo $msg;
 		}else{
 			if ($userinfo->email  == $email && $this->Account_model->_isPassVaild($userinfo->password,$pwd)){
 				echo 'ok';
-				$this->session->native->set_userdata('relogined', '1');
+				$this->session->set_userdata('relogined', '1');
 			}else{
 				echo 'noaccpass';
 			}
@@ -149,7 +149,7 @@ class account extends CI_Controller {
 	}
 	
 	public function infoUpdate(){
-		$relogined = $this->session->native->userdata('relogined');
+		$relogined = $this->session->userdata('relogined');
 		$submited = $this->input->post('submited');
 		$data1['title'] = 'Account Update';
 
@@ -159,7 +159,7 @@ class account extends CI_Controller {
 			$form = $this->config->item('account_info_update_form');
 			$this->form_validation->set_rules($form);
 			$data_vaild = $this->form_validation->run();
-			$this->session->native->unset_userdata('relogined');
+			$this->session->unset_userdata('relogined');
 			$this->load->view('account/info_update',$data);
 		} else if($submited == "1")  {
 
@@ -256,7 +256,7 @@ class account extends CI_Controller {
 		}
 	}
 	public function authErrLoad(){
-		$uri = $this->session->native->userdata('refer');
+		$uri = $this->session->userdata('refer');
 		redirect("/".$uri);
 	}
 	
