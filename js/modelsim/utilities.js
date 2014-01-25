@@ -6,6 +6,7 @@
 var alert;
 var confirm;
 var prompt;
+var exampleDialog;
 var isNum;
 var error;
 
@@ -17,6 +18,11 @@ if (typeof console === "undefined" || !console) {
 }
 
 (function ($) {
+	// Override tooltip
+	$( document ).tooltip({
+      track: true
+    });
+	
     // Override BlockUI defaults
     $.extend(true, jQuery.blockUI.defaults, {
 	    fadeOut:  200,
@@ -171,6 +177,111 @@ if (typeof console === "undefined" || !console) {
 		dialogClass	: 'dialog-box prompt-box',
 		title		: 'Prompt'
 	};
+	
+	/**
+	 * In-page button plugin for showing the example parameters files.
+	 */
+	
+	exampleDialog = function(message, fileList, options) {
+		options = typeof options !== 'undefined' ? options : { };
+		fileList = fileList instanceof Array ? fileList : [];
+	
+		var creatList = function(parent, fileList){
+			parent.append('<br/><ul id="exampleDialog-menu"></ul>');
+			var ul = $("#exampleDialog-menu",parent);
+			$('#exampleDialog-menu').on('click', 'li',function(){
+				$.ajax({
+				beforeSend: function(){ viewModels.sim.isLoading(true);},
+				url: ROOT + "/readExampleFiles/"+MODEL_ID+"/"+$(this).text(),
+				type: 'GET',
+				success: function(data) {
+					try {
+						data = JSON.parse(data);
+					} catch(err) { alert("Sorry. Fail to parse!");}
+					if (data.success)
+					{
+						var params = viewModels.sim.loadParams(data.data);
+						params.error += data.error.length;
+					
+						if (params.error == 0) {
+							var msg = "File uploaded and parsed successfully!";	
+						} else {
+							var msg = "File uploaded successfully with " + params.error + " minor error(s) during parsing: <br /><br />";
+							
+							msg += "<blockquote>";
+						
+							if (data.error.length > 0) {
+								$(data.error).each(function() {
+									msg += "<li>";
+									msg += this;
+									msg += "</li>";									
+								});
+							
+							}
+							
+							if (params.missing.length > 0) {
+								msg += "<li>" + params.missing.length + " parameter(s) missing: ";
+								msg += viewModels.sim.paramSelectList(params.missing, "missingParamList");
+								msg += "</li>";
+								
+								// Switch to the tab of the first missing parameter
+								viewModels.sim.paramSelect(params.missing[0], false);
+							}
+							if (params.extra.length > 0) {
+								msg += "<li>" + params.extra.length + " extra parameter(s) detected: ";
+								msg += viewModels.sim.paramSelectList(params.extra, "extraParamList"); 
+								msg += "</li>";	
+							}
+							
+							msg += "</blockquote>";
+						
+						}
+						
+						alert("<br />" + msg);
+						
+						$("#missingParamList").change(function() {
+							viewModels.sim.paramSelect($(this).val());
+						});
+					}
+					else
+						alert(failUploadMsg);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log("Error: " + textStatus + "; " + errorThrown);
+				}, 
+				complete: function(){viewModels.sim.isLoading(false);}
+				});
+				$('#exampleBox').dialog("close");
+			});
+			for(var i=0; i<fileList.length; ++i)
+			{
+				var str = '<li><a href="#">'+fileList[i]+'</a></li>';
+				ul.append(str);
+			}
+		}
+		
+		var exampleBox = $('#exampleBox');
+		if (!exampleBox.length) {
+			exampleBox = $('<div id="exampleBox">' + message + '</div>').hide().appendTo('body');
+			creatList($('#exampleBox'), fileList)
+		}
+		$("#exampleDialog-menu").menu();
+		exampleBox.dialog($.extend({}, exampleDialog.defaults, options));
+	}
+	
+	exampleDialog.defaults = {
+		resizable	: false,
+		show		: 'fade',
+		hide		: 'fade',
+		position: [200,150],
+		width		: 250,
+		minHeight	: 200,
+		maxHeight	: 300,
+		dialogClass	: 'dialog-box prompt-box',
+		title		: 'Example Library'
+	};
+	
+	
 		
 	/** 
 	 * In-page form submit plugin for file upload / download

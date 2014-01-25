@@ -9,70 +9,19 @@ class Modelsim_model extends CI_Model {
 		$this->config->load('simulation');
 	}
 
-	/* * Benchmarking Test Model * */
-
 	public function getBenchmarkingInfo() {
-		$query = $this->db->query("
-			SELECT mb.id, mb.name,mb.display_name,
-			COALESCE(outputs.filters, \"[]\") AS filter,
-			COALESCE(variable.bias, \"[]\") AS variable_bias,
-			COALESCE(fixed.bias, \"[]\") AS fixed_bias
-			FROM `model_benchmark` AS mb
+		$query = $this->db->query("SELECT mb.id, mb.name,mb.display_name,COALESCE(result.outputs, \"[]\") AS output FROM `model_benchmark` AS mb
 			LEFT JOIN
 			(
 			    SELECT mbo.benchmark_id AS id,
 			    CONCAT('[', GROUP_CONCAT(
 			        '{\"name\":\"', name, '\",\"unit\":\"', unit, '\",\"variable\":\"', variable, '\"}' ORDER BY orders SEPARATOR ','
-			    ), ']') AS filters
-				FROM `model_benchmark_outputs` AS mbo
+			    ), ']') AS outputs FROM `model_benchmark_outputs` AS mbo
 			    GROUP BY benchmark_id
-			) AS outputs ON mb.id=outputs.id
-			LEFT JOIN
-			(
-				SELECT mbo.benchmark_id AS id,
-				CONCAT('[', GROUP_CONCAT(
-					'{\"name\":\"', name, '\"}' ORDER BY orders SEPARATOR ','
-				), ']') AS bias
-				FROM `model_benchmark_bias` AS mbo
-				WHERE variable=1
-				GROUP BY benchmark_id
-			) AS variable ON mb.id=variable.id
-			LEFT JOIN
-			(
-				SELECT mbo.benchmark_id AS id,
-				CONCAT('[', GROUP_CONCAT(
-					'{\"name\":\"', name, '\"}' ORDER BY orders SEPARATOR ','
-				), ']') AS bias
-				FROM `model_benchmark_bias` AS mbo
-				WHERE variable=0
-				GROUP BY benchmark_id
-			) AS fixed ON mb.id=fixed.id
+			) AS result ON mb.id=result.id
 			ORDER BY mb.orders");
 		return $query->result_array();
 	}
-
-	public function getBenchmarkingInfoById($id) {
-		$query = $this->db->query("SELECT * FROM model_benchmark WHERE id=?", array($id));
-		if($query->num_rows() > 0) return $query->row();
-		return null;
-	}
-
-	public function getBenchmarkingBiases($id) {
-		$query = $this->db->query("SELECT * FROM model_benchmark_bias WHERE benchmark_id=?", array($id));
-		return $query->result();
-	}
-
-	public function getBenchmarkingOutputs($id) {
-		$query = $this->db->query("SELECT * FROM model_benchmark_outputs WHERE benchmark_id=?", array($id));
-		return $query->result();
-	}
-
-	public function getBenchmarkingControlSrc($id) {
-		$query = $this->db->query("SELECT * FROM model_benchmark_ctrl WHERE benchmark_id=? ORDER BY orders", array($id));
-		return $query->result();
-	}
-
-	/* * Device Model * */
         	
 	public function getModelsInfo()
 	{
@@ -235,7 +184,7 @@ class Modelsim_model extends CI_Model {
 	{
 		$this->db->select('name, description, unit, default, instance')->from('model_params')
 				->where(array("model_id" => $model_id, "editable" => $editable))
-				->order_by('id', 'asc');		
+				->order_by('instance', 'asc');
 		
 		$query = $this->db->get();
 		$ret = array('instance' => array(), 'model' => array());
@@ -247,6 +196,23 @@ class Modelsim_model extends CI_Model {
 			} else {
 				$ret['model'][] = $param;
 			}
+		}
+
+		return $ret;
+	}
+	
+	public function getModelParamsTabTitle($model_id)
+	{
+		$this->db->select('instance,title')->from('model_params_tab_title')
+		->where(array("model_id" => $model_id))
+		->order_by('instance', 'asc');
+		
+		$query = $this->db->get();
+    $ret = array();
+		$result = $query->result();
+		
+		foreach ($result as $param) {
+      $ret[$param->instance] = $param->title;
 		}
 		
 		return $ret;

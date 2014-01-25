@@ -6,14 +6,14 @@ class modelsim extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('template_inheritance', 'html', 'credits', 'form', 'url', 'download'));
+		$this->load->helper(array('template_inheritance', 'html', 'credits', 'form', 'url', 'download','file'));
 		$this->load->model(array('Modelsim_model', 'Account_model', 'Discussion_model', 'Ngspice_model'));
 		$this->load->library('parser');
 		$this->config->load('simulation');	
 		
 		$this->uploadConfig = array(
 			'upload_path' => './uploads/',
-			'allowed_types' => 'ipa|iml|csv',
+			'allowed_types' => 'ipa|iml|csv|pm|txt',
 			'max_size' => '1024'
 		);
 	}
@@ -38,7 +38,6 @@ class modelsim extends CI_Controller {
 			redirect(base_url('modelsim'));
 			return;
 		}
-		
 		$post_id = $model_info->post_id;
 		$user_info = $this->Account_model->isLogin();
 		$data = array(		
@@ -53,6 +52,24 @@ class modelsim extends CI_Controller {
 		);
 				
 		$this->load->view('simulation/model.php', $data);
+	}
+	
+	public function getExampleFilenames($model_id)
+	{
+		$filenames = get_filenames('./files/exampleFiles/model'.$model_id.'/');
+		//$response = array('data' => $filenams);
+		$this->outputJSON($filenames);
+	}
+	
+	public function readExampleFiles($model_id,$filename)
+	{
+		$data = read_file('./files/exampleFiles/model'.$model_id.'/'.$filename);
+		$params = array();
+		$errors = array();
+
+		$content = addslashes($data);
+
+		return $this->clientParamSet("UPLOAD", $model_id, $content);
 	}
 
 	public function benchmarking($method) {
@@ -193,7 +210,7 @@ class modelsim extends CI_Controller {
         $this->outputJSON($response);
 	}
 
-    public function clientParamSet($method, $modelID = 0)
+    public function clientParamSet($method, $modelID = 0, $content = NULL)
 	{
         $response = array('success' => false, 'error' => 'error');
 		if ($this->Account_model->isLogin()) {
@@ -208,32 +225,100 @@ class modelsim extends CI_Controller {
 					$filename = ($modelID ? 'model' . $modelID : 'params');
 							
 					$params = json_decode($params);
-					$output = $params;
-					
 					$output = "";
-					foreach ($params as $param) {
-						if(isset($param->filename))
-							$filename = $param->filename;
-						else
-							$output .= $param->name."=".$param->value." ";
+					
+					// Get database
+					$query = $this->db->get_where("model_info", array("id" => $modelID));
+					$result = $query->result();
+					$row = $result[0];
+					
+					$xxa = $xxb = "";
+					
+					if (empty($row->type_condition)) {
+						$xxb = $row->type;
+					} else {
+						$type = json_decode($row->type_condition);
 					}
 					
-					$output = trim($output);
+					// Reverse loop
+					for ($i = sizeof($params)-1, $column = 0; $i >= 0; $i--, $column %= 3) {
+						$param = $params[$i];
+						if(isset($param->filename))
+							$filename = $param->filename;
+						else {
+							if (substr(strtolower($param->name),0,4) == "type") {
+								if (isset($type)) {
+									$xxb = $type->{$param->value};
+									continue;
+								}
+							}
+							
+							if ($column == 0) {$output = trim($output) . "\r\n+";}
+							$output .= sprintf("%-8s = %-16s", $param->name, $param->value);
+							$column++;
+						}
+					}
+					
+					$xxa = $xxb;
+					
+					$output = ".model $xxa $xxb (\n" . trim($output) . " )";
 
 					force_download($filename . '.ipa', $output);
 					return;
 				}				
 				break;
 			case "UPLOAD":
-				$this->load->library('upload', $this->uploadConfig);
+				if (empty($content)) $this->load->library('upload', $this->uploadConfig);
 
-				if (!$this->upload->do_upload("file")) {
+				if (empty($content) && !$this->upload->do_upload("file")) {
 					$response = array('success' => false, 'error' => $this->upload->display_errors());
 				} else {
-					$data = $this->upload->data();
-					$params = array();
+					if (empty($content)) {
+						$data = $this->upload->data();
+						$content = addslashes(file_get_contents($data["full_path"]));
+					}
 					
-					preg_match_all ('/[^=\+\s]+\s*=\s*[^\s]+/' ,addslashes(file_get_contents($data["full_path"])), $fields);
+					$params = array();
+					$errors = array();
+					if (preg_match_all ('/\.model\s*(\w*)\s*(\w*)\s*\(?([^\)]*)\)?/i', $content, $fields)) {
+						$xxa = $fields[1][0];
+						$xxb = $fields[2][0];
+						$content = $fields[3][0];
+						
+						// Get database
+
+						$query = $this->db->get_where("model_info", array("id" => $modelID));						
+						$result = $query->result();
+						if (sizeof($result) > 0) {
+							$row = $result[0];	
+							if (empty($row->type_condition)) {
+								$type = $row->type;
+								if (strtolower($xxb) != strtolower($type)) {
+									array_push($errors, "Model type mismatch (Expected '$type')!");
+								}
+							} else {
+								$types = json_decode($row->type_condition, true);
+								$type_found = false;
+								foreach ($types as $key => $value) {
+									if (strtolower($value) == strtolower($xxb)) {
+										$params[] = array("name" => "type", "value" => $key);
+										$type_found = true;
+									}
+								}
+								
+								if (!$type_found) array_push($errors, "Model type mismatch!");
+							}
+						} else {
+							array_push($errors, "Unable to retrieve model type (Database Error)!");
+						}
+
+
+
+					} else {
+						array_push($errors, "Improper format!");	
+					}
+
+					preg_match_all ('/[^=\r\n\+\s]+\s*=\s*[^\s]+/', $content, $fields);
 					
 					foreach ($fields[0] as $entry) {
 						$map = explode('=', $entry, 2);
@@ -243,12 +328,14 @@ class modelsim extends CI_Controller {
 						$params[] = array("name" => $map[0], "value" => $map[1]);
 					}
 					
+
 					if (count($params) > 0) {
-						$response = array('success' => true, 'data' => $params);
+						$response = array('success' => true, 'data' => $params, 'error' => $errors);
 					} else {
 						$response = array('success' => false, 'error' => "Invalid file.");
 					}
-			
+
+					
 					@unlink($data["full_path"]);
 				}
 				break;
@@ -344,6 +431,7 @@ class modelsim extends CI_Controller {
             $response = array(
 				'biases' => $this->Modelsim_model->getModelBiases($model_id),
 				'params' => $this->Modelsim_model->getModelParams($model_id),
+				'paramsTabTitle' => $this->Modelsim_model->getModelParamsTabTitle($model_id),
 				'outputs' => $this->Modelsim_model->getModelOutputs($model_id)
 			);
         } else {

@@ -313,7 +313,7 @@ div.model-library  #model-library-menu li font:active {
 }
 
 .toolbar .action {
-    margin: 0 10px;
+    margin: 0 5px;
     cursor:  pointer;
 	float: left;
 	display: block;
@@ -348,6 +348,12 @@ div.model-library  #model-library-menu li font:active {
     padding-right: 0;
 }
 
+.toolbar input {
+    margin: 0 2px;
+	
+    float: right;
+	display: block;
+}
 
 .inputs select {
 	margin: 0;
@@ -459,12 +465,79 @@ div#param-sets h4 {
 	width: 70px;
 }
 
+#param-tabs label select {
+	vertical-align: middle;
+	display: inline-block;
+	min-width: 75px;
+}
+
 #param-tabs div.ui-tabs-panel {
 	max-height: 275px;
 	min-height: 150px;
 	height: auto;
 	margin-bottom: 10px;
 	padding: 1em 0;
+}
+
+/* Parameter Search */
+
+#search_param{
+	width: 150px;
+	border-radius: 5px;
+	border: solid 1px #bfbfe6;
+	padding: 3px 5px;
+}
+
+::-webkit-input-placeholder {
+   color: #bfbfe6;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #bfbfe6;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #bfbfe6;  
+}
+
+:-ms-input-placeholder {  
+   color: #bfbfe6;  
+}
+
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+	max-width: 210px;
+    /* prevent horizontal scrollbar */
+    /* overflow-x: hidden; */
+}
+
+font.desc {
+	font-style: italic;
+	font-size: 10px;
+}
+
+/* Input Param */
+
+input.param_inputs {
+	width: 70px;
+	border-radius: 3px;
+	border: solid 1px #B5BCC7;
+	padding: 3px 5px;	
+}
+
+select.param_inputs {
+	width: 80px;
+	border-radius: 3px;
+	border: solid 1px #B5BCC7;
+	padding: 3px 0px;	
+}
+
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+	height: 300px;
 }
 
 /* Output Variable tab */

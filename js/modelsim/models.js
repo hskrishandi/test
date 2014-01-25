@@ -87,10 +87,85 @@ var ModelSimulation;
 		
 		self.instanceParams = ko.observableArray([]);
 		self.instanceParams.getData = paramMapper(self.instanceParams);
-		
+	
 		self.modelParams = ko.observableArray([]);
 		self.modelParams.getData = paramMapper(self.modelParams);
+ 
+		self.hasExampleBoxFileList = ko.observable(false);
+		
+ 		self.paramSelect = function(keyword, focus) {
+			if (focus == null) focus = true;
+			var target = $("#" + keyword);
+			if (target == null) return;
 			
+			
+			var index = $("#param-tabs div[role='tabpanel']").index($("#" + $(target).attr("parent")));
+			$('#param-tabs').tabs({ active: index });
+			if (focus) target.focus();
+		};
+		
+ 		self.searchParamsSelect = function(keyword) {
+			var target = $("#" + keyword);
+			// Text field value
+			$( "#search_param" ).val(keyword).stop().css("backgroundColor", "#9f9").animate({backgroundColor: "none"}, 1000);
+			self.paramSelect(keyword);
+			target.stop().css("backgroundColor", "#9f9").animate({backgroundColor: "none"}, 1000);				
+		};
+ 		self.searchParams = ko.observableArray([]);
+		self.searchParamsInit = function() {
+			if (self.searchParams().length == 0) {
+				$("input.param_inputs").each(function() {
+					self.searchParams.push({value: this.id, desc: $(this).attr("desc")});
+				});
+				$("select.param_inputs").each(function() {
+					self.searchParams.push({value: this.id, desc: $(this).attr("desc")});
+				});
+		
+				
+				
+				$("#search_param").autocomplete({
+					source: viewModels.sim.searchParams(),
+					select: function( event, ui ) {
+						self.searchParamsSelect(ui.item.value);
+						return false;
+					}
+				}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+						var keyword = $("#search_param").val().toLowerCase();
+						var pos = item.value.toLowerCase().indexOf(keyword);
+						keyword = item.value.substr(pos, keyword.length);
+						
+						return $( "<li>" )
+						.append( "<a><b>" + item.value.replace(new RegExp($("#search_param").val(),"i"),"<font color='#F00'>"+keyword+"</font>") + "</b><br>" + "<font class='desc'>" + item.desc + "</font>" + "</a>" )
+						.appendTo( ul );
+				};		
+				
+				// When user press "Enter" for searching (Not recommended)
+				$("#search_param_form").submit(function() {
+					var keyword = $("#search_param").val(),
+						searchable = false;
+					$(viewModels.sim.searchParams()).each(function(){
+						if (this.value.toLowerCase() == keyword.toLowerCase()) {
+							self.searchParamsSelect(this.value);
+							searchable = true;
+							return false;
+						}
+					});
+					
+					// Fail search
+					if (!searchable)
+						$("#search_param").stop().css("backgroundColor", "#f88").animate({backgroundColor: "none"}, 1000);
+					
+					// No form submission
+					return false;
+				});
+				
+			}
+		};
+		
+		
+		//array of parameter array for all tabs.
+		self.modelParamsForTabs = ko.observableArray([]);
+ 
 		self.paramSet = ko.observableArray([]);
 		self.selectedSet = ko.observable(null);
 
@@ -131,11 +206,74 @@ var ModelSimulation;
 				}
 			});
 		};
-			
+		
+		self.errorParam = function(id) {
+			$("#" + id).stop().css("backgroundColor", "#f88")
+			.click(function() {
+				$(this).animate({backgroundColor: "none"}, 1000);
+			}).focus(function() {
+				$(this).animate({backgroundColor: "none"}, 1000);
+			})
+		};
+		
+		self.paramSelectList = function(list, id) {
+			var code = "<select id='" + id + "'>\n";
+			code += "<option></option>";
+			$(list).each(function() {
+				code += "<option value='" + this + "'>" + this + "</option>\n";
+			});
+			code += "</select>\n";
+
+			return code;
+		}
+		
 		self.loadParams = function(data) {
 			var mp = self.modelParams();
 			var ip = self.instanceParams();
-			var assigned = false;
+			var return_data = {error: 0, missing: [], extra: []};
+
+			// Clear style
+			$(".param_inputs").each(function() {
+				$(this).animate({backgroundColor: "none"}, 200);
+			});
+			
+			// Loop all model params (param matching & finding missing params)
+			$(mp).each(function() {
+				var param = this,
+					assigned = false;
+				$(data).each(function() {
+					if (this.name.toLowerCase() == param.name.toLowerCase()) {
+						param.value(this.value);
+						assigned = true;
+					}
+				});
+				
+				if (!assigned) {
+					return_data.error++;
+					return_data.missing.push(param.name);	
+					self.errorParam(param.name);
+				}
+			});
+			
+			// Finding extra params
+			$(data).each(function() {
+				var data_param = this,
+					matched = false;
+					
+				$(mp).each(function() {
+					if (this.name.toLowerCase() == data_param.name.toLowerCase()) {
+						matched = true;
+					}
+				});
+				
+				if (!matched) {
+					return_data.error++;
+					return_data.extra.push(data_param.name);	
+				}
+			});
+			
+			return return_data;
+			/* var assigned = false;
 			for (var i = 0; i < data.length; ++i) {
 				assigned = false;
 				for (var j = 0; j < mp.length; ++j) {
@@ -153,6 +291,7 @@ var ModelSimulation;
 					}
 				}
 			}
+			*/
 		};
 		
 		self.addVariable = function() {
@@ -364,7 +503,6 @@ var ModelSimulation;
 				}
 			};			
 			self.isLoading(true);
-				
 			$.ajax({
 				url: ROOT + "/paramSet/GET/" + MODEL_ID,
 				type: 'GET',
@@ -375,21 +513,46 @@ var ModelSimulation;
 					console.log("Error: " + textStatus + "; " + errorThrown);
 				}, 
 				complete: completeTask
-			}); 
-				
+			});
 			$.ajax({
 				url: ROOT + "/modelDetails/" + MODEL_ID,
 				type: 'GET',
 				success: function(result) { 
 					try {
 						result = JSON.parse(result);
-					} catch(err) { }
+					} catch(err) { alert(k);}
+					
 					self.instanceParams($.map(result.params.instance, function(item) { return new ModelSimulation.Parameter(item); }));
 					self.modelParams($.map(result.params.model, function(item) { return new ModelSimulation.Parameter(item); }));
+
+					self.modelParamsForTabs.push({
+																				 modelParams: self.instanceParams,
+																				 href: "#param-tab-model0",
+																				 id: "param-tab-model0",
+																				 title: result.paramsTabTitle[1]
+																				 });
+					for(var i = 0; i < self.modelParams().length; ++i){
+						var tab_id = self.modelParams()[i].tab_id;
+						if(tab_id == 0)
+						 tab_id = 1;
+						if(!self.modelParamsForTabs()[tab_id]){
+								self.modelParamsForTabs.push({
+										modelParams: ko.observableArray([]),
+										href: "#param-tab-model"+tab_id.toString(),
+										id: "param-tab-model"+tab_id.toString(),
+										title: result.paramsTabTitle[self.modelParams()[i].tab_id]
+								});
+						}
+						self.modelParamsForTabs()[tab_id].modelParams.push(self.modelParams()[i]);
+					}
+					$("div#param-tabs").tabs("refresh");//.sliderTabs();
+					$("div#param-tabs").tabs( "option", "active", self.selectedParamTab());
+					if(result.paramsTabTitle.length > 5){
+						 $("div#param-tabs").tabs().scrollabletab();
+				  }
 					self.outputs($.map(result.outputs, function(item) { return new ModelSimulation.OutputVariable(item); }));
-					
 					self.biases(result.biases);
-					self.variablebias.extend({localPersist: { 
+					self.variablebias.extend({localPersist: {
 						key: 'M#' + MODEL_ID + 'VARBIAS',
 						deserialize: ko.mapping.fromJSON
 					}});	
@@ -403,7 +566,8 @@ var ModelSimulation;
 					console.log("Error: " + textStatus + "; " + errorThrown);
 				}, 
 				complete: completeTask
-			}); 			
+			}); 
+					
 		};
 	};
 			
@@ -419,14 +583,25 @@ var ModelSimulation;
 	ModelSimulation.Parameter = function(data) {
 		var that = this;
 		
+		this.tab_id = data.instance;
 		this.name = data.name;
-		this.unit = data.unit;		
+		this.unit = data.unit;
 		this.description = data.description;
 		this.label = this.name + (this.unit ? ' [' + this.unit + ']' : '');
-		//this["default"] = data["default"];
 		this["default"] = data["default"];
-		
-		this.value = ko.observable(this["default"]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
-		//this.value = ko.observable(this["default"]);
+		try{
+		var valueArr = JSON.parse(data["default"]);
+		}catch(e){
+			//do nothing, just prevent the exception terminate the script.
+		}
+		this.valueArr = undefined;
+		if(valueArr instanceof Array && valueArr.length > 0)
+		{
+			this.valueArr = valueArr;
+			this.value = ko.observable(valueArr[0]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
+		}
+		else{
+			this.value = ko.observable(this["default"]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
+		}		//this.value = ko.observable(this["default"]);
 	};
 } (jQuery));

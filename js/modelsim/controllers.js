@@ -8,7 +8,8 @@
  
  (function ($) {
 	//var viewModels;		// view model collection
-
+		
+				
 	// Entry point
 	$(document).ready(function() {
 		MODEL_ID = $("#model-lib-list").data("current");
@@ -28,12 +29,12 @@
 			viewModels.sim.selectedSet(null);		// invalidated selection
 			return false;
 		});
-		
+						
 		// Save As Parameters
 		$(".param-save-as").click(function() {
 			prompt("Filename: ", function(filename) {
 				if(filename == "") return;
-				var data = viewModels.sim.modelParams.getData().concat(viewModels.sim.instanceParams.getData());
+				var data = viewModels.sim.modelParams.getData();
 				data.push({"filename" : filename});
 				$.submit({
 					url: ROOT + "/clientParamSet/DOWNLOADAS/" + MODEL_ID,
@@ -53,15 +54,67 @@
 			uploadComplete: function() {
 				viewModels.sim.isLoading(false);
 			},
-			url: ROOT + "/clientParamSet/UPLOAD",
+			url: ROOT + "/clientParamSet/UPLOAD/" + MODEL_ID,
 			load: function(data) {
-				if (data.success)
-					viewModels.sim.loadParams(data.data);
-				else
-					alert(failUploadMsg);
+				if (data.success) {
+					var params = viewModels.sim.loadParams(data.data);
+					params.error += data.error.length;
+					
+					if (params.error == 0) {
+						var msg = "File uploaded and parsed successfully!";	
+					} else {
+						var msg = "File uploaded successfully with " + params.error + " minor error(s) during parsing: <br /><br />";
+						
+						msg += "<blockquote>";
+					
+						if (data.error.length > 0) {
+							$(data.error).each(function() {
+								msg += "<li>";
+								msg += this;
+								msg += "</li>";									
+							});
+						
+						}
+						
+						if (params.missing.length > 0) {
+							msg += "<li>" + params.missing.length + " parameter(s) missing: ";
+							msg += viewModels.sim.paramSelectList(params.missing, "missingParamList");
+							msg += "</li>";
+							
+							// Switch to the tab of the first missing parameter
+							viewModels.sim.paramSelect(params.missing[0], false);
+						}
+						if (params.extra.length > 0) {
+							msg += "<li>" + params.extra.length + " extra parameter(s) detected: ";
+							msg += viewModels.sim.paramSelectList(params.extra, "extraParamList"); 
+							msg += "</li>";	
+						}
+						
+						msg += "</blockquote>";
+					
+					}
+					
+					alert("<br />" + msg);
+					
+					$("#missingParamList").change(function() {
+						viewModels.sim.paramSelect($(this).val());
+					});
+				} else {
+					alert(data.error);
+				}
+
+
+							
 			}
 		});
-		
+
+		// Search box
+		$( "#search_param" ).click(function() {
+			viewModels.sim.searchParamsInit();
+		}).focus(function() {
+			viewModels.sim.searchParamsInit();
+		});
+
 		$(document).ajaxComplete(function(e, xhr, settings) {
 			$(".plot-custom-data-load").fileupload({
 				name: "file",
@@ -218,6 +271,29 @@
 		}
 	};
 	
+	ko.bindingHandlers.showExamples = {
+		init: function(element) {
+			$.ajax({
+				url: ROOT + "/getExampleFilenames/"+MODEL_ID,
+				type: 'GET',
+				success: function(data){
+					try {
+						data = JSON.parse(data);
+					} catch(err) { alert("cannot parse");}
+					if(data.length){
+						viewModels.sim.hasExampleBoxFileList(true);
+						$(element).click(function() {
+							exampleDialog("PTM Models",data);
+						});
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log("Error: " + textStatus + "; " + errorThrown);
+				}
+			});
+		}
+	}
+	
 	// Load a parameter set
 	ko.bindingHandlers.loadParams = {			
 		update: function(element, valueAccessor) {
@@ -245,7 +321,7 @@
 	ko.bindingHandlers.downloadParams = {
 		init: function(element) {
 			$(element).click(function() {
-				var data = viewModels.sim.modelParams.getData().concat(viewModels.sim.instanceParams.getData());
+				var data = viewModels.sim.modelParams.getData();
 				$.submit({
 					url: ROOT + "/clientParamSet/DOWNLOAD/" + MODEL_ID,
 					type: 'POST',

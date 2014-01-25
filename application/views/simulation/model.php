@@ -11,7 +11,7 @@
 		<script src="<?php echo resource_url('js', 'library/knockout.mapping.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.validation.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.localPersist.js'); ?>" type="text/javascript"></script>
-		
+		<script src="<?php echo resource_url('js', 'library/jquery.scrollerTabs.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/json2.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/jquery.jsonrpc.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/jquery.blockUI.js'); ?>" type="text/javascript"></script>
@@ -39,8 +39,7 @@
 		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'font/font-awesome-ie7.min.css'); ?>"><![endif]-->
 
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery-ui/themes/base/jquery-ui.css'); ?>" />
-		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery.jqplot.css'); ?>" />	
-				
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery.jqplot.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'model.css'); ?>"/>	
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />
 	<?php endblock(); ?>
@@ -94,36 +93,52 @@
 			</div>
 			
 			<div id="params">
-                <div class="toolbar">
-                    <a href="#" class="action add-to-lib btn-span12" data-bind="addToLib: true, if: modelParams().length > 0" title="Include the current parameter set in user library"><i class="icon-plus"></i>Include in user library</a>
-                    <a href="#" class="action download btn-span2" data-bind="downloadParams: true" title="Save parameter set to file"><i class="icon-download-alt"></i>Save</a>
-                    <a href="#" class="action param-save-as btn-span4" title="Save parameter set to file"><i class="icon-download-alt"></i>Save As</a>
-                    <a href="#" class="action upload model-param-load btn-span2" title="Load parameter set from file"><i class="icon-upload-alt"></i>Load</a>                    
-					<!--<label class="action" data-bind="loadParams: selectedSet, if: paramSet().length > 0">Use parameter set: 
+				<div class="toolbar">
+						<a href="#" class="action add-to-lib btn-span12" data-bind="addToLib: true, if: modelParams().length > 0" title="Include the current parameter set in user library"><i class="icon-plus"></i>Include in user library</a>
+						<a href="#" class="action param-save btn-span2" data-bind="downloadParams: true" title="Save parameter set to file"><i class="icon-download-alt"></i>Save</a>
+						<a href="#" class="action param-save-as btn-span4" title="Save parameter set to file"><i class="icon-download-alt"></i>Save As</a>
+						<a href="#" class="action upload model-param-load btn-span2" title="Load parameter set from file"><i class="icon-upload-alt"></i>Load</a>
+						<a href="#" class="action example model-param-example btn-span4" data-bind="showExamples: true, if: modelParams().length > 0" title="Load parameter set from example file"><i class="icon-upload-alt"></i>Example</a>
+						<form id="search_param_form">
+							<input type="text" size="5" id="search_param" placeholder="Search parameter" />
+						</form>
+					<!--<label class="action" data-bind="loadParams: selectedSet, if: paramSet().length > 0">Use parameter set:
 						<select data-bind="options: paramSet, optionsText: 'name', optionsValue: $data, value: selectedSet, optionsCaption: 'None'"></select>
 					</label>-->
 				</div>
 				
 				<script type="text/html" id="parameter-template">
-					<label data-bind="attr: { title: description }"><span data-bind="html: label"></span>
-							<input size="4" type="text" data-bind="attr: { name: name }, value: value" />
+					<label><span data-bind="html: label, attr: { title: description }"></span>
+						<!-- ko ifnot: valueArr-->
+							<input size="4" type="text" data-bind="attr: { name: name, id: name, desc: description, class: 'param_inputs', parent: $parent.id}, value: value" />
+						<!-- /ko -->
+						<!-- ko if: valueArr-->
+							<select data-bind="options: valueArr, value:value, attr: { name: name, id: name, desc: description, class: 'param_inputs', parent: $parent.id}" >
+							</select>
+						<!-- /ko -->
 					</label>
+
 				</script>
 				
-				<div id="param-tabs" class="inputs" data-bind="tabs: selectedParamTab">	
-					<ul>
-						<li><a href="#param-tab-instance">Instance Parameters</a></li>
-						<li><a href="#param-tab-model">Model Parameters</a></li>
+				<div id="param-tabs" class="inputs" data-bind="tabs: selectedParamTab">
+					<ul data-bind="foreach: modelParamsForTabs">
+						<li><a data-bind="attr: {href: href}, text: title" ></a></li>
 					</ul>
 					
-					<div id="param-tab-instance" data-bind="template: { name: 'parameter-template', foreach: instanceParams }">
-					</div>	
-					
-					<div id="param-tab-model" data-bind="template: { name: 'parameter-template', foreach: modelParams }">
-					</div>
+					<!--<div id="param-tab-instance" data-bind="template: { name: 'parameter-template', foreach: instanceParams }">
+					</div>-->
+          <!-- ko foreach: modelParamsForTabs -->
+						<div data-bind="template: { name: 'parameter-template', foreach: modelParams }, attr: {id: id}">
+						</div>
+          <!-- /ko -->
 				</div>
 			</div>
-		  
+
+			<script type="text/javascript">
+
+
+			</script>
+
 			<div id="bias" class="inputs">
 				<div class="toolbar">
                     <a href="#" class="action add-var btn-span9" title="Add variable bias" data-bind='css: { disabled: variablebias().length >= 2 }, click: addVariable'>
