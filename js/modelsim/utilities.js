@@ -206,7 +206,7 @@ if (typeof console === "undefined" || !console) {
 						if (params.error == 0) {
 							var msg = "File uploaded and parsed successfully!";	
 						} else {
-							var msg = "File uploaded successfully with " + params.error + " parameters using default value: <br /><br />";
+							var msg = "File uploaded successfully with " + params.error + " parameters using default values: <br /><br />";
 							
 							msg += "<blockquote>";
 						
@@ -220,7 +220,7 @@ if (typeof console === "undefined" || !console) {
 							}
 							
 							if (params.missing.length > 0) {
-								msg += "<li>" + params.missing.length + " parameter(s) missing: ";
+								msg += "<li>" + params.missing.length + " parameter(s) (in red) not set: ";
 								msg += viewModels.sim.paramSelectList(params.missing, "missingParamList");
 								msg += "</li>";
 								

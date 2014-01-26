@@ -96,7 +96,7 @@ class Txtsim_model extends CI_Model{
 
 	public function getModelParamName($model_id)
 	{
-		$this->db->select('name')->from('model_params')->where(array("model_id" => $model_id,"instance" => "0"));
+		$this->db->select('name')->from('model_params')->where(array("model_id" => $model_id,"instance !=" => "1"));
 		$query = $this->db->get();
 		//var_dump($query->result());
 		if ($query->num_rows() > 0) {

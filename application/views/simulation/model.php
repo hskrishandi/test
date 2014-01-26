@@ -100,7 +100,7 @@
 						-->
 						<a href="#" class="action param-save-as btn-span4" title="Save parameter set to file"><i class="icon-download-alt"></i>Save As</a>
 						<a href="#" class="action upload model-param-load btn-span2" title="Load parameter set from file"><i class="icon-upload-alt"></i>Load</a>
-						<a href="#" class="action example model-param-example btn-span4" data-bind="showExamples: true, if: modelParams().length > 0" title="Load parameter set from example file"><i class="icon-upload-alt"></i>Example</a>
+						<a href="#" class="action example model-param-example btn-span4" data-bind="showExamples: true, if: hasExampleBoxFileList()" title="Load parameter set from example file"><i class="icon-upload-alt"></i>Example</a>
 						<form id="search_param_form">
 							<input type="text" size="5" id="search_param" placeholder="Search parameter" />
 						</form>
@@ -115,8 +115,14 @@
 							<input size="4" type="text" data-bind="attr: { name: name, id: name, desc: description, class: 'param_inputs', parent: $parent.id}, value: value" />
 						<!-- /ko -->
 						<!-- ko if: valueArr-->
+							<!-- ko if:valueArr[0].value -->
+							<select data-bind="options: valueArr, optionsText:'name',optionsValue:'value', value:value, attr: { name: name, id: name, desc: description, class: 'param_inputs', parent: $parent.id}" >
+							</select>
+							<!-- /ko -->
+							<!-- ko ifnot:valueArr[0].value -->
 							<select data-bind="options: valueArr, value:value, attr: { name: name, id: name, desc: description, class: 'param_inputs', parent: $parent.id}" >
 							</select>
+							<!-- /ko -->
 						<!-- /ko -->
 					</label>
 

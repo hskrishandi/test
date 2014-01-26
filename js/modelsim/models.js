@@ -92,7 +92,8 @@ var ModelSimulation;
 		self.modelParams.getData = paramMapper(self.modelParams);
  
 		self.hasExampleBoxFileList = ko.observable(false);
-		
+		self.model_id = ko.observable(MODEL_ID);
+	
  		self.paramSelect = function(keyword, focus) {
 			if (focus == null) focus = true;
 			var target = $("#" + keyword);
@@ -614,7 +615,12 @@ var ModelSimulation;
 		if(valueArr instanceof Array && valueArr.length > 0)
 		{
 			this.valueArr = valueArr;
-			this.value = ko.observable(valueArr[0]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
+			if(valueArr.value && valueArr.name){
+				this.value = ko.observable(valueArr[0].value).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
+			}
+			else{
+				this.value = ko.observable(valueArr[0]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
+			}
 		}
 		else{
 			this.value = ko.observable(this["default"]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
