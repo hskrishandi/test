@@ -59,19 +59,30 @@ class Txtsim_model extends CI_Model{
 		->where(array('user_param_sets.user_id' => $user_id));
 		$query = $this->db->get();
 		$stringModels = "";
-		
 		foreach($query->result() as $modelset){
+			$modelType = null;
 			$modelParamName = $this->Txtsim_model->getModelParamName($modelset->model_id);
 			$modelParamNameSet = null;
 			$allParamSet = json_decode($modelset->user_param_data);
 			foreach($modelParamName as $Name){
 				foreach($allParamSet as $ParamSet){
+					if($modelset->model_id == '9' && strtolower($ParamSet->name) == 'type')	{
+						$modelType = $ParamSet->value;
+						continue;
+					}
 					if (strtolower($ParamSet->name) == strtolower($Name->name))
 						$modelParamNameSet[] = $ParamSet;
 				}
 			}
 			
-			$stringModel = ".MODEL ".$modelset->model_short_name.".".$modelset->library_name." ". $modelset->model_name;
+			//$stringModel = ".MODEL ".$modelset->model_short_name.".".$modelset->library_name." ". $modelset->model_name;
+			$stringModel = ".MODEL ".$modelset->model_short_name.".".$modelset->library_name." ";
+			if($modelset->model_id == '9' && $modelType != null){
+				$stringModel = $stringModel.($modelType == '1' ? 'nmos':'pmos');
+			}
+			else
+				$stringModel = $stringModel. $modelset->model_name;
+			
 			if ($modelParamNameSet!==null){
 				foreach ($modelParamNameSet as $value)
 					$stringModel .= (" ".strtolower($value->name) . "=" . $value->value);
