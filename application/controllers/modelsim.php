@@ -549,6 +549,10 @@ class modelsim extends CI_Controller {
 		$input["prefix"] = $model_info->prefix;
 		$input["suffix"] = $model_info->suffix;
 		$input["mname"] = $input["type"] = $model_info->type;
+		//if $params["type"] != null, this means the model-id is 9 and need to set the type in netlist manually.
+		if($params["type"] != null){
+			$input["mname"] = $input["type"] = $params["type"];
+		}
 		$input["iname"] = substr($model_info->name, 0, 7 - strlen($input["suffix"]));	// instance name is atmost 8 characters with prefix, eg. MXXXXXXXX
 		
 		$model_biases = $this->Modelsim_model->getModelBiases($modelID);

@@ -165,6 +165,21 @@ var ModelSimulation;
 		
 		//array of parameter array for all tabs.
 		self.modelParamsForTabs = ko.observableArray([]);
+	
+		//this parameter is to manually set the type in netlist of model 9.
+		if(MODEL_ID == 9){
+			self.currentType = ko.computed(function(){
+				if(self.modelParams()[2] && self.modelParams()[2].name == 'type'){
+					return self.modelParams()[2].value() == 1 ? 'nmos' : 'pmos';
+				}
+				else
+					return null;
+			});
+		}
+		else{
+			self.currentType = ko.computed(function(){
+				return null;});
+		}
  
 		self.paramSet = ko.observableArray([]);
 		self.selectedSet = ko.observable(null);
@@ -202,7 +217,8 @@ var ModelSimulation;
 				},
 				params: {
 					instance: self.instanceParams.getData(),
-					model: self.modelParams.getData()
+					model: self.modelParams.getData(),
+					type: self.currentType()
 				}
 			});
 		};

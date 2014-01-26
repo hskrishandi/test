@@ -84,7 +84,7 @@
 				<li><a href="#output">Output Filter</a></li>
 				<li><a href="#results">Simulation Results</a></li>
 				<li><a href="#comments">Comments</a></li>
-                <li id="model_name_bar"><a id="model_name" href="#description"><?php echo $model_info->icon_name;?></a></li>
+				<li id="model_name_bar"><a id="model_name" href="#description"><?php echo $model_info->icon_name;?></a></li>
 			</ul>
             
 			
@@ -95,7 +95,9 @@
 			<div id="params">
 				<div class="toolbar">
 						<a href="#" class="action add-to-lib btn-span12" data-bind="addToLib: true, if: modelParams().length > 0" title="Include the current parameter set in user library"><i class="icon-plus"></i>Include in user library</a>
+						<!--
 						<a href="#" class="action param-save btn-span2" data-bind="downloadParams: true" title="Save parameter set to file"><i class="icon-download-alt"></i>Save</a>
+						-->
 						<a href="#" class="action param-save-as btn-span4" title="Save parameter set to file"><i class="icon-download-alt"></i>Save As</a>
 						<a href="#" class="action upload model-param-load btn-span2" title="Load parameter set from file"><i class="icon-upload-alt"></i>Load</a>
 						<a href="#" class="action example model-param-example btn-span4" data-bind="showExamples: true, if: modelParams().length > 0" title="Load parameter set from example file"><i class="icon-upload-alt"></i>Example</a>

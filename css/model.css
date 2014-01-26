@@ -348,13 +348,6 @@ div.model-library  #model-library-menu li font:active {
     padding-right: 0;
 }
 
-.toolbar input {
-    margin: 0 2px;
-	
-    float: right;
-	display: block;
-}
-
 .inputs select {
 	margin: 0;
 	min-width: 85px;
@@ -486,6 +479,8 @@ div#param-sets h4 {
 	border-radius: 5px;
 	border: solid 1px #bfbfe6;
 	padding: 3px 5px;
+    float: right;
+	display: block;
 }
 
 ::-webkit-input-placeholder {

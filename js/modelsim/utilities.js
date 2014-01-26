@@ -206,7 +206,7 @@ if (typeof console === "undefined" || !console) {
 						if (params.error == 0) {
 							var msg = "File uploaded and parsed successfully!";	
 						} else {
-							var msg = "File uploaded successfully with " + params.error + " minor error(s) during parsing: <br /><br />";
+							var msg = "File uploaded successfully with " + params.error + " parameters using default value: <br /><br />";
 							
 							msg += "<blockquote>";
 						
