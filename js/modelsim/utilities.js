@@ -187,7 +187,7 @@ if (typeof console === "undefined" || !console) {
 		fileList = fileList instanceof Array ? fileList : [];
 	
 		var creatList = function(parent, fileList){
-			parent.append('<br/><ul id="exampleDialog-menu"></ul>');
+			parent.append('<br/><ul id="exampleDialog-menu" autofocus></ul>');
 			var ul = $("#exampleDialog-menu",parent);
 			$('#exampleDialog-menu').on('click', 'li',function(){
 				$.ajax({
@@ -274,11 +274,11 @@ if (typeof console === "undefined" || !console) {
 		show		: 'fade',
 		hide		: 'fade',
 		position: [200,150],
-		width		: 250,
+		width		: 280,
 		minHeight	: 200,
 		maxHeight	: 300,
 		dialogClass	: 'dialog-box prompt-box',
-		title		: 'Example Library'
+		title		: 'Model Collections'
 	};
 	
 	

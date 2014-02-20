@@ -106,14 +106,19 @@
                                   Muthupandian Cheralathan<br />
 				  Raju Salahuddin<br />
 				  Aixi Zhang<br />
+				  Ying Zhu<br />
+				  Yin Sun<br />
 			        <br />
 				
 			         <h4 class="sub_title">Programmers</h4>
-			          Sai Kin Cheung<br />
 			          Ngai Sing Ben Ng<br />
+                                  Richeng Huang<br />
+                                  Chun Ming Kenneth Au<br />
+                                  Xiaodong Meng<br />
 		               <br />
 		                <h4 class="sub_title">Past Contributors</h4>
                                   Xiaoxu Cheng<br />
+                                  Sai Kin Cheung<br />
                                   Ka Chun Cyrix Tam<br />
                                   Wing Hang Seifer Tsang<br />
                                   Hao Wang<br />

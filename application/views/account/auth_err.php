@@ -22,7 +22,7 @@
 	<?php startblock('content'); ?>
 		<?php if($logined === false): ?>
 			<div class="auth_err">
-				<h2 class="title">Unauthorized Access</h2>
+				<h2 class="title">Authentication Required</h2>
 				<h4>This page requires user authentication. Please login to access the service.<br />If you are not yet a registered <?php echo imos_mark() ?> user, you may register for free by clicking the Registration button on the top right corner of the page.</h4>
 				
 				<div class="forms">

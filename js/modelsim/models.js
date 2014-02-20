@@ -615,15 +615,13 @@ var ModelSimulation;
 		if(valueArr instanceof Array && valueArr.length > 0)
 		{
 			this.valueArr = valueArr;
-			if(valueArr.value && valueArr.name){
-				this.value = ko.observable(valueArr[0].value).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
-			}
-			else{
-				this.value = ko.observable(valueArr[0]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
-			}
+			this.value = ko.observable(valueArr[0]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
 		}
 		else{
 			this.value = ko.observable(this["default"]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
 		}		//this.value = ko.observable(this["default"]);
+		this.showTypeExplanation = false;
+		if(this.name == 'type' && MODEL_ID == 9)
+			this.showTypeExplanation = true;
 	};
 } (jQuery));

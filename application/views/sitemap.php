@@ -41,7 +41,7 @@
     <tr>
       <td><ul>
       <?php foreach($model_info as $row):?>
-        <li><a href="<?php echo base_url('simulation/model/'.$row->id);?>"><?php echo $row->short_name; ?></a></li>
+        <li><a href="<?php echo base_url('modelsim/model/'.$row->id);?>"><?php echo $row->short_name; ?></a></li>
       <?php endforeach;?>
       </ul></td>
     </tr>

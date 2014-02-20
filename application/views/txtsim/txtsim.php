@@ -103,7 +103,6 @@
 				<div id="netlistmode">
 					<div class="button">
 						<a id="runNetlistModeSim" class="runSim action_button btn-span8"><i class="icon-play"></i>Run Simulation</a>
-						<a id="functionNetlistSave" class="action_button dl_params btn-span2"><i class="icon-download-alt"></i>Save</a>
 						<a class="action_button netlist-save-as btn-span4"><i class="icon-download-alt"></i>Save As</a>
 						<a id="functionNetlistLoad" class="action_button load_params netlist-load btn-span2"><i class="icon-upload-alt"></i>Load</a>
 						<a class="action_button clear-button-0 btn-span2"><i class="icon-columns"></i>Clear</a>
@@ -219,7 +218,6 @@
 					<div class="button">
 						<a id="functionConv" class="action_button btn-span11"><i class="icon-play"></i>Convert from netlist</a>
 						<a id="runTextModeSim" class="runSim action_button btn-span8"><i class="icon-play"></i>Run Simulation</a>
-						<a id="functionRAWSave" class="action_button dl_params btn-span2"><i class="icon-download-alt"></i>Save</a>
 						<a class="action_button raw-input-save-as btn-span4"><i class="icon-download-alt"></i>Save As</a>
 						<a id="functionRAWLoad" class="action_button load_params raw-input-load btn-span2"><i class="icon-upload-alt"></i>Load</a>
 						<a class="action_button clear-button-1"><i class="icon-columns"></i>Clear</a>
@@ -227,7 +225,7 @@
 					</div>
 					<div class="formContent">
 						<input name="mode" value="RAW" type="hidden"/>
-						<span>Raw Input:</span>
+						<span>Raw Input</span>
 						<textarea id="textModeList" class="editorCommonDesign clear-area-1 data-persist code-mirror" name="RAWlist"></textarea>
 						<br /> <br />
 					</div>

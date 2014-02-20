@@ -38,7 +38,8 @@
 				<p>
 					Please note that the site is lightly moderated. We'll honor all the postings, but we will exercise our right to remove spam, hostile, irrelevant and offending postings.
 				</p>
-				<h3>The users' manual is available here. &gt;&gt; <a href="<?php echo base_url('home/manual'); ?>"><span class="italic">i</span>-MOS Users' Manual</a></h3>
+				<h3 style="color:#FF3300">The users' manual is available here. &gt;&gt; <a style="color:#FF3300" href="<?php echo base_url('home/manual'); ?>"><span class="italic">i</span>-MOS Users' Manual</a></h3>
+				<h3 style="color:#FF3300">The ngspice manual is available here. &gt;&gt; <a style="color:#FF3300" href="http://ngspice.sourceforge.net/docs.html" target="_blank">Ngspice Manual</a></h3>
 			</div>
 
 			<div id="showcase">
