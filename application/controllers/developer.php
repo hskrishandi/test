@@ -14,11 +14,11 @@ class developer extends CI_Controller {
 
 	public function index()
 	{
-    /*
+    
 		if (!$this->session->flashdata('developer_tos')) {
 			redirect('developer/tos');
 		}
-    */
+    
 		$this->load->view('developer/message');
 	}
 	
@@ -26,8 +26,9 @@ class developer extends CI_Controller {
 	{
 		if ($this->input->post()) {
 			if ($this->input->post('response') === "I Agree") {
-				$this->session->set_flashdata('developer_tos', 1);
-				redirect('developer');
+				//$this->session->set_flashdata('developer_tos', 1);
+				//redirect('developer');
+				$this->load->view('developer/form');
 			} else {
 				redirect('');
 			}
