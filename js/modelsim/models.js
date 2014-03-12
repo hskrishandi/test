@@ -541,18 +541,25 @@ var ModelSimulation;
 					
 					self.instanceParams($.map(result.params.instance, function(item) { return new ModelSimulation.Parameter(item); }));
 					self.modelParams($.map(result.params.model, function(item) { return new ModelSimulation.Parameter(item); }));
-
+					
 					self.modelParamsForTabs.push({
 																				 modelParams: self.instanceParams,
 																				 href: "#param-tab-model0",
 																				 id: "param-tab-model0",
 																				 title: result.paramsTabTitle[1]
 																				 });
+					var hasZeroTabId = false;
 					for(var i = 0; i < self.modelParams().length; ++i){
 						var tab_id = self.modelParams()[i].tab_id;
+						var currentIndex = hasZeroTabId?tab_id:tab_id-1;
 						if(tab_id == 0)
-						 tab_id = 1;
-						if(!self.modelParamsForTabs()[tab_id]){
+						{
+							tab_id = 1;
+							currentIndex = 1;
+							hasZeroTabId = true;
+						}
+						
+						if(!self.modelParamsForTabs()[currentIndex]){
 								self.modelParamsForTabs.push({
 										modelParams: ko.observableArray([]),
 										href: "#param-tab-model"+tab_id.toString(),
@@ -560,11 +567,12 @@ var ModelSimulation;
 										title: result.paramsTabTitle[self.modelParams()[i].tab_id]
 								});
 						}
-						self.modelParamsForTabs()[tab_id].modelParams.push(self.modelParams()[i]);
+						self.modelParamsForTabs()[currentIndex].modelParams.push(self.modelParams()[i]);
 					}
+					
 					$("div#param-tabs").tabs("refresh");//.sliderTabs();
 					$("div#param-tabs").tabs( "option", "active", self.selectedParamTab());
-					if(result.paramsTabTitle.length > 5){
+					if(self.modelParamsForTabs().length > 5){
 						 $("div#param-tabs").tabs().scrollabletab();
 				  }
 					self.outputs($.map(result.outputs, function(item) { return new ModelSimulation.OutputVariable(item); }));

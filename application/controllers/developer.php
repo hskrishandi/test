@@ -8,6 +8,7 @@ class developer extends CI_Controller {
 		
 		$this->load->helper(array('template_inheritance', 'html', 'form', 'url'));
 		//$this->load->driver('session');
+		$this->load->model('Developer_model');
 		$this->load->library('session');
 		$this->load->library('MY_Session');
 	}
@@ -28,13 +29,25 @@ class developer extends CI_Controller {
 			if ($this->input->post('response') === "I Agree") {
 				//$this->session->set_flashdata('developer_tos', 1);
 				//redirect('developer');
-				$this->load->view('developer/form');
+				redirect('developer/fill_form');
 			} else {
 				redirect('');
 			}
 		}
 		
 		$this->load->view('developer/tos');
+	}
+	
+	public function fill_form()
+	{
+		$this->load->view('developer/form');
+	}
+	
+	public function formData($user_id)
+	{
+		$form_data = $this->Developer_model->getFormData($user_id);
+		//$form_data = array('title' => 'hello','authorList' => '123');
+		$this->outputJSON($form_data);
 	}
 	
 	public function submit()
@@ -44,7 +57,13 @@ class developer extends CI_Controller {
 		} else {
 			redirect('developer');
 		}
-	}		
+	}
+	
+	private function outputJSON($output)
+	{
+		echo json_encode($output);
+	}
+
 }
 
 /* End of file developer.php */

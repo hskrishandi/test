@@ -10,7 +10,8 @@
 #developer textarea {
 	display: block;
 	margin-top: 2px;
-	width: 100%;
+	width: 96%;
+	resize: none;
 }
 
 #developer .tos {
@@ -30,18 +31,40 @@
 	margin: 5px 0 5px 10px;
 }
 
-#developer label {
-	display: block;
-	position: relative;
-	margin: 8px 0;
+#developer h3 {
+	margin: 5px;
 }
+
+#developer div .labels {
+	height: 320px;
+	border-width:1px;
+	border-style:solid;
+}
+
+
+#developer label {
+	display: inline-block;
+	position: relative;
+	margin: 5px 5px;
+	width: 100%;
+	font-size: larger;
+}
+
+
+#developer span {
+	display: inline-block;
+	vertical-align: middle
+	position: relative;
+	margin: 0px 0px;
+	width: 35%
+}
+
 
 #developer input[type=text],
 #developer input[type=file]
  {
-	display: block;
-	margin-top: 2px;
-	width: 100%;
+	display: inline-block;
+	width: 60%;
 }
 
 #developer select {
@@ -66,6 +89,8 @@
 	cursor: default;
 }
 
+#developer .save,
+#developer .back,
 #developer .next {
 	background-color: #726fb2;
 	color: #FFF;
@@ -73,13 +98,25 @@
 	position: relative;	
 	float: right;
 	margin-top: 15px;
-	margin-right: 22px;
+	margin-right: 10px;
 	height: 22px;
 	width: 75px;
 	border: 0;
 	text-align: center;
 	line-height: 22px;
 	cursor: default;
+}
+
+#developer .back:after {
+    content: "";
+	position: absolute;
+    right: 75px;
+    top: 0;
+	display: block;
+	height: 0;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    border-right: 11px solid #726fb2;
 }
 
 #developer .next:after {
@@ -94,6 +131,8 @@
     border-left: 11px solid #726fb2;
 } 
 
+#developer .save:hover,
+#developer .back:hover,
 #developer .next:hover {
 	font-weight: bold;
 	margin-top: 14px;
@@ -101,6 +140,8 @@
 	line-height: 24px;
 }
 
+#developer .save:active,
+#developer .back:active,
 #developer .next:active {
 	font-weight: normal;
 	background-color: #9595C2;
@@ -109,11 +150,19 @@
 	line-height: 22px;
 }
 
+#developer .back:hover:after {
+    right: 75px;
+    border-width: 12px;
+}
+
+#developer .save:hover:after,
 #developer .next:hover:after {
     right: -12px;
     border-width: 12px;
 }
 
+#developer .save:active:after,
+#developer .back:active:after,
 #developer .next:active:after {
 	border-left-color: #9595C2;
 	right: -11px;
