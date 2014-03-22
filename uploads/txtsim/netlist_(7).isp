@@ -1,1 +1,0 @@
-{"netlist":"R1 in out 12431wrqwde0k\nC1 out 0 10p","analyses":"TRAN 10n 10u","source":"V1 in 0 sin(0 1 1e6)\n\t","outvar":"v(in) v(out)"}
