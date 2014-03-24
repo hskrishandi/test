@@ -1,0 +1,104 @@
+	 $(window).load(function(){
+		var tabcontainer = $('#tab_container');
+		tabcontainer.tabs();
+		tabcontainer.bind('tabsshow', function(event, ui) {
+			//Event for clicking output tab. Callback the server program.
+		    if (ui.index == 3){
+			for(var i in jqPlotObject)
+				jqPlotObject[i].replot();
+		    }
+		    
+		});
+
+		//handling analyses Mode windows.
+
+		//Intial the AnalyesMode first selection when page loaded
+		$('#analyses_mode').buttonset();
+		$('#analyses_mode input:first').each(function(){
+				var id = $(this).attr("id");
+				analysesMode($("#analyses_details #"+id));
+		});
+		$('#analyses_mode input').change(function(){
+				var id = $(this).attr("id");
+				analysesMode($("#analyses_details #"+id));
+		});
+	
+		$('.editorCommonDesign').autosize({append: "\n"});
+
+		$('button.src_define').button()
+		.click(function(event){
+			event.preventDefault();
+		});
+		
+
+		$('.runSim').click(function(event){
+			var submitData;
+			if ($(this).attr('id') == "runNetlistModeSim")
+				submitData = $('#netlistModeForm').serialize();
+			else
+				submitData = $('#RAWModeForm').serialize();
+			
+			var connection = $.ajax({
+				url: CI_ROOT + "/txtsim/runSIM",
+				type: "POST",
+				cache: false,
+				async: false,
+				data: submitData,
+				dataType: "json"
+			}).done(function(data){
+				console.log(data);
+				
+				plot_graph($('#graphResult'), data.dataset);
+				$('#log').html(data.log);
+				var string = "";
+				
+				for(var key in data.dataset){
+					if (data.dataset[key].error=="true")
+					{
+						string = string + "Error: The item(s) " + data.dataset[key].ylabel +" not found.<br />";
+						continue;
+					}
+					console.log(key);
+					string = string + "<a href='"+data.path+"/"+data.dataset[key].filename+"' target='blank'>Download the " + data.dataset[key].ylabel + "</a><br />"
+				}
+				$('#rawResult').html(string);
+				
+			}).fail(function(jqXHR, textStatus){
+				console.log(textStatus);
+			});
+			event.preventDefault();
+		});
+		
+		$('#functionConv').click(function(event){
+			var connection = $.ajax({
+				url: CI_ROOT + "/txtsim/getNetlist",
+				type: "POST",
+				cache: false,
+				async: false,
+				data: $('#netlistModeForm').serialize(),
+				dataType: "text"
+			}).done(function(data){
+				$("#textModeList").val(data);
+				$("#textModeList").trigger('autosize');
+			}).fail(function(jqXHR, textStatus){
+				console.log(textStatus);
+			});
+			event.preventDefault();
+		});
+		$("#functionRAWLoad").click(function(){
+			
+			event.preventDefault();
+		});
+		$("#functionRAWSave").click(function(){
+			console.log($('#RAWModeForm').serialize());
+			$('#RAWModeForm').formAndDownload(CI_ROOT + "/txtsim/saveRAW");
+			event.preventDefault();
+			return false;
+		});
+	$("<iframe name='my_iframe' style='display:none'></iframe>").appendTo('BODY');			
+	});
+
+	$.fn.formAndDownload = function(url){
+		this.attr('action', url).attr('method', 'POST').attr('target', 'my_iframe').submit();
+		return false;
+	}

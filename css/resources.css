@@ -1,0 +1,258 @@
+/* Resources content  */
+
+h3.title {
+	margin: 0;
+}
+
+a.more {
+display: block;
+padding-right: 10px;
+background: 
+transparent url(../images/icons/forward-icon.png) no-repeat center right;
+width: 36px;
+float: right;
+top:-15px;
+position:relative;
+}
+
+
+a.post {
+display: block;
+padding-right: 10px;
+margin-right: 17px;
+background: 
+transparent url(../images/icons/forward-icon.png) no-repeat center right;
+width: 32px;
+float: right;
+top:-15px;
+position:relative;
+}
+
+#page #content ul {
+	display: block;
+	border-top: 1px solid #9E9EC3;	
+	min-height: 80px;
+	width: 100%;
+}
+
+#page #content ul.item-list {
+	margin: 5px 0;
+	padding: 0px;
+}
+
+#page #content  ul.item-list li {
+	list-style-type: none;
+	display: block;
+	margin: 8px 5px;
+}
+
+#page #content  ul.item-list li .date {
+	list-style-type: none;
+	display: block;
+	margin: 0px 5px;
+}
+
+#page #content  ul.item-list a.link {
+	color: #85859C;
+	font-style: italic;
+	display: block;
+	margin: 0 1px;
+	word-wrap: break-word;
+}
+
+#page #content  ul.item-list a.link:hover,
+#page #content  ul.item-list a.link:active {
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+#page #content .entry {
+	margin: 3px 0;
+	display: inline-block;
+	font-size: 1.05em;
+	line-height: 1.1;
+	border-bottom: 1px solid #9E9EC3;	
+}
+
+#page #content .entry:hover,
+#page #content .entry:active {
+	font-weight: normal;
+}
+
+#page #content span.description {
+	color: #8080B0;
+/*	display: block;
+	margin: 5px;
+	width: 80%; */
+}
+
+#page #content span.date {
+	color: #85859C;
+}
+
+#page #content span.user-detail {
+	color: #85859C;
+	text-align: left;
+	padding: 0.5em 0.2em;	
+
+	display: block;
+}
+
+#page #content span.website  {
+	padding-top:5px;
+	display: block;	
+}
+#page #content span.website a.link:hover,
+#page #content span.website a.link:active {
+	text-decoration: underline;
+}
+
+/* Resource index page columns */
+
+#page #resources {
+	width: 780px;
+	margin: 10px 20px;
+	position: relative;
+	float: left;
+}
+
+#page #resources .row {
+	position: relative;
+	clear: both;
+}
+
+#page #resources .block {
+	float: left;
+	width: 344px;
+	min-height: 150px;
+	padding: 10px 20px 10px 20px;
+	margin: 10px 0;
+}
+
+#page #resources .block ul.item-list a.link {
+	color: inherit;
+	font-style: normal;
+	display: block;
+	margin: 0 5px;
+}
+
+/* Resource page content */
+
+#page #resource-content {
+	width: 85%;
+	margin: 20px;
+}
+
+#page #resource-content .title{
+	margin-top:0px;
+}
+
+#page #resource-content .tools {
+	padding-top:10px;
+	text-align:right;
+}
+
+#page #resource-content ul.item-list li .date {
+	list-style-type: none;
+	display: block;
+	margin: 0px 0px;
+}
+/*posting form*/
+
+#page #post_forms{
+	
+	padding-left:20px;
+	padding-top:20px;
+	width: 790px;
+	min-height: 500px;
+	float: left;	
+	position: relative;
+}
+
+#page #post_forms .form {
+
+#85859C;
+width: 506px;
+min-height: 500px;
+float: left;
+position: relative;
+}
+
+#page #post_forms .form .form_table{
+	line-height:30px;
+}
+
+
+#page #post_forms .form .form_table td.label{
+	vertical-align: top;
+	width:100px;
+}
+
+
+
+#page #post_forms .form .form_table input.field {
+width: 400px;
+border: 1px solid 
+#9E9EC3;
+}
+
+#page #post_forms .form .form_table input.required {
+width: 400px;
+border: 1px solid 
+#9E9EC3;
+}
+
+#page #post_forms .form .form_table textarea {
+width: 500px;
+border: 1px solid 
+#9E9EC3;
+}
+
+
+#page #post_forms .form .form_table  .form_submit {
+padding-top:10px;
+float: right;
+bottom: 2px;
+
+}
+
+#page #post_forms .form .form_table .submit:after {
+    border-bottom: 11px solid transparent;
+    border-left: 11px solid #726FB2;
+    border-top: 11px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: -11px;
+    top: 0;
+}
+#page #post_forms .form .form_table .submit {
+background-color: #726FB2;
+border: 0 none;
+color: white;
+cursor: default;
+display: block;
+float: right;
+height: 22px;
+line-height: 22px;
+margin-right: 22px;
+position: relative;
+text-align: center;
+width: 75px;
+}
+
+
+#page #post_forms .form .form_table label.error {
+	display:block;
+	color:red;
+
+}
+
+#page #post_forms .form .form_table input.error {
+	border-color:red;
+}
+
+#page #post_forms .form .form_table  textarea.error {
+	border-color:red;
+}

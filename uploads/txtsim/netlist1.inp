@@ -1,0 +1,32 @@
+.TITLE My netlist
+*
+* The list is from i-mos.org.
+* If you any question, please feel free to contact support@i-mos.org
+
+* Circult Defination
+R1 in out 50k
+C1 out 0 10p
+
+* Source Defination
+V1 in 0 sin(0 1 1e6)
+	
+
+* MODEL Defination
+
+.MODEL SNWT.test1 nanowire tox=3.5e-7 r=20e-8 na=5e18
+.MODEL SymDG.test1 symdg tox=1.2e-9 tsi=1.0e-8
+.MODEL SNWT.TOX2 nanowire tox=7e-7 r=20e-8 na=5e18
+.CONTROL
+save all
+run
+* Analyses Defination
+TRAN 10n 10u
+ 
+* Plot Defination
+plot v(in) v(out)
+
+
+
+.endc
+
+.end

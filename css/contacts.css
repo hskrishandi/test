@@ -1,0 +1,91 @@
+
+.div_inline {
+	float: left;
+	position: relative;
+}
+.contacts{
+	margin-left: 20px;
+	margin-top: 20px;
+}
+.contacts .title{
+	margin-left: 0px;
+	margin-top: 0px;
+}
+.contacts .forms {
+	border-right: 1px solid #85859C;	
+	width: 550px;
+	min-height: 500px;
+	float: left;
+	position: relative;
+}
+.contacts .forms .form_table td{
+	padding-top: 10px;
+}
+.contacts .forms input{
+	width: 400px;
+	border: 1px solid #9E9EC3;
+}
+.contacts .forms input.submit{
+	width: 75px;
+	height: 35px;
+	border: 1px solid #9E9EC3;
+}
+.contacts .forms .err{
+	border: 1px solid red;
+}
+.contacts .forms textarea{
+	width: 530px;
+	border: 1px solid #9E9EC3;
+}
+.contacts .forms .error{
+	color: red;
+}
+.contacts .forms .form_table .title{
+	width: 130px;
+	vertical-align: top;
+	font-weight: normal;
+}
+.contacts .forms div.form_submit{
+	position: absolute;
+	float: right;
+	bottom: 2px;
+	right: 8px;
+}
+
+.contacts .team_info {
+	min-height: 200px;
+	float: left;
+	position: relative;
+	margin-left: 8px;
+}
+
+.contacts .submit:after {
+    border-bottom: 11px solid transparent;
+    border-left: 11px solid #726FB2;
+    border-top: 11px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: -11px;
+    top: 0;
+}
+.contacts .submit {
+    background-color: #726FB2;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: default;
+    display: block;
+    float: right;
+    height: 22px;
+    line-height: 22px;
+    margin-right: 22px;
+    position: relative;
+    text-align: center;
+    width: 75px;
+}
+
+.contacts .team_info .title{
+	width: 150px;
+	padding: 3px;
+}

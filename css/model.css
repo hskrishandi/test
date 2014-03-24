@@ -442,7 +442,6 @@ div#param-sets h4 {
 	width: 230px;
 	min-height: 26px;
 	overflow: hidden;
-	vertical-align: top;
 }
 
 #param-tabs label span {
@@ -454,7 +453,7 @@ div#param-sets h4 {
 }
 
 #param-tabs label input {
-	vertical-align: top;
+	vertical-align: middle;
 	display: inline-block;
 	width: 70px;
 }
