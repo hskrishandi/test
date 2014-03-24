@@ -8,9 +8,9 @@
 }
 
 #developer textarea {
-	display: block;
+	display: inline-block;
 	margin-top: 2px;
-	width: 96%;
+	width: 60%;
 	resize: none;
 }
 
@@ -21,6 +21,18 @@
 	height: 250px;
 	overflow: auto;
 	border: 1px solid #9E9EC3;
+}
+
+#developer .progress {
+	margin-top: 7px;
+	padding: 1%;
+	width: 96%;
+	overflow: auto;
+	border: 1px solid #9E9EC3;
+}
+
+#developer .progress-form{
+	height : 35px;
 }
 
 #developer ol#model_info {
@@ -36,16 +48,28 @@
 }
 
 #developer div .labels {
-	height: 320px;
+	min-height: 320px;
 	border-width:1px;
 	border-style:solid;
+}
+
+
+#developer .error {
+	font-size: 12px;
+	color: red;
+	display: none;
+}
+
+#developer .error_show {
+	font-size: 12px;
+	color: red;
 }
 
 
 #developer label {
 	display: inline-block;
 	position: relative;
-	margin: 5px 5px;
+	margin: 5px 5px 0 5px;
 	width: 100%;
 	font-size: larger;
 }
@@ -59,18 +83,77 @@
 	width: 35%
 }
 
+#developer .uploaded{
+	padding-right: 25px;
+	color: chocolate;
+	font-size: smaller;
+	width: 10%
+}
 
-#developer input[type=text],
-#developer input[type=file]
- {
+#developer input[type=text]
+{
 	display: inline-block;
 	width: 60%;
 }
+
+#developer input[type=file]
+{
+	display: inline-block;
+	width: 25%;
+}
+
 
 #developer select {
 	display: block;
 	margin-top: 2px;
 	width: 50%;
+}
+
+#developer .progress_bar {
+	background-color: #726fb2;
+	color: #FFF;
+	display: block;
+	position: relative;	
+	float: left;
+	margin-top: 7px;
+	margin-left: 120px;
+	height: 22px;
+	width: 150px;
+	border: 0;
+	text-align: center;
+	line-height: 22px;
+	cursor: default;
+}
+
+#developer table, td, th{
+	font-size: 12px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	width: 100%;
+	border:1px solid;
+	text-align:center;
+	vertical-align:center;
+}
+
+#developer td, th{
+	padding:2px;
+}
+
+#developer .thead {
+	width: 15%;
+	font-size: 15px;
+}
+
+#developer .small_cell {
+	width: 10%;
+}
+
+#developer .col {
+	width: 15%;
+
+}
+
+#developer .progressbar_col{
+	font-size: 15px;
 }
 
 #developer .submit {
@@ -82,7 +165,7 @@
 	margin-top: 15px;
 	margin-left: 22px;
 	height: 22px;
-	width: 75px;
+	width: 95px;
 	border: 0;
 	text-align: center;
 	line-height: 22px;
@@ -100,7 +183,7 @@
 	margin-top: 15px;
 	margin-right: 10px;
 	height: 22px;
-	width: 75px;
+	width: 95px;
 	border: 0;
 	text-align: center;
 	line-height: 22px;
@@ -108,28 +191,28 @@
 }
 
 #developer .back:after {
-    content: "";
+	content: "";
 	position: absolute;
-    right: 75px;
-    top: 0;
+	right: 95px;
+	top: 0;
 	display: block;
 	height: 0;
-    border-top: 11px solid transparent;
-    border-bottom: 11px solid transparent;
-    border-right: 11px solid #726fb2;
+	border-top: 11px solid transparent;
+	border-bottom: 11px solid transparent;
+	border-right: 11px solid #726fb2;
 }
 
 #developer .next:after {
-    content: "";
+	content: "";
 	position: absolute;
-    right: -11px;
-    top: 0;
+	right: -11px;
+	top: 0;
 	display: block;
 	height: 0;
-    border-top: 11px solid transparent;
-    border-bottom: 11px solid transparent;
-    border-left: 11px solid #726fb2;
-} 
+	border-top: 11px solid transparent;
+	border-bottom: 11px solid transparent;
+	border-left: 11px solid #726fb2;
+}
 
 #developer .save:hover,
 #developer .back:hover,
@@ -151,20 +234,25 @@
 }
 
 #developer .back:hover:after {
-    right: 75px;
-    border-width: 12px;
+	right: 95px;
+	border-width: 12px;
 }
 
 #developer .save:hover:after,
 #developer .next:hover:after {
-    right: -12px;
-    border-width: 12px;
+	right: -12px;
+	border-width: 12px;
+}
+
+#developer .back:active:after {
+	border-right-color: #9595C2;
+	right: 95px;
+	border-width: 11px;
 }
 
 #developer .save:active:after,
-#developer .back:active:after,
 #developer .next:active:after {
 	border-left-color: #9595C2;
 	right: -11px;
-    border-width: 11px;
+	border-width: 11px;
 }

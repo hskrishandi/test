@@ -79,6 +79,30 @@ class home extends CI_Controller {
 		$this->load->helper('download');
 		force_download('i-MOS Users Manual.pdf', file_get_contents('files/manual/i-mos manual_1st rev.pdf'));
 	}
+	
+	
+	//This function provide download function for url http://i-mos.org/imos/home/iwcm2014
+	public function iwcm2014()
+	{
+		$this->load->helper('download');
+		force_download('IWCM2014_PresentationFiles.zip', file_get_contents('files/iwcm2014/IWCM2014_PresentationFiles.zip'));
+	}
+	
+	/*This is a more general download function. You can do updated more easily with this one.
+		The url format is i-mos.org/imos/home/download/[$foldername]/[$filename]
+		 It needs two parameters:
+			$foldername : the folder name that contains the desired file in ./files/, for example iwcm2014,
+			$filename : the file name to be download in the folder(only the file name.).
+			After you paste these two function to home.php at /local/html/imos/applications/controller/, the above two urls should work together. You can choose either url.
+			http://i-mos.org/imos/home/download/iwcm2014/IWCM2014_PresentationFiles.zip
+	*/
+	public function download($foldername,$filename)
+	{
+		$foldername = urldecode($foldername); //replace %20 with normal space symbol.
+		$filename = urldecode($filename);
+		$this->load->helper('download');
+		force_download($filename, file_get_contents('files/'.$foldername.'/'.$filename));
+	}
 
 }
 

@@ -9,18 +9,19 @@ class Developer_model extends CI_Model {
 	}
 
 		
-	public function getFormData($user_id)
+	public function getModelsInProgress()
 	{
-		$this->db->select('title,authorList')->from('developer_form')
-		->where(array("user_id" => $user_id));
+		$this->db->select('user_name,stage,model_name,description')->from('models_in_progress')
+		->order_by('stage', 'desc');//->limit(5);
 		
 		$query = $this->db->get();
-		if ($query->num_rows() == 1) {
-			$result = $query->row(0);
-			return $result;
-		}
 		
-		return null;
+		return $query->result();
+	}
+	
+	public function addNewModelToDb($data)
+	{
+		$this->db->insert('models_in_progress',$data);
 	}
 	
 }

@@ -91,6 +91,9 @@ var ModelSimulation;
 		self.modelParams = ko.observableArray([]);
 		self.modelParams.getData = paramMapper(self.modelParams);
  
+		//This parameter is for remebering the index of 'type' parameter, initial value is -1, wait to be set until the data arrives from modelDetail's ajax
+		self.typeIndex = ko.observable(-1);
+	
 		self.hasExampleBoxFileList = ko.observable(false);
 		self.model_id = ko.observable(MODEL_ID);
 	
@@ -168,13 +171,9 @@ var ModelSimulation;
 		self.modelParamsForTabs = ko.observableArray([]);
 	
 		//this parameter is to manually set the type in netlist of model 9.
-		if(MODEL_ID == 9){
+		if(MODEL_ID >= 9){
 			self.currentType = ko.computed(function(){
-				if(self.modelParams()[2] && self.modelParams()[2].name == 'type'){
-					return self.modelParams()[2].value() == 1 ? 'nmos' : 'pmos';
-				}
-				else
-					return null;
+					return self.typeIndex()==-1? null: (!self.modelParams()[self.typeIndex()]? null : (self.modelParams()[self.typeIndex()].value() == 1 ? 'nmos' : 'pmos'));
 			});
 		}
 		else{
@@ -538,9 +537,12 @@ var ModelSimulation;
 					try {
 						result = JSON.parse(result);
 					} catch(err) { alert(k);}
-					
+					self.hasExampleBoxFileList(result.hasCollection)
 					self.instanceParams($.map(result.params.instance, function(item) { return new ModelSimulation.Parameter(item); }));
-					self.modelParams($.map(result.params.model, function(item) { return new ModelSimulation.Parameter(item); }));
+					self.modelParams($.map(result.params.model, function(item,key) {
+						if(item.name.toLowerCase()== 'type')
+							self.typeIndex(key);
+					  return new ModelSimulation.Parameter(item); }));
 					
 					self.modelParamsForTabs.push({
 																				 modelParams: self.instanceParams,
@@ -629,7 +631,7 @@ var ModelSimulation;
 			this.value = ko.observable(this["default"]).extend({localPersist: { key: 'M#' + MODEL_ID + 'P#' + data.name } });
 		}		//this.value = ko.observable(this["default"]);
 		this.showTypeExplanation = false;
-		if(this.name == 'type' && MODEL_ID == 9)
+		if(this.name.toUpperCase() == 'TYPE'/* && MODEL_ID == 9*/)
 			this.showTypeExplanation = true;
 	};
 } (jQuery));
