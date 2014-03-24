@@ -199,6 +199,7 @@ class developer extends CI_Controller {
 				if($step === 'step4' && isset($data))
 				{
 					$this->Developer_model->addNewModelToDb($data);
+					if (!file_exists('./uploads/developer_models/finished')) mkdir('./uploads/developer_models/finished');
 					$foldername = './uploads/developer_models/finished/'.$USER_ID;
 					$x = 1;
 					while(file_exists($foldername.'#'.$x)) $x++;
