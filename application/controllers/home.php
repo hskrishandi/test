@@ -79,8 +79,7 @@ class home extends CI_Controller {
 		$this->load->helper('download');
 		force_download('i-MOS Users Manual.pdf', file_get_contents('files/manual/i-mos manual_1st rev.pdf'));
 	}
-	
-	
+
 	//This function provide download function for url http://i-mos.org/imos/home/iwcm2014
 	public function iwcm2014()
 	{
@@ -96,6 +95,7 @@ class home extends CI_Controller {
 			After you paste these two function to home.php at /local/html/imos/applications/controller/, the above two urls should work together. You can choose either url.
 			http://i-mos.org/imos/home/download/iwcm2014/IWCM2014_PresentationFiles.zip
 	*/
+
 	public function download($foldername,$filename)
 	{
 		$foldername = urldecode($foldername); //replace %20 with normal space symbol.
@@ -103,7 +103,6 @@ class home extends CI_Controller {
 		$this->load->helper('download');
 		force_download($filename, file_get_contents('files/'.$foldername.'/'.$filename));
 	}
-
 }
 
 /* End of file home.php */
