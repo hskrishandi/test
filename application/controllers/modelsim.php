@@ -72,12 +72,12 @@ class modelsim extends CI_Controller {
 		return $this->clientParamSet("UPLOAD", $model_id, $content);
 	}
 
-	public function benchmarking($method) {
+	public function benchmarking($method,$model_id) {
         $response = null;
 		if ($this->Account_model->isLogin()) {
 			switch ($method) {
 			case "GET":
-				$response = $this->Modelsim_model->getBenchmarkingInfo();
+				$response = $this->Modelsim_model->getBenchmarkingInfo($model_id);
 				break;
 			default:
 				$this->output->set_status_header('404');
@@ -485,8 +485,26 @@ class modelsim extends CI_Controller {
 					}
 				}
 				
-				// Valid input format
-				$netlist = $this->getNetlist($modelID, $biases, $params);
+				//check biasing mode
+				$biasingMode = $this->input->post('biasingMode', true);
+				if($biasingMode == "General Biasing")
+					$netlist = $this->getNetlist($modelID, $biases, $params);
+				else if($biasingMode == "Benchmarking") {
+					$benchmarkingId = $this->input->post('benchmarkingId', true);
+					if($benchmarkingId)
+						$netlist = $this->getNetlist($modelID, $biases, $params, $benchmarkingId);
+					else {
+						//no benchmarking id
+						$this->output->set_status_header('400');
+						return;
+					}
+				}
+				else {
+					//no biasing mode, skip
+					$this->output->set_status_header('400');
+					return;
+				}
+				
 				if ($netlist != null) {
 					$response = $this->Ngspice_model->simulate($netlist);
 				}
@@ -498,7 +516,7 @@ class modelsim extends CI_Controller {
 	
         public function simulationStatus()
         {
-                if (!$this->Account_model->isLogin())
+				if (!$this->Account_model->isLogin())
                         $this->output->set_status_header('401');
                 else if (!$this->input->post())
                         $this->output->set_status_header('405');
@@ -540,10 +558,15 @@ class modelsim extends CI_Controller {
 		$this->outputJSON($response);
 	}
 	
-	private function getNetlist($modelID, $biases, $params)
+	private function getNetlist($modelID, $biases, $params, $benchmarkID = -1)
 	{
 		$model_info = $this->Modelsim_model->getModelInfoById($modelID);
 		if ($model_info == null) return null;
+		
+		if($benchmarkID != -1) {
+			$benchmark_info = $this->Modelsim_model->getBenchmarkingInfoById($benchmarkID);
+			if($benchmark_info == null) return null;
+		}
 		
 		$input = array();
 		$input["prefix"] = $model_info->prefix;
@@ -555,14 +578,36 @@ class modelsim extends CI_Controller {
 		}
 		$input["iname"] = substr($model_info->name, 0, 7 - strlen($input["suffix"]));	// instance name is atmost 8 characters with prefix, eg. MXXXXXXXX
 		
-		$model_biases = $this->Modelsim_model->getModelBiases($modelID);
+		if($benchmarkID == -1) {
+			$model_biases = $this->Modelsim_model->getModelBiases($modelID);
+			$model_outputs = $this->Modelsim_model->getModelOutputs($modelID);
+		}
+		else {
+			$model_biases = $this->Modelsim_model->getBenchmarkingBiases($benchmarkID);
+			$model_outputs = $this->Modelsim_model->getBenchmarkingOutputs($benchmarkID,$modelID);
+			$model_ctrl = $this->Modelsim_model->getBenchmarkingControlSrc($benchmarkID,$modelID);
+			$m_outputs = $this->Modelsim_model->getModelOutputs($modelID);//newly added
+			foreach($model_ctrl as $ctrl) {
+				$input['ctrlsources'][] = array("ctrlname" => $ctrl->ctrl_src, "bias" => $ctrl->bias, "indsource" => $ctrl->ind_src, "ctrlval" => $ctrl->ctrl_val);
+			}
+		}
+
 		$fixed_params = $this->Modelsim_model->getModelParams($modelID, false);
-		$model_outputs = $this->Modelsim_model->getModelOutputs($modelID);
 		
 		$outputs = ' ';
 		foreach ($model_outputs as $output) {
 			$outputs .= $this->parser->parse_string($output->variable, $input, true) . ' ';
 		}
+		
+		//this part is newly added, $moutputs is added to fix bugs, $moutputs stand for model output while $outputs stand for model output when benchmarkID = -1 and benchmark output when benchmarkID != -1
+		if($benchmarkID != -1){
+			$outputs1 = ' ';
+			foreach ($m_outputs as $output) {
+				$outputs1 .= $this->parser->parse_string($output->variable, $input, true) . ' ';
+			}
+			$input['moutputs'] = $outputs1;
+		}
+		
 		$input['outputs'] = $outputs;
 		$input['iparams'] = $params["instance"];
 		$input['mparams'] = $params["model"];
@@ -589,7 +634,10 @@ class modelsim extends CI_Controller {
 			}
 		}
 		
-		return $this->Ngspice_model->getNetlistForModelSim($input);
+		if($benchmarkID != -1)
+			return $this->Ngspice_model->getNetlistForModelSim($input, $benchmark_info->name);
+		else
+			return $this->Ngspice_model->getNetlistForModelSim($input);
 	}
 
     private function outputJSON($output)

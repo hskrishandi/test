@@ -301,6 +301,83 @@ div.model-library  #model-library-menu li font:active {
     font-weight: normal;
 }
 
+/* side menu for benchmark*/
+
+div.model-benchmark-side-menu div {
+	overflow: auto;
+	clear: both;
+}
+
+.model-benchmark-side-menu ul#model-lib-list {
+    padding: 10px 0;
+    margin:  0;
+}
+
+.model-benchmark-side-menu ul li {
+    list-style: none;
+}
+
+.model-benchmark-side-menu ul .tree-icon {
+    display: block;
+    float: left;
+}
+
+#side_menu .model-benchmark-side-menu h2 a.action {
+	color: #FFF;
+	display: block;
+	float: right;
+	padding: 2px 5px;
+	position: relative;
+	z-index: 15;
+	margin-right: 2px;
+} 
+
+#side_menu .model-benchmark-side-menu h2 a.action.active {
+	color: #9e9ec3;
+	background-color: #FFF;
+	-webkit-border-top-left-radius: 2px;
+	-moz-border-radius-topleft: 2px;
+	border-top-left-radius: 2px;
+	-webkit-border-top-right-radius: 2px;
+	-moz-border-radius-topright: 2px;
+	border-top-right-radius: 2px;
+} 
+
+#side_menu .model-benchmark-side-menu h2 a.action.active:hover {
+	font-weight: normal;
+}
+
+#side_menu .model-benchmark-side-menu ul.model-lib {
+	list-style: none;
+	margin: 5px 0;
+}
+
+#side_menu .model-benchmark-side-menu ul.model-lib li {
+	border: 1px solid #EFEFEF;
+	display: block;
+	padding: 3px 5px;
+	margin: 5px 0;
+	overflow: hidden;
+	font-size: 0.95em;
+}
+
+#side_menu .model-benchmark-side-menu ul.model-lib li a {
+	display: block;
+	float: left;
+	word-break: break-all;
+	max-width: 78%;
+}
+
+#side_menu .model-benchmark-side-menu ul.model-lib li a.action {
+	display: block;
+	float: right;
+    font-weight: normal;
+}
+
+/*  none overflow */
+div.no-overflow{
+	overflow:hidden !important; 
+}
 
 /* Model simulation page */
 

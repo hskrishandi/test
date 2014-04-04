@@ -21,9 +21,10 @@
 
 		viewModels.lib.load();
 		viewModels.sim.init();
-
+		ko.applyBindings(viewModels.sim, $(".model-benchmark-side-menu")[0]);	
 		ko.applyBindings(viewModels.lib, $(".model-library")[0]);
 		ko.applyBindings(viewModels.sim, $("#model-page")[0]);
+	
 		
 		$("#model-page").on('change', "#param-tab-model input", function() {			
 			viewModels.sim.selectedSet(null);		// invalidated selection

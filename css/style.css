@@ -563,6 +563,10 @@ a.more:active {
 	cursor: pointer;
 }
 
+.model-choice {
+	cursor: pointer;
+}
+
 [class*="btn-span"] {
 	display: block;
 	float: left;

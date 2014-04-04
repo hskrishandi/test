@@ -5,7 +5,7 @@
 // Exports
 var ModelLibrary;
 var ModelSimulation;
-
+ 
 (function($) {
 
 	/** Model library view model */
@@ -80,11 +80,12 @@ var ModelSimulation;
 		self.simulationTime = ko.observable(0);
 		self.simulationId = ko.observable(null);
 		self.isSimulatingAlert = ko.observable(false);
+		self.b_hasFixed = ko.observable(false);
 		
 		self.isLoading = ko.observable(false);
 		self.selectedTab = ko.observable(0).extend({localPersist: { key: 'M#' + MODEL_ID + 'TABINDEX' } });
 		self.selectedParamTab = ko.observable(0).extend({localPersist: { key: 'MP#' + MODEL_ID + 'TABINDEX' } });
-		
+		self.selectedBenchmarkingTab = ko.observable(0).extend({localPersist: {key: 'MB#' + MODEL_ID + 'TABINDEX'}});		
 		self.instanceParams = ko.observableArray([]);
 		self.instanceParams.getData = paramMapper(self.instanceParams);
 	
@@ -185,7 +186,9 @@ var ModelSimulation;
 		self.selectedSet = ko.observable(null);
 
 		self.biases = ko.observableArray([]);
-		
+		self.choice = ko.observableArray([{id:0,name:'General Biasing',expanded:ko.observable(false),b_name:ko.observableArray([])},{id:1,name:'Benchmarking',expanded:ko.observable(false),b_name:ko.observableArray([])}]);	
+		self.b_variableBias = ko.observableArray([{name:'',init:-0.5,end:0.5,step:0.01}]);
+		self.b_fixedBias = ko.observableArray([{name:'',value:0}]);		
 		self.variablebias = ko.observableArray([]).extend({required: true});
 		
 		self.fixedbias = ko.observableArray([]);
@@ -207,6 +210,86 @@ var ModelSimulation;
 		
 		// Validation group for all data
 		self.validation = ko.validatedObservable(self);
+		self.benchmarking = ko.observableArray([]);	
+		self.originalOutputs = [];
+		
+		self.availableMode = ko.observableArray([
+		{name:'General Biasing',key:'0'},
+		{name:'Benchmarking',key:'1'}
+		
+		]);		
+		self.img_src = [
+			"images/simulation/benchmark1.jpg",
+			"images/simulation/benchmark2.jpg",
+			"images/simulation/benchmark3.jpg",
+			"images/simulation/benchmark4.jpg"
+		];
+		self.selectedMode = ko.observable();
+		
+		//when different benchmarks are selected, output variables are changed
+		self.changeBenchmark = function(data) {
+			self.b_variableBias()[0].name = self.benchmarking()[data].user_input().vb_name();
+			self.b_variableBias()[0].init = self.benchmarking()[data].user_input().init();
+			self.b_variableBias()[0].end = self.benchmarking()[data].user_input().end();
+			self.b_variableBias()[0].step = self.benchmarking()[data].user_input().step();
+			if(self.benchmarking()[data].user_input().fb_name()!=null){
+				self.b_fixedBias()[0].name = self.benchmarking()[data].user_input().fb_name();
+			}
+			self.b_fixedBias()[0].value=self.benchmarking()[data].user_input().value();
+			if(self.benchmarking().length > 0 ){
+				self.outputs.removeAll();
+				self.outputs($.map(self.benchmarking()[data].filter, function(item) { return new ModelSimulation.OutputVariable(item); }));
+			}
+			self.checkFixed(self.benchmarking()[data].user_input().fb_name());
+		};
+	
+		self.changeSelectedMode = function (data) {
+			self.selectedMode().key = data; 
+			self.changeMode();
+		}
+		
+		//selection between "general bias" and "benchmark"
+		self.changeMode = function() {
+			var gb = document.getElementById("general_biasing");
+			var ben = document.getElementById("benchmarking");
+			if(self.selectedMode().key == "0"){
+				gb.style.display = 'block';
+				ben.style.display = 'none';
+			}else{
+				gb.style.display = 'none';
+				ben.style.display = 'block';							
+			}			
+	
+			if(self.selectedMode().key =="0"){
+				self.outputs($.map(self.originalOutputs, function(item) { return new ModelSimulation.OutputVariable(item); }));				
+			}else{
+				self.outputs($.map(self.benchmarking()[self.selectedBenchmarkingTab()].filter, function(item) { return new ModelSimulation.OutputVariable(item); }));		
+			}
+		};
+
+		self.getData_fromBenchmarking = function() {
+				return ko.toJS({
+					modelID: MODEL_ID,
+					biases: {
+						variable: self.b_variableBias,
+						fixed: self.b_fixedBias 
+					},
+					params: {
+						instance: self.instanceParams.getData(),
+						model: self.modelParams.getData(),
+						type: self.currentType()
+					},		
+					biasingMode: "Benchmarking",
+					benchmarkingId: self.benchmarking()[self.selectedBenchmarkingTab()].benchmarkingID
+				});		
+		};
+		
+		self.sideMenuCtrl = function(data) {
+			self.selectedBenchmarkingTab(data);
+			self.changeBenchmark(data);
+			self.selectedMode().key = 1; 
+			self.changeMode();			
+		}
 		
 		self.getData = function() {			
 			return ko.toJS({
@@ -219,7 +302,8 @@ var ModelSimulation;
 					instance: self.instanceParams.getData(),
 					model: self.modelParams.getData(),
 					type: self.currentType()
-				}
+				},
+				biasingMode: "General Biasing"
 			});
 		};
 		
@@ -353,13 +437,28 @@ var ModelSimulation;
 			self.fixedbias.remove(bias);
 		};
 		
+		self.checkFixed = function(fixed){
+			if(fixed==null){
+				self.b_hasFixed(false);
+			}else{
+				self.b_hasFixed(true);
+			}
+		}
+		
 		self.simulate = function() {
 			if (!self.validation.isValid()) {
 				// TODO: display error
 				return;
 			}
 		
-			var data = self.getData();
+			var data;
+			
+			if(self.selectedMode().key =="0"){
+				data = self.getData();	
+			}else{
+				data = self.getData_fromBenchmarking();				
+			}
+			console.log(data);			
 			self.isLoading(true);
 			$.ajax({
 				url: ROOT + "/simulate",
@@ -519,6 +618,7 @@ var ModelSimulation;
 				}
 			};			
 			self.isLoading(true);
+			
 			$.ajax({
 				url: ROOT + "/paramSet/GET/" + MODEL_ID,
 				type: 'GET',
@@ -530,6 +630,7 @@ var ModelSimulation;
 				}, 
 				complete: completeTask
 			});
+			
 			$.ajax({
 				url: ROOT + "/modelDetails/" + MODEL_ID,
 				type: 'GET',
@@ -579,6 +680,8 @@ var ModelSimulation;
 				  }
 					self.outputs($.map(result.outputs, function(item) { return new ModelSimulation.OutputVariable(item); }));
 					self.biases(result.biases);
+					self.originalOutputs = ko.toJS(self.outputs);  //newly added for benchmarking
+					
 					self.variablebias.extend({localPersist: {
 						key: 'M#' + MODEL_ID + 'VARBIAS',
 						deserialize: ko.mapping.fromJSON
@@ -594,7 +697,48 @@ var ModelSimulation;
 				}, 
 				complete: completeTask
 			}); 
-					
+			
+			$.ajax({
+				url: ROOT + "/benchmarking/GET"+ '/' + MODEL_ID,
+				type: 'GET',
+				success: function(result) {
+					try {
+						result = JSON.parse(result);
+					} catch (err) { }
+
+					for ($i=0; $i<result.length; $i++){
+						self.benchmarking.push({
+							order: $i,
+							name: result[$i].display_name,
+							href: "#tab-"+($i+1).toString(),
+							id:"tab-"+($i+1).toString(),
+							variable_bias:JSON.parse(result[$i].variable_bias),
+							b_img:"b_img"+($i+1).toString(),
+							user_input:ko.observable(
+							{vb_name:ko.observable(),fb_name:ko.observable(),init:ko.observable(-0.5),end:ko.observable(0.5),step:ko.observable(0.01),value:ko.observable(0)}
+							),
+							fixed_bias:JSON.parse(result[$i].fixed_bias),
+							filter:JSON.parse(result[$i].filter),
+							benchmarkingID:result[$i].id
+							}
+						);
+						if(self.benchmarking()[$i].variable_bias[0])
+							self.benchmarking()[$i].user_input().vb_name(self.benchmarking()[$i].variable_bias[0].name);
+						if(self.benchmarking()[$i].fixed_bias[0])
+							self.benchmarking()[$i].user_input().fb_name(self.benchmarking()[$i].fixed_bias[0].name);
+					}					
+					for($i=0; $i<self.img_src.length; $i++){
+						$("#b_img"+($i+1).toString()).attr('src',$("#b_img"+($i+1).toString()).attr("src")+self.img_src[$i]);
+					}
+									
+					self.changeBenchmark(self.selectedBenchmarkingTab()); //initialize b_vaibaleBias.name
+					$("#benchmarking_tabs").tabs("refresh");
+					$("#benchmarking_tabs").tabs("option","active",self.selectedBenchmarkingTab());
+					self.selectedMode(self.availableMode()[0]); 	
+				//	console.log(self.benchmarking());
+				}				
+			});
+			self.choice()[1].b_name(self.benchmarking());					
 		};
 	};
 			

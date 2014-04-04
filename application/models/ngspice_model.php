@@ -82,16 +82,18 @@ class Ngspice_model extends CI_Model {
 	 * 
 	 * KEY: iparams = instance parameters; mparams = model parameters; varsources = variable sources
 	 */
-	public function getNetlistForModelSim($input)
+	public function getNetlistForModelSim($input, $template = "netlist")
 	{
 		// Var sources can be atmost 2
 		if (count($input['varsources']) > 2) {
 			$input['varsources'] = array($input['varsources'][0], $input['varsources'][1]);
 		}
 		
+		$template_path = realpath(getcwd() . '/application/simulation/' . $template . '.tpl');
+
 		ob_start();
 		
-		include(realpath(getcwd() . '/application/simulation/netlist.tpl'));
+		include($template_path);
 		
 		$netlist = ob_get_contents();
 		$netlist = $this->parser->parse_string($netlist, $input, true);

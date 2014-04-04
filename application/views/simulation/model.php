@@ -71,6 +71,26 @@
 				</li>
 			</ul>
 		</div>
+		<div class="model-benchmark-side-menu">
+			<!-- ko if: selectedTab()==2-->
+			<div class="block" >
+				<h2>Mode Choice</h2>
+				
+				<ul id="model-lib-list" data-bind="foreach: choice">
+					<li>  	 
+						<a class="tree-icon" data-bind="css: { 'icon-caret-down': expanded(), 'icon-caret-right': expanded() == false }"> </a>                   
+						<font class="model-choice" data-bind="text: name,click:$root.changeSelectedMode.bind($data,id)"></font>
+						<ul class="model-lib" data-bind="modelLibExpandable: expanded,foreach: b_name">
+							<li>
+								<a href="#" data-bind="text:name,click:$root.sideMenuCtrl.bind($data,order)"></a>
+							</li>
+						</ul>              
+					</li>
+					
+				</ul>
+			</div>
+			<!-- /ko -->		
+		</div>
 	<?php endblock(); ?>
 
 	<?php startblock('content'); ?>
@@ -146,83 +166,135 @@
 
 			</script>
 
-			<div id="bias" class="inputs">
-				<div class="toolbar">
-                    <a href="#" class="action add-var btn-span9" title="Add variable bias" data-bind='css: { disabled: variablebias().length >= 2 }, click: addVariable'>
-						<i class="icon-plus"></i>Add variable bias
-					</a>
-                    <a href="#" class="action add-fixed btn-span8" title="Add fixed bias" data-bind='css: { disabled: fixedbias().length + variablebias().length >= biases().length }, click: addFixed'>
-						<i class="icon-plus"></i>Add fixed bias
-					</a>
+			<div id="bias" class="inputs no-overflow">
+				<!--general biasing div block below-->
+				<div style="display:block" id="general_biasing">			  
+					<div class="toolbar">
+						<a href="#" class="action add-var btn-span9" title="Add variable bias" data-bind='css: { disabled: variablebias().length >= 2 }, click: addVariable'>
+							<i class="icon-plus"></i>Add variable bias
+						</a>
+						<a href="#" class="action add-fixed btn-span8" title="Add fixed bias" data-bind='css: { disabled: fixedbias().length + variablebias().length >= biases().length }, click: addFixed'>
+							<i class="icon-plus"></i>Add fixed bias
+						</a>
+					</div>
+
+					<table class="varbias" data-bind='visible: variablebias().length > 0'>
+						<caption>Variable bias</caption>
+						<thead>
+							<tr>
+								<th></th>
+								<th>Node</th>
+								<th>Initial voltage</th>
+								<th>Final voltage</th>
+								<th>Step</th>
+							</tr>
+						</thead>
+						<tbody data-bind='foreach: variablebias'>
+							<tr>
+								<th data-bind="text: ($index() ? 'Second' : 'First')"></th>
+								<td><select data-bind="options: $root.biases, optionsText: 'name', optionsValue: 'name', value: name"></select></td>
+								<td><input value="0" type="text" data-bind='value: init'/></td>
+								<td><input value="0" type="text" data-bind='value: end'/></td>
+								<td><input value="0" type="text" data-bind='event: {change:$root.stepValueOnChange, focus:$root.stepValueOnFocus}, value: step'/></td>
+								<td><a href='#' class="delete icon-trash" data-bind='click: $root.removeVariable'></a></td>
+							</tr>
+						</tbody>
+					</table>
+									
+					<table class="fixedbias" data-bind='visible: fixedbias().length > 0'>
+						<caption>Fixed bias</caption>
+						<thead>
+							<tr>								
+								<th>Node</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody data-bind='foreach: fixedbias'>
+							<tr>
+								<td><select data-bind="options: $root.biases, optionsText: 'name', optionsValue: 'name', value: name"></select></td>
+								<td><input value="0" type="text" data-bind='value: value'/></td>
+								<td><a href='#' class="delete icon-trash" data-bind='click: $root.removeFixed'></a></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<p class="info">Note: All unassigned nodes will be grounded.</p>
 				</div>
 				
-				<table class="varbias" data-bind='visible: variablebias().length > 0'>
-					<caption>Variable bias</caption>
-					<thead>
-						<tr>
-							<th/>
-							<th>Node</th>
-							<th>Initial voltage</th>
-							<th>Final voltage</th>
-							<th>Step</th>
-							<th/>
-						</tr>
-					</thead>
-					<tbody data-bind='foreach: variablebias'>
-						<tr>
-							<th data-bind="text: ($index() ? 'Second' : 'First')"></th>
-							<td><select data-bind="options: $root.biases, optionsText: 'name', optionsValue: 'name', value: name"></select></td>
-							<td><input value="0" type="text" data-bind='value: init'/></td>
-							<td><input value="0" type="text" data-bind='value: end'/></td>
-							<td><input value="0" type="text" data-bind='event: {change:$root.stepValueOnChange, focus:$root.stepValueOnFocus}, value: step'/></td>
-							<td><a href='#' class="delete icon-trash" data-bind='click: $root.removeVariable'></a></td>
-						</tr>
-					</tbody>
-				</table>
-								
-				<table class="fixedbias" data-bind='visible: fixedbias().length > 0'>
-					<caption>Fixed bias</caption>
-					<thead>
-						<tr>
-							<th>Node</th>
-							<th>Value</th>
-							<th/>
-						</tr>
-					</thead>
-					<tbody data-bind='foreach: fixedbias'>
-						<tr>
-							<td><select data-bind="options: $root.biases, optionsText: 'name', optionsValue: 'name', value: name"></select></td>
-							<td><input value="0" type="text" data-bind='value: value'/></td>
-							<td><a href='#' class="delete icon-trash" data-bind='click: $root.removeFixed'></a></td>
-						</tr>
-					</tbody>
-				</table>
+			    
+				<!--benchmarking div block below -->
 				
-				<p class="info">Note: All unassigned nodes will be grounded.</p>
+				<div style="display:none" id="benchmarking">								
+					<script type="text/html" id="board-template">
+						<div data-bind="attr:{id:id}" style="width : 99%; min-height : 400px; border:0">					
+							<div style="float:left;width:400px">
+								<table class="varbias">
+									<caption>Variable bias</caption>
+									<thead>
+										<th>Node</th>
+										<th>Initial voltage</th>
+										<th>Final voltage</th>
+										<th>Step</th>
+									</thead>
+									<tbody>	
+										<th><label data-bind="text:user_input().vb_name,event:{change:$root.changeBenchmark.bind($data,order)}"></label></td>
+										<td><input type="text" data-bind="value:user_input().init,event:{change:$root.changeBenchmark.bind($data,order)}"></input></td>
+										<td><input type="text" data-bind="value:user_input().end,event:{change:$root.changeBenchmark.bind($data,order)}"></input></td>
+										<td><input type="text" data-bind="event: {change:$root.stepValueOnChange, focus:$root.stepValueOnFocus}, value: user_input().step"></input></td>										
+									</tbody>
+								</table>
+								<table class="fixedbias" data-bind="visible:$root.b_hasFixed">								
+									<caption>Fixed bias</caption>								
+									<thead>
+										<th>Node</th>
+										<th>Value</th>
+									</thead>								
+									<tbody>
+										<th><label data-bind="text:user_input().fb_name,event:{change:$root.changeBenchmark.bind($data,order)}"></td>
+										<td><input type="text" data-bind="value:user_input().value,event:{change:$root.changeBenchmark.bind($data,order)}"></input></td>														
+									</tbody>
+								</table>
+							</div>
+							<div style="float:right;width:300px">
+								<img data-bind="attr:{id:b_img}" src="<?php echo base_url('');?>"></img>
+							</div>
+							<div>
+								<p class="info" style="margin-top:255px">Note: All unassigned nodes will be grounded.</p>	
+							</div>							
+						</div>		
+					</script>
+					
+					<div style="padding:1em 0em"id="benchmarking_tabs" data-bind="tabs: selectedBenchmarkingTab,loadingWhen: isLoading">
+						<ul style="display:none" data-bind="foreach: benchmarking">
+							<li><a data-bind="attr:{href:href},text:name,click:$parent.changeBenchmark.bind($data,order)"></a></li>
+						</ul>
+						<div  data-bind="template: { name: 'board-template', foreach: benchmarking}"></div>					
+					</div>
+				</div>		
 			</div>
 
-				<div id="output">		
-					<div class="toolbar">
-						<a href="#" class="action select-all btn-span4" title="Select all" data-bind="checkAll: '#output input'"><i class="icon-check"></i>Select all</a>
-						<a href="#" class="action deselect-all btn-span6" title="Deselect all" data-bind="uncheckAll: '#output input'"><i class="icon-check-empty"></i>Deselect all</a>
-					</div>
-
-					<div class="inputs" data-bind="foreach: outputs">
-						<span class="output-var">
-							<span data-bind="text: name"></span>
-							<a href="#" data-bind="checkbox: linearPlot, css: 'btn-span4'"><label><input type="checkbox" tabindex="-1" />Linear</label></a>
-							<a href="#" data-bind="checkbox: logPlot"><label><input type="checkbox" tabindex="-1" />Log</label></a>
-						</span>
-					</div>
+			<div id="output">		
+				<div class="toolbar">
+					<a href="#" class="action select-all btn-span4" title="Select all" data-bind="checkAll: '#output input'"><i class="icon-check"></i>Select all</a>
+					<a href="#" class="action deselect-all btn-span6" title="Deselect all" data-bind="uncheckAll: '#output input'"><i class="icon-check-empty"></i>Deselect all</a>
 				</div>
+
+				<div class="inputs" data-bind="foreach: outputs">
+					<span class="output-var">
+						<span data-bind="text: name"></span>
+						<a href="#" data-bind="checkbox: linearPlot, css: 'btn-span4'"><label><input type="checkbox" tabindex="-1" />Linear</label></a>
+						<a href="#" data-bind="checkbox: logPlot"><label><input type="checkbox" tabindex="-1" />Log</label></a>
+					</span>
+				</div>
+			</div>
 		  
-				<div id="results">				
-					<div class="toolbar">
-						<a href="#" class="action btn-submit" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i>Run simulation</a>		
-						<label class="action" data-bind="visible: plotData().length > 0">Graph: 
-							<select id="result-select" data-bind="options: plotData, optionsText: function(g) { return g.y().name + (g.y().log ? ' (log)' : ''); }, value: selectedPlot"></select>
-						</label>
-						<a href="#" style="position:absolute;z-index:9999;left:80%;" class="action" data-bind="visible: $root.isSimulating, click: stopSimulationByClick"><i class="icon-off"></i>Abort</a>
+			<div id="results">				
+				<div class="toolbar">
+					<a href="#" class="action btn-submit" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i>Run simulation</a>		
+					<label class="action" data-bind="visible: plotData().length > 0">Graph: 
+						<select id="result-select" data-bind="options: plotData, optionsText: function(g) { return g.y().name + (g.y().log ? ' (log)' : ''); }, value: selectedPlot"></select>
+					</label>
+					<a href="#" style="position:absolute;z-index:9999;left:80%;" class="action" data-bind="visible: $root.isSimulating, click: stopSimulationByClick"><i class="icon-off"></i>Abort</a>
 				</div>
 				
 				<div id="result-container" data-bind="foreach: plotData">
