@@ -32,11 +32,7 @@
 	<div id="developer">
 		<div class="form-page" id="progress-page">
 		<div class="progress">
-		1.To submit NEW model/ Update. Please click the appropriate button below which will direct to the model submission three step pages.<br/> <br/>
-		2.Generally, the processing time for each model is estimated to be 1 month. ( Note: Subject to the completeness of the model provided)<br/> <br/>
-		3.The table 1 shows the status of the model received, processed and completed by the i-MOS team.<br/> <br/>
-		4.After submission, each model developer can check their model status in the table.<br/> <br/>
-		5.Model developer will be contacted by the i-MOS team upon successful completion of their model.<br/> <br/>
+		Please click to submit NEW model/Update which will direct to the description, upload model Verilog-A or C- code and parameter template pages. Generally, the processing time for each model is estimated to be 1 month (note: subject to the completeness of the model provided). The table 1, shows the status of the model received, processed and completed by the i-MOS team. After submission, each model developer can check their model status in the table. Model developer will be contacted by the i-MOS team upon successful completion of their model.
 		</div>
 			<div class="progress-form">
 			<div class="buttons">
@@ -44,8 +40,9 @@
 				<a id="update" class="progress_bar"  name="response" value="Update">Update</a>
 			</div>
 			</div>
-			<div>
+			<div class="tbody-scroll">
 				<table class="progress_table">
+				<thead>
 				<tr>
 					<th rowspan=2 class="thead">Model No.</th>
 					<th rowspan=2 class="thead">Model Name</th>
@@ -57,6 +54,8 @@
 					<th class="small_cell">Processing</th>
 					<th class="small_cell">Completed</th>
 				</tr>
+				</thead>
+				<tbody>
 				<!-- ko foreach: models_info -->
 				<tr>
 						<td class="col" data-bind="text: $index()+1"></td>
@@ -65,6 +64,7 @@
 						<td colspan=4 class="progressbar_col"><div data-bind="attr:{id: progressbar_id}"></div></td>
 				</tr>
 				<!-- /ko -->
+				</tbody>
 				</table>
 			</div>
 		</div>

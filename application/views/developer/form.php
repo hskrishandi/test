@@ -5,12 +5,14 @@
 	<?php endblock(); ?>
 	
 	<?php startblock('css'); ?>
-        <?php echo get_extended_block(); ?>
+		<?php echo get_extended_block(); ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery-ui/themes/base/jquery-ui.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'developer.css'); ?>" media="all" />
     <?php endblock(); ?>
 		
 	<?php startblock('script'); ?>
 		<?php echo get_extended_block(); ?>
+		<script src="<?php echo resource_url('js', 'library/jquery-ui.min.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.localPersist.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'developer/developer.js'); ?>" type="text/javascript" charset="utf-8"></script>
@@ -23,7 +25,7 @@
 	
 	<?php startblock('content'); ?>
 	<div id="developer">
-		<form action="<?php echo base_url('developer/submit/step4')?>" data-bind="with:formDataStatus" id="developer_form" method="post" enctype="multipart/form-data">
+		<form /*action="<?php echo base_url('developer/submit/step4')?>"*/ data-bind="with:formDataStatus" id="developer_form" method="post" enctype="multipart/form-data">
 			<div class="form-page" id="page1" >
 				<h3>Step 1: Fill in the description of your model</h3>
 				<div class="labels">
@@ -67,7 +69,7 @@
 				</div>
 			</div>
 			<div class="form-page" id="page2">
-				<h3>Step 2: Upload your model code to i-MOS (only Verylog-A or C codes are accepted)</h3>
+				<h3>Step 2: Upload your model code to <i>i</i>-MOS (only Verilog-A or C codes are accepted)</h3>
 				<div class="labels">
 					<label>
 						<span>Are you the author of the model code?</span>
@@ -131,10 +133,16 @@
 			<div class="form-page" id="page4">
 				<h3>Step 4: We are almost done</h3>
 				<div class="labels" style="font-size:15px">
-					Thank you for contributing the model to the community.<br/><br/>The <i>i</i>-MOS team will usually takes about 1 month to implement one model. You will be contacted with the estimated time when the model can be done according to the current work load.<br/><br/>By clicking the Finish button, you will transfer the code to i-MOS server, and then will be redirected to the Home page.
+					Thank you for contributing the model to the community.<br/><br/>The <i>i</i>-MOS team will usually takes about 1 month to implement one model. You will be contacted with the estimated time when the model can be done according to the current work load.<br/><br/>By clicking the Submit button, you will transfer the code to <i>i</i>-MOS server, and then will be redirected to the Home page.
 				</div>
 			</div>
 		</form>
+	</div>
+	<div id="validation_alert">
+	<!--<label class="show">Incomplete step:</label>-->
+	<label class="hidden alert_button" id='step1_alert'><a><u>Step 1</u></a>: Description incomplete</label>
+	<label class="hidden alert_button" id='step2_alert'><a><u>Step 2</u></a>: Model code incomplete</label>
+	<label class="hidden alert_button" id='step3_alert'><a><u>Step 3</u></a>:Parameter incomplete</label>
 	</div>
 	<?php endblock(); ?>
 

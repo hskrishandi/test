@@ -1,7 +1,8 @@
 // Script for developer form
 
  var ROOT = CI_ROOT + "developer";
- var USER_ID = 1005;
+ var MODEL_ID = window.location.href.split('/').pop();
+ if(!$.isNumeric(MODEL_ID)) MODEL_ID = 0;
 
 (function ($) {
 	FormModel =  function() {
@@ -44,18 +45,19 @@
 	
 		self.init = function() {
 			$.ajax({
-				url: ROOT + "/loadSavedModelInfo/" + USER_ID,
+				url: ROOT + "/loadSavedModelInfo/" + MODEL_ID,
 				type: 'GET',
 				success: function(result) {
 					try{
 						result = JSON.parse(result);
-					} catch(err) {alert("Parse Failed");}
+					} catch(err) {console.log("Parse Failed");}
 					if(!result.fieldname || !result.value || result.fieldname.length != result.value.length)
 					{}	//load nothing
 					else
 					{
 						for(var i=0;i<result.fieldname.length;i++)
 						{
+							if(result.fieldname[i] == 'model_id') continue;
 							self.formDataStatus()[result.fieldname[i]](result.value[i]);
 						}
 					}
@@ -88,11 +90,15 @@ $(document).ready(function($) {
 	var next = $("<a class='next'>Save and Next</a>"), submit = $("<a class='next'>Submit</a>");
 	forms.addClass("hidden")
 		 .eq(0).removeClass("hidden");
-	next.appendTo("#developer .form-page:not(:last)")
-		.click(function() {
+	next.appendTo("#developer .form-page:not(:last)");
+	submit.appendTo("#developer .form-page:last");
+	var nextAndSubmit = $(".next");
+	nextAndSubmit.click(function() {
+		$('.error_show').removeClass('error_show').addClass('error');
 		isUploading = true;
 		var stayOnCurrentPage = false;
 		var formData = new FormData($("form#developer_form")[0]);
+		formData.append('model_id',MODEL_ID);
 		viewModels.clearFormDataStatus();
 		$.ajax({
 				url: ROOT + "/submit/step"+(current_page+1),
@@ -101,24 +107,40 @@ $(document).ready(function($) {
 				contentType: false,
 				processData: false,
 				success: function(result) {
-					try {
-						result = JSON.parse(result);
-					} catch(err) { }
-					if(!result.success){
-						stayOnCurrentPage = true;
-						$('.error_show').removeClass('error_show').addClass('error');
-						if(result.error_info){
-							$.each(result.error_info,function(key,value){
-								if(value && value != ''){
-									$('#'+key+'_error').text(value).removeClass('error').addClass('error_show');
-								}
-								else{
-									$('#'+key+'_error').text('').removeClass('error_show').addClass('error');
-								}
-							});
+						try {
+							result = JSON.parse(result);
+						} catch(err) { }
+						if(MODEL_ID == 0){
+					 		MODEL_ID = result.model_id;
+							console.log(result.model_id);
+					 	}
+						if(!result.success){
+							stayOnCurrentPage = true;
+							var hasError = [];
+							if(result.error_info){
+								$(".alert_button").addClass("hidden");
+								$.each(result.error_info,function(step,element){
+									$.each(element,function(key,value){
+										if(value && value != ''){
+											$('#'+key+'_error').text(value).removeClass('error').addClass('error_show');
+											hasError[step] = true;
+										}
+									});
+								if(hasError[step] && current_page+1 == 4){
+									 $("#"+step+"_alert").removeClass("hidden").addClass("show").click(function(){
+											forms.eq(current_page).addClass("hidden");
+											current_page = step[4]-1;
+											forms.eq(current_page).removeClass("hidden");
+											$("#validation_alert").dialog("close");
+											});
+									 $("#validation_alert").dialog( "open" );
+								 }
+								});
+							}
 						}
-						
-					}
+						else if(current_page+1==4){
+							window.location = ROOT;
+						}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					console.log("Error: " + textStatus + "; " + errorThrown);
@@ -133,11 +155,6 @@ $(document).ready(function($) {
 				}
 			});
 	});
-	submit.appendTo("#developer .form-page:last")
-		  .click(function() {
-		current_page = 0;
-		$("#developer form").submit();		
-	});
 //	save.appendTo("#developer .form-page")
 //		.click(function() {
 //	});
@@ -145,6 +162,15 @@ $(document).ready(function($) {
 		.click(function() {
 		forms.eq(current_page).addClass("hidden");
 		forms.eq(--current_page).removeClass("hidden");
+	});
+	$("#validation_alert").dialog({
+		autoOpen: false,
+		height: 150,
+		width: 300,
+		show: 'fade',
+		hide: 'fade',
+		title: 'Incomplete',
+		dialogClass	: 'dialog-box alert-box'
 	});
 });
 

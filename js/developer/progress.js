@@ -14,7 +14,7 @@
 				success: function(result) {
 					try{
 						result = JSON.parse(result);
-					} catch(err) {alert("Parse Failed");}
+					} catch(err) {console.log("Parse Failed");}
 					for(var i=0;i<result.length;i++)
 					{
 						 self.models_info.push({
@@ -45,7 +45,9 @@ $(document).ready(function($) {
 	ko.applyBindings(viewModels,$("#progress-page")[0]);
 	
 	$("#newModel").click(function(){
-		$.ajax({
+		//window.location = ROOT+"/tos/0";
+		$("<form method='get' action='"+ROOT+"/tos'><input type='hidden' name='model_id' value='0' /></form>").submit();
+		/*$.ajax({
 				url: ROOT + "/checkSaved/",
 				type: 'POST',
 				data: {},
@@ -74,9 +76,9 @@ $(document).ready(function($) {
 				},
 				complete: function(){
 				}
-			});
+			});*/
 	});
-	$("#update").click(function(){window.location=ROOT+"/tos";})
+	$("#update").click(function(){window.location=ROOT+"/user_models";})
 	
 	
 });

@@ -1,6 +1,10 @@
 #developer {
 	margin: 20px;
-	width: 85%;
+	width: 95%;
+}
+
+#developer a{
+	cursor: pointer;
 }
 
 #developer .form-page.hidden {
@@ -24,9 +28,10 @@
 }
 
 #developer .progress {
+	text-align: justify;
 	margin-top: 7px;
 	padding: 1%;
-	width: 96%;
+	width: 93%;
 	overflow: auto;
 	border: 1px solid #9E9EC3;
 }
@@ -48,6 +53,7 @@
 }
 
 #developer div .labels {
+	padding: 5px;
 	min-height: 320px;
 	border-width:1px;
 	border-style:solid;
@@ -116,19 +122,59 @@
 	position: relative;	
 	float: left;
 	margin-top: 7px;
-	margin-left: 120px;
+	margin-left: 130px;
 	height: 22px;
 	width: 150px;
 	border: 0;
 	text-align: center;
 	line-height: 22px;
-	cursor: default;
+	cursor: pointer;
+}
+
+#user_models .update_button {
+	background-color: #726fb2;
+	color: #FFF;
+	display: block;
+	position: relative;
+	height: 22px;
+	width: 100%;
+	border: 0;
+	text-align: center;
+	line-height: 22px;
+	cursor: pointer;
+}
+
+#user_models #new_model_button {
+	width: 25%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#user_models .delete_button img{
+	width : 30px;
+}
+
+#validation_alert .show{
+	cursor: pointer;
+	display: block;
+	margin: 8px;
+	color: #7575a9;
+}
+
+#validation_alert .show a{
+	color: #7575a9;
+}
+
+#validation_alert .hidden{
+	display: none;
+	font-size: medium;
+	margin: 5px;
 }
 
 #developer table, td, th{
-	font-size: 12px;
-	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
-	width: 100%;
+	//font-size: 12px;
+	//font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	width: 95%;
 	border:1px solid;
 	text-align:center;
 	vertical-align:center;
@@ -138,9 +184,32 @@
 	padding:2px;
 }
 
+#user_models .scol {
+	width: 20%;
+}
+
+#user_models .lcol {
+	width: 35%;
+}
+
+#developer .sthead {
+	width: 20%;
+	//font-size: 13px;
+}
+
+#developer .lthead {
+	width: 35%;
+	//font-size: 13px;
+}
+
 #developer .thead {
-	width: 15%;
-	font-size: 15px;
+	width: 25%;
+	//font-size: 13px;
+}
+
+#developer .tbody-scroll {
+	max-height:250px;
+	overflow-y: scroll;
 }
 
 #developer .small_cell {
@@ -149,11 +218,10 @@
 
 #developer .col {
 	width: 15%;
-
 }
 
 #developer .progressbar_col{
-	font-size: 15px;
+	//font-size: 13px;
 }
 
 #developer .submit {
@@ -169,7 +237,7 @@
 	border: 0;
 	text-align: center;
 	line-height: 22px;
-	cursor: default;
+	cursor: pointer;
 }
 
 #developer .save,
@@ -187,7 +255,7 @@
 	border: 0;
 	text-align: center;
 	line-height: 22px;
-	cursor: default;
+	cursor: pointer;
 }
 
 #developer .back:after {
@@ -255,4 +323,32 @@
 	border-left-color: #9595C2;
 	right: -11px;
 	border-width: 11px;
+}
+
+/* Dialog box */
+
+div.ui-dialog {
+	padding: 0;
+}
+
+div.ui-dialog,
+div.ui-dialog div.ui-dialog-titlebar,
+div.ui-dialog button {
+	border: 1px solid #9E9EC3;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+}
+
+div.ui-dialog  div.ui-dialog-titlebar  {
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+	background-color: #9E9EC3;
+	background-image: none;
+	color: #FFF;
+}
+
+div.ui-dialog,
+div.ui-dialog .ui-widget-content {
+	border-color: #9E9EC3;
 }
