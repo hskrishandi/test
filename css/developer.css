@@ -1,6 +1,6 @@
 #developer {
-	margin: 20px;
-	width: 95%;
+	margin: 20px 0 0 20px;
+	//width: 95%;
 }
 
 #developer a{
@@ -31,7 +31,7 @@
 	text-align: justify;
 	margin-top: 7px;
 	padding: 1%;
-	width: 93%;
+	//width: 100%;
 	overflow: auto;
 	border: 1px solid #9E9EC3;
 }
@@ -122,7 +122,7 @@
 	position: relative;	
 	float: left;
 	margin-top: 7px;
-	margin-left: 130px;
+	margin-left: 20%;
 	height: 22px;
 	width: 150px;
 	border: 0;
@@ -174,7 +174,7 @@
 #developer table, td, th{
 	//font-size: 12px;
 	//font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
-	width: 95%;
+	width: 100%;
 	border:1px solid;
 	text-align:center;
 	vertical-align:center;

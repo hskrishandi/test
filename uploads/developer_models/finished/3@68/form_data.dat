@@ -1,0 +1,14 @@
+title : Organic
+author_list : A.Cerdeira
+organization : CINVESTAV
+contact : eemuthu@ust.hk
+description : OTFT
+reference : Modeling of OTFT
+is_author : Yes
+has_tested : Yes
+pre_simulator : SPICE
+model_id : 3
+structure : true
+model_code : true
+parameter_list : true
+output_list : true

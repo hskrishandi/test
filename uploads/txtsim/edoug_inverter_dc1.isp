@@ -1,0 +1,1 @@
+{"netlist":"M1 out in 0 0 eDouG.n1 L=1u W=1u\nM2 out in vsup vsup eDouG.p1 L=1u W=1u\n","analyses":"dc vin 0 1.0 0.01","source":"vdd vsup 0 dc=1.0\nvin in 0 dc=1.0","outvar":"v(in) v(out)"}

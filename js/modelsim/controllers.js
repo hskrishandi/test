@@ -284,7 +284,7 @@
 					if(data.length){
 						//viewModels.sim.hasExampleBoxFileList(true);
 						$(element).click(function() {
-							exampleDialog("Predictive Technology Models (adopted from <a target='_blank' href='http://ptm.asu.edu'><u>http://ptm.asu.edu</u></a>)",data);
+							exampleDialog(viewModels.sim.collection_info(),data);
 						});
 					}
 				},

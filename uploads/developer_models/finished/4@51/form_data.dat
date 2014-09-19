@@ -1,0 +1,14 @@
+title : r
+author_list : r
+organization : r
+contact : eemuthu@ust.hk
+description : e
+reference : d
+is_author : No
+has_tested : Yes
+pre_simulator : yes
+model_id : 4
+structure : true
+model_code : true
+parameter_list : true
+output_list : true

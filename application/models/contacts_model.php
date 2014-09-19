@@ -22,7 +22,7 @@ $this->email->initialize($config);
 		
 
 		$this->email->from($email, $name);
-		$this->email->to('mchan@ust.hk, lnzhang@ust.hk');
+		$this->email->to('mchan@ust.hk, eelnzhang@ust.hk');
 		$this->email->subject("[i-MOS]".$subject);
 		$this->email->message($msg."\n\nMessage From ".$name.", ".$affiliation);
 		$this->email->send();

@@ -1,0 +1,1 @@
+{"netlist":"R1 vsup out 10\nC1 out 0 1p\nZ1_3 out in 0 eHEMT.n1\n","analyses":"TRAN 1n 300n","source":"vdd vsup 0 dc=2.0\nvin in 0 dc 0 pulse(-2.9 1.0 2n 10n 10n 48n 100n)","outvar":"v(in) v(out)"}

@@ -428,12 +428,14 @@ class modelsim extends CI_Controller {
 	{
 		$response = null;
 		if ($this->Account_model->isLogin()) {
-            $response = array(
+				$model_info = $this->Modelsim_model->getModelInfoById($model_id);
+				$response = array(
 				'biases' => $this->Modelsim_model->getModelBiases($model_id),
 				'params' => $this->Modelsim_model->getModelParams($model_id),
 				'paramsTabTitle' => $this->Modelsim_model->getModelParamsTabTitle($model_id),
 				'outputs' => $this->Modelsim_model->getModelOutputs($model_id),
-				'hasCollection' => $this->Modelsim_model->getModelInfoById($model_id)->hasCollection
+				'hasCollection' => $model_info->hasCollection,
+				'collection_info' => $model_info->collection_info
 			);
         } else {
             $this->output->set_status_header('401');

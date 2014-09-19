@@ -19,7 +19,7 @@
 .control
 
 save all
-save {outputs}
+save {moutputs}
 
 dc {varsources} {name} {init} {end} {step} {/varsources}
 

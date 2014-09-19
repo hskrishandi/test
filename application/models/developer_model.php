@@ -11,7 +11,7 @@ class Developer_model extends CI_Model {
 		
 	public function getModelsInProgress()
 	{
-		$this->db->select('user_name,stage,model_name,description')->from('models_in_progress')
+		$this->db->select('user_name,stage,model_name,description')->from('models_in_progress')->where(array('released' => '0','complete' => '1'))
 		->order_by('stage', 'desc');//->limit(5);
 		
 		$query = $this->db->get();

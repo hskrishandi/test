@@ -126,6 +126,8 @@
                                   Hamza Zia<br />
                                <br />				
         <h4 class="sub_title">Collaborators</h4>
+	Prof. Xinnan Lin <br />
+        (Peking University Shenzhen) <br />
         Dr. Stanislav Markov<br />
         (The University of Hong Kong)<br />
           Prof. Yu Cao <br />(Arizona State University)<br />

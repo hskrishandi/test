@@ -1,0 +1,1 @@
+{"netlist":"m1 out in 0 0 bsim3.nmos2\nm2 out in vsup vsup bsim3.pmos2","analyses":"dc vin 0 1.0 0.001","source":"vin in 0 1.0\nvdd vsup 0 1.0\n\t","outvar":"v(in) v(out)"}

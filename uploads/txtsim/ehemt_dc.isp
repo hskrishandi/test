@@ -1,0 +1,1 @@
+{"netlist":"R1 vsup out 500\nC1 out 0 0.01p\nZ2_3 out in 0 eHEMT.n1\n","analyses":"DC vin -4 1.0 0.01","source":"vdd vsup 0 dc=5.0\nvin in 0 dc=1.0","outvar":"v(in) v(out)"}

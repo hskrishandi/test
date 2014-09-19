@@ -96,6 +96,7 @@ var ModelSimulation;
 		self.typeIndex = ko.observable(-1);
 	
 		self.hasExampleBoxFileList = ko.observable(false);
+		self.collection_info = ko.observable("");
 		self.model_id = ko.observable(MODEL_ID);
 	
  		self.paramSelect = function(keyword, focus) {
@@ -172,7 +173,7 @@ var ModelSimulation;
 		self.modelParamsForTabs = ko.observableArray([]);
 	
 		//this parameter is to manually set the type in netlist of model 9.
-		if(MODEL_ID >= 9){
+		if(MODEL_ID == 9 || MODEL_ID == 10 || MODEL_ID == 11){
 			self.currentType = ko.computed(function(){
 					return self.typeIndex()==-1? null: (!self.modelParams()[self.typeIndex()]? null : (self.modelParams()[self.typeIndex()].value() == 1 ? 'nmos' : 'pmos'));
 			});
@@ -638,7 +639,8 @@ var ModelSimulation;
 					try {
 						result = JSON.parse(result);
 					} catch(err) { alert(k);}
-					self.hasExampleBoxFileList(result.hasCollection)
+					self.hasExampleBoxFileList(result.hasCollection=='1'?true:false);
+					self.collection_info(result.collection_info);
 					self.instanceParams($.map(result.params.instance, function(item) { return new ModelSimulation.Parameter(item); }));
 					self.modelParams($.map(result.params.model, function(item,key) {
 						if(item.name.toLowerCase()== 'type')

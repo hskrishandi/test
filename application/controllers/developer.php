@@ -284,21 +284,19 @@ class developer extends CI_Controller {
 		$config['mailtype']='html';
 		$this->email->initialize($config);
 		$this->email->from("model@i-mos.org", 'i-MOS Team');
-		$this->email->cc("model@i-mos.org");
-		$this->email->to($user_info->email);
+		//$this->email->cc("model@i-mos.org");
+		$receiver = array();
+		$receiver[] = $user_info->email;
+		if($current_email != $user_info->email){
+			$receiver[] = $current_email;
+		}
+		$receiver[] = "model@i-mos.org";
+		
+		$this->email->to($receiver);
 		$this->email->subject("[i-MOS]Model Submitted");
 		$msg="Dear ".$user_info->first_name.' '.$user_info->last_name.'<br /> <br />Thank you for your interest in <i>i</i>-MOS. We have received your model code. Kindly, note that the processing period for the code is one month. Our i-MOS team will contact you after processing the code successfully.<br /><br />For more information, visit www.i-mos.org<br /><br />Regards,<br /><i>i</i>-MOS Team';
 		$this->email->message($msg);
 		$this->email->send();
-		if($current_email != $user_info->email){
-			$this->email->from("model@i-mos.org", 'i-MOS Team');
-			$this->email->to($current_email);
-			$this->email->cc("model@i-mos.org");
-			$this->email->subject("[i-MOS]Model Submitted");
-			$msg="Dear ".$user_info->first_name.' '.$user_info->last_name.'<br /> <br />Thank you for your interest in <i>i</i>-MOS. We have received your model code. Kindly, note that the processing period for the code is one month. Our i-MOS team will contact you after processing the code successfully.<br /><br />For more information, visit www.i-mos.org<br /><br />Regards,<br /><i>i</i>-MOS Team';
-			$this->email->message($msg);
-			$this->email->send();
-		}
 	}
 	
 	public function download($foldername,$filename)
