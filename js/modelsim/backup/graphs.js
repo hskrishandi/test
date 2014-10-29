@@ -10,7 +10,9 @@ var Graph;
 	// Workaround for undefined log values when using log plot
 	Math.log = (function(log) {
 		return function(x) {
-			if (x > 0) return log(x);
+			if (x > 0) {
+				return log(x);
+			}
 			return null;
 		}
 	})(Math.log);
@@ -27,6 +29,7 @@ var Graph;
 		self.allData = ko.computed(function() {
 			return self.data().concat(self.customData());
 		});
+		self.id = $.imos.graph.counter;
 	};
 	
 	GraphModel.log = function(data) {
@@ -54,6 +57,8 @@ var Graph;
 			var $element = $(this.element).wrap('<div class="graph-wrapper" />');			
 			this._btnClose = $('<a href="#" class="close"><i class="icon-remove-sign"></i> Close</a>')
 					.appendTo($element.parent()).hide();
+			this._btnDownloadAsPNG = $('<a class="saveas" href="#" onclick="viewModels.sim.downloadPlotData();"><i class="icon-download-alt"></i> Save as PNG</a>')
+					.appendTo($element.parent()).hide();
 					
 			this._isOpen = false;
 			this._jqplot = null;
@@ -61,11 +66,6 @@ var Graph;
 			this._jqPlotOptions = $.extend(true, {}, $.imos.graph.plotOptions);
 								
 			this._resizeHandler = function(e) {
-				var w = $(window).width(), h = $(window).height();
-				$('div.blockMsg').css({
-					top: 0.1 * h / 2 + 'px', left: 0.1 * w / 2 + 'px', 
-					width: 0.9 * w + 'px', height: 0.9 * h + 'px'
-				});
 				$element.graph("replot");
 			};
 			
@@ -82,7 +82,11 @@ var Graph;
 			}
 			
 			if (this.options.y.name) {
-				this._ylabel = this.options.y.name + (this.options.y.unit ? ' [' + this.options.y.unit + ']' : '')
+				var name = this.options.y.name;
+				if (this.options.y.log) {
+					name = 'abs(' + name + ')';
+				}
+				this._ylabel = name + (this.options.y.unit ? ' [' + this.options.y.unit + ']' : '')
 			}
 			
 			this._jqPlotOptions.axes.xaxis.label = this._xlabel;
@@ -106,6 +110,14 @@ var Graph;
 			var i;
 			var data = this.options.data.concat(this.options.customData);
 			var options = this._jqPlotOptions;
+			
+			if (this.options.y.log) {
+				for (var i = 0; i < data.length; ++i) {
+					for (var j = 0; j < data[i].length; ++j) {
+						data[i][j][1] = (data[i][j][1] ? Math.abs(data[i][j][1]) : Math.MIN_VALUE);
+					}
+				}
+			}
 			
 			options.series = [];			
 			for (i = 0; i < this.options.data.length; ++i) {
@@ -133,30 +145,22 @@ var Graph;
 				return;
 			}
 			
-			this._isOpen = true;			
+			this._isOpen = true;
 
 			var self = this;
 			var $element = $(this.element);
 			var container = $element.parent();
 
-			$(window).resize(self._resizeHandler);				
-			$.blockUI({ 
-				message: container,
-				overlayCSS:  { opacity: 1.0 },
-				onBlock: function() { 
-					self._btnClose.show();
-					$("div.blockOverlay").css('cursor', 'default');
-					$(document).one('keyup', function(e) {
-						if (e.keyCode == 27) {	// Esc key
-							self.close();
-						}
-						return 0;
-					});						
-					self._btnClose.one('click', function() { self.close(); });
-					self._resizeHandler();
-				}
-			}); 
-						
+			$(window).resize(self._resizeHandler);
+			container.addClass("full-screen-cover");
+			self._graphParent = container.parent();
+			container.appendTo("body");
+
+			self._btnClose.show();
+			self._btnDownloadAsPNG.show();
+			self._btnClose.one('click', function() { self.close(); });
+			self._resizeHandler();
+			
 			// trigger open event
 			this._trigger("open");
 			
@@ -170,13 +174,13 @@ var Graph;
 			this._isOpen = false;
 			this._trigger("close");
 			
-			$.unblockUI({
-				onUnblock: function() {	
-					$element.graph("replot");
-					self._btnClose.hide();
-					$element.one('click', function() { self.open() });
-				}
-			});				
+			$element.parent().removeClass("full-screen-cover")
+			.appendTo(self._graphParent);
+			$element.graph("replot");
+			self._btnClose.hide();
+			self._btnDownloadAsPNG.hide();
+			$element.one('click', function() { self.open() });
+
 			$(window).unbind('resize', self._resizeHandler);
 	
 			return this;
@@ -242,6 +246,7 @@ var Graph;
  
 	$.extend($.imos.graph, {
 		counter: 0,
+		selectedPlot: -1,
 		plotOptions: { 
 			axes: {
 				xaxis: {
@@ -274,6 +279,7 @@ var Graph;
 					pt2px: 2
 				},
 				tickOptions: { 
+					mark: 'inside',
 					fontSize: '8pt',
 					pt2px: 2
 				}

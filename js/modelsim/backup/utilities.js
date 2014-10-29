@@ -6,6 +6,7 @@
 var alert;
 var confirm;
 var prompt;
+var exampleDialog;
 var isNum;
 var error;
 
@@ -17,11 +18,16 @@ if (typeof console === "undefined" || !console) {
 }
 
 (function ($) {
+	// Override tooltip
+	$( document ).tooltip({
+      track: true
+    });
+	
     // Override BlockUI defaults
     $.extend(true, jQuery.blockUI.defaults, {
 	    fadeOut:  200,
 	    css: { border: 'none', backgroundColor: '#FFF' }, 
-	    overlayCSS:  { backgroundColor: '#FFF', opacity: 0.8 }
+	    overlayCSS:  { backgroundColor: '#FFF', opacity: 0.5 }
     });
         
     isNum = function(val) {
@@ -136,7 +142,9 @@ if (typeof console === "undefined" || !console) {
 	 * @param { Function (string val) } the callback function when confirmed
 	 * @param { Object } jQuery Dialog box options (optional)
 	 */	
-	prompt = function(message, success, target, options) {
+	prompt = function(message, success, options) {
+		options = typeof options !== 'undefined' ? options : { };
+		
 		var defaultActions = {
 			buttons		: {
 				OK : function() {
@@ -147,11 +155,14 @@ if (typeof console === "undefined" || !console) {
 					$(this).dialog('close');
 				}
 			}
-		};		
+		};
+		
+		var moremessage = options.note || null;
+		moremessage = (moremessage == null ? "" : ("<br /><br />" + moremessage));
 		
 		var promptBox = $('#prompt');
 		if (!promptBox.length) {
-			promptBox = $('<div id="prompt">' + message + ' <input id="prompt-input" type="text" /></div>').hide().appendTo('body');		
+			promptBox = $('<div id="prompt">' + message + ' <input id="prompt-input" type="text" />' + moremessage + '</div>').hide().appendTo('body');		
 		}
 		
 		promptBox.dialog($.extend({}, prompt.defaults, defaultActions, options));
@@ -166,6 +177,111 @@ if (typeof console === "undefined" || !console) {
 		dialogClass	: 'dialog-box prompt-box',
 		title		: 'Prompt'
 	};
+	
+	/**
+	 * In-page button plugin for showing the example parameters files.
+	 */
+	
+	exampleDialog = function(message, fileList, options) {
+		options = typeof options !== 'undefined' ? options : { };
+		fileList = fileList instanceof Array ? fileList : [];
+	
+		var creatList = function(parent, fileList){
+			parent.append('<br/><ul id="exampleDialog-menu" autofocus></ul>');
+			var ul = $("#exampleDialog-menu",parent);
+			$('#exampleDialog-menu').on('click', 'li',function(){
+				$.ajax({
+				beforeSend: function(){ viewModels.sim.isLoading(true);},
+				url: ROOT + "/readExampleFiles/"+MODEL_ID+"/"+$(this).text(),
+				type: 'GET',
+				success: function(data) {
+					try {
+						data = JSON.parse(data);
+					} catch(err) { alert("Sorry. Fail to parse!");}
+					if (data.success)
+					{
+						var params = viewModels.sim.loadParams(data.data);
+						params.error += data.error.length;
+					
+						if (params.error == 0) {
+							var msg = "File uploaded and parsed successfully!";	
+						} else {
+							var msg = "File uploaded successfully with " + params.error + " parameters using default values: <br /><br />";
+							
+							msg += "<blockquote>";
+						
+							if (data.error.length > 0) {
+								$(data.error).each(function() {
+									msg += "<li>";
+									msg += this;
+									msg += "</li>";									
+								});
+							
+							}
+							
+							if (params.missing.length > 0) {
+								msg += "<li>" + params.missing.length + " parameter(s) (in red) not set: ";
+								msg += viewModels.sim.paramSelectList(params.missing, "missingParamList");
+								msg += "</li>";
+								
+								// Switch to the tab of the first missing parameter
+								viewModels.sim.paramSelect(params.missing[0], false);
+							}
+							if (params.extra.length > 0) {
+								msg += "<li>" + params.extra.length + " extra parameter(s) detected: ";
+								msg += viewModels.sim.paramSelectList(params.extra, "extraParamList"); 
+								msg += "</li>";	
+							}
+							
+							msg += "</blockquote>";
+						
+						}
+						
+						alert("<br />" + msg);
+						
+						$("#missingParamList").change(function() {
+							viewModels.sim.paramSelect($(this).val());
+						});
+					}
+					else
+						alert(failUploadMsg);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log("Error: " + textStatus + "; " + errorThrown);
+				}, 
+				complete: function(){viewModels.sim.isLoading(false);}
+				});
+				$('#exampleBox').dialog("close");
+			});
+			for(var i=0; i<fileList.length; ++i)
+			{
+				var str = '<li><a href="#">'+fileList[i]+'</a></li>';
+				ul.append(str);
+			}
+		}
+		
+		var exampleBox = $('#exampleBox');
+		if (!exampleBox.length) {
+			exampleBox = $('<div id="exampleBox">' + message + '</div>').hide().appendTo('body');
+			creatList($('#exampleBox'), fileList)
+		}
+		$("#exampleDialog-menu").menu();
+		exampleBox.dialog($.extend({}, exampleDialog.defaults, options));
+	}
+	
+	exampleDialog.defaults = {
+		resizable	: false,
+		show		: 'fade',
+		hide		: 'fade',
+		position: [200,150],
+		width		: 280,
+		minHeight	: 200,
+		maxHeight	: 300,
+		dialogClass	: 'dialog-box prompt-box',
+		title		: 'Model Collections'
+	};
+	
+	
 		
 	/** 
 	 * In-page form submit plugin for file upload / download
@@ -176,25 +292,27 @@ if (typeof console === "undefined" || !console) {
 		//url option required
 		if(opts.url) { 		
 			//send request
-			var iframe = $('<iframe />').uniqueId().appendTo('body').hide();
+			var iframe = $('iframe[name="fileupload"]');
+			console.log(iframe);
+			if(iframe.length == 0)
+				iframe = $('<iframe name="fileupload" />').uniqueId().appendTo('body').hide();
+				
 			var target = iframe.attr('id');
-			iframe.attr('name', target);
-			var form = opts.form || $('<form />');
+			var form = $('<form name="uploadform" action="' + opts.url
+				+ '" method="' + (opts.type||'post')
+				+ '" target="' + "fileupload" //target
+				+ '" enctype="multipart/form-data" />').appendTo('body').hide();
 			
-			form.attr({
-				action: opts.url,
-				method: (opts.type||'post'),
-				target: target,
-				enctype: "multipart/form-data"			
-			});
-			
+			var input = opts.input || null;
+			if(input !== null) input.appendTo(form);
+				
 			if (opts.data) {
 				$('<input type="hidden" name="data" />')
 					.val(JSON.stringify(opts.data))
 					.appendTo(form);
 			}
 			
-			iframe.load(function() {
+			iframe.unbind('load').load(function() {
 				var result;
 				try {
 					result = JSON.parse($(this).contents().text());
@@ -207,10 +325,12 @@ if (typeof console === "undefined" || !console) {
 				iframe.remove();
 			});
 
-			form.appendTo('body').submit();
-			if (!opts.form) {
-				form.remove();		
-			}
+			form.submit();
+			//form.appendTo('body').submit();
+			//if (!opts.form) {
+			//if(form)
+			//	form.remove();		
+			//}
 		}
 	};
 	

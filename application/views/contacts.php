@@ -100,29 +100,33 @@
 				Prof. Mansun Chan<br />
 				<br />
 				<h4 class="sub_title">Project Manager</h4>
-                                  Lining Zhang<br />
+                                Dr. Lining Zhang<br /> 
 				<br />
 				<h4 class="sub_title">Members</h4>
-                                  Muthupandian Cheralathan<br />
 				  Raju Salahuddin<br />
-				  Aixi Zhang<br />
-				  Ying Zhu<br />
+				  Clarissa Cyrilla Prawoto<br />
 				  Yin Sun<br />
+				  Ying Zhu<br />
+				  Salahuddin Shairfe Muhammad<br />
 			        <br />
 				
 			         <h4 class="sub_title">Programmers</h4>
-			          Ngai Sing Ben Ng<br />
-                                  Richeng Huang<br />
-                                  Chun Ming Kenneth Au<br />
-                                  Xiaodong Meng<br />
+			          Keda Ruan<br />
+                                  Lei Sun<br />
 		               <br />
 		                <h4 class="sub_title">Past Contributors</h4>
-                                  Xiaoxu Cheng<br />
+                                  Chun Ming Kenneth Au<br />
+				  Xiaoxu Cheng<br />
+				  Muthupandian Cheralathan<br />
                                   Sai Kin Cheung<br />
+				  Richeng Huang<br />
+				  Xiaodong Meng<br />
+				  Ngai Sing Ben Ng<br />
                                   Ka Chun Cyrix Tam<br />
                                   Wing Hang Seifer Tsang<br />
                                   Hao Wang<br />
                                   Kwok Shiu Andy Wong<br />
+				  Aixi Zhang<br />
                                   Hamza Zia<br />
                                <br />				
         <h4 class="sub_title">Collaborators</h4>

@@ -5,7 +5,8 @@
 // Exports
 var ModelLibrary;
 var ModelSimulation;
- 
+var temp_store_for_user_data;  
+
 (function($) {
 
 	/** Model library view model */
@@ -66,7 +67,7 @@ var ModelSimulation;
 	/** Model simulation page view model */
 	ModelSimulation = function() {
 		var self = this;
-		var paramMapper = function(observable) {			
+		var paramMapper = function(observable) {
 			return function() {
 				var arr = observable(), i = arr.length, ret = [];
 				while (--i >= 0) {
@@ -119,16 +120,17 @@ var ModelSimulation;
 		};
  		self.searchParams = ko.observableArray([]);
 		self.searchParamsInit = function() {
+	 		// alert(self.searchParams().length == 0? "true":"false");
+	 		self.searchParams().length = 0;
 			if (self.searchParams().length == 0) {
 				$("input.param_inputs").each(function() {
-					self.searchParams.push({value: this.id, desc: $(this).attr("desc")});
+					self.searchParams.push({value: this.id, desc: $(this).attr("desc"), param_value: $(this).val()});
 				});
 				$("select.param_inputs").each(function() {
 					self.searchParams.push({value: this.id, desc: $(this).attr("desc")});
 				});
-		
 				
-				
+				// This is for search function
 				$("#search_param").autocomplete({
 					source: viewModels.sim.searchParams(),
 					select: function( event, ui ) {
@@ -143,8 +145,8 @@ var ModelSimulation;
 						return $( "<li>" )
 						.append( "<a><b>" + item.value.replace(new RegExp($("#search_param").val(),"i"),"<font color='#F00'>"+keyword+"</font>") + "</b><br>" + "<font class='desc'>" + item.desc + "</font>" + "</a>" )
 						.appendTo( ul );
-				};		
-				
+					};
+
 				// When user press "Enter" for searching (Not recommended)
 				$("#search_param_form").submit(function() {
 					var keyword = $("#search_param").val(),
@@ -164,8 +166,204 @@ var ModelSimulation;
 					// No form submission
 					return false;
 				});
+
+
+				// This is for add param to the equalizar
+				$("#add_param").autocomplete({
+					source: viewModels.sim.searchParams(),
+					select: function( event, ui ) {
+						var addable = true;
+						$(".eq-name").each(function(){
+							// alert($(this).text());
+							if($(this).text() == ui.item.value){
+								alert("You have already add the parameter!");
+								addable = false;
+							}
+						})
+						if(isNaN(ui.item.param_value)){
+							alert("The parameter is not a number!");
+							addable = false;
+						}
+						if(addable){
+							add_eq_param(ui.item.value, ui.item.param_value);
+						}
+						$("#add_param").val("");
+						return false;
+					}
+				}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+						var keyword = $("#add_param").val().toLowerCase();
+						var pos = item.value.toLowerCase().indexOf(keyword);
+						keyword = item.value.substr(pos, keyword.length);
+						
+						return $( "<li>" )
+						.append( "<a><b>" + item.value.replace(new RegExp($("#add_param").val(),"i"),"<font color='#F00'>"+keyword+"</font>") + "</b><br>" + "<font class='desc'>" + item.desc + "</font>" + "</a>" )
+						.appendTo( ul );
+					};
 				
+				// When user press "Enter" for adding (Not recommended)
+				$("#add_param_form").submit(function() {
+					var keyword = $("#add_param").val(),
+						searchable = false;
+					$(viewModels.sim.searchParams()).each(function(){
+						if (this.value.toLowerCase() == keyword.toLowerCase()) {
+							// self.searchParamsSelect(this.value);
+							searchable = true;
+							return false;
+						}
+					});
+					
+					// // Fail search
+					if (!searchable){
+						$("#add_param").stop().css("backgroundColor", "#f88").animate({backgroundColor: "none"}, 1000);
+						$("#add_param").val("");
+					}
+
+					// // No form submission
+					return false;
+				});
 			}
+		};
+
+		var eq_toggle = true;
+
+		$("#eq-icon-expand").click(function(){
+			$('#results').animate({scrollTop: $("#equalizer-temp").offset().top}, 1500);
+			if(eq_toggle){
+				$("#eq-panel").slideToggle("slow");
+				$("#equalizer-temp").css("height", "420px");
+				eq_toggle = false;
+			}
+		})
+
+		$("#eq-icon-close").click(function(){
+			if(!eq_toggle){
+				$("#eq-panel").slideToggle("slow");
+				$("#equalizer-temp").css("height", "");
+				eq_toggle = true;
+			}
+		})
+
+		$("#eq-expand").click(function(){
+			$('#results').animate({scrollTop: $("#equalizer-temp").offset().top}, 1500);
+			if(eq_toggle){
+				$("#eq-panel").slideToggle("slow");
+				$("#equalizer-temp").css("height", "420px");
+				eq_toggle = false;
+			}
+			$("#equalizer-temp").css("visibility", "visible");
+			return false;
+		})
+
+		$("#eq-run").click(function(){
+			$('#results').animate({scrollTop: $("#result-container").offset().top}, 1500);
+			return false;
+		})
+
+		$("#eq-deleteall").click(function(){
+			$(".eq-slider").remove();
+			eq_num = 0;
+			eq_cnt = 0;
+			$(".eq-changeable").css("visibility", "hidden");
+		})
+
+		var eq_num = 0;
+		var eq_cnt = 0;
+		function add_eq_param(param_name, param_value){
+			var eq_exp = 1;
+			eq_num++; eq_cnt++;
+			if(eq_cnt > 8){
+				alert("You have reach the max number of parameters!");
+				eq_cnt = 8;eq_num--;
+				return;
+			}
+			if (eq_cnt){
+				$(".eq-changeable").css("visibility", "visible");
+			}
+			var $new_slider = $("<div class='eq-slider' id='eq-slider" + eq_num + "' ><b id='name" + eq_num + "' class='eq-name'><span>" + param_name + "</span></b><br>");
+			$new_slider.appendTo("#equalizer");
+			var $new_val = $("<input class='eq-val' id='eq-slider" + eq_num + "-val' /><br>");
+			var $new_max = $("<input class='eq-max' id='eq-slider" + eq_num + "-max' /><br>");
+			var $new_range = $("<div class='eq-range' id='eq-slider" + eq_num + "-range' /><br>");
+			var $new_min = $("<input class='eq-min' id='eq-slider" + eq_num + "-min' /><br>");
+			var $new_trash = $("<a href='#' class='delete_button eq-trash icon-trash' ></a>");
+			$new_max.appendTo("#eq-slider" + eq_num);
+			$new_min.appendTo("#eq-slider" + eq_num);
+			$new_val.appendTo("#eq-slider" + eq_num);
+			$new_range.appendTo("#eq-slider" + eq_num);
+			$new_trash.appendTo("#eq-slider" + eq_num);
+
+			if(param_value == 0){
+
+			}
+			else if(param_value < 10){
+				var tmp = 10/param_value;
+				tmp = Math.ceil(Math.log(tmp)/Math.log(10)) + 3;
+				eq_exp = Math.pow(10,tmp);
+			}
+			$new_range.slider({
+			range: "min",
+			min: (param_value>0) ? param_value * eq_exp * 0.5 : param_value * eq_exp * 1.5,
+			max: (param_value>0) ? param_value * eq_exp * 1.5 : param_value * eq_exp * 0.5,
+			value: param_value * eq_exp,
+			orientation: "vertical",
+			slide: function (event, ui) {
+				var slider_val = ("#" + $(this).attr("id").slice(0,-5) + "val");
+				$(slider_val).val((ui.value / eq_exp).toExponential(3));
+				$("#" + param_name).val(ui.value / eq_exp);
+				$("#" + param_name).change();
+			}
+			});
+
+			// Click trash button and delete the column
+			$new_trash.click(function(){
+				var slider_curr = $(this).parent().attr("id");
+				$("#" + slider_curr).remove();
+				eq_cnt--;
+				if (eq_cnt == 0 ){
+					$(".eq-changeable").css("visibility", "hidden");
+				}
+			});
+
+			// Initial value for max, min, val
+			var slider_selector = ("#eq-slider" + eq_num);
+			$(slider_selector + "-max").val(($(slider_selector + "-range").slider("option", "max") / eq_exp).toExponential(3));
+			$(slider_selector + "-min").val(($(slider_selector + "-range").slider("option", "min") / eq_exp).toExponential(3));
+			$(slider_selector + "-val").val(($(slider_selector + "-range").slider("option", "value") / eq_exp).toExponential(3));
+
+			// When textbox is changed, update the slider
+			var curr_min = $(slider_selector + "-min").val() * eq_exp;
+			var curr_max = $(slider_selector + "-max").val() * eq_exp;
+			var curr_val = $(slider_selector + "-min").val() * eq_exp;
+			$(slider_selector + "-max").change(function() {
+				if((parseFloat($(this).val(),10) * eq_exp) < curr_min){
+					alert("The number you typed is smaller than min value, please re-enter.");
+					$(slider_selector + "-max").val(($(slider_selector + "-range").slider("option", "max") / eq_exp).toExponential(3));
+					return;
+				}
+				$(slider_selector + "-range").slider("option", "max", parseFloat($(this).val(),10) * eq_exp);
+				$(slider_selector + "-max").val(parseFloat($(this).val()).toExponential(3));
+			})
+			$(slider_selector + "-min").change(function() {
+				if((parseFloat($(this).val(),10) * eq_exp) > curr_max){
+					alert("The number you typed is larger than max value, please re-enter.");
+					$(slider_selector + "-min").val(($(slider_selector + "-range").slider("option", "min") / eq_exp).toExponential(3));
+					return;
+				}
+				$(slider_selector + "-range").slider("option", "min", parseFloat($(this).val(),10) * eq_exp);
+				$(slider_selector + "-min").val(parseFloat($(this).val()).toExponential(3));
+			})
+			$(slider_selector + "-val").change(function() {
+				if((parseFloat($(this).val(),10) * eq_exp) > curr_max
+				|| (parseFloat($(this).val(),10) * eq_exp) < curr_min){
+					alert("The number you typed is out of range, please re-enter.");
+					$(slider_selector + "-val").val(($(slider_selector + "-range").slider("option", "value") / eq_exp).toExponential(3));
+					return;
+				}
+				$(slider_selector + "-range").slider("option", "value", parseFloat($(this).val(),10) * eq_exp);
+				$(slider_selector + "-val").val(parseFloat($(this).val()).toExponential(3));
+				$("#" + param_name).val(parseFloat($(this).val(),10));
+				$("#" + param_name).change();
+			})
 		};
 		
 		
@@ -374,25 +572,7 @@ var ModelSimulation;
 			});
 			
 			return return_data;
-			/* var assigned = false;
-			for (var i = 0; i < data.length; ++i) {
-				assigned = false;
-				for (var j = 0; j < mp.length; ++j) {
-					if (data[i].name.toLowerCase() == mp[j].name.toLowerCase()) {
-						mp[j].value(data[i].value);
-						assigned = true;						
-						break;
-					}
-				}
-				
-				for (var j = 0; !assigned && j < ip.length; ++j) {
-					if (data[i].name.toLowerCase() == ip[j].name.toLowerCase()) {
-						ip[j].value(data[i].value);					
-						break;
-					}
-				}
-			}
-			*/
+
 		};
 		
 		self.addVariable = function() {
@@ -448,19 +628,41 @@ var ModelSimulation;
 		
 		self.simulate = function() {
 			if (!self.validation.isValid()) {
-				// TODO: display error
+
+				$("#eq-dialog")
+				.dialog({
+					autoOpen: false,
+					title: "No Output Selected!",
+					width: 400,
+					buttons: {
+						"Choose output": function(){
+							$('#model-tabs').tabs({
+								active: 3
+							});
+							$(this).dialog("close");
+						},
+						"Cancel": function(){
+							$(this).dialog("close");
+						}
+					}
+				})
+				.dialog("open");
 				return;
 			}
 		
-			var data;
+			var data; 
+			
 			
 			if(self.selectedMode().key =="0"){
 				data = self.getData();	
 			}else{
 				data = self.getData_fromBenchmarking();				
 			}
-			console.log(data);			
+
 			self.isLoading(true);
+
+			// Notes: All the ajax must be synchronized, including every parts like 'checkSimulationStatus' and its containing ajax part.
+			
 			$.ajax({
 				url: ROOT + "/simulate",
 				type: 'POST',
@@ -478,9 +680,13 @@ var ModelSimulation;
 				error: function(jqXHR, textStatus, errorThrown) {
 					console.log("Error: " + textStatus + "; " + errorThrown);
 					console.log("Response data: " + jqXHR.responseText);
-				}
+				},
+				async:false
 			}); 
+
+			simulation_upload();	
 		};
+
 		
 		
 		self.checkSimulationStatus = function(interval, data) {
@@ -524,11 +730,14 @@ var ModelSimulation;
 					}
 					if(result.status != "RUNNING") {
 						self.isSimulating(false);
-						if(result.status != "KILL")
+						if(result.status != "KILL"){
 							$("#alert").dialog('close');
+						}
 					}
-				}
+				},
+				async: false
 			});
+
 		};
 		
 		self.stopSimulationByClick = function(data, e) {
@@ -584,7 +793,8 @@ var ModelSimulation;
 							if (--tasks <= 0) {
 								self.isLoading(false); 
 							}
-						}
+						},
+						async: false
 					}); 
 				}(outputs[i]));
 			}

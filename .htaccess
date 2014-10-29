@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /develop/lnzhang/imosdev
+    RewriteBase /imosdev.git
 
     #Removes access to the system folder by users.
     RewriteCond %{REQUEST_URI} ^system.*

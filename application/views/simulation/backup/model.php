@@ -48,6 +48,7 @@
 		<?php echo get_extended_block(); ?>		
 		<div class="block model-library">
 			<h2><a href="#" class="action drop-down-btn icon-cog" title="Settings" data-bind="modelLibMenu: '#model-library-menu'"></a>User Library</h2>
+			<!--<input type="hidden" value="testing" name="testing" />-->
             <ul id="model-library-menu">
 				<li><font class="action new"><i class="icon-file"></i>New</font></li>
 
@@ -63,13 +64,15 @@
 					<ul class="model-lib" data-bind="modelLibExpandable: expanded, foreach: library">
                         <li class="model-lib-entry" data-bind="modelLibEntry: true">
                             <a href="#" title="Select model library" class="load" data-bind="text: name"></a>
-                            <a href="#" class="action model-lib-entry-remove delete icon-trash" title="Delete model library"></a>                       
+                            <a href="#" class="action model-lib-entry-remove delete icon-trash" title="Delete model library"></a>
+                            <!-- <a href="#" class="action rename icon-pencil" title="Edit model library"></a> -->                          
                         </li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 		<div class="model-benchmark-side-menu">
+			<!-- ko if: selectedTab()==2-->
 			<div class="block" >
 				<h2>Mode Choice</h2>
 				
@@ -112,12 +115,18 @@
 			<div id="params">
 				<div class="toolbar">
 						<a href="#" class="action add-to-lib btn-span12" data-bind="addToLib: true, if: modelParams().length > 0" title="Include the current parameter set in user library"><i class="icon-plus"></i>Include in user library</a>
+						<!--
+						<a href="#" class="action param-save btn-span2" data-bind="downloadParams: true" title="Save parameter set to file"><i class="icon-download-alt"></i>Save</a>
+						-->
 						<a href="#" class="action param-save-as btn-span4" title="Save parameter set to file"><i class="icon-download-alt"></i>Save As</a>
 						<a href="#" class="action upload model-param-load btn-span2" title="Load parameter set from file"><i class="icon-upload-alt"></i>Load</a>
 						<a href="#" class="action example model-param-example btn-span4" data-bind="showExamples: true, if: hasExampleBoxFileList()" title="Load parameter set from model collections"><i class="icon-upload-alt"></i>Collection</a>
 						<form id="search_param_form">
 							<input type="text" size="5" id="search_param" placeholder="Search parameter" />
 						</form>
+					<!--<label class="action" data-bind="loadParams: selectedSet, if: paramSet().length > 0">Use parameter set:
+						<select data-bind="options: paramSet, optionsText: 'name', optionsValue: $data, value: selectedSet, optionsCaption: 'None'"></select>
+					</label>-->
 				</div>
 				
 				<script type="text/html" id="parameter-template">
@@ -143,7 +152,8 @@
 						<li><a data-bind="attr: {href: href}, text: title" ></a></li>
 					</ul>
 					
-
+					<!--<div id="param-tab-instance" data-bind="template: { name: 'parameter-template', foreach: instanceParams }">
+					</div>-->
           <!-- ko foreach: modelParamsForTabs -->
 						<div data-bind="template: { name: 'parameter-template', foreach: modelParams }, attr: {id: id}">
 						</div>
@@ -277,13 +287,13 @@
 					</span>
 				</div>
 			</div>
+		  
 			<div id="results">				
 				<div class="toolbar">
-					<a href="#" id="btn-submit-upper" class="action btn-submit" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i>Run simulation</a>		
+					<a href="#" class="action btn-submit" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i>Run simulation</a>		
 					<label class="action" data-bind="visible: plotData().length > 0">Graph: 
 						<select id="result-select" data-bind="options: plotData, optionsText: function(g) { return g.y().name + (g.y().log ? ' (log)' : ''); }, value: selectedPlot"></select>
 					</label>
-					<a href="#" class="action btn-submit" id="eq-expand" style="float:right;">Equalizer</a>		
 					<a href="#" style="position:absolute;z-index:9999;left:80%;" class="action" data-bind="visible: $root.isSimulating, click: stopSimulationByClick"><i class="icon-off"></i>Abort</a>
 				</div>
 				
@@ -292,7 +302,7 @@
 						<div class="toolbar">
 							<a href="#" class="action download" data-bind="downloadPlot: true, css: 'btn-span11'" title="Save raw data as file"><i class="icon-download-alt"></i>Download raw data</a>
 							<a href="#" class="action upload plot-custom-data-load" data-bind="css: 'btn-span11'" title="Upload custom data from file"><i class="icon-upload-alt"></i>Upload custom data</a>                    
-							<a href="#" class="action show-custom" data-bind="checkbox: showCustomData, css: 'btn-span10'"><label><input id="customdata_check" type="checkbox" tabindex="-1" />Show custom data</label></a>
+							<a href="#" class="action show-custom" data-bind="checkbox: showCustomData, css: 'btn-span10'"><label><input type="checkbox" tabindex="-1" />Show custom data</label></a>
 							<a href="#" class="action" data-bind="click:$root.downloadPlotData, css: 'btn-span6'"><i class="icon-download-alt"></i>Save as PNG</a>
 						</div>
 						
@@ -300,42 +310,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div id="equalizer-temp">
-					<div class="add-title" style="padding:4px;padding-left:17px;">
-						Euqalizer
-						<a id="eq-icon-close"><span class="ui-icon ui-icon-minusthick" style="float:right; margin-right:10px;"></span></a>
-						<a id="eq-icon-expand"><span class="ui-icon ui-icon-plusthick" style="float:right; margin-right:10px;"></span></a>
-					</div>
-
-				    <div id="eq-panel" >
-						<p class="add-title" >
-							<form id="add_param_form" style="float:left;margin-left: 10px;" >
-								<input type="text" size="5" id="add_param" placeholder="Add Parameter" />
-							</form>
-							<a href="#" id="eq-deleteall" style="float:right;" class="btn-span4"><i class="icon-trash"></i> Delete All  </a>
-							<a href="#" id="eq-run" class="action btn-submit" style="margin-top: 4px;float:right;" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i> Run simulation</a>	
-						</p>
-						<br>
-						<br>
-
-					    <div class="equalizer" id="equalizer" >
-					        <div class="equalizer-minmax">
-					            <table class="eq-table" style="margin: 10px 0 0 10px;">
-						            <tr class="eq-changeable" style="visibility:hidden"><th>max</th></tr>
-						            <tr class="eq-changeable" style="visibility:hidden"><th>min</th></tr>
-						            <tr class="eq-changeable" style="visibility:hidden"><th>value</th></tr>
-						        </table>
-					        </div>
-					    </div>
-					</div>
-				</div>
-			</div>
-			<div id="eq-dialog" style="display:none;">
-			   <p>
-			   	<i class="icon-warning-sign icon-4x pull-left"></i>
-			     Please select the output with variables to be displayed.
-			   </p>
 			</div>
 
 			<div id="comments">
