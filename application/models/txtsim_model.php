@@ -66,7 +66,7 @@ class Txtsim_model extends CI_Model{
 			$allParamSet = json_decode($modelset->user_param_data);
 			foreach($modelParamName as $Name){
 				foreach($allParamSet as $ParamSet){
-					if($modelset->model_id == '9' && strtolower($ParamSet->name) == 'type')	{
+					if(($modelset->model_id == '9' || $modelset->model_id == '10' || $modelset->model_id == '11') && strtolower($ParamSet->name) == 'type')	{
 						$modelType = $ParamSet->value;
 						continue;
 					}
@@ -77,7 +77,7 @@ class Txtsim_model extends CI_Model{
 			
 			//$stringModel = ".MODEL ".$modelset->model_short_name.".".$modelset->library_name." ". $modelset->model_name;
 			$stringModel = ".MODEL ".$modelset->model_short_name.".".$modelset->library_name." ";
-			if($modelset->model_id == '9' && $modelType != null){
+			if(($modelset->model_id == '9' || $modelset->model_id == '10' || $modelset->model_id == '11') && $modelType != null){
 				$stringModel = $stringModel.($modelType == '1' ? 'nmos':'pmos');
 			}
 			else

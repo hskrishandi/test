@@ -70,6 +70,7 @@
 			</ul>
 		</div>
 		<div class="model-benchmark-side-menu">
+			<!-- ko if: selectedTab()==2-->
 			<div class="block" >
 				<h2>Mode Choice</h2>
 				

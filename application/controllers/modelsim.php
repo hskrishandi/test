@@ -88,6 +88,57 @@ class modelsim extends CI_Controller {
 
         $this->outputJSON($response);
 	}
+
+	public function modelCardinfo($card_name)
+	{
+		$user_info = $this->Account_model->isLogin();
+		$response = null; 
+
+		$infos = $this->Modelsim_model->getModelCardInfo($card_name) ; 
+		$response = array() ; 
+
+		foreach ($infos as $info) {
+			if (!array_key_exists($info->param_data, $response)) {
+				$response[$info->param_data] = array(
+					'data' => $info->param_data,				
+				);
+			}
+		}
+
+		$response_array = array();
+		foreach ($response as $item) {
+			$response_array[] = $item;
+		}
+		$response = $response_array;
+
+		$this->outputJSON($response);
+	}
+
+	public function modelCardinfo2($card_name)
+	{
+		$user_info = $this->Account_model->isLogin();
+		$response = null; 
+
+		$infos = $this->Modelsim_model->getModelCardInfo2($card_name, $user_info->id) ; 
+		$response = array() ; 
+
+		foreach ($infos as $info) {
+			if (!array_key_exists($info->param_data, $response)) {
+				$response[$info->param_data] = array(
+					'data' => $info->param_data,				
+				);
+			}
+		}
+
+		$response_array = array();
+		foreach ($response as $item) {
+			$response_array[] = $item;
+		}
+		$response = $response_array;
+
+		$this->outputJSON($response);
+	}
+
 	
     public function modelLibrary($method, $id = 0) 
     {
@@ -440,8 +491,21 @@ class modelsim extends CI_Controller {
         } else {
             $this->output->set_status_header('401');
         }
-
         $this->outputJSON($response);
+	} 
+
+	public function modelInstanceParams($model_id) 
+	{
+		$response = null ; 
+		if ($this->Account_model->isLogin()) {
+			$model_info = $this->Modelsim_model->getModelInfoById($model_id);
+			$response = array(
+				'ins_params' => $this->Modelsim_model->getModelInstanceParams($model_id)
+			);
+		} else {
+			$this->output->set_status_header('401');
+		}
+		$this->outputJSON($response);
 	}
 	
 	public function simulate()

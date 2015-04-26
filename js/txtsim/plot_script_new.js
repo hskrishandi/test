@@ -136,7 +136,6 @@ function plot_graph(container, input){
 		}
 		output[a] = out;
 	}
-	
 	plotGraphs(container, output);
 		
 }

@@ -680,11 +680,10 @@ var temp_store_for_user_data;
 				error: function(jqXHR, textStatus, errorThrown) {
 					console.log("Error: " + textStatus + "; " + errorThrown);
 					console.log("Response data: " + jqXHR.responseText);
-				},
-				async:false
+				}
 			}); 
 
-			simulation_upload();	
+				
 		};
 
 		
@@ -705,6 +704,7 @@ var temp_store_for_user_data;
 						data.outputs = self.selectedOutputs();
 						self.session(data);
 						self.loadPlotData();
+						simulation_upload();
 						alert("Simulation finished. Waiting for plotting.",null,null);
 					}
 					else if(result.status == "RUNNING") {
@@ -734,8 +734,7 @@ var temp_store_for_user_data;
 							$("#alert").dialog('close');
 						}
 					}
-				},
-				async: false
+				}
 			});
 
 		};
@@ -793,8 +792,7 @@ var temp_store_for_user_data;
 							if (--tasks <= 0) {
 								self.isLoading(false); 
 							}
-						},
-						async: false
+						}
 					}); 
 				}(outputs[i]));
 			}
@@ -948,6 +946,7 @@ var temp_store_for_user_data;
 					$("#benchmarking_tabs").tabs("option","active",self.selectedBenchmarkingTab());
 					self.selectedMode(self.availableMode()[0]); 	
 				//	console.log(self.benchmarking());
+					self.changeSelectedMode(0);
 				}				
 			});
 			self.choice()[1].b_name(self.benchmarking());					

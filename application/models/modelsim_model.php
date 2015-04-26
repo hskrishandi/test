@@ -137,7 +137,23 @@ class Modelsim_model extends CI_Model {
 	
 		return 0;
 	}
-    	
+    
+	public function getModelCardInfo($model_card_name)
+	{
+		$this->db->select('user_param_sets.data as param_data')->from('user_param_sets')
+			 ->where('user_param_sets.name', $model_card_name);	
+
+		return $this->db->get()->result();
+	}
+
+	public function getModelCardInfo2($model_card_name, $user_id)
+	{
+		$this->db->select('user_param_sets.data as param_data')->from('user_param_sets')
+			 ->where(array('user_param_sets.name' => $model_card_name, 'user_id' => $user_id));	
+
+		return $this->db->get()->result();
+	}
+
 	public function getModelLibrary($user_id)
 	{
 		$this->db->select('model_info.id as model_id, model_info.short_name as model_name, user_param_sets.id as id, user_param_sets.name, user_param_sets.data')->from('model_info')
@@ -250,7 +266,24 @@ class Modelsim_model extends CI_Model {
 				$ret['model'][] = $param;
 			}
 		}
+		return $ret;
+	}
 
+	public function getModelInstanceParams($model_id, $editable = true)
+	{
+		$this->db->select('name, description, unit, default, instance')->from('model_params')
+				->where(array("model_id" => $model_id, "editable" => $editable, "instance" =>1))
+				->order_by('instance', 'asc');
+		
+		$query = $this->db->get();
+		$ret = array('instance' => array());
+		$result = $query->result();
+		
+		foreach ($result as $param) {
+			if ($param->instance == 1) {
+				$ret['instance'][] = $param;
+			} 
+		}
 		return $ret;
 	}
 	

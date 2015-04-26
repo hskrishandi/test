@@ -1,0 +1,1 @@
+{"netlist":"ma 1 2 3 4 nmos L=0.045u W=0.9u tcyc=20e-9","analyses":"tran 0.5n 1080n ","source":"Vg 2 0 pulse(0.0 1.1 0n 0.0n 0.0n 20n 20n) \nvd 1 0 dc=1.1\nvs 3 0 dc=0\nvb 4 0 dc=0","outvar":"@ma[treal] @ma[dvthextr]"}

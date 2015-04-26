@@ -29,6 +29,13 @@ class txtsim extends CI_Controller {
 		echo json_encode(array("error" => false, "netlist"=>$netlist),JSON_NUMERIC_CHECK);
 	}
 
+	public function getModelCard()
+	{
+		if (!$this->Account_model->isAuth()) return;
+		$modelcard = $this->Txtsim_model->getAllModelCard();
+		echo json_encode(array("error" => false, "modelcard"=>$modelcard),JSON_NUMERIC_CHECK);
+	}
+
 	
 	public function runNetlistSIM(){
 		if (!$this->Account_model->isAuth()) return;

@@ -187,9 +187,10 @@
 					}
 					//the div count will be less than expected
 					//grow the codemirror to get maxlinenumber
-					codemirror.setSize(null, 10000);
+					// codemirror.setSize(null, 10000);
 					var maxLineNumbers = self.next().find(".CodeMirror-code > div").length;
-					codemirror.setSize(null, maxLineNumbers * 13 + 40);
+					if(maxLineNumbers<=30)
+						codemirror.setSize(null, maxLineNumbers * 14+40);
 				});
 
 				$(elem).change(function() {
@@ -261,6 +262,14 @@ $(function() {
 			key: $(this).attr("id")
 		}));
 	});
+
+	$(".svg-persist").each(function(){
+		if($(this).storage.load({key:$(this).attr("id")})!=null){
+			$(this).html($(this).storage.load({
+				key: $(this).attr("id")
+			}));
+		}
+	});
 	
 	//When the data has changed, stored the changed value to localstorage with key = their id
 	$(".data-persist").change(function() {
@@ -268,6 +277,15 @@ $(function() {
 			key: $(this).attr("id"),
 			val: $(this).val()
 		});
+	});
+
+	$(".svg-persist").bind({
+		DOMSubtreeModified:function(){
+			$(this).storage.save({
+				key: $(this).attr("id"),
+				val: $(this).html()
+			});
+		}
 	});
 	
 	//for saving library as

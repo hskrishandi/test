@@ -36,7 +36,7 @@
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td class="thead"><a href="<?php echo base_url('simulation');?>">Simulation</a></td>
+      <td class="thead"><a href="<?php echo base_url('txtsim');?>">Simulation</a></td>
     </tr>
     <tr>
       <td><ul>

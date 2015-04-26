@@ -158,10 +158,10 @@ $(document).ready(function() {
 	simulation_upload = function(){
 		//finish upload
 		if(upload_flag){
+			$("#customdata_check").click();
 			viewModels.sim.selectedPlot().customData(temp_store_for_user_data);
 			console.log("upload again");
-
-			$("#customdata_check").click();
+			
 		}
 	}
 });
