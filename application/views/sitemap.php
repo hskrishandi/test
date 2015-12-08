@@ -28,8 +28,33 @@
     </tr>
     <tr>
       <td><ul>
+        <li><a href="<?php echo base_url('home/manual');?>">i-MOS User Manual</a></li>
+        <li><a href="http://ngspice.sourceforge.net/docs.html">Ngspice Manual</a></li>
         <li><a href="<?php echo base_url('home/activities');?>">i-MOS Activities</a></li>
         <li><a href="<?php echo base_url('home/user_experience');?>">User Experience</a></li>
+      </ul></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="thead"><a href="<?php echo base_url('modelsim');?>">Models</a></td>
+    </tr>
+    <tr>
+      <td><ul>
+      <?php foreach($model_info as $row):?>
+        <li><a href="<?php echo base_url('modelsim/model/'.$row->id);?>"><?php echo $row->short_name; ?></a></li>
+        <!--&nbsp;&nbsp;&nbsp;&nbsp; Description<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; Parameters<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Instance Parameters<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Model Parameters<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; Biasing<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; General Biasing<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Benchmarking<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; Output Filter<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; Simulation Results<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; Comments<br/>-->
+      <?php endforeach;?>
       </ul></td>
     </tr>
     <tr>
@@ -40,9 +65,13 @@
     </tr>
     <tr>
       <td><ul>
-      <?php foreach($model_info as $row):?>
-        <li><a href="<?php echo base_url('modelsim/model/'.$row->id);?>"><?php echo $row->short_name; ?></a></li>
-      <?php endforeach;?>
+        <li><a href="<?php echo base_url('txtsim#netlistmode');?>">Netlist</a></li>
+        <li><a href="<?php echo base_url('txtsim#simMode');?>">Schematic</a></li>
+        <li><a href="<?php echo base_url('txtsim#textMode');?>">Raw Input</a></li>
+        <li><a href="<?php echo base_url('txtsim#rawResult');?>">Raw Data</a></li>
+        <li><a href="<?php echo base_url('txtsim#graphResult');?>">Graph Result</a></li>
+        <li><a href="<?php echo base_url('txtsim#log');?>">Log</a></li>
+        <li><a href="<?php echo base_url('txtsim');?>">User Library</a></li>
       </ul></td>
     </tr>
     <tr>
@@ -54,6 +83,10 @@
     <tr>
       <td>&nbsp;</td>
     </tr>
+  </table>
+  </div>
+  <div class="right_table">
+  <table>
     <tr>
       <td class="thead"><a href="<?php echo base_url('discussion');?>">Discussion</a></td>
     </tr>
@@ -63,10 +96,9 @@
         <li><a href="<?php echo base_url('discussion/blog');?>">Blog</a></li>
       </ul></td>
     </tr>
-  </table>
-  </div>
-  <div class="right_table">
-  <table>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
     <tr>
       <td class="thead"><span class="thead"><a href="<?php echo base_url('resources');?>">Resources</a><a href="<?php echo base_url('home');?>"></a></span></td>
     </tr>

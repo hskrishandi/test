@@ -1,0 +1,60 @@
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+body {
+	background-color: rgb(60,60,60);
+	font-family: 'Noto Sans', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,h7 {
+	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+}
+
+#page {
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100%;
+    width: 1280px;
+    min-width: 0px;
+    padding-bottom: 1em;
+    position: relative;
+}
+
+#main_content {
+	display:inline;
+	float: left;
+	position: relative;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 1280px;
+	min-height: 500px;
+	background-color: rgb(255,255,255);
+}
+
+a {
+	color: rgb(41,171,226);
+}
+a:link {
+	color: rgb(41,171,226);
+    text-decoration: none;
+}
+a:visited {
+	color: rgb(27,146,197);
+    text-decoration: none;
+}
+a:hover {
+    /* text-decoration: underline; */
+	color: rgb(20,106,143);
+}
+a:active {
+    /* text-decoration: underline; */
+}
+
+p {
+	/* font-size: 1.15em; */
+    line-height: 1.51em;
+    color: rgb(0, 0, 0);  
+}

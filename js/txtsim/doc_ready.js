@@ -1,296 +1,313 @@
-
-	 /**
-	*	i-mos.org Simlution fontend
-	*	@fileOverview Controller scripts
-	*/
-	var data_return = null;
-	var position;
-	var netlist2;
+/**
+ *	i-mos.org Simlution fontend
+ *	@fileOverview Controller scripts
+ */
+var data_return = null;
+var position;
+var netlist2;
 
 //communicate with others
-	// function startf() {
-	//     simdappear();
-	//     var o = document.getElementById('targetbox');
-	//     o.contentWindow.postMessage('Hello World', '*');
- //    	}
+// function startf() {
+//     simdappear();
+//     var o = document.getElementById('targetbox');
+//     o.contentWindow.postMessage('Hello World', '*');
+//    	}
 // make the library change
-    	function simappear() {
-    	    $("#userlib").attr({
-    	        "style": "z-index:50;visibility:hidden;position:absolute;"
-    	    });
-    	    $("#targetbox").attr({
-    	        "style": "visibility:visible;z-index:500;position:absolute;"
-    	    });
-    	    $("#SClib").attr({
-    	        "style": "z-index:50;visibility:visible;position:absolute;"
-    	    });
-    	}
-
-    	function simdappear() {
-    	    $("#userlib").attr({
-    	        "style": "z-index:50;visibility:visible;position:absolute;"
-    	    });
-    	    $("#targetbox").attr({
-    	        "style": "visibility:hidden;z-index:500;position:absolute;"
-    	    });
-    	    $("#SClib").attr({
-    	        "style": "z-index:50;visibility:hidden;position:absolute;"
-    	    });
-    	}
-
-	 $(document).ready(function(){
-
-		/*
-			jQuery UI Tab Function
-		*/
-	 	$.extend(true, $.blockUI.defaults, {
-			fadeOut:  200,
-			css: { border: 'none', backgroundColor: '#FFF' },
-			overlayCSS:  { backgroundColor: '#FFF', opacity: 0.8 }
-		});
-		var tabcontainer = $('#tab_container');
-		tabcontainer.tabs();
-		tabcontainer.bind('tabsshow', function(event, ui) {
-			//Event for clicking output tab. Callback the server program.
-		    if (ui.index == 2) {
-				$("#textModeList").cmApply(function(cm) {
-					cm.refresh();
-				}).change();
-			}
-		    if (ui.index == 4){
-			//Display the graph if there is any
-				if(jqPlotObject.length > 0){
-					$('.graph-container').show();
-					for(var i in jqPlotObject){
-						jqPlotObject[i].plot.replot({ resetAxes: true});
-						if(i != position)
-							$('.graph-container:eq('+i+')').hide();
-						else if(jqPlotObject[i].log_en){
-							$('#log_plot').show();
-							if(jqPlotObject[i].log) {
-								$('#log_plot i').addClass("icon-check").removeClass("icon-check-empty");
-							} else
-								$('#log_plot i').addClass("icon-check-empty").removeClass("icon-check");
-						}else{
-							$('#log_plot i').addClass("icon-check-empty").removeClass("icon-check");
-							$('#log_plot').hide();
-						}
-					}
-					//make the pull down menu same as the graph
-					$('#graph')[0].selectedIndex = position;
-				}else{
-					$('#graphResult').html("");
-				}
-		    }
-
-		});
-
-		//handling analyses Mode windows.
-
-		//Initial the AnalyesMode first selection when page loaded
-		$('#analyses_mode').buttonset();
-		$('#analyses_mode input:first').each(function(){
-				var id = $(this).attr("id");
-				analysesMode($("#analyses_details #"+id));
-		});
-		$('#analyses_mode input').change(function(){
-				var id = $(this).attr("id");
-				analysesMode($("#analyses_details #"+id));
-		});
-
-		//Every textarea will autosize pressing enter
-		$('.editorCommonDesign').autosize({append: "\n"});
-
-		$('button.src_define').button()
-		.click(function(event){
-			event.preventDefault();
-		});
-
-
-		/*
-			Simlution Run
-		*/
-		var shandler = new SimulationHandler({
-			interval: 2000
-		});
-		shandler.instance(shandler);
-		$('.runSim').click(function(event){
-			//Clearing the Result from Last Simlution
-			shandler.cleardata(jqPlotObject);
-			//Analyze which "Run Simlution" clicked (Netlist or RAW input?)
-			if ($(this).attr('id') == "runNetlistModeSim"){
-				shandler.submitData = $('#netlistModeForm').serialize();
-				shandler.submitpath =  "/txtsim/runNetlistSIM";
-				shandler.simmode = 0;
-			}else{
-				shandler.submitData = $('#RAWModeForm').serialize();
-				shandler.submitpath =  "/txtsim/runRAWSIM";
-				shandler.simmode = 1;
-			}
-			//Create AJAX connection
-			shandler.runsimulation();
-			return;
-		});
-
-		$(".stop-simulation").click(function() {
-			shandler.killsimulation();
-			return;
-		});
-
-		//Conv the GUI to the netlist
-		$('#functionConv').click(function(event){
-			shandler.convNetlist();
-			return;
-		});
-
-        
-	// window.addEventListener("message", function (e) {
-		$("#schematicConv").click(function(){
-		    netlist2 = get_netlist();
-		    shandler.convNetlist2();
-		    return;
-		});
-	// }, false);
-		/*$('#craw').click(function(event){
-					shandler.convNetlist2();
-					return;
-		});*/
-
-
-		$(".raw-input-load").fileupload({
-			name: "RAWupload",
-			url: CI_ROOT + "txtsim/loadRAW",
-			load: function(data) {
-				console.log(data);
-				if(!data.error){
-					$('#textModeList').val(data.netlist);
-					//$("#textModeList").trigger('autosize');
-					$(".data-persist").change();
-				}
-				else
-					alert(failUploadMsg);
-			}
-		});
-
-		$("#functionRAWSave").click(function(){
-			$('#RAWModeForm').formAndDownload(CI_ROOT + "/txtsim/saveRAW");
-			//event.preventDefault();
-			return false;
-		});
-
-		$(".raw-input-save-as").click(function() {
-			prompt("Filename: ", function(filename) {
-				if(filename == '') return;
-				if(!$('.raw-saveas-name').length)
-				{
-					$('<input/>', {
-						type : 'hidden',
-						name : 'saveas_name',
-						value : filename
-					}).appendTo('#RAWModeForm').addClass('raw-saveas-name');
-				}
-				else
-					$('.raw-saveas-name').val(filename);
-				$('#RAWModeForm').formAndDownload(CI_ROOT + "/txtsim/saveasRAW");
-			}, {
-				note: downloadAsNote
-			});
-			return;
-		});
-
-		$(".netlist-load").fileupload({
-			name: "Netlistupload",
-			url: CI_ROOT + "txtsim/loadNetlist",
-			load: function(data) {
-				try{
-					result = JSON.parse(data.netlist);
-					$('#srcNetlist').val(result.netlist);
-					$("#srcNetlist").trigger('autosize');
-					$('#srcAnalyses').val(result.analyses);
-					$("#srcAnalyses").trigger('autosize');
-					$('#srcDefination').val(result.source);
-					$("#srcDefination").trigger('autosize');
-					$('#txtOutVar').val(result.outvar);
-					$("#txtOutVar").trigger('autosize');
-					$('.data-persist').change();
-				} catch (err) {
-					alert(failUploadMsg);
-				}
-			}
-		});
-
-		//Netlist Save
-		$("#functionNetlistSave").click(function(){
-			console.log($('#netlistModeForm').serialize());
-			$('#netlistModeForm').formAndDownload(CI_ROOT + "/txtsim/saveNetlist");
-			event.preventDefault();
-			return false;
-		});
-
-		//Netlist Save as
-		$(".netlist-save-as").click(function() {
-			prompt("Filename: ", function(filename) {
-				if(filename == '') return;
-				if(!$('.netlist-saveas-name').length)
-				{
-					$('<input/>', {
-						type : 'hidden',
-						name : 'saveas_name',
-						value : filename
-					}).appendTo('#netlistModeForm').addClass('netlist-saveas-name');
-				}
-				else
-					$('.netlist-saveas-name').val(filename);
-				$('#netlistModeForm').formAndDownload(CI_ROOT + "/txtsim/saveasNetlist");
-			}, {
-				note: downloadAsNote
-			});
-			return;
-		});
-
-		/* initialize CodeMirror*/
-		$(".code-mirror").cmInit();
-		$("div.CodeMirror.CodeMirror-wrap").attr("style","height:350px");
-
-		$("<iframe name='my_iframe' style='display:none'></iframe>").appendTo('BODY');
+/*
+ * Show Schemetic tab and side component selection box contents
+ */
+function simappear() {
+	$("#userlib").attr({
+		// "style": "z-index:50;visibility:hidden;position:absolute;"
+		"style": "display:none;"
 	});
-	var CSVDownload = function(url,item_no){
-		var CSV = $("<form>").attr('method', 'POST').attr('target', 'my_iframe').addClass("hidden").attr('action',url);
-		$("<input>").attr('name', 'uuid').val(data_return.uuid).appendTo(CSV);
-		$("<input>").attr('name', 'file').val(data_return.dataset[item_no].filename).appendTo(CSV);
-		CSV.appendTo($("body"));
-		CSV.submit();
-		CSV.remove();
-		return false;
-	}
-	$.fn.RAWUpload = function(url,callback){
-		this.attr('action', url).attr('method', 'POST').attr('target', 'my_iframe').attr('enctype',"multipart/form-data").submit();
-		$('iframe[name=my_iframe]').html("").unbind("load").load(function(){
-			var result = $('iframe[name=my_iframe]').contents().text();
-			try{
-				result = JSON.parse(result);
-				callback(result);
-			}catch(err){
-			};
-		});
-		return false;
-	}
+	$("#targetbox").attr({
+		// "style": "visibility:visible;z-index:500;position:absolute;"
+	});
+	$("#SClib").attr({
+		// "style": "z-index:50;visibility:visible;position:absolute;"
+		"style": "display:inline;float:left;clear:both;"
+	});
+}
 
-	$.fn.formAndDownload = function(url){
-		this.attr('action', url).attr('method', 'POST').attr('target', 'my_iframe').submit();
+/*
+ * Hide Schemetic tab and side component selection box contents
+ */
+function simdappear() {
+	$("#userlib").attr({
+		// "style": "z-index:50;visibility:visible;position:absolute;"
+		"style": "display:inline;float:left;clear:both;"
+	});
+	$("#targetbox").attr({
+		// "style": "visibility:hidden;z-index:500;position:absolute;"
+		"style": "display:none;"
+	});
+	$("#SClib").attr({
+		// "style": "z-index:50;visibility:hidden;position:absolute;"
+		"style": "display:none;"
+	});
+}
+
+$(document).ready(function() {
+
+	/*
+		jQuery UI Tab Function
+	*/
+	// blockUI plugin (blur the page while simulating) config
+	$.extend(true, $.blockUI.defaults, {
+		fadeOut: 200,
+		css: {
+			border: 'none',
+			backgroundColor: '#FFF'
+		},
+		overlayCSS: {
+			backgroundColor: '#FFF',
+			opacity: 0.8
+		}
+	});
+
+	// tabs
+	var tabcontainer = $('#tab_container');
+	tabcontainer.tabs();
+	tabcontainer.bind('tabsshow', function(event, ui) {
+		//Event for clicking output tab. Callback the server program.
+		if (ui.index == 2) {
+			$("#textModeList").cmApply(function(cm) {
+				cm.refresh();
+			}).change();
+		}
+		if (ui.index == 4) {
+			//Display the graph if there is any
+			if (jqPlotObject.length > 0) {
+				$('.graph-container').show();
+				for (var i in jqPlotObject) {
+					jqPlotObject[i].plot.replot({
+						resetAxes: true
+					});
+					if (i != position)
+						$('.graph-container:eq(' + i + ')').hide();
+					else if (jqPlotObject[i].log_en) {
+						$('#log_plot').show();
+						if (jqPlotObject[i].log) {
+							$('#log_plot i').addClass("icon-check").removeClass("icon-check-empty");
+						} else
+							$('#log_plot i').addClass("icon-check-empty").removeClass("icon-check");
+					} else {
+						$('#log_plot i').addClass("icon-check-empty").removeClass("icon-check");
+						$('#log_plot').hide();
+					}
+				}
+				//make the pull down menu same as the graph
+				$('#graph')[0].selectedIndex = position;
+			} else {
+				$('#graphResult').html("");
+			}
+		}
+
+	});
+
+	//handling analyses Mode windows.
+
+	//Initial the AnalyesMode first selection when page loaded
+	$('#analyses_mode').buttonset();
+	$('#analyses_mode input:first').each(function() {
+		var id = $(this).attr("id");
+		analysesMode($("#analyses_details #" + id));
+	});
+	$('#analyses_mode input').change(function() {
+		var id = $(this).attr("id");
+		analysesMode($("#analyses_details #" + id));
+	});
+
+	//Every textarea will autosize pressing enter
+	$('.editorCommonDesign').autosize({
+		append: "\n"
+	});
+
+	$('button.src_define').button()
+		.click(function(event) {
+			event.preventDefault();
+		});
+
+
+	/*
+		Simlution Run
+	*/
+	var shandler = new SimulationHandler({
+		interval: 2000
+	});
+	shandler.instance(shandler);
+	$('.runSim').click(function(event) {
+		//Clearing the Result from Last Simlution
+		shandler.cleardata(jqPlotObject);
+		//Analyze which "Run Simlution" clicked (Netlist or RAW input?)
+		if ($(this).attr('id') == "runNetlistModeSim") {
+			shandler.submitData = $('#netlistModeForm').serialize();
+			shandler.submitpath = "/txtsim/runNetlistSIM";
+			shandler.simmode = 0;
+		} else {
+			shandler.submitData = $('#RAWModeForm').serialize();
+			shandler.submitpath = "/txtsim/runRAWSIM";
+			shandler.simmode = 1;
+		}
+		//Create AJAX connection
+		shandler.runsimulation();
+		return;
+	});
+
+	$(".stop-simulation").click(function() {
+		shandler.killsimulation();
+		return;
+	});
+
+	//Conv the GUI to the netlist
+	$('#functionConv').click(function(event) {
+		shandler.convNetlist();
+		return;
+	});
+
+
+	// window.addEventListener("message", function (e) {
+	$("#schematicConv").click(function() {
+		netlist2 = get_netlist();
+		shandler.convNetlist2();
+		return;
+	});
+	// }, false);
+	/*$('#craw').click(function(event){
+				shandler.convNetlist2();
+				return;
+	});*/
+
+
+	$(".raw-input-load").fileupload({
+		name: "RAWupload",
+		url: CI_ROOT + "txtsim/loadRAW",
+		load: function(data) {
+			console.log(data);
+			if (!data.error) {
+				$('#textModeList').val(data.netlist);
+				//$("#textModeList").trigger('autosize');
+				$(".data-persist").change();
+			} else
+				alert(failUploadMsg);
+		}
+	});
+
+	$("#functionRAWSave").click(function() {
+		$('#RAWModeForm').formAndDownload(CI_ROOT + "/txtsim/saveRAW");
+		//event.preventDefault();
 		return false;
-	}
+	});
+
+	$(".raw-input-save-as").click(function() {
+		prompt("Filename: ", function(filename) {
+			if (filename == '') return;
+			if (!$('.raw-saveas-name').length) {
+				$('<input/>', {
+					type: 'hidden',
+					name: 'saveas_name',
+					value: filename
+				}).appendTo('#RAWModeForm').addClass('raw-saveas-name');
+			} else
+				$('.raw-saveas-name').val(filename);
+			$('#RAWModeForm').formAndDownload(CI_ROOT + "/txtsim/saveasRAW");
+		}, {
+			note: downloadAsNote
+		});
+		return;
+	});
+
+	$(".netlist-load").fileupload({
+		name: "Netlistupload",
+		url: CI_ROOT + "txtsim/loadNetlist",
+		load: function(data) {
+			try {
+				result = JSON.parse(data.netlist);
+				$('#srcNetlist').val(result.netlist);
+				$("#srcNetlist").trigger('autosize');
+				$('#srcAnalyses').val(result.analyses);
+				$("#srcAnalyses").trigger('autosize');
+				$('#srcDefination').val(result.source);
+				$("#srcDefination").trigger('autosize');
+				$('#txtOutVar').val(result.outvar);
+				$("#txtOutVar").trigger('autosize');
+				$('.data-persist').change();
+			} catch (err) {
+				alert(failUploadMsg);
+			}
+		}
+	});
+
+	//Netlist Save
+	$("#functionNetlistSave").click(function() {
+		console.log($('#netlistModeForm').serialize());
+		$('#netlistModeForm').formAndDownload(CI_ROOT + "/txtsim/saveNetlist");
+		event.preventDefault();
+		return false;
+	});
+
+	//Netlist Save as
+	$(".netlist-save-as").click(function() {
+		prompt("Filename: ", function(filename) {
+			if (filename == '') return;
+			if (!$('.netlist-saveas-name').length) {
+				$('<input/>', {
+					type: 'hidden',
+					name: 'saveas_name',
+					value: filename
+				}).appendTo('#netlistModeForm').addClass('netlist-saveas-name');
+			} else
+				$('.netlist-saveas-name').val(filename);
+			$('#netlistModeForm').formAndDownload(CI_ROOT + "/txtsim/saveasNetlist");
+		}, {
+			note: downloadAsNote
+		});
+		return;
+	});
+
+	/* initialize CodeMirror*/
+	$(".code-mirror").cmInit();
+	$("div.CodeMirror.CodeMirror-wrap").attr("style", "height:350px");
+
+	$("<iframe name='my_iframe' style='display:none'></iframe>").appendTo('BODY');
+});
+var CSVDownload = function(url, item_no) {
+	var CSV = $("<form>").attr('method', 'POST').attr('target', 'my_iframe').addClass("hidden").attr('action', url);
+	$("<input>").attr('name', 'uuid').val(data_return.uuid).appendTo(CSV);
+	$("<input>").attr('name', 'file').val(data_return.dataset[item_no].filename).appendTo(CSV);
+	CSV.appendTo($("body"));
+	CSV.submit();
+	CSV.remove();
+	return false;
+}
+$.fn.RAWUpload = function(url, callback) {
+	this.attr('action', url).attr('method', 'POST').attr('target', 'my_iframe').attr('enctype', "multipart/form-data").submit();
+	$('iframe[name=my_iframe]').html("").unbind("load").load(function() {
+		var result = $('iframe[name=my_iframe]').contents().text();
+		try {
+			result = JSON.parse(result);
+			callback(result);
+		} catch (err) {};
+	});
+	return false;
+}
+
+$.fn.formAndDownload = function(url) {
+	this.attr('action', url).attr('method', 'POST').attr('target', 'my_iframe').submit();
+	return false;
+}
 var confirm;
- var ROOT = CI_ROOT + "modelsim";
- var MODEL_ID = 0;
-(function ($) {
+var ROOT = CI_ROOT + "modelsim";
+var MODEL_ID = 0;
+(function($) {
 
 	$(document).ready(function() {
 		MODEL_ID = $("#model-lib-list").data("current");
 
 		viewModels = {
 			lib: new ModelLibrary()
-			//sim: new ModelSimulation()
+				//sim: new ModelSimulation()
 		};
 
 		viewModels.lib.load();
@@ -306,7 +323,7 @@ var confirm;
 		*/
 	});
 
-		// Model library menu
+	// Model library menu
 	ko.bindingHandlers.modelLibMenu = {
 		init: function(element, valueAccessor) {
 			var $menu = $(valueAccessor()).menu().hide();
@@ -381,12 +398,12 @@ var confirm;
 
 	confirm = function(message, callback, options) {
 		var defaultActions = {
-			buttons	: {
-				Confirm : function() {
+			buttons: {
+				Confirm: function() {
 					callback(true);
 					$(this).dialog('close');
 				},
-				Cancel : function() {
+				Cancel: function() {
 					callback(false);
 					$(this).dialog('close');
 				}
@@ -418,14 +435,13 @@ var confirm;
 		//callback function
 		var running = function(b) {
 			_running = b;
-			if(b) {
+			if (b) {
 				/* BLOCK */
 				_instance.block();
 				_timeoutInstance = setTimeout(function() {
 					_instance.killsimulation();
 				}, _simulationTimeout);
-			}
-			else {
+			} else {
 				clearTimeout(_timeoutInstance);
 				_instance.unblock();
 			}
@@ -433,44 +449,44 @@ var confirm;
 		var _plotdata = function(sender, data) {
 			running(false);
 			data_return = data;
-			if (!_errmsg(data)){
+			if (!_errmsg(data)) {
 				//check for the simulation type
-				if(data.netlist.match(/[\n\r]\.?tran( [0-9\.]+[a-zA-Z]*)+/i))
-					for(var i in data.dataset)
+				if (data.netlist.match(/[\n\r]\.?tran( [0-9\.]+[a-zA-Z]*)+/i))
+					for (var i in data.dataset)
 						data.dataset[i].xlabel = "tran";
-				else if(data.netlist.match(/[\n\r]\.?ac lin [0-9]+/i))
-					for(var i in data.dataset)
+				else if (data.netlist.match(/[\n\r]\.?ac lin [0-9]+/i))
+					for (var i in data.dataset)
 						data.dataset[i].xlabel = "ac_lin";
 				//else if(data.netlist.match(/[\n\r].?AC DEC [^\n\r] /i))
-				else if(data.netlist.match(/[\n\r]\.?ac dec/i))
-					for(var i in data.dataset)
+				else if (data.netlist.match(/[\n\r]\.?ac dec/i))
+					for (var i in data.dataset)
 						data.dataset[i].xlabel = "ac_dec";
 				else {
 					//var dc_string = data.netlist.match(/[\n\r]\.?dc(.+)[\n\r]/ig);
 
-					for(var i in data.dataset)
+					for (var i in data.dataset)
 						data.dataset[i].xlabel = "dc";
 				}
 				//Graph Result Plot and Display
 				console.log(data.dataset);
 				if (data.dataset) plot_graph($('#graphResult'), data.dataset);
-				$("#graph").change(function () {
+				$("#graph").change(function() {
 					var str = $("#graph").val();
-					$('.graph-container:eq('+position+')').hide();
-					for(var i in jqPlotObject){
-						if(jqPlotObject[i].name === str){
-							$('.graph-container:eq('+i+')').show();
+					$('.graph-container:eq(' + position + ')').hide();
+					for (var i in jqPlotObject) {
+						if (jqPlotObject[i].name === str) {
+							$('.graph-container:eq(' + i + ')').show();
 							position = i;
-							if(jqPlotObject[i].log){
+							if (jqPlotObject[i].log) {
 								$('#log_plot i').addClass("icon-check").removeClass("icon-check-empty");
-							}else{
+							} else {
 								$('#log_plot i').addClass("icon-check-empty").removeClass("icon-check");
 							}
 						}
 					}
 				});
 				//Disable right click menu on the plot
-				$(".graph-container").bind("contextmenu",function(e){
+				$(".graph-container").bind("contextmenu", function(e) {
 					return false;
 				});
 				//RAW Result Display
@@ -481,26 +497,25 @@ var confirm;
 				var pull_down_select = $("<select>").attr("id", "pull_down_menu").appendTo(pull_down_form);
 				csv_download.appendTo(pull_down_form);
 				var result_form = $("<div>").attr("id", "result_form");
-				for(var key in data.dataset){
-					if (data.dataset[key].error=="true")
-					{
+				for (var key in data.dataset) {
+					if (data.dataset[key].error == "true") {
 						//string = string + "Error: The item(s) " + data.dataset[key].ylabel +" not found.<br />";
 						continue;
-					}else{
-						$('<option>').attr("id", "dataset_select"+ key).attr("value", key).html(data.dataset[key].ylabel).appendTo(pull_down_select);
-						$("<div>").attr("id", "dataset"+ key).addClass("hidden").html(_rawtable(data.dataset[key].table_data)).appendTo(result_form);
+					} else {
+						$('<option>').attr("id", "dataset_select" + key).attr("value", key).html(data.dataset[key].ylabel).appendTo(pull_down_select);
+						$("<div>").attr("id", "dataset" + key).addClass("hidden").html(_rawtable(data.dataset[key].table_data)).appendTo(result_form);
 					}
 				}
 				result_form.children().first().removeClass("hidden");
-				if ( data.dataset != null && data.dataset.length > 0)
+				if (data.dataset != null && data.dataset.length > 0)
 					$('#rawResult').append(pull_down_form).append(result_form);
-				pull_down_select.change(function(object){
+				pull_down_select.change(function(object) {
 					result_form.children().addClass("hidden");
-					result_form.children("#dataset"+$(this).val()).removeClass("hidden");
+					result_form.children("#dataset" + $(this).val()).removeClass("hidden");
 				});
 
-				$("#csv_download").click(function(){
-					CSVDownload("txtsim/CSVDownload",pull_down_select.val());
+				$("#csv_download").click(function() {
+					CSVDownload("txtsim/CSVDownload", pull_down_select.val());
 				});
 				$('#log').html(data.log);
 			}
@@ -508,14 +523,14 @@ var confirm;
 		var _rawtable = function(data) {
 			var string = "";
 			string = string + "<table style='margin-left:15px'>"
-			for(var cols in data){
+			for (var cols in data) {
 				string = string + "<tr>"
-				for	(var rows in data[cols]){
-					if (rows == 0){
+				for (var rows in data[cols]) {
+					if (rows == 0) {
 						string = string + "<td style='padding-right:10px;'>";
 						string = string + data[cols][rows].toExponential(7) + "  &nbsp&nbsp";
 						string = string + "</td>";
-					}else if(rows % 2 == 1){
+					} else if (rows % 2 == 1) {
 						string = string + "<td style='padding-right:10px;'>";
 						string = string + data[cols][rows].toExponential(7) + "  &nbsp&nbsp";
 						string = string + "</td>";
@@ -530,12 +545,14 @@ var confirm;
 			$.ajax({
 				url: CI_ROOT + "txtsim/simulationStatus",
 				type: "POST",
-				data: {session: _session},
+				data: {
+					session: _session
+				},
 				success: function(data) {
 					try {
 						data = JSON.parse(data);
-					} catch(err) {}
-					if(_statushandler(sender, data)) {
+					} catch (err) {}
+					if (_statushandler(sender, data)) {
 						console.log(data);
 						_plotdata(sender, data);
 						_simerr($("#log").html());
@@ -550,17 +567,15 @@ var confirm;
 		};
 		/* ajax run simulation handler */
 		var _statushandler = function(sender, data) {
-			if(data.status) {
-				if(data.status == "RUNNING") {
+			if (data.status) {
+				if (data.status == "RUNNING") {
 					setTimeout(function() {
 						_checkstatus(sender);
 					}, _interval);
-				}
-				else if(data.status == "KILL") {
+				} else if (data.status == "KILL") {
 					alert("The simulation has been stopped.");
 					running(false);
-				}
-				else if(data.status == "FINISHED") {
+				} else if (data.status == "FINISHED") {
 					return true;
 				}
 			}
@@ -570,13 +585,13 @@ var confirm;
 			running(false);
 			var jqXHR = options.jqXHR;
 			var textStatus = options.textStatus;
-			if (jqXHR.status == 500){
+			if (jqXHR.status == 500) {
 				//$('#log').html("Error: " + jqXHR.status + " "+ jqXHR.statusText + "<br />");
 				$('#log').html("Your simulation results in too much data points, please reduce the step value and try it again.");
-			}else if(jqXHR.status == 404){
-				$('#log').html("Error: " + jqXHR.status + " "+ jqXHR.statusText + "<br />");
-			}else{
-				$('#log').html("Error: " + jqXHR.status + " "+ jqXHR.statusText + "<br />Please check the connect to the server.");
+			} else if (jqXHR.status == 404) {
+				$('#log').html("Error: " + jqXHR.status + " " + jqXHR.statusText + "<br />");
+			} else {
+				$('#log').html("Error: " + jqXHR.status + " " + jqXHR.statusText + "<br />Please check the connect to the server.");
 			}
 		};
 		/* message handler */
@@ -585,23 +600,23 @@ var confirm;
 			reg_err[0] = /error/i;
 			reg_err[1] = /warning/i;
 			reg_err[2] = /fail/i;
-			for(var x in reg_err){
-				if(reg_err[x].test(log)){
+			for (var x in reg_err) {
+				if (reg_err[x].test(log)) {
 					alert("Error/Warning may occurred.\nPlease check the log.");
 					break;
 				}
 			}
 		};
 		var _errmsg = function(data) {
-			if (data.error == false){
+			if (data.error == false) {
 				return false;
-			}else{
-				if (data.type=="model"){
-					alert("Error: "+ "Model not found - " + data.obj);
+			} else {
+				if (data.type == "model") {
+					alert("Error: " + "Model not found - " + data.obj);
 					return true;
 				}
-				if (data.type=="library"){
-					alert("Error: "+ "Library not found - " + data.obj);
+				if (data.type == "library") {
+					alert("Error: " + "Library not found - " + data.obj);
 					return true;
 				}
 			}
@@ -611,14 +626,16 @@ var confirm;
 		/* public member */
 		return {
 			instance: function(that) {
-				if(_instance == null)
+				if (_instance == null)
 					_instance = that;
 			},
 			block: function() {
 				$(".stop-simulation").css("display", "inherit");
 				$('#tab_container').block({
 					message: $('#loading'),
-					css: { backgroundColor: 'transparent' }
+					css: {
+						backgroundColor: 'transparent'
+					}
 				});
 			},
 			unblock: function() {
@@ -626,7 +643,7 @@ var confirm;
 				$('#tab_container').unblock();
 			},
 			cleardata: function(jqdata) {
-				for(var i in jqPlotObject){
+				for (var i in jqPlotObject) {
 					delete jqPlotObject[i];
 				}
 				jqPlotObject = new Array();
@@ -645,20 +662,24 @@ var confirm;
 					try {
 						console.log(data);
 						data = JSON.parse(data);
-					} catch(err) {console.log("fail!!!");}
-					if(data.id) {
+					} catch (err) {
+						console.log("fail!!!");
+					}
+					if (data.id) {
 						_session = data.id;
 						_checkstatus(self);
 					}
 				});
 			},
 			killsimulation: function() {
-				if(!_running) return;
+				if (!_running) return;
 				$(".stop-simulation").css("display", "none");
 				$.ajax({
 					url: CI_ROOT + "txtsim/simulationStop",
 					type: "POST",
-					data: { session: _session }
+					data: {
+						session: _session
+					}
 				});
 			},
 			convNetlist: function() {
@@ -669,24 +690,23 @@ var confirm;
 					dataType: "json"
 				}).done(function(data) {
 					console.log(data);
-					if (!_simerr(data)){
+					if (!_simerr(data)) {
 						$("#textModeList").val(data.netlist);
 						//$("#textModeList").trigger('autosize');
 						$(".data-persist").change();
 					}
 				});
-				$("div.CodeMirror.CodeMirror-wrap").attr("style","height:350px");
+				$("div.CodeMirror.CodeMirror-wrap").attr("style", "height:350px");
 			},
-			convNetlist2: function () {
-			        $('#tab_container').tabs({
-			          active: 2
-			        });
-			        $("#textModeList").val(netlist2);
-                    $(".data-persist").change();
-				$("div.CodeMirror.CodeMirror-wrap").attr("style","height:350px");
+			convNetlist2: function() {
+				$('#tab_container').tabs({
+					active: 2
+				});
+				$("#textModeList").val(netlist2);
+				$(".data-persist").change();
+				$("div.CodeMirror.CodeMirror-wrap").attr("style", "height:350px");
 			}
 		};
 	};
 
- } (jQuery));
-
+}(jQuery));

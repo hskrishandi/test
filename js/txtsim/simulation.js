@@ -7,6 +7,7 @@
 // Export the Simulation class 
 var Simulation;
 
+// document.ready
 (function($) {
 	/**
 	 * Simulation class constructor

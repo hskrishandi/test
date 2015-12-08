@@ -1,0 +1,392 @@
+#MenuBar {
+    float: none;
+    height: 65px;
+    margin: 0px auto;
+    clear: none;
+    width: 1280px;
+    min-height: 65px;
+    background-color: rgb(26, 26, 26);
+    min-width: 0px;
+    max-height: none;
+	display: block;
+	clear: both;
+    top: 0px;
+    left: 0px;
+}
+
+#MenuBar #logo {
+    float: left;
+    width: auto;
+    max-width: 100%;
+    height: 50%;
+    margin: 0px;
+    clear: none;
+    color: rgb(0, 0, 0);
+    min-height: 0px;
+    padding-top: 1.2%;
+    padding-bottom: 1.2%;
+    padding-left: 3%;
+    display: inline;
+}
+
+#MenuBar #Applications {
+	float: left;
+	margin-left: 35px;
+	height: 100%;
+}
+
+#MenuBar #Applications .ApplicationButton {
+	float: left;
+    height: 100%;
+	min-height: 0px;
+    display: inline;
+	clear: none;
+	padding: 0 10px;
+}
+
+#MenuBar #Applications .ApplicationIcon {
+	float: left;
+    width: auto;
+	max-width: 100%;
+    height: 40%;
+	clear: none;
+	color: rgb(0, 0, 0);
+	min-height: 0px;
+	margin-top: 20px;
+}
+
+#MenuBar #Applications .ApplicationName {
+	float: left;
+	font-size: 0.9em;
+	width: auto;
+	text-align: left;
+	vertical-align: middle;
+    line-height: 100%;
+	clear: none;
+	min-height: 0px;
+    color: rgb(255, 255, 255);
+	margin-top: 26px;
+	margin-left: 10px;
+}
+
+.MenuButton {
+	float: left;
+    width: auto;
+    height: 100%;
+}
+
+.MenuButton p {
+	font-size: 0.7em;
+    line-height: 1em;
+    color: rgb(255, 255, 255);
+	
+    width: auto;
+	height: auto;
+    min-height: 0px;
+    text-align: left;
+	clear: none;
+	margin-top: 27px;
+}
+
+#SiteMenu {
+    margin-left: 3.24%;
+    /* margin-top: 2.233887%; */
+}
+
+#MenuBar .separateLine {
+	font-size: 0.7em;
+    line-height: 1em;
+    color: rgb(255, 255, 255);
+	
+	float: left;
+    margin-left: 0.53222656%;
+    margin-top: 2.233887%;
+}
+
+#ContactUs {
+    margin-left: 0.46875%;
+    /* margin-top: 2.233887%; */
+}
+
+#SearchBox {
+    float: left;
+    height: 100%;
+    margin: 0px 0px 0px 8.09%;
+    width: 12.999268%;
+}
+
+#searchFormGroup {
+    float: left;
+    height: auto;
+    display: block;
+    text-align: left;
+    margin: 2%;
+    clear: none;
+    width: 100%;
+    min-width: 0px;
+    margin: 16px 0px 0px 0px;
+}
+
+#searchTextInput {
+    float: none;
+    height: 28px;
+    padding: 0px 5% 0px 20%;
+    display: block;
+    clear: none;
+    width: 100%;
+    font-size: 1em;
+    text-align: right;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-width: 0px;
+    margin-left: 0%;
+    margin-right: 0px;
+    background-image:url("images/searchIcon.svg");
+    background-attachment: inherit;
+    -webkit-background-size: 12%;
+    background-size: 12%;
+    background-position: 7% 42%;
+    background-repeat: no-repeat no-repeat;
+}
+
+#searchTextInput::-webkit-input-placeholder {
+	font-weight:bold;
+    text-align:center;
+}
+#searchTextInput:-ms-input-placeholder {
+	font-weight:bold;
+    text-align:center;
+}
+#searchTextInput::-moz-placeholder { /* Firefox 19+ */
+	font-weight:bold;
+    text-align:center;
+}
+#searchTextInput:-moz-placeholder { /* Firefox 18- */
+	font-weight:bold;
+    text-align:center;
+}
+
+#UserBox {
+    float: right;
+    height: 100%;
+    margin: 0px;
+    clear: none;
+    width: 12.319336%;
+    min-height: 0px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+#UserName {
+    float: none;
+    font-size: 0.7em;
+    width: auto;
+    height: auto;
+    text-align: left;
+    
+    line-height: 1em;
+    clear: none;
+    min-height: 0px;
+    color: rgb(255, 255, 255);
+    display: block;
+    position: absolute;
+    top: 44%;
+    left: 20%;
+    right: auto;
+    bottom: auto;
+}
+
+#UserIcon {
+    float: left;
+    max-width: none;
+    width: 20px;
+    height: 20px;
+    clear: none;
+    color: rgb(0, 0, 0);
+    display: block;
+    position: absolute;
+    top: 37%;
+    left: 0%;
+    bottom: auto;
+	
+	background-image:  url(images/userIcon_white_large.png);
+    background-size:   cover;                      /* <------ */
+    background-repeat: no-repeat;
+    background-position: center center;            /* optionally, center the image */
+	background-color: rgb(26, 26, 26);
+}
+
+/* Default style of Menu Droup Down Box  Start */
+.MenuDropDown {
+/* 	border: 1px solid black; */
+/* 	background-color: rgb(223,223,223); */
+	padding: 3% 4% 3% 4%;
+	z-index: 1000;
+	
+    background-color: rgb(230, 230, 230);
+    opacity: 0.95;
+    -webkit-box-shadow: rgb(94, 94, 94) 8px 6px 1em 0px;
+    box-shadow: rgb(94, 94, 94) 8px 6px 1em 0px;
+}
+.MenuDropDown h1 {
+	display: block;
+	clear: both;
+	font-size: 0.9em;
+	width: 100%;
+	height: auto;
+	text-align: left;
+	font-weight: bold;
+	line-height: 1em;
+	margin: 1em 0 0 0;
+	min-height: 0px;
+	color: rgb(77, 77, 77);
+	
+    border-bottom-color: rgb(153, 153, 153);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding-bottom: 0.5em;
+}
+.MenuDropDown h1 .boxCloseButton {
+	position: relative;
+	left: 88%;
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	margin: 0px;
+	clear: none;
+	color: rgb(0, 0, 0);
+}
+.MenuDropDown p {
+	float: none;
+	display: block;
+	clear: both;
+	font-size: 0.9em;
+	width: 100%;
+	height: auto;
+	text-align: left;
+	font-weight: normal;
+	line-height: 1.98em;
+	margin: 0px auto;
+	min-height: 0px;
+	color: rgb(77, 77, 77);
+	min-width: 0px;
+}
+.MenuDropDown .contentBox h1 {
+	float: left;
+	font-size: 0.6em;
+	width: auto;
+	height: auto;
+	text-align: left;
+	font-weight: bold;
+	line-height: 1em;
+	margin: 0.78em 0px 0px;
+	border: 0;
+	clear: none;
+	min-height: 0px;
+	color: rgb(77, 77, 77);
+}
+.MenuDropDown .contentBox form {
+	display: block;
+	clear: both;
+	overflow: hidden;
+}
+.MenuDropDown .contentBox form label {
+	display: block;
+	font-size: 0.9em;
+	padding: 0.78em 0 0 0;
+	height: 100%;
+	width: auto;
+	clear: both;
+}
+.MenuDropDown .contentBox form label span {
+	float: left;
+    width: 15%;
+	height: auto;
+	text-align: left;
+	line-height: 1em;
+	clear: none;
+	min-height: 0px;
+	color: rgb(77, 77, 77);
+	margin-top: 0.4em;
+	margin-right: 8%;
+}
+.MenuDropDown .contentBox form label input, .MenuDropDown .contentBox form label textarea {
+	float: left;
+	width: 75%;
+	height: auto;
+	text-align: left;
+	margin: 0px auto;
+	clear: none;
+}
+.MenuDropDown .contentBox form label #recaptcha {
+	float: left;
+	width: 50%;
+	height: auto;
+	text-align: left;
+	margin: 0px auto;
+	clear: none;
+}
+.MenuDropDown .contentBox form label input[type="submit"] {
+	display: inline-block;
+	margin-top: 15%;
+	margin-left: 7%;
+	width: auto;
+	height: auto;
+	clear: none;
+	vertical-align: bottom;
+	
+	background-color:#4d4d4d;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:1.3em;
+	font-weight:bold;
+	padding:0.15em 1em;
+	text-decoration:none;
+	border:0px;
+}
+.MenuDropDown .contentBox form label input[type="submit"]:hover {
+	background-color:#4d4d4d;
+}
+.MenuDropDown .contentBox form label input[type="submit"]:active {
+	position:relative;
+	top:1px;
+}
+/* Default style of Menu Droup Down Box  End */
+
+#MenuItemsBox {
+	display: inline-block;
+	position: absolute;
+	left: 480px;
+	height: auto;
+	width: 110px;
+	padding: 2% 3%;
+}
+#MenuItemsBox ul {
+	list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+	clear: both;
+}
+
+#ContactUsBox {
+	display: inline-block;
+	position: absolute;
+/* 	top: 65px; */
+/* 	right: 20px; */
+	left: 510px;
+	height: auto;
+	width: 650px;
+}
+
+#block-user {
+	display: inline-block;
+	position: absolute;
+/* 	top: 65px; */
+/* 	right: 20px; */
+	left: 950px;
+	height: auto;
+	width: 210px;
+}

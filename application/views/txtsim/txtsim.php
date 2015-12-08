@@ -82,7 +82,7 @@
 		<option value="6">Simulation</option>
 	</select>
 <div id="2_term_component" style="width:130px; height:365px; float:left; overflow:auto; display:none;">
-	<svg style="width:100px; height:200px; float: left;margin:10px;">
+	<svg style="width:100px; height:260px; float: left;margin:10px;">
 		<g id="2toolbar" >
 			<g class="component" id="dcv" term="2">
 				<g class="drawing" transform="matrix(1,0,0,1,55,20)">
@@ -107,6 +107,19 @@
 					<path fill="none" stroke="#000000" d="M20 7.5 L12 11 L30 14.5 L10 18 L30 21.5 L10 25 L28 28.5 L 20 32.5" stroke-width="2" />
 					<circle order="1" class="term" visibility="hidden" cx="20" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
 					<circle order="2" class="term" visibility="hidden" cx="20" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+				</g>
+				<g class="text">
+					<text class="id" x="35" y="25" font-family="sans-serif" font-size="14px" fill="black"></text>
+				</g>
+			</g>
+			<g class="component" id="capacitor" term="2">
+				<g class="drawing" transform="matrix(1,0,0,1,5,200)">
+					<rect fill="#ffffff" width="40" height="40" style="opacity:0"></rect>
+					<path order="1" fill="none" stroke="#000000" d="M20 1 L20 16" stroke-width="1"></path>
+					<path order="2" fill="none" stroke="#000000" d="M20 25 L20 40" stroke-width="1"></path>
+					<path fill="none" stroke="#000000" d="M10 16 L30 16" stroke-width="2"></path>
+					<path fill="none" stroke="#000000" d="M10 25 L30 25" stroke-width="2"></path><circle order="1" class="term" visibility="hidden" cx="20" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" style="visibility: hidden;"></circle>
+					<circle order="2" class="term" visibility="hidden" cx="20" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" style="visibility: hidden;"></circle>
 				</g>
 				<g class="text">
 					<text class="id" x="35" y="25" font-family="sans-serif" font-size="14px" fill="black"></text>
@@ -175,7 +188,7 @@
 </div>
 
 <div id="3_term_component" style="width:130px; height:365px; float:left; overflow:auto; display:none;">
-	<svg style="width:100px; height:440px; float: left;margin:10px;">
+	<svg style="width:100px; height:510px; float: left;margin:10px;">
 		<g id="3toolbar" >
 			<g class="component" id="NMOS-eDouG" term="3">
 				<g class="drawing" transform="matrix(1,0,0,1,5,20)">
@@ -390,6 +403,44 @@
 				</g>
 			</g>
 			<text x="30" y="425" font-family="sans-serif" font-size="14px" fill="black">eHEMT</text>
+
+			<g class="component" id="NMOS-oTFT2" term="3">
+				<g class="drawing" transform="matrix(1,0,0,1,5,440)">
+					<rect fill="#ffffff" width="40" height="40" style="opacity:0" />
+					<path order="1" fill="none" stroke="#000000" stroke-width="1" d="M 0 20 L 10 20" />
+					<path order="2" fill="none" stroke="#000000" stroke-width="1" d="M 30 0 L 30 10" />
+					<path order="3" fill="none" stroke="#000000" stroke-width="1" d="M 30 30 L 30 40" />
+					<path fill="none" stroke="#000000" stroke-width="1" d="M 10 10 L 10 30" />
+					<path fill="none" stroke="#000000" stroke-width="1" d="M 30 10 L 15 10 L 15 30 L 30 30" />
+					<path fill="#000000" stroke="#000000" stroke-width="1" d="M 19 26 L 27 30 L 19 34 Z" />
+					<circle order="1" class="term" visibility="hidden" cx="30" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+					<circle order="2" class="term" visibility="hidden" cx="0" cy="20" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+					<circle order="3" class="term" visibility="hidden" cx="30" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+				</g>
+				<g class="text">
+					<text class="type" x="0" y="50" font-family="sans-serif" font-size="14px" fill="black"></text>
+					<text class="id" x="35" y="9" font-family="sans-serif" font-size="14px" fill="black"></text>
+				</g>
+			</g>
+			<g class="component" id="PMOS-oTFT2" term="3">
+				<g class="drawing" transform="matrix(1,0,0,1,55,440)">
+					<rect fill="#ffffff" width="40" height="40" style="opacity:0" />
+					<path order="1" fill="none" stroke="#000000" stroke-width="1" d="M 0 20 L 10 20" />
+					<path order="2" fill="none" stroke="#000000" stroke-width="1" d="M 30 0 L 30 10" />
+					<path order="3" fill="none" stroke="#000000" stroke-width="1" d="M 30 30 L 30 40" />
+					<path fill="none" stroke="#000000" stroke-width="1" d="M 10 10 L 10 30" />
+					<path fill="none" stroke="#000000" stroke-width="1" d="M 30 10 L 15 10 L 15 30 L 30 30" />
+					<path fill="#000000" stroke="#000000" stroke-width="1" d="M 26 6 L 18 10 L 26 14 Z" />
+					<circle order="1" class="term" visibility="hidden" cx="30" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+					<circle order="2" class="term" visibility="hidden" cx="0" cy="20" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+					<circle order="3" class="term" visibility="hidden" cx="30" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+				</g>
+				<g class="text">
+					<text class="type" x="0" y="50" font-family="sans-serif" font-size="14px" fill="black"></text>
+					<text class="id" x="35" y="9" font-family="sans-serif" font-size="14px" fill="black"></text>
+				</g>
+			</g>
+			<text x="30" y="495" font-family="sans-serif" font-size="14px" fill="black">oTFT2</text>
 		</g>
 	</svg>
 </div>
@@ -610,7 +661,7 @@
   <?php startblock('script'); ?>
 		<?php echo get_extended_block(); ?>
 		<!--<script src="<?php echo resource_url('js', 'library/jquery-ui.min.js'); ?>" type="text/javascript"></script>-->
-		<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js" type="text/javascript"></script>
+		<script src="https://code.jquery.com/ui/1.9.1/jquery-ui.js" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.mapping.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.validation.js'); ?>" type="text/javascript"></script>
@@ -660,7 +711,7 @@
 
 	<?php startblock('css'); ?>
         <?php echo get_extended_block(); ?>
-		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'txtsim.css'); ?>?<?php echo time(); ?>"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery.jqplot.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />

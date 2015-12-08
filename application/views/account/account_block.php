@@ -1,5 +1,5 @@
 <div class="block">
-	<div class="simulation_block">
+	<div>
 		<h2>Accounts</h2>
 		<p> </p>
 		<div>	

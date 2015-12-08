@@ -1,261 +1,578 @@
-a.post {
+/*SlideImage - Start*/
+
+#slideBox {
+    float: none;
+    height: auto;
+    clear: none;
+    width: 1280px;
+    display: block;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    min-width: 0px;
+    z-index: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slide {
+	float: none;
+	width: 100%;
+    max-width: 100%;
+    height: auto;
+    clear: none;
+    color: rgb(0, 0, 0);
+	top: 0px;
+    left: 0px;
+}
+
+#slideImage {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#slideOverlay {
+    position: absolute;
+    bottom: auto;
+    z-index: auto;
+}
+
+#slideText {
+    float: left;
+    font-size: 2.45em;
+    width: auto;
+    height: auto;
+    text-align: left;
+	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+    font-weight: bold;
+    line-height: 1.15em;
+    clear: none;
+    min-height: 0px;
+    position: absolute;
+    top: 64%;
+    left: 100px;
+    color: rgb(255, 255, 255);
+    bottom: auto;
+    right: 0%;
+    z-index: 1;
+}
+
+/*SlideImage - End*/
+
+/*Introduction - Start*/
+
+#IntroBox {
+    float: none;
+    height: auto;
+    margin: 0px auto;
+    clear: none;
+    width: 1280px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    padding-bottom: 6em;
+    z-index: auto;
+	background-color: rgb(255,255,255);
+}
+
+#introTextBox {
+    float: left;
+    height: auto;
+    margin: 100px 0px 0px 150px;
+    clear: none;
+    width: 52.999268%;
+}
+
+.textTitle {
+	color: rgb(77, 77, 77);
+	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+	font-size: 2.1em;
+    line-height: 1.22em;
+}
+
+#IconBox {
+    float: right;
+    height: auto;
+    margin-left: 0px;
+    margin-top: 55px;
+    clear: none;
+    width: 29.656982%;
+    margin-right: 2.421875%;
+}
+
+.iconBoxes {
+	float: none;
+    height: auto;
+	clear: none;
+	width: 49.997942%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#Icon1Box {
+    margin-top: 0px;
+}
+
+#Icon2Box {
+    margin-top: 6.5em;
+}
+
+#Icon3Box {
+    margin-top: 6.5em;
+}
+
+.introBoxIcon {
+    float: none;
+    width: 60%;
+    max-width: 100%;
+    height: auto;
+    margin: 0px auto;
+    clear: none;
+    color: rgb(0, 0, 0);
+    min-width: 0px;
 	display: block;
-	padding-right: 10px;
-	margin-right: 17px;
-	background: transparent url(../images/icons/forward-icon.png) no-repeat center right;
-	width: 32px;
+}
+
+.introBoxIconText {
+    float: none;
+    font-size: 0.9em;
+    width: auto;
+    height: auto;
+    text-align: center;
+    line-height: 1em;
+    margin: 1em auto 0px;
+    clear: none;
+    min-height: 0px;
+}
+
+#ScreenShotBox {
+    float: none;
+    height: auto;
+    margin-left: auto;
+    /* margin-top: 30px;  reference: http://stackoverflow.com/questions/4198269/margin-top-not-working-with-clear-both */
+	padding-top: 30px;
+    clear: both;
+	display: block;
+    width: 78.5%;
+    margin-right: auto;
+	
+}
+
+.screenShotImage {
+	width: auto;
+    max-width: 45%;
+    height: auto;
+    margin: 0px;
+}
+
+#imageSS1 {
+    float: left;
+}
+
+#ImageSS2 {
+    float: right;
+}
+
+/*Introduction - End*/
+
+/*Model Library - Start*/
+
+#ModelLibraryIntroBox {
+    float: none;
+    height: auto;
+    margin: 0px auto;
+    clear: none;
+    width: 1280px;
+    min-width: 0px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(242, 242, 242);
+    display: block;
+    padding-bottom: 8em;
+}
+
+#ModelLibraryIntroBoxContainer {
+    float: none;
+    height: 100%;
+    margin: 0px auto;
+    clear: none;
+    width: 1280px;
+    min-height: 0px;
+}
+
+#MLIconBox {
+    float: left;
+    height: 174px;
+    margin-left: 19%;
+    margin-top: 114px;
+    clear: none;
+    width: 174px;
+    margin-right: 0%;
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 13%;
+    border-top-right-radius: 13%;
+    border-bottom-right-radius: 13%;
+    border-bottom-left-radius: 13%;
+    -webkit-box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
+    box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
+}
+
+#MLBigicon {
+    float: none;
+    width: 128px;
+    max-width: 100%;
+    height: 143px;
+    margin: 1em auto auto;
+    clear: none;
+    color: rgb(0, 0, 0);
+	display: block;
+}
+
+#MLTextBox {
+    margin-left: 9%;
+    float: left;
+    height: auto;
+    margin-top: 73px;
+    clear: none;
+    width: 46%;
+}
+
+#MLitemBox {
+    float: none;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-top: 435px; */
+	padding-top: 80px;
+    clear: both;
+	display: block;
+    width: 76%;
+}
+
+.modelBoxContainer {
+    float: left;
+	clear: none;
+	height: auto;
+    width: 20%;
+}
+
+.modelBoxes{
+	height: auto;
+    width: 80%;
+    margin: 0px auto;
+	background-color: rgb(230, 230, 230);
+    -webkit-box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
+    box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
+}
+
+.modelImage {
+    float: none;
+    width: auto;
+    max-width: 100%;
+    height: 98px;
+    margin-left: auto;
+    /* margin-top: 27px; */
+	padding-top: 27px;
+    clear: both;
+    color: rgb(0, 0, 0);
+    margin-right: auto;
+	display: block;
+}
+
+.modelInfo {
+    float: none;
+    width: 85.362975%;
+    height: auto;
+    text-align: left;
+    margin: 24px auto 0px;
+    clear: none;
+    min-height: 46px;
+	font-family: DINPro;
+    color: rgb(31, 31, 31);
+	font-size: 0.7em;
+    line-height: 1.6em;
+}
+
+.modelGreyBox {
+    float: none;
+    height: 25px;
+    margin-left: auto;
+    margin-top: 15px;
+    clear: none;
+    width: 100%;
+    background-color: rgb(77, 77, 77);
+    margin-right: auto;
+}
+
+.MessageIcon {
+    float: left;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin-left: 4.5%;
+    margin-top: 6px;
+    clear: none;
+    color: rgb(0, 0, 0);
+}
+
+.MessageNumber {
+    float: left;
+    font-size: 1em;
+    width: 19.516034%;
+    height: auto;
+    text-align: left;
+    line-height: 1em;
+    margin-left: 2.99036%;
+    margin-top: 6px;
+    clear: none;
+    min-height: 19px;
+    color: rgb(230, 230, 230);
+}
+
+.modelRatingStars {
 	float: right;
+    width: 42%;
+    clear: none;
+    margin-right: 1.5%;
+}
+.ratingStar {
+    float: right;
+    width: 0.7em;
+    max-width: 100%;
+    height: auto;
+    clear: none;
+    color: rgb(0, 0, 0);
+	margin-top: 7px;
+    margin-right: 1%;
+}
+.ratingLightStar {
+    color: rgb(255,255,0);
+}
+.ratingDimStar {
+    color: rgb(0, 0, 0);
 }
 
-a.post:hover,
-a.post:active {
-	background: transparent url(../images/icons/forward-icon-active.png) no-repeat center right;
+/*Model Library - End*/
+
+/*User Experience & News HighLights - Start*/
+
+/*Uswe Experience - Start*/
+#UENHBox {
+    float: none;
+    height: auto;
+    margin: 0px auto;
+    clear: none;
+    width: 1280px;
+    padding-bottom: 6em;
+	background-color: rgb(255,255,255);
 }
 
-
-#home .divider {
-	border-bottom: 1px solid #9595C2;
-	height: 20px;
-	margin: 10px 15px;
+#UserExperienceBox {
+    float: none;
+    height: auto;
+    margin-left: auto;
+    margin-top: 74.65625px;
+    clear: none;
+    width: 76%;
+    margin-right: auto;
 }
 
-#home .column {
-	width: 358px;
-	min-height: 200px;
-	padding: 0 20px 10px 20px;
-	float: left;	
-	margin-right: -1px;
-	border-left: 1px solid #85859C;	
-	border-right: 1px solid #85859C;	
-	position: relative;
+#ExperienceBox {
+    float: right;
+/*     height: 278px; */
+	height: auto;
+    margin-left: 0px;
+    margin-top: 0px;
+    clear: none;
+    width: 58%;
+    margin-right: 0.14295122%;
 }
 
-#home {
-	width: 800px;
+#User_ExperienceTitle {
+    float: left;
+    margin: 10px 0px 0px;
 }
 
-/* General: List style */
-
-#content ul.item-list {
-	margin: 10px 0;
-	padding: 0px;
+#E1Box {
+    float: none;
+    height: auto;
+    margin: 0px;
+    clear: none;
+    width: 100%;
+    min-width: 0px;
+    border-top-color: rgb(77, 77, 77);
+    border-top-width: 1px;
+    border-top-style: solid;
 }
 
-#content ul.item-list li {
-	list-style-type: none;
-	display: block;
-	margin: 5px;
-	margin-top: 0.75em;
-}
-
-#content ul.item-list a:hover,
-#content ul.item-list a:active {
-	font-weight: normal;
-	text-decoration: underline;
-}
-
-#content ul.item-list span.date {
-	color: #85859C;
-}
-
-/*  i-MOS overview  */
-
-#home #showcase {
-	position: relative;
-	float:left; 
-	height: 180px; 
-	width: 240px;
-	margin-top: 45px;
-	margin-left: 10px;
-}
-
-#home #showcase img {
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-
-#home #description {
-	float: left; 
-	width: 480px; 
-	margin: 0 20px;
-}
-
-#home #description .title {
-	margin: 20px 0;
-	font-weight: normal;
-}
-
-#home #description .title h3 {
-	font-size: 1.2em;
-}
-
-/* Info section (news & user experiences)  */
-
-#home #info div.first {
-	border-left: 0 solid #85859C;	
-}
-
-#home #info div.last {
-	border-right: 0 solid #85859C;	
+#E2Box {
+    float: none;
+    height: auto;
+    margin: 2em 0px 0px;
+    clear: none;
+    width: 100%;
+    min-width: 0px;
+    border-top-color: rgb(77, 77, 77);
+    border-top-width: 1px;
+    border-top-style: solid;
 }
 
 
-/* Activity styles */
-
-#content #activity-page {
-	margin: 20px;
+.EMessageText{
+	float: none;
+    font-size: 1em;
+    width: 100%;
+    height: auto;
+    margin: 0.7em auto 0px;
+	line-height: 1.63em;
 }
 
-#content #activity-page ul.item-list span {
-	display: block;
+.EMessageNameText{
+	float: none;
+    width: 100%;
+    height: auto;
+    text-align: right;
+    margin: 2em auto 0px;
+	font-size: 0.85em;
 }
 
-#content #activities  ul.item-list span {
-	display: block;
+/*User Experience - End*/
+
+/*News Highlights - Start*/
+
+#NewsHighlightsBox {
+    float: left;
+    height: auto;
+    margin-left: 11.71875%;
+    margin-top: 40px;
+    clear: none;
+    width: 76%;
 }
 
-/* User experience styles */
-
-#content span.user-detail {
-	color: #85859C;
-	text-align: right;
-	padding: 0.5em 0.2em;	
-	margin-left: 80px;
-	display: block;
+#NLimageBox {
+    float: left;
+    height: auto;
+    margin-left: 0%;
+    margin-top: 28px;
+    clear: both;
+    width: 100%;
+    min-width: 0px;
 }
 
-#content blockquote {
-	display: inline-block;
-	position: relative;
-	padding: 0.5em 1em;
+.NLimage{
+	width: 30%;
+    height: auto;
 }
 
-#content blockquote:before ,
-#content blockquote:after {
-	content: '"';
-	font-size: 1.1em;
+#NLimage1 {
+    float: left;
+    margin: 0px;
 }
 
-#content #experience-page {
-	width: 90%;
-	position: relative;
+#NLImage2 {
+    float: left;
+    margin: 0px 0px 0px 5%;
 }
 
-#content #experience-page,
-#content #post-experience {
-	margin: 20px;
+#NLImage3 {
+    float: right;
+    margin: 0px;
 }
 
-#content #experience-page blockquote {
-	padding: 1em 2em;
+/*News Highlights - End*/
+
+/*iMos Activities - Start*/
+
+#iMosActivitiesBox {
+    float: left;
+    height: auto;
+    margin-left: 0%;
+    margin-top: 1.5em;
+    clear: both;
+    width: 100%;
+    min-width: 0px;
 }
 
-#content #experience-page ul.item-list {
-	border-top: 0px solid #85859C;
+#iMOSActivitiesTitleTextBox {
+    float: left;
+    height: auto;
+    margin: 0px;
+    clear: both;
+    width: 100%;
+    min-width: 0px;
+    background-color: rgb(77, 77, 77);
 }
 
-#content #experience-page ul.item-list li {
-	padding: 10px 0;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	border-bottom: 0px solid #85859C;
+#iMOSActivitiesTitleText {
+    float: left;
+    font-size: 1.1em;
+    width: auto;
+    height: auto;
+    text-align: left;
+    line-height: 1em;
+    margin: 0px 0px 0px 1em;
+    clear: none;
+    min-height: 0px;
+    min-width: 0px;
+    color: rgb(255, 255, 255);
+    padding: 0.7em 0px;
 }
 
-
-/* Post user experience page style */
-
-#content #post-experience form {
-	width: 540px;
-	margin-top: 20px;
-}
-
-#content #post-experience form input {
-	display: block;
-	float: left;
-	margin-right: 8px;
-	margin-top: 2px;
-}
-
-#content #post-experience form textarea{
-	width: 530px;
-	border: 1px solid #9E9EC3;
-	margin: 5px 0;
-	display: block;
-}
-
-#content #post-experience textarea:focus, 
-#content #post-experience textarea:active
-{
-	border: 2px solid #555; 
-}
-
-#content #post-experience form .error {
-	border: 1px solid red;
-}
-
-#content #post-experience form .error-msg {
-	color: red;
-}
-
-#content #post-experience form .submit
-{
-	background-color: #726fb2;
-	color: #FFF;
-	display: block;
-	position: relative;	
+#iMOSActivitiesMore {
 	float: right;
-	margin-right: 22px;
-	height: 22px;
-	width: 75px;
-	border: 0;
-	text-align: center;
-	line-height: 22px;
-	cursor: default;
+    clear: none;
+    line-height: 1em;
+	margin-right: 1em;
+    position:relative; height:1.9em; top:50%; margin-top:0.95em; /* div高度的一半 */
+	font-size: 0.9em;
+    color: rgb(255, 255, 255);
 }
 
-#content #post-experience form .submit:after {
-    content: "";
-	position: absolute;
-    right: -11px;
-    top: 0;
-	display: block;
-	height: 0;
-    border-top: 11px solid transparent;
-    border-bottom: 11px solid transparent;
-    border-left: 11px solid #726fb2;
-} 
-
-#content #post-experience form .submit:hover {
-	font-weight: bold;
-	margin-top: -1px;
-	height: 24px;
-	line-height: 24px;
+#iMOSActivitiesTextBox {
+    float: left;
+    height: auto;
+    margin: 0px;
+    clear: both;
+    width: 100%;
+    min-width: 0px;
+	overflow: hidden;
 }
 
-#content #post-experience form .submit:active {
-	font-weight: normal;
-	margin-top: 0;
-	height: 22px;
-	line-height: 22px;
+.iMosActivityTitle{
+	font-size: 1em;
+	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
 }
 
-#content #post-experience form .submit:hover:after {
-    right: -12px;
-    border-width: 12px;
+.iMosActivityContent{
+	font-size: 0.9em;
 }
 
-#content #post-experience form .submit:active {
-	background-color: #9595C2;
+.iMosActivityColumn1 {
+    float: left;
+    font-size: 1em;
+    width: 49%;
+    height: auto;
+    line-height: 0.9em;
+    margin: 1em 0px 0px;
 }
 
-#content #post-experience form .submit:active:after {
-	border-left-color: #9595C2;
-	right: -11px;
-    border-width: 11px;
+.iMosActivityColumn2 {
+    float: right;
+    font-size: 1em;
+    width: 49%;
+    height: auto;
+    line-height: 0.9em;
+    margin: 1em 0px 0px;
 }
 
-#content #post-experience form label{
-	display: block;
-	margin: 10px 0;
+.iMosActivityLink {
+	float: none;
+    font-size: 0.6em;
+    color: rgb(41, 171, 226);
 }
+
+/*iMos Activities - End*/
+
+/*User Experience & News HighLights - End*/

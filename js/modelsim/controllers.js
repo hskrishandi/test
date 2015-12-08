@@ -15,8 +15,8 @@ $(document).ready(function() {
 	MODEL_ID = $("#model-lib-list").data("current");
 
 	viewModels = {
-		lib: new ModelLibrary(),
-		sim: new ModelSimulation()
+		lib: new ModelLibrary(),  //models.js
+		sim: new ModelSimulation()  //models.js
 	};
 
 	viewModels.lib.load();
@@ -676,3 +676,13 @@ ko.bindingHandlers.modelLibMenu = {
 
 } (jQuery));
 
+
+/**
+ * Redirect to different model while versions dropdown box selection changed
+ * @param object $selected 		the selected option
+ * @return Redirect to /model/selected.value
+ */
+ function onVersionSelectionChanged(selected) {
+ 	var model_id = selected.value;
+ 	window.location = ROOT + "/model/" + model_id;
+ }

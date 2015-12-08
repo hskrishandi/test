@@ -4,10 +4,10 @@
  * acquired from the simulation module
  */ 
  
- //used for storing the plots
- var jqPlotObject=new Array();
- //used to store which plot was displaying
- var position = 0;
+//used for storing the plots
+var jqPlotObject=new Array();
+//used to store which plot was displaying
+var position = 0;
 // Export the plotGraphs function 
 var plotGraphs;
  

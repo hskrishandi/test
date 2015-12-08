@@ -13,39 +13,49 @@ var temp_store_for_user_data;
 	ModelLibrary = function() {
 		var self = this;
 
+		// Enablie blinding
 		self.tree = ko.observableArray([]);
-		self.isLoading = ko.observable(false);
+		self.isLoading = ko.observable(false);  //blind isLoading with init value of false
 
+		// Load the data of User Libraries by ajax
 		self.load = function() {
 			self.isLoading(true);
+			//ajax request
 			$.ajax({
 				url: ROOT + "/modelLibrary/GET",
 				success: function(result) {
+					//1. try parse json string to array
 					try {
 						result = JSON.parse(result);
 					} catch (err) { }
+					//2. ORM of DeviceModel
 					var mapped = $.map(result, function(item) { return new ModelLibrary.DeviceModel(item); });
 					var i = mapped.length;
-							
+					
+					//3. blinding
 					self.tree(mapped);
 					mapped = self.tree();
+					//4. exprend the library tree if the User Library == current model
 					while (--i >= 0) {
-						if (mapped[i].id == MODEL_ID) {
+						if (mapped[i].id == MODEL_ID) {  //controlers.js::MODEL_ID
 							mapped[i].expanded(true);
 							break;
 						}
 					}
 				},
+				// On error, console log error
 				error: function(jqXHR, textStatus, errorThrown) {
 					console.log("Error: " + textStatus + "; " + errorThrown);
-				}, 
+				},
+				// Finally, set loading to false
 				complete: function() {
 					self.isLoading(false);
 				}
 			});
 		};
 	};
-		
+	
+	// POCO class of a DeviceModel (include Library objects)
 	ModelLibrary.DeviceModel = function(data) {
 		var that = this;
 		this.name = data.name;
@@ -53,10 +63,11 @@ var temp_store_for_user_data;
 			
 		this.expanded = ko.observable(false);
 
-		var mapped = $.map(data.library, function(item) { item.modelID = that.id; return item; });
+		var mapped = $.map(data.library, function(item) { item.modelID = that.id; return item; });  //ORM of librarys of a DeviceModel
 		this.library = ko.observableArray(mapped);
 	};
 	
+	// POCO class of a Library
 	ModelLibrary.LibraryEntry = function(data) {
 		this.modelID = data.modelID;
 		this.name = data.name;
@@ -67,6 +78,7 @@ var temp_store_for_user_data;
 	/** Model simulation page view model */
 	ModelSimulation = function() {
 		var self = this;
+		// get the useful value only from the Parameters
 		var paramMapper = function(observable) {
 			return function() {
 				var arr = observable(), i = arr.length, ret = [];
@@ -77,17 +89,25 @@ var temp_store_for_user_data;
 			};
 		};
 		//var simuData = { running: false, session: "", exectime: 0 };
+		//for showing the Abort button
 		self.isSimulating = ko.observable(false);
 		self.simulationTime = ko.observable(0);
 		self.simulationId = ko.observable(null);
 		self.isSimulatingAlert = ko.observable(false);
+		//for showing the Fixed bias table when pressing the Add fixed bias button in the Biasing tab
 		self.b_hasFixed = ko.observable(false);
 		
+		//for custom binding function (loadingWhen) in the controller js
 		self.isLoading = ko.observable(false);
+		//saving the selected tab
 		self.selectedTab = ko.observable(0).extend({localPersist: { key: 'M#' + MODEL_ID + 'TABINDEX' } });
+		//saving the tab (Instance/Model) selected in the Parameters tab
 		self.selectedParamTab = ko.observable(0).extend({localPersist: { key: 'MP#' + MODEL_ID + 'TABINDEX' } });
-		self.selectedBenchmarkingTab = ko.observable(0).extend({localPersist: {key: 'MB#' + MODEL_ID + 'TABINDEX'}});		
+		//the Mode Choice (General Biasing/Benchmarking) of Biasing tab
+		self.selectedBenchmarkingTab = ko.observable(0).extend({localPersist: {key: 'MB#' + MODEL_ID + 'TABINDEX'}});
+		//params in Instance/Model tab of Parameters tab
 		self.instanceParams = ko.observableArray([]);
+		//get useful information only from instanceParams and save in variable (getData)
 		self.instanceParams.getData = paramMapper(self.instanceParams);
 	
 		self.modelParams = ko.observableArray([]);
@@ -96,21 +116,24 @@ var temp_store_for_user_data;
 		//This parameter is for remebering the index of 'type' parameter, initial value is -1, wait to be set until the data arrives from modelDetail's ajax
 		self.typeIndex = ko.observable(-1);
 	
+		//for showing the Collection button next to the Load button in Parameters tab
 		self.hasExampleBoxFileList = ko.observable(false);
 		self.collection_info = ko.observable("");
 		self.model_id = ko.observable(MODEL_ID);
 	
+		/* Search Parameter */
+		// focus the target (a input field) and jump to the tab where the target is, mainly for searching
  		self.paramSelect = function(keyword, focus) {
 			if (focus == null) focus = true;
 			var target = $("#" + keyword);
 			if (target == null) return;
 			
-			
+			//jump to the tab where the focusing target is
 			var index = $("#param-tabs div[role='tabpanel']").index($("#" + $(target).attr("parent")));
 			$('#param-tabs').tabs({ active: index });
-			if (focus) target.focus();
+			if (focus) target.focus();  //jquery focus function
 		};
-		
+		//jump to the parameter by the search result and show animation
  		self.searchParamsSelect = function(keyword) {
 			var target = $("#" + keyword);
 			// Text field value
@@ -118,7 +141,8 @@ var temp_store_for_user_data;
 			self.paramSelect(keyword);
 			target.stop().css("backgroundColor", "#9f9").animate({backgroundColor: "none"}, 1000);				
 		};
- 		self.searchParams = ko.observableArray([]);
+ 		self.searchParams = ko.observableArray([]);  //the search result
+ 		// jquery autocomplete function for searhing parameters
 		self.searchParamsInit = function() {
 	 		// alert(self.searchParams().length == 0? "true":"false");
 	 		self.searchParams().length = 0;
@@ -223,9 +247,12 @@ var temp_store_for_user_data;
 				});
 			}
 		};
+		/* ; Search Parameter */
 
+		/* Equalizer */
 		var eq_toggle = true;
 
+		// Expand the equalizer by chicking the + icon
 		$("#eq-icon-expand").click(function(){
 			$('#results').animate({scrollTop: $("#equalizer-temp").offset().top}, 1500);
 			if(eq_toggle){
@@ -235,6 +262,7 @@ var temp_store_for_user_data;
 			}
 		})
 
+		// Collapse the equalizer by chicking the - icon
 		$("#eq-icon-close").click(function(){
 			if(!eq_toggle){
 				$("#eq-panel").slideToggle("slow");
@@ -243,14 +271,20 @@ var temp_store_for_user_data;
 			}
 		})
 
+		// Show of hide the equalizer by chicking the Equalizer link
 		$("#eq-expand").click(function(){
-			$('#results').animate({scrollTop: $("#equalizer-temp").offset().top}, 1500);
 			if(eq_toggle){
+				$('#results').animate({scrollTop: $("#equalizer-temp").offset().top}, 1500);
 				$("#eq-panel").slideToggle("slow");
 				$("#equalizer-temp").css("height", "420px");
+				$("#equalizer-temp").css("visibility", "visible");
 				eq_toggle = false;
+			} else {
+				$("#eq-panel").slideToggle("slow");
+				$("#equalizer-temp").css("height", "");
+				$("#equalizer-temp").css("visibility", "hidden");
+				eq_toggle = true;
 			}
-			$("#equalizer-temp").css("visibility", "visible");
 			return false;
 		})
 
@@ -365,6 +399,7 @@ var temp_store_for_user_data;
 				$("#" + param_name).change();
 			})
 		};
+		/* : Equalizer */
 		
 		
 		//array of parameter array for all tabs.
@@ -856,11 +891,11 @@ var temp_store_for_user_data;
 					  return new ModelSimulation.Parameter(item); }));
 					
 					self.modelParamsForTabs.push({
-																				 modelParams: self.instanceParams,
-																				 href: "#param-tab-model0",
-																				 id: "param-tab-model0",
-																				 title: result.paramsTabTitle[1]
-																				 });
+												modelParams: self.instanceParams,
+												href: "#param-tab-model0",
+												id: "param-tab-model0",
+												title: result.paramsTabTitle[1]
+												});
 					var hasZeroTabId = false;
 					for(var i = 0; i < self.modelParams().length; ++i){
 						var tab_id = self.modelParams()[i].tab_id;

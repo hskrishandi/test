@@ -1,43 +1,37 @@
-
 <?php extend('layout.php'); ?>
 
 <?php startblock('title'); ?>
-		Activities management
-	<?php endblock(); ?>
+    Activities management
+<?php endblock(); ?>
     
-    
-    	<?php startblock('css'); ?>
-        <?php echo get_extended_block(); ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'cms.css'); ?>" media="all" />
-        <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jTPS.css'); ?>" media="all" />
-        
-        <script src="<?php echo resource_url('js', 'cms.js'); ?>" type="text/javascript" charset="utf-8"></script>
-        
-        <script src="<?php echo resource_url('js', 'sorttable.js'); ?>" type="text/javascript" charset="utf-8"></script>
+<?php startblock('css'); ?>
+    <?php echo get_extended_block(); ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'cms.css'); ?>" media="all" />
+    <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jTPS.css'); ?>" media="all" />
 
-    <?php endblock(); ?>
-	
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-        <?php $this->load->view('account/account_block'); ?>
-        
-         
-	<?php endblock(); ?>
+    <script src="<?php echo resource_url('js', 'cms.js'); ?>" type="text/javascript" charset="utf-8"></script>
+
+    <script src="<?php echo resource_url('js', 'sorttable.js'); ?>" type="text/javascript" charset="utf-8"></script>
+<?php endblock(); ?>
+
+<?php startblock('side_menu'); ?>
+    <?php echo get_extended_block(); ?>
+    <?php $this->load->view('account/account_block'); ?>
+<?php endblock(); ?>
+
 
 <?php startblock('content'); ?>
 
-
-<script>
-					  
-$(function () { 	
-
+<script>					  
+$(function () {
 			page('#activities_table');
-			
-		});
-              </script>
+});
+</script>
+
     <div class="cms">
     	<div class="activities">
 			<h2 class="title">Activities management</h2>
+            <input name="Post" type="button" value="Post" class="submit" onclick="location.href='<?php echo base_url('resources/post/activities');?>'">
             <form name="form1" method="post"> 
             <table id="activities_table">
             	<thead>

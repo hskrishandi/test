@@ -1,7 +1,7 @@
 <?php extend('resources/layout.php'); ?>	
 	<?php startblock('title'); ?>
 		Resources
-	<?php endblock(); ?>	
+	<?php endblock(); ?>
 	
 	<?php startblock('content'); ?>
 		<div id="resources">

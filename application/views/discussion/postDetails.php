@@ -6,26 +6,25 @@
 	<?php endblock(); ?>
     
     
-    <?php startblock('css'); ?>
+  <?php startblock('css'); ?>
     <?php echo get_extended_block(); ?>
 
-		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />
-        
-    <?php endblock(); ?>
-    
-    <?php startblock('script'); ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />
+  <?php endblock(); ?>
+
+  <?php startblock('script'); ?>
     <?php echo get_extended_block(); ?>
-    	<script src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
-    	<script src="<?php echo resource_url('js', 'ckeditor/ckeditor.js'); ?>" type="text/javascript"></script>
-    <?php endblock(); ?>
+  	<script src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
+  	<script src="<?php echo resource_url('js', 'ckeditor/ckeditor.js'); ?>" type="text/javascript"></script>
+  <?php endblock(); ?>
 	
 	<?php startblock('side_menu'); ?>
 	<?php echo get_extended_block(); ?>
 	<?php $this->load->view('account/account_block'); ?>
-        
-        
-         
-        
+
+
+
+
 	<div class="block">
 			<div>
 				<h2>Dicussion</h2>

@@ -1,11 +1,15 @@
 <?php extend('resources/layout.php'); ?>	
-	<?php startblock('title'); ?>
+<?php startblock('title'); ?>
+  Resources
+<?php endblock(); ?>
 
-		Resources
-	<?php endblock(); ?>		
-    
+<?php startblock('script'); ?>
+    <?php echo get_extended_block(); ?>
+    <script src="<?php echo resource_url('js', 'ckeditor/ckeditor.js'); ?>" type="text/javascript"></script>
+<?php endblock(); ?>
+
+
 <?php startblock('content'); ?>
-
 
 <script>
 
@@ -19,7 +23,7 @@ $(document).ready(function(){
 							$('#groups_form').submit();	
 							$('#models_form').submit();		
 							$('#tools_form').submit();					
-
+              $('#activities_form').submit();
 						})
 				});
 				
@@ -32,8 +36,6 @@ $(document).ready(function(){
             
 				<?php if($res=='news'){?>
        
-                
-                
                 
                 	<h2 class="title">News</h2>
                		  <div class="form">
@@ -259,13 +261,61 @@ $(document).ready(function(){
                       </table>
     </form>
                 
-               		</div>        
+               		</div>
+
+
+              <?php } else if($res=='activities'){?>
+                
+                
+                <h2 class="title">Activities</h2>
+                    <div class="form">
+                      <form name="activities_form" id="activities_form" action="<?php echo base_url('/resources/submit/activities');?>" method="post">
+                        
+                        <table class="form_table">
+                          <tr>
+                            <td class="label">Content:</td>
+                            <td>
+                                <textarea name="activities_content" id="activities_content"></textarea>
+                                <script type="text/javascript">
+                                CKEDITOR.replace( 'activities_content',
+                                {
+                                  on :
+                                  {
+                                    instanceReady : function( ev )
+                                     {
+                                        // Output paragraphs as <p>Text</p>.
+                                        this.dataProcessor.writer.setRules( 'p',
+                                            {
+                                                indent : false,
+                                                breakBeforeOpen : false,
+                                                breakAfterOpen : false,
+                                                breakBeforeClose : false,
+                                                breakAfterClose : false
+                                            });
+                                      }
+                                  }
+                                });
+                                CKEDITOR.replace( 'activities_content' );
+                                toolbar : 'MyToolbar';  
+                              </script>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td colspan="2"><div class="form_submit"><a class="submit" id="submit">Submit</a></div></td>
+                          </tr>
+                        </table>
+    
+          </form>                                         
+        </div>
+
                 <?php } if($res=='submited'){?>     
                     	Your input is submited. Thank you.
-                        
-                      <a class="return-link" href="<?php echo base_url('resources/'.$_GET['res']); ?>">
-					Back
-				</a>
+                      <?php
+                      $backpath = 'resources/'.$_GET['res'];
+                      if ($_GET['res'] == 'activities') $backpath = 'cms/'.$_GET['res'];
+                      ?>
+                      <a class="return-link" href="<?php echo base_url($backpath); ?>">Back</a>
        
                 <?php }/*endif*/ ?>
             

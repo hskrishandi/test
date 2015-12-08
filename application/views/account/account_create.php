@@ -95,10 +95,12 @@
 						theme : 'white'
 					 };
 					 </script>
+					 <div class="recaptcha">
 					<?php
 						$publickey = "6LfKDtASAAAAADfqnqFzbxPZQRzzdA0wggu8GhkN"; // you got this from the signup page
-						echo recaptcha_get_html($publickey);
+						echo recaptcha_get_html($publickey, null, TRUE);
 					?>
+					</div>
 					<h4 class="error"><?php if (isset($err['verification'])) echo $err['verification'] ?></h4>
 					</div>
 				</td>

@@ -8,7 +8,7 @@
 		var target = this.find("img");
 		var pos = 0;
 		
-		target.each(function(index, element) {			
+		target.each(function(index, element) {
 			$(element).css("opacity", 0);
 		});
 		$(target[0]).css("opacity", 1);
@@ -32,4 +32,3 @@
 jQuery(document).ready(function($) {
 	$('#home #showcase').showcase();
 });
-

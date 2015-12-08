@@ -19,7 +19,7 @@
 		<!--[if lt IE 9]><script src="<?php echo resource_url('js', 'library/excanvas.min.js'); ?>" type="text/javascript"></script><![endif]-->
 		<script src="<?php echo resource_url('js', 'library/jquery.jqplot.min.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/jqplot/jqplot.plugins.pack.js'); ?>" type="text/javascript"></script>
-
+		
 		<?php start_block_marker('model_script'); ?>
 		<?php end_block_marker(); ?>
 		
@@ -30,7 +30,12 @@
 		<script src="<?php echo resource_url('js', 'modelsim/graphs.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/controllers.js'); ?>" type="text/javascript"></script>
 		
-		<script  src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>		
+		<script src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
+		
+		<script src="<?php echo resource_url('js', 'fivestar.js'); ?>" type="text/javascript" charset="utf-8"></script>
+		<script src="<?php echo resource_url('js', 'star-rating/jquery.form.js'); ?>" type="text/javascript" charset="utf-8"></script>
+		<script src="<?php echo resource_url('js', 'star-rating/jquery.MetaData.js'); ?>" type="text/javascript" charset="utf-8"></script>
+		<script src="<?php echo resource_url('js', 'star-rating/jquery.rating.js'); ?>" type="text/javascript" charset="utf-8"></script>
 	<?php endblock(); ?>
 
 	<?php startblock('css'); ?>
@@ -42,6 +47,8 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery.jqplot.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'model.css'); ?>"/>	
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />
+		
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('js', 'star-rating/jquery.rating.css'); ?>" media="all" />
 	<?php endblock(); ?>
 
 	<?php startblock('side_menu'); ?>
@@ -107,7 +114,7 @@
             
 			
 			<div id="description">
-				<?php $this->load->view('simulation/descriptions/' . $model_info->name . '.php'); ?>
+				<?php $this->load->view('simulation/descriptions/' . $model_info->name); ?>
 			</div>
 			
 			<div id="params">
@@ -341,7 +348,7 @@
 
 			<div id="comments">
 				<?php $this->load->view('discussion/model_comment', $comment_data); ?>
-			</div>			
+			</div>
 		</div>
 	</div>
 	
