@@ -22,15 +22,21 @@ class Txtsim_model extends CI_Model{
 	}
 	public function NetlistCheck($netlist){
 		//Check the netlist without .end
-		$matches = null;
+		/*$matches = null;
 		preg_match("/.end$/i", $netlist, $matches);
-		if (count($matches) === 0) $netlist .= "\n.end";
+		if (count($matches) === 0) $netlist .= "\n.end";*///simplified
+		if (!preg_match("/\.end$/i", $netlist))
+			$netlist .= "\n.end";
 		
 		//Check if no control card
-		$matches = null;
 		global $plotstring;
+		/*$matches = null;
 		preg_match("/.control/i", $netlist, $matches);
 		if (count($matches) === 0){
+			$pos = stripos($netlist,'.end');
+			$netlist = substr($netlist, 0, $pos)."\n.CONTROL\nsave all\nrun\n.endc\n".substr($netlist, $pos);
+		}*///simplified
+		if (!preg_match("/\.control/i", $netlist)){
 			$pos = stripos($netlist,'.end');
 			$netlist = substr($netlist, 0, $pos)."\n.CONTROL\nsave all\nrun\n.endc\n".substr($netlist, $pos);
 		}
@@ -247,12 +253,17 @@ class Txtsim_model extends CI_Model{
 			write_file($folder."/netlist", $netlist);
 		
 		$this->process_model->SetWorkingFolder($folder);
-		$this->process_model->RunBgProcess($this->config->item('ngspice') . " -b netlist.sp", $pid, true);
+		$this->process_model->RunBgProcess($this->config->item('ngspice') . " -b netlist.sp", $pid, true); //the config is loaded in Simulation_model
 		if($pid != -1) {
 			$this->process_model->RecordPID($pid);
 			return array("id" => $uuid);
 		}
 		return null;
+	}
+
+
+	public function get_simuroot(){
+		return $this->_simuroot;
 	}
 }
 

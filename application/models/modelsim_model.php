@@ -72,16 +72,27 @@ class Modelsim_model extends CI_Model {
 	public function getBenchmarkingControlSrc($b_id,$m_id) {
 		$query = $this->db->query("SELECT * FROM model_benchmark_ctrl WHERE benchmark_id=? AND model_id=?  ORDER BY orders", array($b_id,$m_id));
 		return $query->result();
-	}		
-			
-	/* * Device Model * */			
-			
+	}
+
+	/* * Device Model * */
+
 	public function getModelsInfo()
 	{
-		$this->db->from('model_info')->order_by("id asc");
+		$this->db->from('model_info')->where("parent_id", null)->order_by("id asc");
 		return $this->db->get()->result();
 	}
-		    
+
+	/**
+	 * Get Top (5) Models with highest rating and post comments count
+	 */
+	public function getTopModels() {
+		$this->db->select("model_info.*, AVG(rate) AS rate, IFNULL(countComment,0) AS countComment", FALSE)->from('model_info, starrating')
+			->join("(SELECT postid, count(*) AS countComment from post_comments WHERE type = 'model' GROUP BY `postid`) comments", "comments.postid = model_info.post_id", "left")
+		->where("`model_info`.`name`=`starrating`.`model_id`")
+		->group_by("model_id")->order_by("rate DESC")->limit(5);
+		return $this->db->get()->result();
+	}
+
 	public function getModelInfoById($id)
 	{
 		$this->db->from('model_info')->where("id", $id);
@@ -136,6 +147,51 @@ class Modelsim_model extends CI_Model {
 		}
 	
 		return 0;
+	}
+	/**
+	 * Get a list of version numbers of the series of model of a model
+	 * @param object $model_info 		the model_info object returned by getModelInfoById
+	 * @return an array of id and version number pairs
+	 */
+	public function getModelVersions($model_info)
+	{
+		if ($model_info != null) {
+			if ($model_info->version != null) {
+				if ($model_info->parent_id == null) {  // this is the parent model
+					$model_series_root_id = $model_info->id;
+				} else {  // this is the child model
+					$model_series_root_id = $model_info->parent_id;
+				}
+				$this->db->select('id, version')->from('model_info')
+					->where('parent_id',$model_series_root_id)
+					->or_where('id',$model_series_root_id);
+				return $this->db->get()->result();
+			}
+		}
+		return null;
+	}
+	/**
+	 * Get a list of version numbers of the series of model of a model
+	 * @param int $model_id 		the model_id
+	 * @return an array of id and version number pairs
+	 */
+	public function getModelVersionsById($model_id)
+	{
+		$model_info = getModelInfoById($model_id);
+		if ($model_info != null) {
+			if ($model_info->version != null) {
+				if ($model_info->parent_id == null) {  // this is the parent model
+					$model_series_root_id = $model_info->id;
+				} else {  // this is the child model
+					$model_series_root_id = $model_info->parent_id;
+				}
+				$this->db->select('id, version')->from('model_info')
+					->where('parent_id',$model_info->model_series_root_id)
+					->or_where('id',$model_info->model_series_root_id);
+				return $this->db->get()->result();
+			}
+		}
+		return null;
 	}
     
 	public function getModelCardInfo($model_card_name)

@@ -122,6 +122,11 @@ class process_model extends CI_Model {
 		return false;
 	}
 	
+	/**
+	 * Read the generated output
+	 * @param string $folder	the location the output stored
+	 * @return string about the saved output
+	 */
 	public function ReadOutput($folder = null)
 	{
 		$folder = $this->_GetWorkingFolder($folder);
@@ -132,12 +137,23 @@ class process_model extends CI_Model {
 		return null;
 	}
 	
-	
+	/**
+	 * Check if the custom folder selected, else return default _workingfolder
+	 * @param string $folder	the location of custom folder
+	 * @return string about the full path of working folder
+	 */
 	private function _GetWorkingFolder($folder)
 	{
 		if($folder == null)
 			return $this->_workingfolder;
+		else
+			return $folder;
 	}
+	/**
+	 * Save the workingfolder path and set shell root to the working folder
+	 * @param string $folder	the location of working folder
+	 * @return n/a
+	 */
 	public function SetWorkingFolder($folder)
 	{
 		$this->_workingfolder = $folder;

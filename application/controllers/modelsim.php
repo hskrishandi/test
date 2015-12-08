@@ -22,7 +22,7 @@ class modelsim extends CI_Controller {
 	{
 		$user_info = $this->Account_model->isLogin();
 		$data = array(
-			'models' => ($user_info ? $this->Modelsim_model->getModelLibrary($user_info->id) : array()), 
+			//'models' => ($user_info ? $this->Modelsim_model->getModelLibrary($user_info->id) : array()), //not in use
 			'model_list' => $this->Modelsim_model->getModelsInfo()
 		);
 		
@@ -40,7 +40,7 @@ class modelsim extends CI_Controller {
 		}
 		$post_id = $model_info->post_id;
 		$user_info = $this->Account_model->isLogin();
-		$data = array(		
+		$data = array(
 			'model_info' => $model_info,
 			'comment_data' => array(
 				'model_name' => $model_info->name,
@@ -48,9 +48,12 @@ class modelsim extends CI_Controller {
 				'reply' => $this->Discussion_model->getReply($post_id),
 				'countComment' => $this->Discussion_model->getCountModelCommentById($post_id),
 				'userInfo' => $user_info
-			)			
+			)
 		);
-				
+		if ($model_info->version != null) {
+			$data['versions'] = $this->Modelsim_model->getModelVersions($model_info);
+		}
+		
 		$this->load->view('simulation/model.php', $data);
 	}
 	

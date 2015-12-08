@@ -164,7 +164,8 @@ class resources extends CI_Controller {
 	}
 	
 	public function edit_resources($res=NULL){
-		if($this->Account_model->isLogin()->email!='model@i-mos.org'){
+		//if($this->Account_model->isLogin()->email=='model@i-mos.org'){
+		if($this->Account_model->isLogin()->class >= 99){
 			redirect(base_url('/resources/'), 'refresh');
 		}
 		
@@ -247,7 +248,8 @@ class resources extends CI_Controller {
 
 	}
 	public function edit_resources_submit($res){
-		if($this->Account_model->isLogin()->email!='model@i-mos.org'){
+		//if($this->Account_model->isLogin()->email=='model@i-mos.org'){
+		if($this->Account_model->isLogin()->class >= 99){
 			redirect(base_url('/resources/'), 'refresh');
 		}
 		if($res!=NULL){
@@ -329,7 +331,7 @@ class resources extends CI_Controller {
 	
 	public function tools()
 	{
-		if($this->Account_model->isLogin()&&$this->Account_model->isLogin()->email=='model@i-mos.org'){
+		if($this->Account_model->isLogin()&&$this->Account_model->isLogin()->class >= 99){
 			$tools = array();
 			foreach ($this->config->item('tool_type') as $type => $title) {
 				$tools[$title] = $this->Resources_model->get_tools_adv('undelete',$type, RESOURCE_ENTRIES_PER_PAGE);
@@ -375,7 +377,8 @@ class resources extends CI_Controller {
 	}
 	
 	public function submit($res){
-		if($this->Account_model->isLogin()->email=='model@i-mos.org'){
+		//if($this->Account_model->isLogin()->email=='model@i-mos.org'){
+		if($this->Account_model->isLogin()->class >= 99){
 			$approval_status = 1;
 		}
 		else{
@@ -453,11 +456,24 @@ class resources extends CI_Controller {
 			$this->Resources_model->insertTools($data);
 			redirect(base_url('/resources/post/submited?res='.$res), 'refresh');				
 		}
-
+		// Inserting new activities
+		else if ($res == 'activities') {
+			//load data from post request
+			$data = array(
+				'content' => $this->input->get_post('activities_content', true),
+				'approval_status' => $approval_status,
+				'del_status' => false
+			);
+			//insert
+			$this->Resources_model->insertActivities($data);
+			//redirect to 'done' message page
+			redirect(base_url('/resources/post/submited?res='.$res), 'refresh');				
+		}
 	}
 	
 	public function maintain(){
-		if($this->Account_model->isLogin()->email!='model@i-mos.org'){
+		//if($this->Account_model->isLogin()->email=='model@i-mos.org'){
+		if($this->Account_model->isLogin()->class >= 99){
 			redirect(base_url('/resources/'), 'refresh');
 		}
 		if(!isset($_GET['action'])){

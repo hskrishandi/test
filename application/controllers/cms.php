@@ -22,7 +22,8 @@ class cms extends CI_Controller {
 	public function index()
 	{	
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 		$data = array(
 		"disapproved_res" => $this->Resources_model->countDisapporvedRes()
 		);
@@ -33,7 +34,8 @@ class cms extends CI_Controller {
 	
 	public function discussion($action=NULL){
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 		if($action == NULL){
 		$data = array(	
 			'posts' => $this->discussion_model->getPosts('all',NULL),
@@ -64,7 +66,8 @@ class cms extends CI_Controller {
 
 	public function resources($action=NULL){
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 		/* display all the resources */
 		if($action == NULL){
 			$data = array(
@@ -157,37 +160,44 @@ class cms extends CI_Controller {
 	}	
 	public function activities($action=NULL){
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 		
 		if($action==NULL){
 			$data = array(
 			'activities' => $this->Resources_model->get_activities_adv('all')
 			);
-			$this->load->view('cms/activities',$data);	
+			$this->load->view('cms/activities',$data);
 		}
 		else if($action=='hide_res'){
 			$type=$this->input->get('type',TRUE);
-			$id=$this->input->get('id',TRUE);			
+			$id=$this->input->get('id',TRUE);
 			$this->Resources_model->hideRes(true,$type,$id,NULL);
-					
 		}
 		else if($action=='unhide_res'){
 			$type=$this->input->get('type',TRUE);
-			$id=$this->input->get('id',TRUE);				
+			$id=$this->input->get('id',TRUE);
 			$this->Resources_model->hideRes(false,$type,$id,NULL);
-					
 		}
 		else if($action=='del_res'){
 			$type=$this->input->get('type',TRUE);
-			$id=$this->input->get('id',TRUE);				
-			$this->Resources_model->delRes($type,$id,NULL);			
-			
-		}			
-		
+			$id=$this->input->get('id',TRUE);
+			$this->Resources_model->delRes($type,$id,NULL);
+		}
+		/*else if ($action=='post'){
+			if (isset($_POST)) {
+				if (!empty($_POST) && $this->input->post('content')) {
+					//The user submitted a new activity
+				}
+			} else {
+				//Display form for user to input content
+			}
+		}*/
 	}
 	public function users($action=NULL){
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 		
 		if($action==NULL){
 			$data = array(
@@ -216,7 +226,8 @@ class cms extends CI_Controller {
 	}
 	public function user_experience(){
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 		$data = array(
 			'user_experience' => $this->Resources_model->get_all_user_experience()
 		);
@@ -239,7 +250,8 @@ class cms extends CI_Controller {
 
 	public function model($action=NULL){
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 		if($action == NULL){
 		$data = array(	
 			'models' => $this->modelsim_model->getModelsInfo(),
@@ -287,7 +299,8 @@ class cms extends CI_Controller {
 	 */
 	public function nodes($action = null) {
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 
 		if($action == null) {
 			$data["nodes"] = $this->server_model->loadnodes();
@@ -337,7 +350,8 @@ class cms extends CI_Controller {
 	 */
 	public function monitor() {
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 
 		$this->load->view('cms/node_monitor');
 	}
@@ -348,7 +362,8 @@ class cms extends CI_Controller {
 	 */
 	public function loadStatus() {
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 
 		$nodes = $this->server_model->loadnodes();
 
@@ -403,7 +418,8 @@ class cms extends CI_Controller {
 	 */
 	public function preexecute($action) {
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 
 		$node = $this->input->post("node");
 		if($node)
@@ -437,7 +453,8 @@ class cms extends CI_Controller {
 
 	public function execute($action) {
 		if (!$this->Account_model->isAuth()) return;
-		if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		//if($this->Account_model->isLogin()->email!='model@i-mos.org') show_404();
+		if($this->Account_model->isLogin()->class < 99) show_404();
 
 		switch($action) {
 			case "ps":

@@ -9,7 +9,7 @@ class Account_model extends CI_Model {
 		$this->load->database();
 		$this->load->library('email');
 		$this->load->library('session');
-		$this->load->library('MY_Session');
+		//$this->load->library('MY_Session');
 		//$this->session->select_driver('native');
 		$this->load->library('LoginPass');
 		$this->load->helper('url');
@@ -34,16 +34,16 @@ class Account_model extends CI_Model {
 				}else{
 					return "noactive";
 				}
-                        }else{
+			}else{
 				return "noaccpass";
 			}
-                } else{
+		} else{
 			return "noaccpass";
 		}
 	}
 
 	public function logout(){
-	var_dump($this->session->all_userdata());
+		var_dump($this->session->all_userdata());
 		$this->session->sess_destroy();
 		var_dump($this->session->all_userdata());
 	}

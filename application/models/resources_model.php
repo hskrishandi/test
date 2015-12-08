@@ -32,8 +32,7 @@ class Resources_model extends CI_Model {
 
 	/**
 	 * Get recent events, sorted by date
-	 */	
-	 
+	 */
 	public function get_events_adv($show, $past = false, $limit = NULL, $offset = 0)
 	{
 		if($show=='all'){
@@ -357,6 +356,10 @@ class Resources_model extends CI_Model {
 		);
 
 		$this->db->insert('user_experience', $data); 
+	}
+
+	public function insertActivities($data){
+		$this->db->insert('activities', $data);
 	}
 	
 	public function insertNews($data){
