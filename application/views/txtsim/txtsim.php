@@ -1,5 +1,8 @@
 <?php extend('layout.php'); ?>
 
+  <?php startblock('MenuBar'); ?>
+  <?php endblock(); ?>
+
   <?php startblock('title'); ?>
     Simulation
   <?php endblock(); ?>
@@ -1016,6 +1019,9 @@
 		<img src="<?php echo base_url('images/loading.gif'); ?>"><p>
 		Press F5 to refresh if<br>no response</p>
 	</div>
+  <?php endblock(); ?>
+
+  <?php startblock('FooterBox'); ?>
   <?php endblock(); ?>
 
 <?php end_extend(); ?>

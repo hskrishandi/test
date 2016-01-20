@@ -62,6 +62,7 @@
 
 	<!-- MenuBar - Start -->
 	<div id="MenuBar">
+		<?php start_block_marker('MenuBar'); ?>
 		<a href="<?php echo base_url(); ?>">
 			<img id="logo" src="<?php echo resource_url('img', 'home/Logo.png'); ?>" />
 		</a>
@@ -73,7 +74,7 @@
 					Model Library
 				</p>
 			</a>
-			<a class="ApplicationButton" href="<?php echo base_url('txtsim'); ?>">
+			<a class="ApplicationButton" target="_blank" href="<?php echo base_url('txtsim'); ?>">
 				<img class="ApplicationIcon" src="<?php echo resource_url('img', 'home/icon_SP.png'); ?>"/>
 				<p class="ApplicationName">
 					Simulation Platform
@@ -125,7 +126,7 @@
 	
 	<div id="block-user" class="MenuDropDown" style="display:none;"></div>
 	<!-- MenuDropDowns - End -->
-	
+	<?php end_block_marker(); ?>
 	<!-- MenuBar - End -->
 
 
@@ -147,6 +148,7 @@
 
 
 	<!-- Footer - Start-->
+	<?php start_block_marker('FooterBox'); ?>
     <div id="FooterBox" class="clearfix">
         <p id="footerLeftText" class="footerText">
         <span>All rights reserved. &copy; 2015 i-MOS Team</span><br />
@@ -158,6 +160,7 @@
         <span><a href="<?php echo base_url('page/terms');?>">Terms of Use</a>  &nbsp;&nbsp;  &#x7c;  &nbsp;&nbsp;  <a href="<?php echo base_url('page/privacy');?>">Privacy Policy</a>  &nbsp;&nbsp;  &#x7c;  &nbsp;&nbsp;  <a href="<?php echo base_url('page/disclaimers');?>">Disclaimers</a>  &nbsp;&nbsp;  &#x7c;  &nbsp;&nbsp;  <a href="<?php echo base_url('page/sitemap');?>">Sitemap</a></span><br />
         </p>
     </div>
+    <?php end_block_marker(); ?>
     <!-- Footer - End-->
 
 </div>
