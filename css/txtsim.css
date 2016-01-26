@@ -1,5 +1,9 @@
 /* jQuery UI tabs customized theme */
 
+body {
+	background-color: #ffffff;
+}
+
 div.ui-tabs {
 	border: none;
 }

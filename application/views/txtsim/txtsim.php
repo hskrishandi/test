@@ -128,6 +128,21 @@
 					<text class="id" x="35" y="25" font-family="sans-serif" font-size="14px" fill="black"></text>
 				</g>
 			</g>
+			<g class="component" id="inductor" term="2">
+				<g class="drawing" transform="matrix(1,0,0,1,55,200)">
+					<rect fill="#ffffff" width="40" height="40" style="opacity:0"></rect>
+					<path order="1" fill="none" stroke="#000000" d="M20 0 L20 5" stroke-width="1"></path>
+					<path order="2" fill="none" stroke="#000000" d="M20 35 L20 40" stroke-width="1"></path>
+					<path fill="none" stroke="#000000" d="M20 5 A5 5 0 0 1 20 15" stroke-width="1"></path>
+					<path fill="none" stroke="#000000" d="M20 15 A5 5 0 0 1 20 25" stroke-width="1"></path>
+					<path fill="none" stroke="#000000" d="M20 25 A5 5 0 0 1 20 35" stroke-width="1"></path>
+				    <circle order="1" class="term" visibility="hidden" cx="20" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" style="visibility: hidden;"></circle>
+					<circle order="2" class="term" visibility="hidden" cx="20" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" style="visibility: hidden;"></circle>
+				</g>
+				<g class="text">
+					<text class="id" x="35" y="25" font-family="sans-serif" font-size="14px" fill="black"></text>
+				</g>
+			</g>
 			<g class="component" id="dcc" term="2">
 				<g class="drawing" transform="matrix(1,0,0,1,5,80)">
 					<rect fill="#ffffff" width="40" height="40" style="opacity:0" />
@@ -730,8 +745,8 @@
 	<div id="simulation">
 		<div id="tab_container">
 			<ul>
-				<li><a href="#netlistmode" class="guiMode" onclick="simdappear()">Netlist</a></li>
 				<li><a href="#simMode" class="guiMode" onclick="simappear()">Schematic</a></li>
+				<li><a href="#netlistmode" class="guiMode" onclick="simdappear()">Netlist</a></li>
 				<li><a href="#textMode" class="guiMode" onclick="simdappear()">Raw Input</a></li>
 				<li><a href="#rawResult" class="guiMode" onclick="simdappear()">Raw Data</a></li>
 				<li><a href="#graphResult" class="guiMode" onclick="simdappear()">Graph Result</a></li>
@@ -1019,9 +1034,6 @@
 		<img src="<?php echo base_url('images/loading.gif'); ?>"><p>
 		Press F5 to refresh if<br>no response</p>
 	</div>
-  <?php endblock(); ?>
-
-  <?php startblock('FooterBox'); ?>
   <?php endblock(); ?>
 
 <?php end_extend(); ?>

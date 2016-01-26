@@ -31,6 +31,9 @@ function onLoad(svg, error) {
 	if($(".workspace_component[type='capacitor']:last").attr("id")!=undefined){
 		capacitor_index = parseInt($(".workspace_component[type='capacitor']:last").attr("index").match(/(\d+)/g)[0]);
 	}
+	if($(".workspace_component[type='inductor']:last").attr("id")!=undefined){
+		inductor_index = parseInt($(".workspace_component[type='inductor']:last").attr("index").match(/(\d+)/g)[0]);
+	}
 	if($(".workspace_component[type='node']:last").attr("id")!=undefined){
 		node_index = parseInt($(".workspace_component[type='node']:last").attr("index").match(/(\d+)/g)[0]);
 	}
@@ -271,6 +274,7 @@ var ground_index = 0;
 var source_index = 0;
 var resistor_index = 0;
 var capacitor_index = 0;
+var inductor_index = 0;
 var node_index = 0;
 var mos_index = 0;
 var vnode_index = 0;
@@ -412,6 +416,13 @@ function drawComponent(event) {
 					parname = "C";
 					ctype = "capacitor";
 					break;
+
+				case "inductor":
+					inductor_index++;
+					parnum = inductor_index;
+					parname = "L";
+					ctype = "inductor";
+					break;	
 
 				case "node":
 					node_index++;
@@ -567,6 +578,10 @@ function drawComponent(event) {
 				else if($workspace_tmp.attr("type")=="capacitor"){
 					$workspace_tmp.find("path[order='1']").attr("d","M 20 -10 L20 16");
 					$workspace_tmp.find("path[order='2']").attr("d","M 20 25 L20 50");
+				}
+				else if($workspace_tmp.attr("type")=="inductor"){
+					$workspace_tmp.find("path[order='1']").attr("d","M 20 -10 L20 5");
+					$workspace_tmp.find("path[order='2']").attr("d","M 20 35 L20 50");
 				}
 				else{
 					$workspace_tmp.find("path[order='1']").attr("d","M 20 -10 L 20 10");
@@ -877,7 +892,9 @@ var model2id = {
 	hisim2	:10,
 	bsim4	:11,
 	UMEM	:12,
-	mvsg	:13
+	mvsg	:13,
+	oTFT2	:14,
+	ndtfet  :15
 };
 
 /*
@@ -1110,6 +1127,12 @@ function changeParam(event){
 		}
 		else if($current.attr("type")=="capacitor"){
 			var tmp_dialog = "<div id='param_dialog' style='display:none;' type='capacitor'>"
+						+ "<label><span>Name</span><input id='param_name' maxlength='8'/></label>"
+						+ "<label><span>Value</span><input id='param_value' class='param_value' /></label></div>";
+			$("body").append(tmp_dialog);
+		}
+		else if($current.attr("type")=="inductor"){
+			var tmp_dialog = "<div id='param_dialog' style='display:none;' type='inductor'>"
 						+ "<label><span>Name</span><input id='param_name' maxlength='8'/></label>"
 						+ "<label><span>Value</span><input id='param_value' class='param_value' /></label></div>";
 			$("body").append(tmp_dialog);
@@ -2660,6 +2683,12 @@ function get_netlist(event){
 				+point_to_number[component_term[index1][1]]+" "
 				+component_value[index1]+ '\n';
 		}
+		else if(component_type[index1]=="inductor"){
+			circuitdef +="L"+component_name[index1]+" "
+				+point_to_number[component_term[index1][0]]+" "
+				+point_to_number[component_term[index1][1]]+" "
+				+component_value[index1]+ '\n';
+		}
 		else if(component_type[index1].substring(1,4)=="MOS"){
 			switch(component_type[index1].substring(5)){
 
@@ -2668,6 +2697,8 @@ function get_netlist(event){
 				case "eTIM":
 				case "eSDDGM":
 				case "UMEM":
+				case "oTFT2":
+				case "ndtfet":
 					circuitdef +="M"+component_name[index1]+" ";
 					circuitdef+=point_to_number[component_term[index1][0]]+" ";
 					circuitdef+=point_to_number[component_term[index1][1]]+" ";
