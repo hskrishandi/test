@@ -745,8 +745,8 @@
 	<div id="simulation">
 		<div id="tab_container">
 			<ul>
-				<li><a href="#simMode" class="guiMode" onclick="simappear()">Schematic</a></li>
 				<li><a href="#netlistmode" class="guiMode" onclick="simdappear()">Netlist</a></li>
+				<li class="ui-tabs-active ui-state-active"><a href="#simMode" class="guiMode" onclick="simappear()">Schematic</a></li>
 				<li><a href="#textMode" class="guiMode" onclick="simdappear()">Raw Input</a></li>
 				<li><a href="#rawResult" class="guiMode" onclick="simdappear()">Raw Data</a></li>
 				<li><a href="#graphResult" class="guiMode" onclick="simdappear()">Graph Result</a></li>
