@@ -12,7 +12,7 @@
   <div class="block block-Title">
 		<h1>Simulation</h1>
 </div>
-<div id="userlib" class="block model-library" style="z-index:50;visibility:visible;position:absolute;">
+<div id="userlib" class="block model-library" style="z-index:50;visibility:hidden;position:absolute;">
 			<h2><a href="#" class="action drop-down-btn icon-cog" title="Settings" data-bind="modelLibMenu: '#model-library-menu'"></a>User Library</h2>
             <ul id="model-library-menu">
 				<li><font class="action new"><i class="icon-file"></i>New</font></li>
@@ -33,7 +33,7 @@
 				</li>
 			</ul>
 		</div>
-<div id="SClib" class="block model-library" style="z-index:50;visibility:hidden;position:absolute;">
+<div id="SClib" class="block model-library" style="z-index:50;visibility:visible;position:absolute;">
 <h2>Component</h2>
 <!-- <iframe id="targetbox" height="330" width="930" name="targetbox"  style="visibility:hidden;z-index:500;position:absolute;" src="http://eea258.ee.ust.hk/develop/kruan/imosdev2/js/txtsim/demo.html"></iframe> -->
 	<!-- <label>Select a number</label> -->
