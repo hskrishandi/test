@@ -23,7 +23,7 @@ class modelsim extends CI_Controller {
 		$user_info = $this->Account_model->isLogin();
 		$data = array(
 			//'models' => ($user_info ? $this->Modelsim_model->getModelLibrary($user_info->id) : array()), //not in use
-			'model_list' => $this->Modelsim_model->getModelsInfo()
+			'model_list' => $this->Modelsim_model->getModels()
 		);
 		
 		$this->load->view('simulation/model_list.php', $data);
@@ -50,8 +50,12 @@ class modelsim extends CI_Controller {
 				'userInfo' => $user_info
 			)
 		);
+		// retrieve all version of the model among the hierarchy
 		if ($model_info->version != null) {
+			// only one level supported
 			$data['versions'] = $this->Modelsim_model->getModelVersions($model_info);
+			// able to retrieve unlimited level of model version
+			//$data['versionmap'] = $this->Modelsim_model->getModelVersionTree($model_info);
 		}
 		
 		$this->load->view('simulation/model.php', $data);
