@@ -92,6 +92,17 @@ class Modelsim_model extends CI_Model {
 		->group_by("model_id")->order_by("rate DESC")->limit(5);
 		return $this->db->get()->result();
 	}
+	
+	/**
+	 * Get Models with rating and post comments count
+	 */
+	public function getModels() {
+		$this->db->select("model_info.*, AVG(rate) AS rate, IFNULL(countComment,0) AS countComment", FALSE)->from('model_info, starrating')
+			->join("(SELECT postid, count(*) AS countComment from post_comments WHERE type = 'model' GROUP BY `postid`) comments", "comments.postid = model_info.post_id", "left")
+		->where("`model_info`.`name`=`starrating`.`model_id`")
+		->group_by("model_id")->order_by("id asc");
+		return $this->db->get()->result();
+	}
 
 	public function getModelInfoById($id)
 	{
@@ -157,9 +168,9 @@ class Modelsim_model extends CI_Model {
 	{
 		if ($model_info != null) {
 			if ($model_info->version != null) {
-				if ($model_info->parent_id == null) {  // this is the parent model
+				if ($model_info->parent_id == null) {  // this is a parent model
 					$model_series_root_id = $model_info->id;
-				} else {  // this is the child model
+				} else {  // this is a child model
 					$model_series_root_id = $model_info->parent_id;
 				}
 				$this->db->select('id, version')->from('model_info')
@@ -180,9 +191,9 @@ class Modelsim_model extends CI_Model {
 		$model_info = getModelInfoById($model_id);
 		if ($model_info != null) {
 			if ($model_info->version != null) {
-				if ($model_info->parent_id == null) {  // this is the parent model
+				if ($model_info->parent_id == null) {  // this is a parent model
 					$model_series_root_id = $model_info->id;
-				} else {  // this is the child model
+				} else {  // this is a child model
 					$model_series_root_id = $model_info->parent_id;
 				}
 				$this->db->select('id, version')->from('model_info')
@@ -193,6 +204,46 @@ class Modelsim_model extends CI_Model {
 		}
 		return null;
 	}
+	/** ---------------------------Version Tree-------------------------------
+	 * Get a list of version numbers of the series of model of a model
+	 * @param object $model_info 		the model_info object returned by getModelInfoById
+	 * @return a Tree of all version in the hierarchy of the model
+	 */
+	public function getModelVersionTree($model_info)
+	{
+		if ($model_info != null) {
+			if ($model_info->version != null) {
+				// find the root node
+				$root_info = $model_info;
+				while ($root_info->parent_id != null) {
+					$root_info = $this->getModelInfoById($root_info->parent_id);
+				}
+				// recursively get all children
+				$tree = (array)$root_info;
+				$tree['children'] = $this->getModelChildrenR($tree);
+				return $tree;
+			}
+		}
+		return null;
+	}
+	// Get all children recursively
+	public function getModelChildrenR($model_info)
+	{
+		if ($model_info != null && $model_info['id'] != null) {
+			$this->db->from('model_info')->where('parent_id',$model_info['id']);
+			$children = $this->db->get()->result_array();
+			if ($children == null || count($children) == 0) {
+				return null;
+			} else {
+				foreach ($children as &$child) {
+					$child['children'] = $this->getModelChildrenR ($child);
+				}
+				return $children;
+			}
+		}
+		return null;
+	}
+	// ---------------------------;Version Tree-------------------------------
     
 	public function getModelCardInfo($model_card_name)
 	{
