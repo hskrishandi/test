@@ -9,26 +9,39 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'model.css'); ?>" media="all" />
 	<?php endblock(); ?>
 
-		
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-		<?php $this->load->view('credit'); ?>
-	<?php endblock(); ?>
-	
 	<?php startblock('content'); ?>
 		<div id="model-list">
 			<h2 class="title">Device Models</h2>
-			<ul class="models">
-			<?php foreach ($model_list as $model): ?>
-				<li>
-					<a href="<?php echo base_url('modelsim/model/' . $model->id);?>" style="display: block">
-						<b><?php echo $model->icon_name; ?></b>
-						<div class="icon-img"><img alt="<?php echo $model->name; ?>" src="<?php echo resource_url('img', 'simulation/' . $model->name . '.png');?>"/></div>
-						<b><?php echo $model->desc_name . '<br/>' . $model->organization; ?></b>
+				<div id="MLitemBox" class="clearfix" style="background-color:#C9C9C9; overflow:hidden;">
+				<?php foreach ($model_list as $model) : ?>
+					<a target="_blank" href="<?php echo base_url('modelsim/model/' . $model->id);?>">
+					<div class="clearfix modelBoxContainer">
+						<div class="modelBoxes">
+							<img alt="<?php echo $model->name; ?>" src="<?php echo resource_url('img', 'simulation/' . $model->name . '.png');?>" class="modelImage"/>
+							<p class="modelInfo">
+								<span>
+									<?php echo $model->icon_name . '<br/>' . $model->desc_name . '<br/>by ' . $model->organization; ?>
+								</span>
+							</p>
+							<div class="clearfix modelGreyBox">
+								<img src="<?php echo resource_url('img', 'home/messageIcon.svg'); ?>" class="MessageIcon" />
+								<font class="MessageNumber">
+									<?php echo $model->countComment; ?>
+								</font>
+								<div class="modelRatingStars">
+								<?php for ($i=round($model->rate); $i<5; $i++) : ?>
+									<img src="<?php echo resource_url('img', 'home/greyStar.svg'); ?>" class="ratingStar ratingDimStar" />
+								<?php endfor; ?>
+								<?php for ($i=0; $i<round($model->rate); $i++) : ?>
+									<img src="<?php echo resource_url('img', 'home/yellowStar.svg'); ?>" class="ratingStar ratingLightStar" />
+								<?php endfor; ?>
+								</div>
+							</div>
+						</div>
+					</div>
 					</a>
-				</li>
-			<?php endforeach; ?>
-			</ul>
+				<?php endforeach; ?>
+				</div>
 		</div>
 	<?php endblock(); ?>
 
