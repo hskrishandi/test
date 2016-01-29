@@ -1,7 +1,7 @@
 <?php extend('layout.php'); ?>
 
 	<?php startblock('title'); ?>
-		Simulation
+		Model
 	<?php endblock(); ?>
 
 	<?php startblock('script'); ?>
@@ -51,6 +51,9 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('js', 'star-rating/jquery.rating.css'); ?>" media="all" />
 	<?php endblock(); ?>
 
+	<?php startblock('MenuBar'); ?>
+	<?php endblock(); ?>
+	
 	<?php startblock('side_menu'); ?>
 		<?php echo get_extended_block(); ?>		
 		<div class="block model-library">
@@ -99,7 +102,7 @@
 	<?php endblock(); ?>
 
 	<?php startblock('content'); ?>
-	<div id="model-page">	
+	<div id="model-page" style="height: 100%;">	
 		<div id="model-tabs" data-bind="tabs: selectedTab, loadingWhen: isLoading">
 			<ul>
             	
