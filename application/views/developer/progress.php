@@ -23,45 +23,47 @@
 		<script src="<?php echo resource_url('js', 'library/jquery.validate.min.js'); ?>" type="text/javascript"></script>
 	<?php endblock(); ?>
 	
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-		<?php $this->load->view('credit'); ?>
-	<?php endblock(); ?>
+
 	
-	<?php startblock('content'); ?>
+	<?php startblock('main_content'); ?>
 	<div id="developer">
-		<div class="form-page" id="progress-page">
-		<div class="progress">
-		Please click to submit NEW model/Update which will direct to the description, upload model Verilog-A or C- code and parameter template pages. Generally, the processing time for each model is estimated to be 1 month (note: subject to the completeness of the model provided). The table 1, shows the status of the model received, processed and completed by the i-MOS team. After submission, each model developer can check their model status in the table. Model developer will be contacted by the i-MOS team upon successful completion of their model.
+		
+		<!-- SlideImage-->
+		<div id="slideBox" class="clearfix">
+			<img id="slideImage" class="slide" src="<?php echo resource_url('img', 'develop/slider.jpg'); ?>" />
+			<p id="slideText">
+				Developer <br/>Model<br/>
+			</p>
+			<img id="slideOverlay" class="slide"src="<?php echo resource_url('img', 'develop/slideOverlay.svg'); ?>" />
 		</div>
-			<div class="progress-form">
-			<div class="buttons">
-				<a id="newModel" class="progress_bar" name="response" value="New Model">New Model</a>
-				<a id="update" class="progress_bar"  name="response" value="Update">Update</a>
-			</div>
-			</div>
+		<!--SlideImage End-->
+		<div id="progress-page" class="clearfix">
+			<table id="button_table">
+				<tr>
+					<td class="progress_button" ><a id="newModel" class="progress_bar" name="response" value="New Model">New Model</a></td>
+					<td rowspan="2">Please click to submit NEW model/Update which will direct to the description, upload model Verilog-A or C- code and parameter template pages. Generally, the processing time for each model is estimated to be 1 month (note: subject to the completeness of the model provided). The table 1, shows the status of the model received, processed and completed by the i-MOS team. After submission, each model developer can check their model status in the table. Model developer will be contacted by the i-MOS team upon successful completion of their model.</td>
+				</tr>
+				<tr><td class="progress_button"><a id="update" class="progress_bar"  name="response" value="Update">Update Model</a></td></tr>
+			</table>
+		
 			<div class="tbody-scroll">
 				<table class="progress_table">
 				<thead>
 				<tr>
-					<th rowspan=2 class="thead">Model No.</th>
-					<th rowspan=2 class="thead">Model Name</th>
-					<th rowspan=2 class="thead">Contributor</th>
-					<th colspan=4 class="progressbar_col">Progress</th>
+					<th class="thead">Model No.</th>
+					<th  class="thead2">Model Name</th>
+					<th  class="thead">Contributor</th>
+					<th>Progress</th>
 				</tr>
-				<tr>
-					<th class="small_cell">Received</th>
-					<th class="small_cell">Processing</th>
-					<th class="small_cell">Completed</th>
-				</tr>
+			
 				</thead>
 				<tbody>
 				<!-- ko foreach: models_info -->
 				<tr>
-						<td class="col" data-bind="text: $index()+1"></td>
-						<td class="col" data-bind="text: model_name"></td>
+						<td class="col" data-bind="text: model_num"></td>
+						<td class="col2" data-bind="text: model_name"></td>
 						<td class="col" data-bind="text: user_name"></td>
-						<td colspan=4 class="progressbar_col"><div data-bind="attr:{id: progressbar_id}"></div></td>
+						<td ><ul class="progress_col" data-bind="attr:{id: progressbar_id}"><li></li><li></li><li></li></ul></td>
 				</tr>
 				<!-- /ko -->
 				</tbody>
