@@ -6,10 +6,34 @@
     width: 1280px;
     min-width: 0px;
 	position: relative;
-	padding-top: 250px;
+	/*padding-top: 250px;*/
     padding-bottom: 20px;
 	clear: both;
 	background-color: rgb(255,255,255);
+}
+
+@media only screen and (min-height: 550px){
+    #FooterBox {
+        padding-top: 65px;
+    }
+}
+
+@media only screen and (min-height: 600px){
+    #FooterBox {
+        padding-top: 105px;
+    }
+}
+
+@media only screen and (min-height: 650px){
+    #FooterBox {
+        padding-top: 145px;
+    }
+}
+
+@media only screen and (min-height: 700px) {
+    #FooterBox {
+        padding-top: 185px;
+    }
 }
 
 .footerText{

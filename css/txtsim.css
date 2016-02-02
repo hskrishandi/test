@@ -1,5 +1,9 @@
 /* jQuery UI tabs customized theme */
 
+body {
+	background-color: #ffffff;
+}
+
 div.ui-tabs {
 	border: none;
 }
@@ -58,7 +62,6 @@ div.formContent{
 
 #simulation{
 	margin-left:20px;
-	margin-top:20px;
 }
 
 #simulation .models li b{

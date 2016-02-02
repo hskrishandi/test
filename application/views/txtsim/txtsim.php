@@ -1,5 +1,8 @@
 <?php extend('layout.php'); ?>
 
+  <?php startblock('MenuBar'); ?>
+  <?php endblock(); ?>
+
   <?php startblock('title'); ?>
     Simulation
   <?php endblock(); ?>
@@ -9,7 +12,7 @@
   <div class="block block-Title">
 		<h1>Simulation</h1>
 </div>
-<div id="userlib" class="block model-library" style="z-index:50;visibility:visible;position:absolute;">
+<div id="userlib" class="block model-library" style="z-index:50;visibility:hidden;position:absolute;">
 			<h2><a href="#" class="action drop-down-btn icon-cog" title="Settings" data-bind="modelLibMenu: '#model-library-menu'"></a>User Library</h2>
             <ul id="model-library-menu">
 				<li><font class="action new"><i class="icon-file"></i>New</font></li>
@@ -30,7 +33,7 @@
 				</li>
 			</ul>
 		</div>
-<div id="SClib" class="block model-library" style="z-index:50;visibility:hidden;position:absolute;">
+<div id="SClib" class="block model-library" style="z-index:50;visibility:visible;position:absolute;">
 <h2>Component</h2>
 <!-- <iframe id="targetbox" height="330" width="930" name="targetbox"  style="visibility:hidden;z-index:500;position:absolute;" src="http://eea258.ee.ust.hk/develop/kruan/imosdev2/js/txtsim/demo.html"></iframe> -->
 	<!-- <label>Select a number</label> -->
@@ -119,6 +122,21 @@
 					<path order="2" fill="none" stroke="#000000" d="M20 25 L20 40" stroke-width="1"></path>
 					<path fill="none" stroke="#000000" d="M10 16 L30 16" stroke-width="2"></path>
 					<path fill="none" stroke="#000000" d="M10 25 L30 25" stroke-width="2"></path><circle order="1" class="term" visibility="hidden" cx="20" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" style="visibility: hidden;"></circle>
+					<circle order="2" class="term" visibility="hidden" cx="20" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" style="visibility: hidden;"></circle>
+				</g>
+				<g class="text">
+					<text class="id" x="35" y="25" font-family="sans-serif" font-size="14px" fill="black"></text>
+				</g>
+			</g>
+			<g class="component" id="inductor" term="2">
+				<g class="drawing" transform="matrix(1,0,0,1,55,200)">
+					<rect fill="#ffffff" width="40" height="40" style="opacity:0"></rect>
+					<path order="1" fill="none" stroke="#000000" d="M20 0 L20 5" stroke-width="1"></path>
+					<path order="2" fill="none" stroke="#000000" d="M20 35 L20 40" stroke-width="1"></path>
+					<path fill="none" stroke="#000000" d="M20 5 A5 5 0 0 1 20 15" stroke-width="1"></path>
+					<path fill="none" stroke="#000000" d="M20 15 A5 5 0 0 1 20 25" stroke-width="1"></path>
+					<path fill="none" stroke="#000000" d="M20 25 A5 5 0 0 1 20 35" stroke-width="1"></path>
+				    <circle order="1" class="term" visibility="hidden" cx="20" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" style="visibility: hidden;"></circle>
 					<circle order="2" class="term" visibility="hidden" cx="20" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" style="visibility: hidden;"></circle>
 				</g>
 				<g class="text">
@@ -728,7 +746,7 @@
 		<div id="tab_container">
 			<ul>
 				<li><a href="#netlistmode" class="guiMode" onclick="simdappear()">Netlist</a></li>
-				<li><a href="#simMode" class="guiMode" onclick="simappear()">Schematic</a></li>
+				<li class="ui-tabs-active ui-state-active"><a href="#simMode" class="guiMode" onclick="simappear()">Schematic</a></li>
 				<li><a href="#textMode" class="guiMode" onclick="simdappear()">Raw Input</a></li>
 				<li><a href="#rawResult" class="guiMode" onclick="simdappear()">Raw Data</a></li>
 				<li><a href="#graphResult" class="guiMode" onclick="simdappear()">Graph Result</a></li>
