@@ -425,16 +425,21 @@ div.ui-dialog button {
 }
 
 div.ui-dialog  div.ui-dialog-titlebar  {
-	padding-top: 0.7em;
-	padding-bottom: 0.7em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 	background-color: #9E9EC3;
 	background-image: none;
 	color: #FFF;
+	font-size: 0.75em;
 }
 
 div.ui-dialog,
 div.ui-dialog .ui-widget-content {
 	border-color: #9E9EC3;
+}
+
+.ui-dialog-buttonset .ui-button-text-only .ui-button-text {
+	font-size: 0.75em;
 }
 
 #content {

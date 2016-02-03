@@ -58,11 +58,13 @@
 		clear: left;
 		width: 140px;
 		text-align: left;
+		font-size: 0.75em;
 	}
 	#param_dialog label input {
 		display: inline-block;
 		width: 80px;
 		float: left;
+		font-size: 0.75em;
 	}
 	#simulation_dialog span {
 		display: inline-block;
