@@ -74,7 +74,7 @@
 					Model Library
 				</p>
 			</a>
-			<a class="ApplicationButton" href="<?php echo base_url('txtsim'); ?>">
+			<a class="ApplicationButton" target="_blank" href="<?php echo base_url('txtsim'); ?>">
 				<img class="ApplicationIcon" src="<?php echo resource_url('img', 'home/icon_SP.png'); ?>"/>
 				<p class="ApplicationName">
 					Simulation Platform
