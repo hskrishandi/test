@@ -442,6 +442,10 @@ div.ui-dialog .ui-widget-content {
 	font-size: 0.75em;
 }
 
+.ui-dialog .ui-dialog-content .alert-message {
+	font-size: 0.75em;
+}
+
 #content {
 	*z-index:-1;
 }
