@@ -97,10 +97,11 @@ class Modelsim_model extends CI_Model {
 	 * Get Models with rating and post comments count
 	 */
 	public function getModels() {
-		$this->db->select("model_info.*, AVG(rate) AS rate, IFNULL(countComment,0) AS countComment", FALSE)->from('model_info, starrating')
+		$this->db->select("model_info.*, IFNULL(rate, 0) AS rate, IFNULL(countComment,0) AS countComment", FALSE)->from('model_info')
 			->join("(SELECT postid, count(*) AS countComment from post_comments WHERE type = 'model' GROUP BY `postid`) comments", "comments.postid = model_info.post_id", "left")
-		->where("`model_info`.`name`=`starrating`.`model_id`")
-		->group_by("model_id")->order_by("id asc");
+			->join("(SELECT model_id, AVG(rate) AS rate from starrating GROUP BY `model_id`) rating", "rating.model_id = model_info.name", "left")
+		->group_by("short_name")->order_by("id asc");
+		
 		return $this->db->get()->result();
 	}
 
