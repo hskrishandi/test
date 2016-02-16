@@ -94,6 +94,7 @@ $(document).ready(function($) {
 	submit.appendTo("#developer .form-page:last");
 	var nextAndSubmit = $(".next");
 	nextAndSubmit.click(function() {
+		if (MODEL_ID == null) MODEL_ID=window.location.href.split('/').pop();
 		$('.error_show').removeClass('error_show').addClass('error');
 		isUploading = true;
 		var stayOnCurrentPage = false;
@@ -155,6 +156,7 @@ $(document).ready(function($) {
 				}
 			});
 	});
+
 //	save.appendTo("#developer .form-page")
 //		.click(function() {
 //	});

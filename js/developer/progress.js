@@ -6,6 +6,7 @@
 (function ($) {
 	ProgressModel =  function() {
 		var self = this;
+		
 		self.models_info = ko.observableArray([]);
 		self.init = function() {
 			$.ajax({
@@ -16,19 +17,38 @@
 						result = JSON.parse(result);
 					} catch(err) {console.log("Parse Failed");}
 					for(var i=0;i<result.length;i++)
-					{
-						 self.models_info.push({
+					{	
+						var tempNum=i+1;
+						if(tempNum<10){
+							tempNum='0'+tempNum;
+						}
+						 self.models_info.push({	
+						 	model_num:ko.observable(tempNum),
 						 	user_name: ko.observable(result[i].user_name),
-							stage: ko.observable(result[i].stage*100/3.0),
+							stage: ko.observable(result[i].stage),
 							progressbar_id: ko.observable('progressbar'+i),
 							model_name: ko.observable(result[i].model_name),
 							description: ko.observable(result[i].description)
 						 });
+
+
 					}
 					for(var i=0;i<result.length;i++)
-					{
-						$("#progressbar"+i).progressbar({value:self.models_info()[i].stage()});
+					{	
+
+						if(self.models_info()[i].stage()>1){
+							$("#progressbar"+i).find("li:first").addClass('recevied');
+						}
+						if(self.models_info()[i].stage()>2){
+							$("#progressbar"+i).find("li:nth-child(2)").addClass('processing');
+						}
+						if(self.models_info()[i].stage()==3){
+							$("#progressbar"+i).find("li:nth-child(3)").addClass('complete');
+						}
+
+						
 					}
+					
 				},
 				error: function(errorThrown) {
 					console.log("Error:"+errorThrown);
