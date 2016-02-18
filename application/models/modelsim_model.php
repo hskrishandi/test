@@ -95,7 +95,6 @@ class Modelsim_model extends CI_Model {
 	
 	/**
 	 * Get Models with rating and post comments count
-	 * testing
 	 */
 	public function getModels() {
 		$this->db->select("model_info.*, IFNULL(rate, 0) AS rate, IFNULL(countComment,0) AS countComment", FALSE)->from('model_info')
