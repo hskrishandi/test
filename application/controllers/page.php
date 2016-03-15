@@ -38,6 +38,10 @@ class page extends CI_Controller {
     {
 		$this->load->view('disclaimers');
 	}
+	public function credits()
+    {
+		$this->load->view('credits');
+	}
 	
 	public function sitemap(){
 		$data = array(
