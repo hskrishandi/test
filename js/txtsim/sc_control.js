@@ -894,7 +894,8 @@ var model2id = {
 	UMEM	:12,
 	mvsg	:13,
 	oTFT2	:14,
-	ndtfet  :15
+	ndtfet  :15,
+    mvshemt120 :17, //add by Leon, this id should be same in the database, so here may miss 16 above
 };
 
 /*
@@ -2698,6 +2699,7 @@ function get_netlist(event){
 				case "eSDDGM":
 				case "UMEM":
 				case "oTFT2":
+                case "mvshemt120":
 				case "ndtfet":
 					circuitdef +="M"+component_name[index1]+" ";
 					circuitdef+=point_to_number[component_term[index1][0]]+" ";
