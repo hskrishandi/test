@@ -1,7 +1,7 @@
 .discussion{
 	padding-left:20px;
 	padding-top:20px;
-	width: 790px;
+	width: 780px;
 	min-height: 500px;
 	float: left;	
 	position: relative;
@@ -27,18 +27,14 @@
 	width:640px;
 	float:left;
 	padding-top:20px;
-	border-right: solid;
-	border-right-width:1px;
-	border-right-color: #9E9EC3;
 	padding-right:20px;
 }
 
 
 .discussion .bottom .posts .user_post{
 	float:left;
-
-
 }
+
 .discussion .bottom .posts .user_post .leftcol{
 	width:100;
 	float:left;
@@ -52,7 +48,7 @@
 }
 
 .discussion .bottom .posts .user_post .rightcol{
-	width:530px;
+	width:450px;
 	float:left;
 	display:block;
 }
@@ -63,16 +59,96 @@
 	margin-top:0px;
 	margin-bottom:0px;
 	display:block;
+	width: 450px;
 }
 
-.discussion .bottom .posts .user_post .rightcol .date{
-
-	margin-bottom:10px;
+#main_content .user_post .rightcol .title a {
+	color: black;
 }
 
+#main_content .user_post .rightcol .date {
+	color: black;
+}
 
+#main_content div.user_post {
+	width: 700px;
+	margin-bottom: 10px;
+}
 
+#main_content div#content {
+	margin-left: 150px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
 
+#main_content div.discussion {
+	margin-top: 40px;
+	border-color: gray;
+	border-width: 1px;
+	border-style: solid;
+}
+
+#main_content p.mainTitle {
+	font-size: 35px;
+	color: black;
+}
+
+#main_content div.subTitle {
+	background-color: rgb(26, 26, 26);
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#main_content div.subTitle span {
+	font-size: 20px;
+	color: white;
+}
+
+#main_content div.discussionHeader {
+	float: left;
+	font-weight: bold;
+	color: black;
+}
+
+#main_content div.short_content * {
+	color: black;
+}
+
+#main_content :not(#FooterBox) p {
+	margin: 0;
+}
+
+#main_content a span.displayName {
+	color: black;
+	font-weight: bold;
+}
+
+#main_content div.replies {
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	color: black;
+}
+
+#main_content .subTitle span.links {
+	float: right;
+	color: white;
+	font-size: 15px;
+	padding-top: 3px;
+	padding-right: 10px;
+}
+
+#main_content .subTitle span.links a {
+	color:white;
+	font-size: 15px;
+}
+
+#main_content .subTitle span.links a:hover {
+	color:white;
+	font-size: 15px;
+	font-weight: normal;
+}
 
 .discussion .bottom .posts .post_tool{
 	text-align:right;
@@ -109,18 +185,20 @@ overflow: hidden;
 
 
 .post_details{
-	padding-left:20px;
-	padding-top:20px;
-	width: 700px;
+	width: 720px;
 	min-height: 500px;
-	float: left;	
+	float: left;
+	border: gray 1px solid;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 40px;
 }
 
 
 
 .post_details .post_content{
 display: block;
-padding: 5px  5px 20px 5px ;
+padding: 5px  5px 5px 5px ;
 }
 
 .post_details .post_title{
@@ -128,31 +206,46 @@ padding: 5px  5px 20px 5px ;
 }
 
 .post_details .comment{
-	width:inherit;
+	width:680px;
 	padding-top:8px;
 	padding-left:10px;
 	padding-bottom:10px;
 	padding-right:10px;
-	margin-top:15px;
-	border:solid;
+	margin-top: 5px;
+	border-bottom:solid;
 	border-width:1px;
-	border-color:#9E9EC3;
+	border-color:gray;
 	word-break: break-all; 
+	overflow: hidden;
 }
 
 .post_details .comment .user_comment{
 	display:block;
 	padding-bottom:5px;
 	word-break: break-all;
+	width: 550px;
+	float: left;
 }
-.post_details .comment .user_reply_info{
-	display: block;
-	color: #85859C;
-	text-align:right;
+
+.post_details .comment .user_reply_info {
+	border-left: gray 1px solid;
+	float: left;
+	width: 100px;
+	padding-left: 10px;
 }
+
+#main_content .post_details .comment .user_reply_info div.replyUser a {
+	color: black;
+	font-weight: bold;
+}
+
+#main_content .post_details .comment div.user_reply_info {
+	color: black;
+}
+
 .post_details  .reply{
 	padding-top:20px;
-	width:608px;
+	width:700px;
 	display:block;
 }
 
@@ -179,23 +272,15 @@ padding: 5px  5px 20px 5px ;
 .post_details .rating .fivestar {
 }
 
-.discussion .posting{
-	width:530px;
-}
-
-.discussion .posting .topic{
-	padding-bottom:20px;
-}
-
-.discussion .posting .topic .subject{
-	margin-left:20px;
-}
-
-.discussion .posting .content_title{
-	padding-bottom:10px;
-}
-.discussion .posting .content{
-	padding-bottom:10px;
+div.posting {
+	background-color: #e0e0e0;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	padding-left: 40px;
+	padding-right: 40px;
+	overflow: hidden;
 }
 
 .blog{	
@@ -242,44 +327,70 @@ padding: 5px  5px 20px 5px ;
 	text-align:right;
 }
 
+.posting div.formContent {
+	width: 500px;
+	border-right: 1px solid gray;
+	float: left;
+	padding-right: 15px;
+}
+
+div.prompt {
+	float: left;
+	margin-right: 20px;
+}
+
+div.prompt * {
+	font-size: 15px;
+	color: black;
+	margin-bottom: 25px;
+}
+
+div.userInfo {
+	float: left;
+	margin-left: 15px;
+}
+
+div.userInfo * {
+	color: black;
+}
+
+div.userInfo div.userName {
+	font-weight: bold;
+}
+
+input.subject {
+	margin-bottom: 20px;
+}
+
 .form_submit {
 padding-top:10px;
 float: right;
 bottom: 2px;
-
 }
 
-.submit:after {
-    border-bottom: 11px solid transparent;
-    border-left: 11px solid #726FB2;
-    border-top: 11px solid transparent;
-    content: "";
-    display: block;
-    height: 0;
-    position: absolute;
-    right: -11px;
-    top: 0;
+div.submit input {
+	color: white;
+	background-color: rgb(26, 26, 26);
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-color: transparent;
 }
-.submit {
-background-color: #726FB2;
-border: 0 none;
-color: white;
-cursor: default;
-display: block;
-float: right;
-height: 22px;
-line-height: 22px;
-margin-right: 22px;
-position: relative;
-text-align: center;
-width: 75px;
-}
+
  .date{
-color: #85859C;
+color: black;
 display: block;
 padding-bottom:5px;
 }
 
+#main_content .date a {
+	color: black;
+}
+
+#main_content .date a:hover {
+	font-weight: normal;
+}
 
 #error{
 	 color: #F00;
@@ -309,4 +420,68 @@ padding-bottom:5px;
 	background: transparent url(../images/icons/back-icon-active.png) no-repeat center right;
 	width: 36px;
 
+}
+
+.post_details .posts .user_post h1.title {
+	color: black;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+div.comment_title strong {
+	color: black;
+	font-weight: bold;
+}
+
+div.comment_title {
+	border-top: gray 1px solid;
+	border-bottom: gray 1px solid;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#main_content div.form_submit a.submit {
+	background-color: rgb(26, 26, 26);
+	padding: 5px 10px;
+	cursor: default;
+}
+
+#main_content div.form_submit a.submit:hover {
+	font-weight: normal;
+}
+
+#main_content .user_post .postContent div.leftPanel {
+	float:left;
+	width:560px;
+	border-right: gray 1px solid;
+	margin-bottom: 20px;
+}
+
+#main_content .user_post .postContent div.rightPanel {
+	float:left;
+	padding-left: 10px;
+}
+
+#main_content .user_post .postContent .rightPanel div.userName {
+	color: black;
+	font-weight: bold;
+}
+
+#main_content .user_post div.postContent {
+	overflow: hidden;
+}
+
+#main_content .posts .user_post .reply {
+	overflow: hidden;
+}
+
+#main_content .posts .user_post .reply .formContent {
+	float: left;
+	width: 500px;
+	border-right: gray 1px solid;
+	padding-right: 60px;
+}
+
+#main_content .posts .user_post .userInfo {
+	float:left;
 }
