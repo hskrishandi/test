@@ -210,7 +210,7 @@
 </div>
 
 <div id="3_term_component" style="width:130px; height:365px; float:left; overflow:auto; display:none;">
-	<svg style="width:100px; height:510px; float: left;margin:10px;">
+	<svg style="width:100px; height:570px; float: left;margin:10px;">
 		<g id="3toolbar" >
 			<g class="component" id="NMOS-eDouG" term="3">
 				<g class="drawing" transform="matrix(1,0,0,1,5,20)">
@@ -463,6 +463,45 @@
 				</g>
 			</g>
 			<text x="30" y="495" font-family="sans-serif" font-size="14px" fill="black">oTFT2</text>
+
+			<g class="component" id="NMOS-mvshemt120" term="3">
+				<g class="drawing" transform="matrix(1,0,0,1,5,510)">
+					<rect fill="#ffffff" width="40" height="40" style="opacity:0" />
+					<path order="1" fill="none" stroke="#000000" stroke-width="1" d="M 0 20 L 10 20" />
+					<path order="2" fill="none" stroke="#000000" stroke-width="1" d="M 30 0 L 30 10" />
+					<path order="3" fill="none" stroke="#000000" stroke-width="1" d="M 30 30 L 30 40" />
+					<path fill="none" stroke="#000000" stroke-width="1" d="M 10 10 L 10 30" />
+					<path fill="none" stroke="#000000" stroke-width="1" d="M 30 10 L 15 10 L 15 30 L 30 30" />
+					<path fill="#000000" stroke="#000000" stroke-width="1" d="M 19 26 L 27 30 L 19 34 Z" />
+					<circle order="1" class="term" visibility="hidden" cx="30" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+					<circle order="2" class="term" visibility="hidden" cx="0" cy="20" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+					<circle order="3" class="term" visibility="hidden" cx="30" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+				</g>
+				<g class="text">
+					<text class="type" x="0" y="50" font-family="sans-serif" font-size="14px" fill="black"></text>
+					<text class="id" x="35" y="9" font-family="sans-serif" font-size="14px" fill="black"></text>
+				</g>
+			</g>
+			<g class="component" id="PMOS-mvshemt120" term="3">
+				<g class="drawing" transform="matrix(1,0,0,1,55,510)">
+					<rect fill="#ffffff" width="40" height="40" style="opacity:0" />
+					<path order="1" fill="none" stroke="#000000" stroke-width="1" d="M 0 20 L 10 20" />
+					<path order="2" fill="none" stroke="#000000" stroke-width="1" d="M 30 0 L 30 10" />
+					<path order="3" fill="none" stroke="#000000" stroke-width="1" d="M 30 30 L 30 40" />
+					<path fill="none" stroke="#000000" stroke-width="1" d="M 10 10 L 10 30" />
+					<path fill="none" stroke="#000000" stroke-width="1" d="M 30 10 L 15 10 L 15 30 L 30 30" />
+					<path fill="#000000" stroke="#000000" stroke-width="1" d="M 26 6 L 18 10 L 26 14 Z" />
+					<circle order="1" class="term" visibility="hidden" cx="30" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+					<circle order="2" class="term" visibility="hidden" cx="0" cy="20" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+					<circle order="3" class="term" visibility="hidden" cx="30" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+				</g>
+				<g class="text">
+					<text class="type" x="0" y="50" font-family="sans-serif" font-size="14px" fill="black"></text>
+					<text class="id" x="35" y="9" font-family="sans-serif" font-size="14px" fill="black"></text>
+				</g>
+			</g>
+			<text x="30" y="565" font-family="sans-serif" font-size="14px" fill="black">HEMT 1.2</text>
+
 		</g>
 	</svg>
 </div>
