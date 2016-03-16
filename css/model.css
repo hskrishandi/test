@@ -18,7 +18,7 @@ div.error_box p.error {
 
 body {
 	background-color: #FFF;
-	font-size:80%;
+	//font-size:80%;
 }
 
 h1, h2, h3, h4 {
@@ -703,11 +703,14 @@ select.param_inputs {
 }
 
 /* Model list page */
+.ApplicatonName {
+	font-weight: bigger;
+}
 
 #model-list {
 	margin-left:20px;
 	margin-top:20px;
-	width: 110%;
+	width: 150%;
 }
 
 #model-list  :hover{
@@ -715,15 +718,15 @@ select.param_inputs {
 }
 
 #MLitemBox {
-    float: none;
+    float: left;
     height: auto;
-    margin-left: auto;
-    margin-right: auto;
+    /*margin-left: auto;
+    margin-right: auto;*/
     /* margin-top: 435px; */
 	padding: 18px;
     clear: both;
 	display: block;
-    width: 100%;
+    width: 73%;
 }
 
 .modelBoxContainer {
@@ -837,6 +840,12 @@ select.param_inputs {
     color: rgb(0, 0, 0);
 }
 
+#info {
+	float: right;
+	width: 24%;
+	height: 762px;
+	background-color: #E4E4E4;
+}
 
 .full-screen-cover {
 	width:100%;

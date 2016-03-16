@@ -8,7 +8,6 @@
     <script src="<?php echo resource_url('js', 'ckeditor/ckeditor.js'); ?>" type="text/javascript"></script>
 <?php endblock(); ?>
 
-
 <?php startblock('content'); ?>
 
 <script>
@@ -124,23 +123,23 @@ $(document).ready(function(){
               
                 <?php } else if($res=='articles'){?>
            <div class="form">
-           			  <h2 class="title">Article</h2>
+					  <h2>Post Article</h2>
                    	  <form name="articles_form" id="articles_form" action="<?php echo base_url('/resources/submit/articles');?>" method="post">                     
                       	<table class="form_table">
                           <tr>
-                            <td class="label">Name:</td>
+                            <td class="label">Name</td>
                             <td><input name="name" type="text" class="required" id="name" /></td>
                           </tr>
                           <tr>
-                            <td class="label">Author:</td>
+                            <td class="label">Author</td>
                             <td><input name="author" type="text" class="required" id="author" /></td>
                           </tr>
                           <tr>
-                            <td class="label">Publisher name:</td>
+                            <td class="label">Publisher name</td>
                             <td><input name="publisher" type="text" class="required" id="publisher" /></td>
                           </tr>
                           <tr>
-                            <td class="label"><label for="year">Year:</label></td>
+                            <td class="label"><label for="year">Year</label></td>
                             <td><select name="year" id="year">
                               <?php for($i=date("Y");$i>1900;$i--):?>
                               <option value="<?php echo $i;?>"><?php echo $i;?></option>
@@ -148,17 +147,13 @@ $(document).ready(function(){
                             </select></td>
                           </tr>
                           <tr>
-                            <td class="label"><label for="website">Website:</label></td>
+                            <td class="label"><label for="website">Website</label></td>
                             <td><input name="website" type="text" class="url required" id="website" /></td>
                           </tr>
                           <tr>
-                            <td colspan="2">Summary:</td>
-                          </tr>
-                          <tr>
-                            <td colspan="2"><textarea name="summary" cols="50" rows="6"  id="summary" class="required"></textarea></td>
-                          </tr>
-                          <tr>
-                            <td colspan="2"><div class="form_submit"><a class="submit" id="submit">Submit</a></div></td>
+                            <td class="label">Summary</td>
+							 <td><textarea name="summary" cols="10" rows="6"  id="summary" class="required"></textarea></td>
+							 <td><div class="form_submit"><a class="submit" id="submit">Submit</a></div></td>
                           </tr>
                         </table>
                       	<label for="select"></label>

@@ -5,142 +5,117 @@
 	
 	<?php startblock('content'); ?>
 		<div id="resources">
-			<div class="row">
-				<div class="block">
-					<h3 class='title'>News</h3>
-                    <a class="more" href="<?php echo base_url('resources/news'); ?>">more</a>
-					<a class="post" href="<?php echo base_url('resources/post/news'); ?>">post</a>
-					<ul class="item-list">
-						<?php foreach($news as $entry): ?>
-							<li>
-                            	<span class="date">[ <?php echo date('d M Y', $entry->post_date); ?> ]</span>
-								<?php 
-									echo '<a href="' . base_url('resources/news/' . $entry->id) . '" class="link">' . $entry->title . '</a>'; 
-								?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
+			<p id="pageTitle">Resources</p>
+			
+			<div class='title'>Device Models Reference
+				<a class="more" href="<?php echo base_url('resources/models'); ?>">more</a>
+				<div class="postSeparateLine">
+					&#x7c;
 				</div>
-
-				<div class="block">
-					<h3 class='title'>Events</h3>
-					<a class="more" href="<?php echo base_url('resources/events'); ?>">more</a>
-                    <a class="post" href="<?php echo base_url('resources/post/events'); ?>">post</a>
-					<ul class="item-list">
-						<?php foreach($events as $entry): ?>
-							<li>
-                            
-                            	<span class="date">[ <?php echo date_range(strtotime($entry->start_date), strtotime($entry->end_date)) ;?> ]</span>
-								<?php 
-									$content = $entry->name;
-									$content .= ', ' . $entry->location;
-									if ($entry->website != NULL) {
-										echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $content . '</a>'; 
-									} else {
-										echo $content;
-									}
-								?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
-				<div class="clear"></div>
+				<a class="post" href="<?php echo base_url('resources/post/models'); ?>">Post Reference</a>
 			</div>
-			<div class="row">
-				<div class="block">
-					<h3 class='title'>Articles</h3>
-					<a class="more" href="<?php echo base_url('resources/articles'); ?>">more</a>
-                    <a class="post" href="<?php echo base_url('resources/post/articles'); ?>">post</a>
-					<ul class="item-list">
-						<?php foreach($articles as $entry): ?>
-							<li>
-								<?php 
-									$content = $entry->name;
-									if ($entry->author != NULL) {
-										$content .= '<br/>(' . $entry->author;
-										if ($entry->year != NULL)
-											$content .= ', ' . $entry->year;
-										$content .= ')';
-									} else if ($entry->year != NULL) {
-											$content .= '<br/>(' . $entry->year . ')';
-									}
+			<ul class="item-list">
+				<?php foreach($models as $entry): ?>
+					<li>
+						<?php 
+							$content = $entry->name;
+							if ($entry->author != NULL) {
+								$content .= ', ' . $entry->author;
+							}
+							if ($entry->website != NULL) {
+								echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $content . '</a>'; 
+							} else {
+								echo $content;
+							}
+						?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 
-									if ($entry->website != NULL) {
-										echo '<a href="' .  /*$entry->website*/ base_url('resources/articles/' . $entry->id)  . '" class="link">' . $content . '</a>'; 
-									} else {
-										echo $content;
-									}
-								?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
-
-				<div class="block">
-					<h3 class='title'>Organizations</h3>
-					<a class="more" href="<?php echo base_url('resources/groups'); ?>">more</a>
-                    <a class="post" href="<?php echo base_url('resources/post/groups'); ?>">post</a>
-					<ul class="item-list">
-						<?php foreach($groups as $entry): ?>
-							<li>
-								<?php 
-									if ($entry->website != NULL) {
-										echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $entry->name . '</a>'; 
-									} else {
-										echo $entry->name;
-									}
-								?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
-				<div class="clear"></div>
+			<div class='title'>Tools
+			<a class="more" href="<?php echo base_url('resources/tools'); ?>">more</a>
+			<div class="postSeparateLine">
+				&#x7c;
+			</div>
+			<a class="post" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
 			</div>
 			
-			<div class="row">
-				<div class="block">
-					<h3 class='title'>Device Models</h3>
-					<a class="more" href="<?php echo base_url('resources/models'); ?>">more</a>
-                    <a class="post" href="<?php echo base_url('resources/post/models'); ?>">post</a>
-					<ul class="item-list">
-						<?php foreach($models as $entry): ?>
-							<li>
-								<?php 
-									$content = $entry->name;
-									if ($entry->author != NULL) {
-										$content .= ', ' . $entry->author;
-									}
-									if ($entry->website != NULL) {
-										echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $content . '</a>'; 
-									} else {
-										echo $content;
-									}
-								?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
 
-				<div class="block">
-					<h3 class='title'>Tools</h3>
-					<a class="more" href="<?php echo base_url('resources/tools'); ?>">more</a>
-                    <a class="post" href="<?php echo base_url('resources/post/tools'); ?>">post</a>
-					<ul class="item-list">
-						<?php foreach($tools as $entry): ?>
-							<li>
-								<?php
-									if ($entry->website != NULL) {
-										echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $entry->name . '</a>'; 
-									} else {
-										echo $entry->name;
-									}
-								?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				</div>	
-				<div class="clear"></div>
+			<?php foreach ($this->config->item('tool_type') as $type => $title) :?>
+			<h2 class="sub_title"><?php echo $title; ?></h2>
+			<ul class="item-list">
+			<?php if($type == 'device_sim'){ ?>
+				<?php foreach($tools1 as $entry): ?>
+					<li>
+						<?php
+								echo '<a href="' . $entry->website . '" class="entry"  target="_blank" >' . $entry->name . '</a>';
+								if ($entry->description != NULL) {
+									echo ' - <span class="description">' . nl2br($entry->description) . '</span>';
+								}
+						?>
+					</li>
+				<?php endforeach; ?>
+			<?php } elseif($type == 'circuit_sim') {?>
+				<?php foreach($tools2 as $entry): ?>
+					<li>
+						<?php
+								echo '<a href="' . $entry->website . '" class="entry"  target="_blank" >' . $entry->name . '</a>';
+								if ($entry->description != NULL) {
+									echo ' - <span class="description">' . nl2br($entry->description) . '</span>';
+								}
+						?>
+					</li>
+				<?php endforeach; ?>
+			<?php } elseif($type == 'param_extract') {?>
+				<?php foreach($tools3 as $entry): ?>
+					<li>
+						<?php
+								echo '<a href="' . $entry->website . '" class="entry"  target="_blank" >' . $entry->name . '</a>';
+								if ($entry->description != NULL) {
+									echo ' - <span class="description">' . nl2br($entry->description) . '</span>';
+								}
+						?>
+					</li>
+				<?php endforeach; ?>
+			<?php }else { ?>
+				<?php foreach($tools4 as $entry): ?>
+					<li>
+						<?php
+								echo '<a href="' . $entry->website . '" class="entry"  target="_blank" >' . $entry->name . '</a>';
+								if ($entry->description != NULL) {
+									echo ' - <span class="description">' . nl2br($entry->description) . '</span>';
+								}
+						?>
+					</li>
+				<?php endforeach; ?>
+			<?php } ?>
+			</ul>
+			<br/>
+			<hr>
+			<?php endforeach; ?>
+
+			
+			<div class="title">Organizations
+				<a class="more" href="<?php echo base_url('resources/groups'); ?>">more</a>
+				<div class="postSeparateLine">
+					&#x7c;
+				</div>
+				<a class="post" href="<?php echo base_url('resources/post/groups'); ?>">Post Organization</a>
 			</div>
+			<ul class="item-list">
+				<?php foreach($groups as $entry): ?>
+					<li>
+						<?php 
+							if ($entry->website != NULL) {
+								echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $entry->name . '</a>'; 
+							} else {
+								echo $entry->name;
+							}
+						?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+
 		</div>
 	<?php endblock(); ?>
 

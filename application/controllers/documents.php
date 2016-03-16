@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class resources extends CI_Controller {
+class documents extends CI_Controller {
 
 	public function __construct()
 	{
@@ -16,59 +16,11 @@ class resources extends CI_Controller {
 	 * Home Page for this controller.
 	 *
 	 * Maps to the following URL
-	 * 		http://www.i-mos.org/resources
+	 * 		http://www.i-mos.org/documents
 	 *	- or -  
-	 * 		http://www.i-mos.org/resources/index
-	 */
-	public function index()
-	{
-		$num_rows = RESOURCE_INDEX_ENTRIES_PER_BLOCK;
-		$data = array(	
-				'events' => $this->Resources_model->get_events_adv('undelete',false, $num_rows),
-				'groups' => $this->Resources_model->get_groups_adv('undelete',$num_rows),
-				'documents' => $this->Resources_model->get_articles_adv('undelete','all', $num_rows),
-				'models' => $this->Resources_model->get_models_adv('undelete','released', $num_rows),
-				'news' => $this->Resources_model->get_news_adv('undelete',$num_rows),
-				'tools1' => $this->Resources_model->get_tools_adv('undelete', 'device_sim', $num_rows),
-				'tools2' => $this->Resources_model->get_tools_adv('undelete', 'circuit_sim', $num_rows),
-				'tools3' => $this->Resources_model->get_tools_adv('undelete', 'param_extract', $num_rows),
-				'tools4' => $this->Resources_model->get_tools_adv('undelete', 'interface', $num_rows)
-							/*
-							//$tools = array();
-			foreach ($this->config->item('tool_type') as $type => $title) {
-				'tools' = $this->Resources_model->get_tools_adv('undelete',$type, RESOURCE_ENTRIES_PER_PAGE);
-			}
-				*/
-		);
-		
-		$this->load->view('resources/index', $data);
-	}
-	
-	public function events()
-	{		
-			$data = array(	
-					'userInfo' => $this->Account_model->isLogin(),
-					'past_events' => $this->Resources_model->get_events_adv('undelete',true, RESOURCE_ENTRIES_PER_PAGE),
-					'upcoming_events' => $this->Resources_model->get_events_adv('undelete',false, RESOURCE_ENTRIES_PER_PAGE)
-			);					
-
-
-		$this->load->view('resources/events', $data);
-	}
-
-
-	public function approve_event($event_id=0){
-		if (!$this->Account_model->isAuth()) return;
-		if($event_id>0){
-			$this->Resources_model->approve_event($event_id);
-			redirect(base_url('/resources/events/'.$event_id), 'refresh');
-		}
-		else{
-			show_404();	
-		}
-	}
-		
-	public function articles($id=0)
+	 * 		http://www.i-mos.org/documents/index
+	 */		
+	public function index($id=0)
 	{	
 
 			if($id>0){
@@ -89,87 +41,19 @@ class resources extends CI_Controller {
 				'articles' => $articles);
 			}
 
-		$this->load->view('resources/articles', $data);
+		$this->load->view('documents/index', $data);
 	}
 	
 	public function approve_article($article_id=0){
 		if (!$this->Account_model->isAuth()) return;
 		if($article_id>0){
 			$this->Resources_model->approve_article($article_id);
-			redirect(base_url('/resources/articles/'.$article_id), 'refresh');
+			redirect(base_url('documents/articles/'.$article_id), 'refresh');
 		}
 		else{
 			show_404();
 		}
 				
-	}
-	
-	public function groups()
-	{
-
-			$data = array(	
-					'groups' => $this->Resources_model->get_groups_adv('undelete',RESOURCE_ENTRIES_PER_PAGE), 
-					'userInfo' => $this->Account_model->isLogin()
-			);
-
-
-		$this->load->view('resources/groups', $data);	
-	}
-	public function approve_group($group_id){
-		if (!$this->Account_model->isAuth()) return;
-		$this->Resources_model->approve_group($group_id);
-		redirect(base_url('/resources/groups/'), 'refresh');
-		
-	}	
-	public function models()
-	{
-
-			$models = array();
-			foreach ($this->config->item('device_model_status') as $type => $title) {
-				$models[$title] = $this->Resources_model->get_models_adv('undelete',$type, RESOURCE_ENTRIES_PER_PAGE);
-			}
-			
-			$data = array(	
-				'models' => $models,
-				'userInfo' => $this->Account_model->isLogin()
-			);
-		
-
-		$this->load->view('resources/models', $data);
-	}
-	public function approve_model($model_id){
-		if (!$this->Account_model->isAuth()) return;
-		$this->Resources_model->approve_model($model_id);
-		redirect(base_url('/resources/models'), 'refresh');		
-	}
-				
-	public function news($id = 0)
-	{	
-		if ($id > 0) {
-			$data = array('display_list' => false,
-			'userInfo' => $this->Account_model->isLogin(),
-			'news_details' => $this->Resources_model->get_news_details($id), 
-			'news_status'=>$this->Resources_model->check_inapproavl_news($id));
-			
-		} else {
-		
-			$data = array(		
-				'display_list' => true,
-				'userInfo' => $this->Account_model->isLogin(),
-				'news' => $this->Resources_model->get_news_adv('undelete',RESOURCE_ENTRIES_PER_PAGE)
-			);
-
-			
-			
-		} 
-		$this->load->view('resources/news', $data);
-	}
-	
-	public function approve_news($news_id){
-		if (!$this->Account_model->isAuth()) return;
-		$this->Resources_model->approve_news($news_id);
-		redirect(base_url('/resources/news/'.$news_id), 'refresh');
-		
 	}
 	
 	public function edit_resources($res=NULL){
@@ -337,42 +221,6 @@ class resources extends CI_Controller {
 		
 	}
 	
-	
-	public function tools()
-	{
-		if($this->Account_model->isLogin()&&$this->Account_model->isLogin()->class >= 99){
-			$tools = array();
-			foreach ($this->config->item('tool_type') as $type => $title) {
-				$tools[$title] = $this->Resources_model->get_tools_adv('undelete',$type, RESOURCE_ENTRIES_PER_PAGE);
-			}
-			
-			$data = array(
-				
-				'userInfo' => $this->Account_model->isLogin(),	
-				'tools' => $tools
-			);
-		}
-		else{
-			$tools = array();
-			foreach ($this->config->item('tool_type') as $type => $title) {
-				$tools[$title] = $this->Resources_model->get_tools_adv('undelete',$type, RESOURCE_ENTRIES_PER_PAGE);
-			}
-			
-			$data = array(	
-				'userInfo' => $this->Account_model->isLogin(),
-				'tools' => $tools
-			);			
-		}
-
-		$this->load->view('resources/tools', $data);
-	}
-	
-	public function approve_tool($tools_id){
-		if (!$this->Account_model->isAuth()) return;
-		$this->Resources_model->approve_tool($tools_id);
-		redirect(base_url('/resources/tools/'), 'refresh');		
-	}	
-	
 	public function post($res){
 		if (!$this->Account_model->isAuth()) return;
 		if($res!=NULL){
@@ -537,10 +385,7 @@ class resources extends CI_Controller {
 		
 	}
 
-	
-	
-
 }
 
-/* End of file resources.php */
-/* Location: ./application/controllers/resources.php */
+/* End of file documents.php */
+/* Location: ./application/controllers/documents.php */

@@ -5,14 +5,24 @@
 	
 	<?php startblock('content'); ?>
 		<div id="resources">
-			<div id="resource-content">
-				<?php foreach($tools as $title => $entries): ?>
-					<h2 class="title"><?php echo $title; ?></h2>
+			<p id="pageTitle">Resources</p>
+				
+			<div class='title'>Tools
+				<a class="more" href="<?php echo base_url('resources/tools'); ?>">more</a>
+				<div class="postSeparateLine">
+					&#x7c;
+				</div>
+				<a class="post" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
+			</div>
+			
+			<?php foreach($tools as $title => $entries): ?>
+			<h2 class="sub_title"><?php echo $title; ?></h2>
 					<ul class="item-list">
+
 						<?php foreach($entries as $entry): ?>
 						<li>
 							<?php 
-								echo '<a href="' . $entry->website . '" class="entry"  target="_blank" >' . $entry->name . '</a>';
+								echo '<span class="name">' . $entry->name. '</span>';
 								if ($entry->description != NULL) {
 									echo ' - <span class="description">' . nl2br($entry->description) . '</span>';
 								}
@@ -25,6 +35,7 @@
 						<?php endforeach; ?>
 					</ul>
 					<br/>
+					<hr>
 				<?php endforeach; ?>
 			</div>
 		</div>

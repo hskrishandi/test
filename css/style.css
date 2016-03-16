@@ -296,14 +296,14 @@
 #main_content a.more {
 	display: block;
 	padding-right: 10px;
-	background: transparent url(../images/icons/forward-icon.png) no-repeat center right;
+	//background: transparent url(../images/icons/forward-icon.png) no-repeat center right;
 	width: 36px;
 	float: right;
 }
 
 #main_content a.more:hover,
 #main_content a.more:active {
-	background: transparent url(../images/icons/forward-icon-active.png) no-repeat center right;
+	//background: transparent url(../images/icons/forward-icon-active.png) no-repeat center right;
 }
 
 /*  Main Page  */
@@ -322,7 +322,7 @@
 	display:inline;
 	float: left;
 	position: relative;
-
+	margin: 5px 0 15px 10px;
 	min-height: 200px;
 	width: 800px;
 }

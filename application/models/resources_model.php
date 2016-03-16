@@ -288,7 +288,7 @@ class Resources_model extends CI_Model {
 	{		
 
 		if($show=='all'){
-		$this->db->from('tools')->order_by("name asc");		
+		$this->db->from('tools')->group_by("type")->order_by("name asc");		
 		}
 		else{
 			if($show=='delete')
@@ -307,8 +307,6 @@ class Resources_model extends CI_Model {
 		}	
 		return $this->db->get()->result();
 	}
-	
-
 
 	public function get_tools_by_id($tool_id)
 	{		

@@ -1,11 +1,12 @@
 <?php echo doctype('html5') ?>
 <html>
 
-<?php $menu_items = array('News' => base_url('resources'),
+<?php $menu_items = array('News and Events' => base_url('resources'),
 						'Discussion' => base_url('discussion'),
-						'Users Manual' => base_url('home/manual'),
-						'Ngspice Manual' => 'http://ngspice.sourceforge.net/docs.html',
-						'Developer' => base_url('developer')); ?>
+						'Documents' => base_url('documents'),
+						'Resources' => base_url('resources'),
+						'Contributiors' => base_url('contributor'),
+						'Developers' => base_url('developer')); ?>
 
 <head>
 	<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
@@ -74,7 +75,7 @@
 					Model Library
 				</p>
 			</a>
-			<a class="ApplicationButton" target="_blank" href="<?php echo base_url('txtsim'); ?>">
+			<a class="ApplicationButton" href="<?php echo base_url('txtsim'); ?>">
 				<img class="ApplicationIcon" src="<?php echo resource_url('img', 'home/icon_SP.png'); ?>"/>
 				<p class="ApplicationName">
 					Simulation Platform
@@ -136,10 +137,10 @@
 		<?php start_block_marker('main_content'); ?>
 		<?php end_block_marker(); ?>
 		
-		<div id="side_menu">
-			<?php start_block_marker('side_menu'); ?>
-			<?php end_block_marker(); ?>
-		</div>
+		<!--div id="side_menu">
+			<//?php start_block_marker('side_menu'); ?>
+			<//?php end_block_marker(); ?>
+		</div-->
 		
 		<div id="content" style="clearfix">
 			<?php start_block_marker('content'); ?>
