@@ -1,11 +1,11 @@
 <?php echo doctype('html5') ?>
 <html>
 
-<?php $menu_items = array('News and Events' => base_url('resources'),
+<?php $menu_items = array('News and Events' => base_url('news'),
 						'Discussion' => base_url('discussion'),
 						'Documents' => base_url('documents'),
 						'Resources' => base_url('resources'),
-						'Contributiors' => base_url('contributor'),
+						'Contributiors' => base_url('page/credits'),
 						'Developers' => base_url('developer')); ?>
 
 <head>
