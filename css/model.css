@@ -18,7 +18,7 @@ div.error_box p.error {
 
 body {
 	background-color: #FFF;
-	//font-size:80%;
+	/* //font-size:80%; */ /* Fix font-size bug, by Leon 20160316 */
 }
 
 h1, h2, h3, h4 {
