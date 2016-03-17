@@ -5,12 +5,12 @@
 						'Discussion' => base_url('discussion'),
 						'Documents' => base_url('documents'),
 						'Resources' => base_url('resources'),
-						'Contributiors' => base_url('page/credits'),
+						'Contributiors' => base_url('contributors'),
 						'Developers' => base_url('developer')); ?>
 
 <head>
 	<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
-	<?php	
+	<?php
 		$meta = array(
 			array('name' => 'Content-type', 'content' => 'text/html; charset=utf-8', 'type' => 'equiv'),
 			array('name' => 'description', 'content' => 'Integrated circuit interactive Modeling and Online Simulation Platform'),
@@ -24,7 +24,7 @@
 	<title>
 		<?php start_block_marker('title'); ?>Home<?php end_block_marker(); ?> | i-MOS
 	</title>
-	
+
 	<?php start_block_marker('css'); ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'reset.css'); ?>" media="all" />
 		<link rel="stylesheet" type="text/css" href="<?php if (current_url() != base_url() && current_url() != base_url('home')) echo resource_url('css', 'style.css'); ?>" media="all" /><!-- <==This is for transaction from old ui to new ui. Once the new ui is finished, this should be removed. -->
@@ -40,10 +40,10 @@
 			var CI_ROOT = "<?php echo base_url();?>";
 			var M_TIME = "<?php echo microtime(true); ?>";
 		</script>
-		
-        
+
+
         <script src="https://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
-        
+
 		<script src="<?php echo resource_url('js', 'scripts.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'menuBar.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'login.js'); ?>" type="text/javascript" charset="utf-8"></script>
@@ -53,8 +53,8 @@
 		<script src="<?php echo resource_url('js', 'star-rating/jquery.MetaData.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'star-rating/jquery.rating.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'jTPS.js'); ?>" type="text/javascript" charset="utf-8"></script>-->
-		
-    <?php end_block_marker(); ?>	
+
+    <?php end_block_marker(); ?>
 </head>
 <body>
 
@@ -67,7 +67,7 @@
 		<a href="<?php echo base_url(); ?>">
 			<img id="logo" src="<?php echo resource_url('img', 'home/Logo.png'); ?>" />
 		</a>
-		
+
 		<div id="Applications">
 			<a class="ApplicationButton" href="<?php echo base_url('modelsim'); ?>">
 				<img class="ApplicationIcon" src="<?php echo resource_url('img', 'home/icon_ML.png'); ?>"/>
@@ -82,7 +82,7 @@
 				</p>
 			</a>
 		</div>
-		
+
 		<a id="SiteMenu" class="MenuButton" href="#">
 			<p>
 				Site Menu
@@ -96,7 +96,7 @@
 				Contact Us
 			</p>
 		</a>
-		
+
 		<div id="SearchBox">
 			<form accept-charset="UTF-8" id="searchForm" method="get" action="<?php echo base_url('search') ?>">
 				<div id="searchFormGroup">
@@ -104,14 +104,14 @@
 				</div>
 			</form>
 		</div>
-		
+
 		<a id="UserBox" class="clearfix" href="#">
 			<div id="UserIcon"></div>
 			<p id="UserName">Login</p>
 		</a>
-		
+
 	</div>
-	
+
 	<!-- MenuDropDowns - Start -->
 	<div id="MenuItemsBox" class="MenuDropDown" style="display:none;">
 		<ul>
@@ -122,12 +122,12 @@
 		<?php endforeach; ?>
 		</ul>
 	</div>
-	
+
 	<?php $this->load->view('menubar_contactbox'); ?>
-	
+
 	<div id="block-user" class="MenuDropDown" style="display:none;"></div>
 	<!-- MenuDropDowns - End -->
-	
+
 	<?php end_block_marker(); ?>
 
 	<!-- MenuBar - End -->
@@ -136,17 +136,17 @@
 	<div id="main_content">
 		<?php start_block_marker('main_content'); ?>
 		<?php end_block_marker(); ?>
-		
+
 		<!--div id="side_menu">
 			<//?php start_block_marker('side_menu'); ?>
 			<//?php end_block_marker(); ?>
 		</div-->
-		
+
 		<div id="content" style="clearfix">
 			<?php start_block_marker('content'); ?>
 			<?php end_block_marker(); ?>
 		</div>
-		
+
 	</div>
 
 
@@ -171,7 +171,3 @@
 
 </body>
 </html>
-
-
-
-				
