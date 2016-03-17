@@ -20,12 +20,12 @@ class contributors extends CI_Controller
     /**
      * Show the contributors page.
      *
-     * @return redirect
+     * @return view
      *
      * @author Leon
      */
     public function index()
     {
-        redirect('contributors/index');
+        $this->load->view('contributors/index');
     }
 }
