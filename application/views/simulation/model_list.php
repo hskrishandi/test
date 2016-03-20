@@ -3,7 +3,7 @@
 	<?php startblock('title'); ?>
 		Models
 	<?php endblock(); ?>
-  
+
 	<?php startblock('css'); ?>
 		<?php echo get_extended_block(); ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'model.css'); ?>" media="all" />
