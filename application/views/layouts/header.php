@@ -1,7 +1,9 @@
 <div class="header">
-    
-    <div class="logo">
 
+    <div class="logo">
+        <a href="<?php echo base_url(); ?>">
+			<img src="<?php echo resource_url('img', 'home/Logo.png'); ?>" />
+		</a>
     </div>
 
     <div class="menu">
