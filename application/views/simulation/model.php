@@ -7,7 +7,7 @@
 	<?php startblock('script'); ?>
 		<?php echo get_extended_block(); ?>
 		<script src="<?php echo resource_url('js', 'library/jquery-ui.min.js'); ?>" type="text/javascript"></script>
-		<script src="<?php echo resource_url('js', 'library/knockout.js'); ?>" type="text/javascript"></script>		
+		<script src="<?php echo resource_url('js', 'library/knockout.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.mapping.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.validation.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.localPersist.js'); ?>" type="text/javascript"></script>
@@ -19,19 +19,19 @@
 		<!--[if lt IE 9]><script src="<?php echo resource_url('js', 'library/excanvas.min.js'); ?>" type="text/javascript"></script><![endif]-->
 		<script src="<?php echo resource_url('js', 'library/jquery.jqplot.min.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/jqplot/jqplot.plugins.pack.js'); ?>" type="text/javascript"></script>
-		
+
 		<?php start_block_marker('model_script'); ?>
 		<?php end_block_marker(); ?>
-		
+
 		<script src="<?php echo resource_url('js', 'txtsim/PlotToPNG.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'imos-addon.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/utilities.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/models.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/graphs.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/controllers.js'); ?>" type="text/javascript"></script>
-		
+
 		<script src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
-		
+
 		<script src="<?php echo resource_url('js', 'fivestar.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'star-rating/jquery.form.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'star-rating/jquery.MetaData.js'); ?>" type="text/javascript" charset="utf-8"></script>
@@ -45,67 +45,22 @@
 
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery-ui/themes/base/jquery-ui.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery.jqplot.css'); ?>" />
-		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'model.css'); ?>"/>	
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'model.css'); ?>"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />
-		
+
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('js', 'star-rating/jquery.rating.css'); ?>" media="all" />
 	<?php endblock(); ?>
 
 	<?php startblock('MenuBar'); ?>
 	<?php endblock(); ?>
-	
-	<?php startblock('side_menu'); ?>
-		<?php echo get_extended_block(); ?>		
-		<div class="block model-library">
-			<h2><a href="#" class="action drop-down-btn icon-cog" title="Settings" data-bind="modelLibMenu: '#model-library-menu'"></a>User Library</h2>
-            <ul id="model-library-menu">
-				<li><font class="action new"><i class="icon-file"></i>New</font></li>
 
-				<li><font class="action model-library-save-as"><i class="icon-download"></i>Download</font></li>
 
-				<li><font class="action model-library-upload"><i class="icon-upload"></i>Upload</font></li>
-			</ul>
-			
-			<ul id="model-lib-list" data-bind="foreach: tree" data-current="<?php echo $model_info->id; ?>">	
-                <li>
-                    <a class="tree-icon" data-bind="css: { 'icon-caret-down': expanded(), 'icon-caret-right': expanded() == false }"> </a>
-					<font class="model-page-direct" data-bind="attr: { href: id }, text: name"></font>
-					<ul class="model-lib" data-bind="modelLibExpandable: expanded, foreach: library">
-                        <li class="model-lib-entry" data-bind="modelLibEntry: true">
-                            <a href="#" title="Select model library" class="load" data-bind="text: name"></a>
-                            <a href="#" class="action model-lib-entry-remove delete icon-trash" title="Delete model library"></a>                       
-                        </li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-		<div class="model-benchmark-side-menu">
-			<!-- ko if: selectedTab()==2-->
-			<div class="block" >
-				<h2>Mode Choice</h2>
-				
-				<ul id="model-lib-list" data-bind="foreach: choice">
-					<li>  	 
-						<a class="tree-icon" data-bind="css: { 'icon-caret-down': expanded(), 'icon-caret-right': expanded() == false }"> </a>                   
-						<font class="model-choice" data-bind="text: name,click:$root.changeSelectedMode.bind($data,id)"></font>
-						<ul class="model-lib" data-bind="modelLibExpandable: expanded,foreach: b_name">
-							<li>
-								<a href="#" data-bind="text:name,click:$root.sideMenuCtrl.bind($data,order)"></a>
-							</li>
-						</ul>              
-					</li>
-					
-				</ul>
-			</div>
-			<!-- /ko -->		
-		</div>
-	<?php endblock(); ?>
 
 	<?php startblock('content'); ?>
-	<div id="model-page" style="height: 100%;">	
+	<div id="model-page" style="height: 100%;">
 		<div id="model-tabs" data-bind="tabs: selectedTab, loadingWhen: isLoading">
 			<ul>
-            	
+
 				<li><a href="#description">Description</a></li>
 				<li><a href="#params">Parameters</a></li>
 				<li><a href="#bias">Biasing</a></li>
@@ -114,12 +69,12 @@
 				<li><a href="#comments">Comments</a></li>
 				<li id="model_name_bar"><a id="model_name" href="#description"><?php echo $model_info->icon_name;?></a></li>
 			</ul>
-            
-			
+
+
 			<div id="description">
 				<?php $this->load->view('simulation/descriptions/' . $model_info->name); ?>
 			</div>
-			
+
 			<div id="params">
 				<div class="toolbar">
 						<a href="#" class="action add-to-lib btn-span12" data-bind="addToLib: true, if: modelParams().length > 0" title="Include the current parameter set in user library"><i class="icon-plus"></i>Include in user library</a>
@@ -130,7 +85,7 @@
 							<input type="text" size="5" id="search_param" placeholder="Search parameter" />
 						</form>
 				</div>
-				
+
 				<script type="text/html" id="parameter-template">
 					<label>
 						<!-- ko if: showTypeExplanation-->
@@ -148,12 +103,12 @@
 					</label>
 
 				</script>
-				
+
 				<div id="param-tabs" class="inputs" data-bind="tabs: selectedParamTab">
 					<ul data-bind="foreach: modelParamsForTabs">
 						<li><a data-bind="attr: {href: href}, text: title" ></a></li>
 					</ul>
-					
+
 
           <!-- ko foreach: modelParamsForTabs -->
 						<div data-bind="template: { name: 'parameter-template', foreach: modelParams }, attr: {id: id}">
@@ -169,7 +124,7 @@
 
 			<div id="bias" class="inputs no-overflow">
 				<!--general biasing div block below-->
-				<div style="display:block" id="general_biasing">			  
+				<div style="display:block" id="general_biasing">
 					<div class="toolbar">
 						<a href="#" class="action add-var btn-span9" title="Add variable bias" data-bind='css: { disabled: variablebias().length >= 2 }, click: addVariable'>
 							<i class="icon-plus"></i>Add variable bias
@@ -201,11 +156,11 @@
 							</tr>
 						</tbody>
 					</table>
-									
+
 					<table class="fixedbias" data-bind='visible: fixedbias().length > 0'>
 						<caption>Fixed bias</caption>
 						<thead>
-							<tr>								
+							<tr>
 								<th>Node</th>
 								<th>Value</th>
 							</tr>
@@ -218,16 +173,16 @@
 							</tr>
 						</tbody>
 					</table>
-					
+
 					<p class="info">Note: All unassigned nodes will be grounded.</p>
 				</div>
-				
-			    
+
+
 				<!--benchmarking div block below -->
-				
-				<div style="display:none" id="benchmarking">								
+
+				<div style="display:none" id="benchmarking">
 					<script type="text/html" id="board-template">
-						<div data-bind="attr:{id:id}" style="width : 99%; min-height : 400px; border:0">					
+						<div data-bind="attr:{id:id}" style="width : 99%; min-height : 400px; border:0">
 							<div style="float:left;width:400px">
 								<table class="varbias">
 									<caption>Variable bias</caption>
@@ -237,22 +192,22 @@
 										<th>Final voltage</th>
 										<th>Step</th>
 									</thead>
-									<tbody>	
+									<tbody>
 										<th><label data-bind="text:user_input().vb_name,event:{change:$root.changeBenchmark.bind($data,order)}"></label></td>
 										<td><input type="text" data-bind="value:user_input().init,event:{change:$root.changeBenchmark.bind($data,order)}"></input></td>
 										<td><input type="text" data-bind="value:user_input().end,event:{change:$root.changeBenchmark.bind($data,order)}"></input></td>
-										<td><input type="text" data-bind="event: {change:$root.stepValueOnChange, focus:$root.stepValueOnFocus}, value: user_input().step"></input></td>										
+										<td><input type="text" data-bind="event: {change:$root.stepValueOnChange, focus:$root.stepValueOnFocus}, value: user_input().step"></input></td>
 									</tbody>
 								</table>
-								<table class="fixedbias" data-bind="visible:$root.b_hasFixed">								
-									<caption>Fixed bias</caption>								
+								<table class="fixedbias" data-bind="visible:$root.b_hasFixed">
+									<caption>Fixed bias</caption>
 									<thead>
 										<th>Node</th>
 										<th>Value</th>
-									</thead>								
+									</thead>
 									<tbody>
 										<th><label data-bind="text:user_input().fb_name,event:{change:$root.changeBenchmark.bind($data,order)}"></td>
-										<td><input type="text" data-bind="value:user_input().value,event:{change:$root.changeBenchmark.bind($data,order)}"></input></td>														
+										<td><input type="text" data-bind="value:user_input().value,event:{change:$root.changeBenchmark.bind($data,order)}"></input></td>
 									</tbody>
 								</table>
 							</div>
@@ -260,21 +215,21 @@
 								<img data-bind="attr:{id:b_img}" src="<?php echo base_url('');?>"></img>
 							</div>
 							<div>
-								<p class="info" style="margin-top:255px">Note: All unassigned nodes will be grounded.</p>	
-							</div>							
-						</div>		
+								<p class="info" style="margin-top:255px">Note: All unassigned nodes will be grounded.</p>
+							</div>
+						</div>
 					</script>
-					
+
 					<div style="padding:1em 0em"id="benchmarking_tabs" data-bind="tabs: selectedBenchmarkingTab,loadingWhen: isLoading">
 						<ul style="display:none" data-bind="foreach: benchmarking">
 							<li><a data-bind="attr:{href:href},text:name,click:$parent.changeBenchmark.bind($data,order)"></a></li>
 						</ul>
-						<div  data-bind="template: { name: 'board-template', foreach: benchmarking}"></div>					
+						<div  data-bind="template: { name: 'board-template', foreach: benchmarking}"></div>
 					</div>
-				</div>		
+				</div>
 			</div>
 
-			<div id="output">		
+			<div id="output">
 				<div class="toolbar">
 					<a href="#" class="action select-all btn-span4" title="Select all" data-bind="checkAll: '#output input'"><i class="icon-check"></i>Select all</a>
 					<a href="#" class="action deselect-all btn-span6" title="Deselect all" data-bind="uncheckAll: '#output input'"><i class="icon-check-empty"></i>Deselect all</a>
@@ -288,25 +243,25 @@
 					</span>
 				</div>
 			</div>
-			<div id="results">				
+			<div id="results">
 				<div class="toolbar">
-					<a href="#" id="btn-submit-upper" class="action btn-submit" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i>Run simulation</a>		
-					<label class="action" data-bind="visible: plotData().length > 0">Graph: 
+					<a href="#" id="btn-submit-upper" class="action btn-submit" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i>Run simulation</a>
+					<label class="action" data-bind="visible: plotData().length > 0">Graph:
 						<select id="result-select" data-bind="options: plotData, optionsText: function(g) { return g.y().name + (g.y().log ? ' (log)' : ''); }, value: selectedPlot"></select>
 					</label>
-					<a href="#" class="action btn-submit" id="eq-expand" style="float:right;">Equalizer</a>		
+					<a href="#" class="action btn-submit" id="eq-expand" style="float:right;">Equalizer</a>
 					<a href="#" style="position:absolute;z-index:9999;left:80%;" class="action" data-bind="visible: $root.isSimulating, click: stopSimulationByClick"><i class="icon-off"></i>Abort</a>
 				</div>
-				
+
 				<div id="result-container" data-bind="foreach: plotData">
-					<div class="graph-container" data-bind="visible: $root.selectedPlot() == $data">				
+					<div class="graph-container" data-bind="visible: $root.selectedPlot() == $data">
 						<div class="toolbar">
 							<a href="#" class="action download" data-bind="downloadPlot: true, css: 'btn-span11'" title="Save raw data as file"><i class="icon-download-alt"></i>Download raw data</a>
-							<a href="#" class="action upload plot-custom-data-load" data-bind="css: 'btn-span11'" title="Upload custom data from file"><i class="icon-upload-alt"></i>Upload custom data</a>                    
+							<a href="#" class="action upload plot-custom-data-load" data-bind="css: 'btn-span11'" title="Upload custom data from file"><i class="icon-upload-alt"></i>Upload custom data</a>
 							<a href="#" class="action show-custom" data-bind="checkbox: showCustomData, css: 'btn-span10'"><label><input id="customdata_check" type="checkbox" tabindex="-1" />Show custom data</label></a>
 							<a href="#" class="action" data-bind="click:$root.downloadPlotData, css: 'btn-span6'"><i class="icon-download-alt"></i>Save as PNG</a>
 						</div>
-						
+
 						<div href="#" class="graph-area" data-bind="graph: $root.selectedPlot, replot: showCustomData">
 						</div>
 					</div>
@@ -325,7 +280,7 @@
 								<input type="text" size="5" id="add_param" placeholder="Add Parameter" />
 							</form>
 							<a href="#" id="eq-deleteall" style="float:right;" class="btn-span4"><i class="icon-trash"></i> Delete All  </a>
-							<a href="#" id="eq-run" class="action btn-submit" style="margin-top: 4px;float:right;" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i> Run simulation</a>	
+							<a href="#" id="eq-run" class="action btn-submit" style="margin-top: 4px;float:right;" data-bind="click: simulate, css: 'btn-span8'"><i class="icon-play"></i> Run simulation</a>
 						</p>
 						<br>
 						<br>
@@ -354,7 +309,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="loading" class="hidden">
 		<img src="<?php echo base_url('images/loading.gif');?>" alt="loading" />
         <p>Press F5 to refresh if<br/>no response</p>
