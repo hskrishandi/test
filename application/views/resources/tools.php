@@ -8,9 +8,7 @@
 			<p id="pageTitle">Resources</p>
 				
 			<div class='title'>Tools
-				<a class="more" href="<?php echo base_url('resources/tools'); ?>">more</a>
 				<div class="postSeparateLine">
-					&#x7c;
 				</div>
 				<a class="post" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
 			</div>
