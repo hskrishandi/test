@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'eex149.ee.ust.hk';
-$db['default']['username'] = 'web';
-$db['default']['password'] = 'imos2';
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'good7410';
 $db['default']['database'] = 'imosdev';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
