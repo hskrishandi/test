@@ -7,10 +7,14 @@
 		<div id="resources">
 			<p id="pageTitle">Documents</p>
 				<div class="title">Manual Downloads</div>
-				<div class="documents">
-					<a style="color:#FF3300" href="<?php echo base_url('home/manual'); ?>"><img src="<?php echo resource_url('img', 'download.png'); ?>" alt="i-Mos Users' Manual" width="70" height="40" border="0"></a>
-					<a style="color:#FF3300" href="http://ngspice.sourceforge.net/docs.html" target="_blank"><img src="<?php echo resource_url('img', 'download.png'); ?>" alt="Ngspice Manual" width="70" height="40" border="0"></a>
-				</div>
+				<div class="documents" style="min-height: 300px;">
+					<div style="position:absolute; right: 330px; margin-top: 20px;">
+						<a style="color:#FF3300" href="<?php echo base_url('home/manual'); ?>"><img src="<?php echo resource_url('img', 'download_imos.png'); ?>" alt="i-Mos Users' Manual" width="310" height="170" border="0" style="text-align:center;"></a>
+					</div>
+					<div style="position:absolute; right: 0; margin-top: 20px;">
+						<a style="color:#FF3300" href="http://ngspice.sourceforge.net/docs.html" target="_blank"><img src="<?php echo resource_url('img', 'download_ngspice.png'); ?>" alt="Ngspice Manual" width="310" height="170" border="0" style="text-align:center;"></a>
+					</div>
+					</div>
             	<?php if($display_list):?>
                 <div class="title">Articles
 					<div class="postSeparateLine">
