@@ -282,28 +282,33 @@
 	display: block;
 	margin-top: 25px;
 	padding-left: 15px;
-	color: #85859C;
-	background: transparent url(../images/icons/back-icon.png) no-repeat center left;
-	width: 32px;
+	background-color: #4E4E4E;
+	color: white;
+	height: 22px;
+	line-height: 22px;
+	/*background: transparent url(../images/icons/back-icon.png) no-repeat center left;*/
+	width: 30px;
+	text-align: center;
+	position: relative;
 }
 
 #main_content a.return-link:hover,
 #main_content a.return-link:active
 {
-	background: transparent url(../images/icons/back-icon-active.png) no-repeat center left;
+	/*background: transparent url(../images/icons/back-icon-active.png) no-repeat center left;*/
 }
 
 #main_content a.more {
 	display: block;
 	padding-right: 10px;
-	//background: transparent url(../images/icons/forward-icon.png) no-repeat center right;
+	/*background: transparent url(../images/icons/forward-icon.png) no-repeat center right;*/
 	width: 36px;
 	float: right;
 }
 
 #main_content a.more:hover,
 #main_content a.more:active {
-	//background: transparent url(../images/icons/forward-icon-active.png) no-repeat center right;
+	/*background: transparent url(../images/icons/forward-icon-active.png) no-repeat center right;*/
 }
 
 /*  Main Page  */
