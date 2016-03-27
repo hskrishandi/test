@@ -136,6 +136,7 @@
                         <input type="hidden" name="userid" value="<?php if($userInfo!=false) echo $userInfo->id;?>" />
                         </form>
                     </div>
+                    <?php if ($userInfo!=false): ?>
                     <div class="userInfo">
                         <div>
                             <?php if($userInfo->email=='model@i-mos.org'): ?>
@@ -163,6 +164,7 @@
                         <div><?php echo date("Y-m-d"); ?></div>
                         <div><?php echo date("H:i:s"); ?></div>
                     </div>
+                <?php endif; ?>
                 </div>
             </div>
             <?php endforeach ?>

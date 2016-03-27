@@ -28,10 +28,12 @@
         </span>
     </div>
 
-       <div class="discussion">
+    <div class="discussion">
+    <div class="top">
     <div style="width:520px" class="discussionHeader">Topics</div>
     <div style="width:100px" class="discussionHeader">Replies</div>
-    <div style="width:100px" class="discussionHeader">Last Post</div>
+    <div style="width:80px" class="discussionHeader">Last Post</div>
+    </div>
     <div class="bottom">
     <div class="posts">
 	<?php $index=0; foreach ($posts as $row): ?>
