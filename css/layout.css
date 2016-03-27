@@ -1,15 +1,21 @@
 .clearfix {
-  overflow: auto;
-  zoom: 1;
+    overflow: auto;
+    zoom: 1;
 }
 
 body {
-	background-color: rgb(60,60,60);
-	font-family: 'Noto Sans', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma', sans-serif;
+    background-color: rgb(60, 60, 60);
+    font-family: 'Noto Sans', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma', sans-serif;
 }
 
-h1,h2,h3,h4,h5,h6,h7 {
-	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7 {
+    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
 }
 
 #page {
@@ -19,35 +25,46 @@ h1,h2,h3,h4,h5,h6,h7 {
     min-height: 100%;
     width: 1280px;
     min-width: 0px;
-    padding-bottom: 1em;
+    /*padding-bottom: 1em;*/
+    /* edit by Leon, remove homepage bottom padding */
     position: relative;
 }
 
 #main_content {
-	display:inline;
-	float: left;
-	position: relative;
-	margin-left: 0px;
-	margin-right: 0px;
-	width: 1280px;
-	min-height: 500px;
-	background-color: rgb(255,255,255);
+    display: inline;
+    float: left;
+    position: relative;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 1280px;
+    min-height: 500px;
+    background-color: rgb(255, 255, 255);
 }
 
 a {
+<<<<<<< HEAD
 	color: rgb(60,60,60);
+=======
+    color: rgb(41, 171, 226);
+>>>>>>> 659eb6f2b9390781eacce528e4ef0434a262cd10
 }
+
 a:link {
+
 	color: rgb(60,60,60);
     text-decoration: none;
 }
+
 a:visited {
 	color: rgb(60,60,60);
+
     text-decoration: none;
 }
+
 a:hover {
     /* text-decoration: underline; */
 	color: rgb(60,60,60);
+
 
 }
 a:active {
@@ -81,7 +98,7 @@ a:active {
 	
 }
 p {
-	/* font-size: 1.15em; */
+    /* font-size: 1.15em; */
     line-height: 1.51em;
-    color: rgb(0, 0, 0);  
+    color: rgb(0, 0, 0);
 }

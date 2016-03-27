@@ -1,3 +1,4 @@
 .htaccess
 .DS_Store
 application/simulation/tmp/
+application/config/database.php
