@@ -24,21 +24,14 @@ class resources extends CI_Controller {
 	{
 		$num_rows = RESOURCE_INDEX_ENTRIES_PER_BLOCK;
 		$data = array(	
-				'events' => $this->Resources_model->get_events_adv('undelete',false, $num_rows),
+				/*'past_events' => $this->Resources_model->get_events_adv('undelete',true, $num_rows),
+				'upcoming_events' => $this->Resources_model->get_events_adv('undelete',false, $num_rows),*/
 				'groups' => $this->Resources_model->get_groups_adv('undelete',$num_rows),
-				'documents' => $this->Resources_model->get_articles_adv('undelete','all', $num_rows),
+				'articles' => $this->Resources_model->get_articles_adv('undelete','all', $num_rows),
 				'models' => $this->Resources_model->get_models_adv('undelete','released', $num_rows),
-				'news' => $this->Resources_model->get_news_adv('undelete',$num_rows),
-				'tools1' => $this->Resources_model->get_tools_adv('undelete', 'device_sim', $num_rows),
-				'tools2' => $this->Resources_model->get_tools_adv('undelete', 'circuit_sim', $num_rows),
-				'tools3' => $this->Resources_model->get_tools_adv('undelete', 'param_extract', $num_rows),
-				'tools4' => $this->Resources_model->get_tools_adv('undelete', 'interface', $num_rows)
-							/*
-							//$tools = array();
-			foreach ($this->config->item('tool_type') as $type => $title) {
-				'tools' = $this->Resources_model->get_tools_adv('undelete',$type, RESOURCE_ENTRIES_PER_PAGE);
-			}
-				*/
+				/*'news' => $this->Resources_model->get_news_adv('undelete',$num_rows),*/
+				'tools' => $this->Resources_model->get_tools_adv('undelete', 'all', $num_rows),		
+						
 		);
 		
 		$this->load->view('resources/index', $data);

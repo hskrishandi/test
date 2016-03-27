@@ -35,25 +35,51 @@ h1,h2,h3,h4,h5,h6,h7 {
 }
 
 a {
-	color: rgb(41,171,226);
+	color: rgb(60,60,60);
 }
 a:link {
-	color: rgb(41,171,226);
+	color: rgb(60,60,60);
     text-decoration: none;
 }
 a:visited {
-	color: rgb(27,146,197);
+	color: rgb(60,60,60);
     text-decoration: none;
 }
 a:hover {
     /* text-decoration: underline; */
-	color: rgb(20,106,143);
-}
+	color: rgb(60,60,60);
 
+}
 a:active {
     /* text-decoration: underline; */
 }
-
+#MenuItemsBox li a{
+	
+	display: block;
+}
+#MenuItemsBox li:hover{
+	background: #FFAA00; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left, #FFDC5F , #FFAA00); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #FFDC5F, #FFAA00); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #FFDC5F, #FFAA00); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #FFDC5F , #FFAA00); /* Standard syntax (must be last) */
+	font-weight: bold;
+}
+#MenuItemsBox li{
+	
+	padding:2% 8%;
+}
+#MenuItemsBox li:first-child{
+	
+	padding-top: 8%;
+}
+#MenuItemsBox li:last-child{
+	
+	padding-bottom: 8%;
+}
+#MenuItemsBox li:nth-child(3){
+	
+}
 p {
 	/* font-size: 1.15em; */
     line-height: 1.51em;

@@ -11,7 +11,7 @@
 
 #main_content a {
 	text-decoration:none;
-	color: #7575a9;
+	/*color: #7575a9;*/
 }
 
 #main_content a:hover, #main_content a:active {
@@ -281,10 +281,10 @@
 #main_content a.return-link {
 	display: block;
 	margin-top: 25px;
-	padding-left: 15px;
+	/*padding-left: 15px;
 	color: #85859C;
 	background: transparent url(../images/icons/back-icon.png) no-repeat center left;
-	width: 32px;
+	width: 32px;*/
 }
 
 #main_content a.return-link:hover,

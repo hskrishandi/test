@@ -19,11 +19,11 @@
 		<div id="home">
 			<!-- SlideImage - Start -->
 	        <div id="slideBox" class="clearfix">
-	            <img id="slideImage" src="<?php echo resource_url('img', 'home/slider3.jpg'); ?>" class="slide" />
+	            <img id="slideImage" src="<?php echo resource_url('img', 'home/newslider.jpg'); ?>" class="slide" />
 	            <p id="slideText">
-	            Interative Modeling &amp; <br />Online Simulation <br />Platform
+	            Interative Modeling &amp;<br />Online Simulation Platform
 	            </p>
-	            <img id="slideOverlay" src="<?php echo resource_url('img', 'home/slideOverlay.svg'); ?>" class="slide" />
+	           
 	        </div>
 	        <!-- SlideImage - End -->
 	        <!-- Introduction - Start -->

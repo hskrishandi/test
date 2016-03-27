@@ -16,13 +16,13 @@
 }
 
 .slide {
-	float: none;
-	width: 100%;
+    float: none;
+    width: 100%;
     max-width: 100%;
     height: auto;
     clear: none;
     color: rgb(0, 0, 0);
-	top: 0px;
+    top: 0px;
     left: 0px;
 }
 
@@ -30,6 +30,7 @@
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    height: 650px;
 }
 
 #slideOverlay {
@@ -39,22 +40,21 @@
 }
 
 #slideText {
-    float: left;
-    font-size: 2.45em;
+    float: right;
+    font-size: 2.5em;
     width: auto;
     height: auto;
-    text-align: left;
-	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+    text-align: right;
+    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
     font-weight: bold;
     line-height: 1.15em;
     clear: none;
     min-height: 0px;
     position: absolute;
-    top: 64%;
-    left: 100px;
+    top: 80%;
     color: rgb(255, 255, 255);
     bottom: auto;
-    right: 0%;
+    right: 50px;
     z-index: 1;
 }
 

@@ -355,14 +355,17 @@
 	top:1px;
 }
 /* Default style of Menu Droup Down Box  End */
+.MenuDropDown1 ul{
+	padding-left: 20px;
+}
 
 #MenuItemsBox {
 	display: inline-block;
 	position: absolute;
-	left: 480px;
+	left: 620px;
 	height: auto;
-	width: 110px;
-	padding: 2% 3%;
+	width: 16%;
+	padding: 0% 0%;
 }
 #MenuItemsBox ul {
 	list-style-type: none;
