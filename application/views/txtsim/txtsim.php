@@ -714,7 +714,7 @@
 	<div><span>&nbsp; DC Simulation</span><input class="simsim" id="dc_sim" type="checkbox" size="10" value="0"/> </div>
 	<div><span>&nbsp; AC Simulation</span><input class="simsim" id="ac_sim" type="checkbox" size="10" value="0"/> </div>
 	<div><span>Tran Simulation</span><input class="simsim" id="tran_sim" type="checkbox" size="10" value="0"/> </div>
-</div>	
+</div>
 
 </div>
   <?php endblock(); ?>
