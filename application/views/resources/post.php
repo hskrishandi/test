@@ -8,6 +8,9 @@
     <script src="<?php echo resource_url('js', 'ckeditor/ckeditor.js'); ?>" type="text/javascript"></script>
 <?php endblock(); ?>
 
+<?php startblock('side_menu'); ?>
+<?php endblock(); ?>
+	
 <?php startblock('content'); ?>
 
 <script>
