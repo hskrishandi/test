@@ -3,6 +3,9 @@
 		Documents
 	<?php endblock(); ?>
 	
+	<?php startblock('side_menu'); ?>
+	<?php endblock(); ?>
+	
 	<?php startblock('content'); ?>
 		<div id="resources">
 			<p id="pageTitle">Documents</p>
