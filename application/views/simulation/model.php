@@ -53,8 +53,16 @@
 
 	<?php startblock('MenuBar'); ?>
 	<?php endblock(); ?>
-
-
+	
+	<?php startblock('side_menu'); ?>
+		<?php echo get_extended_block(); ?>		
+		<div class="block model-library" style="border:0">
+			<ul id="model-lib-list" data-bind="foreach: tree" data-current="<?php echo $model_info->id; ?>">	
+			</ul>
+		</div>
+		<div class="model-benchmark-side-menu">	
+		</div>
+	<?php endblock(); ?>
 
 	<?php startblock('content'); ?>
 	<div id="model-page" style="height: 100%;">
