@@ -137,10 +137,10 @@
 		<?php start_block_marker('main_content'); ?>
 		<?php end_block_marker(); ?>
 
-		<!--div id="side_menu">
-			<//?php start_block_marker('side_menu'); ?>
-			<//?php end_block_marker(); ?>
-		</div-->
+		<div id="side_menu">
+			<?php start_block_marker('side_menu'); ?>
+			<?php end_block_marker(); ?>
+		</div>
 
 		<div id="content" style="clearfix">
 			<?php start_block_marker('content'); ?>
