@@ -21,9 +21,9 @@
             <a href="<?php echo base_url('discussion/posting');?>">Create Post</a>
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <?php if($userInfo==NULL):?>
-            <a href="<?php echo base_url('account/authErr');?>">My Blog</a>
+            <a href="<?php echo base_url('account/authErr');?>">My Posts</a>
             <?php else: ?>  
-            <a href="<?php if($userInfo==false) echo base_url('discussion/blog/'); else echo base_url('discussion/blog/'.$userInfo->id);?>">My Blog</a>
+            <a href="<?php if($userInfo==false) echo base_url('discussion/blog/'); else echo base_url('discussion/blog/'.$userInfo->id);?>">My Posts</a>
             <?php endif ?>
         </span>
     </div>
@@ -32,7 +32,7 @@
     <div class="top">
     <div style="width:520px" class="discussionHeader">Topics</div>
     <div style="width:100px" class="discussionHeader">Replies</div>
-    <div style="width:80px" class="discussionHeader">Last Post</div>
+    <div style="width:80px" class="discussionHeader"></div>
     </div>
     <div class="bottom">
     <div class="posts">
@@ -69,6 +69,13 @@
         </a>
         <?php echo " > "?>
         <?php echo $row->datetime; ?>
+        <?php if($userInfo!=false){
+            if ($userInfo->id==$row->userid||$userInfo->email=="model@i-mos.org"){?>
+                &nbsp;&nbsp;
+                <a href="<?php echo base_url('discussion/edit_post/'.$row->postid);?>">Edit</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="<?php echo base_url('discussion/maintain?action=del&blogid='.$row->userid.'&postid='.$row->postid);?>">Delete</a>
+        <?php }}?>
     </div>
 
     <div width="400">
@@ -84,22 +91,14 @@
         <?php echo "</s".$row->postid.">"?>
     </div>
     </div>
-
-    <table width="400">
-    <tr>
-    <td>
-    <span class="long_content" id="l<?php echo $row->postid;?>"><?php echo "<l".$row->postid.">"?><?php  echo $row->content; ?><?php echo "</l".$row->postid.">"?><span id="readMore<?php echo $row->postid;?>"><a class="readLess" onclick="swap('l<?php echo $row->postid;?>','s<?php echo $row->postid;?>');" href="javascript:void(0)">Read less</a></span></span>
-    </td>
-    </tr>
-    </table> 
     
-    <?php echo "<script language='javascript'>checkContent(".$row->postid.",".substr_count($row->content, '<br />').",".strlen($row->content).");</script>" ;?>
     </div><!--end rightcol-->
     <div class="replies"><?php echo $countComment[$row->postid];?></div>
 
     </div><!--end user_post-->
     
     <?php endforeach  ?>
+    <div class="backtop"><a href="#">Back to the top</a></div>
     </div><!--end posts-->
     
     

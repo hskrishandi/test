@@ -15,37 +15,20 @@
         <?php echo get_extended_block(); ?>
 		<script src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
     <?php endblock(); ?>
-	
-<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-	<?php $this->load->view('account/account_block'); ?>
-	<div class="block">
-			<div>
-				<h2>Dicussion</h2>
-				<p></p>
-					<ul class="menu">
-						<li>
-							<a href="<?php echo base_url('discussion/posting');?>">Create Post</a>
-						</li>
-                        <li>
-                        	<?php if($userInfo==NULL):?>
-							<a href="<?php echo base_url('account/authErr');?>">My Blog</a>
-                            <?php else: ?>  
-                            <a href="<?php if($userInfo==false) echo base_url('discussion/blog/'); else echo base_url('discussion/blog/'.$userInfo->id);?>">My Blog</a>
-                           	<?php endif ?>
-						</li>
-					</ul>
-				<p></p>
-			</div>
-		</div>
-	<?php endblock(); ?>
         
         <?php startblock('content'); ?>
         <?php if($userInfo!=false) $userid= $userInfo->id; ?>
         <div class="blog">
-        <div class="top">
-        <h2 class="title"><?php echo $displayname->displayname;?>'s Blog</h2>
-        </div>
+
+    <p class="mainTitle">Discussion</p>
+    <div class="subTitle">
+        <span>My Posts</span>
+        <span class="links">
+            <a href="<?php echo base_url('discussion/posting');?>">Create Post</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="<?php echo base_url('discussion/'); ?>">Back to Discussion Page</a>
+        </span>
+    </div>
         
     <div class="bottom">
     <div class="entries">
@@ -55,8 +38,15 @@
     <div class="user_entry">
     <div class="entry_topic"><a href="<?php echo base_url('discussion/postDetails?postid='.$row->postid);?>"><?php   echo $row->subject; ?></a></div>
     <div class="date"><i><?php echo $row->datetime;?></i></div>
+    <div class="entry_tool">
+        <?php if($userInfo!=false) { 
+            if($blogOwnerid==$userid||$userInfo->email=="model@i-mos.org"){?>
+                <a href="<?php echo base_url('discussion/edit_post/'.$row->postid);?>">Edit</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="<?php echo base_url('discussion/maintain?action=del&pre=blog&blogid='.$blogOwnerid.'&postid='.$row->postid);?>">Delete</a>
+        <?php }}?>
+    </div> 
     <div class="content">   
-    
     
     <table width="530">
     <tr>
@@ -78,11 +68,6 @@
     
     </div> 
     
-    
-    
-    
-    <div class="entry_tool"><?php if($userInfo!=false){ if($blogOwnerid==$userid||$userInfo->email=="model@i-mos.org"){?><a href="<?php echo base_url('discussion/edit_post/'.$row->postid);?>">Edit</a> <a href="<?php echo base_url('discussion/maintain?action=del&pre=blog&blogid='.$blogOwnerid.'&postid='.$row->postid);?>">Delete</a><?php }}?> <a href="<?php echo base_url('discussion/postDetails?postid='.$row->postid);?>">Comment(<?php echo $countComment[$row->postid];?>)</a> </div>
-    </div>
     <?php endforeach;?>
 	</div><!--end entry-->
     </div><!--end bottom-->
