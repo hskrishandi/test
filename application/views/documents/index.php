@@ -24,23 +24,23 @@
 					</div>
 					<a class="post" href="<?php echo base_url('resources/post/articles'); ?>">Post Article</a>
                 </div>
-                        <ul class="item-list">
+                        <ul class="item-list article">
                         <?php foreach($articles as $title => $entries): ?>
                             <?php $year=NULL; foreach($entries as $entry): ?>
                             <li>
                                 <?php 
 									if($year!=$entry->year)
-									echo '<span class="date" style="padding-top:10px">[ '.$entry->year.' ]</span>';
+									echo '<span class="date" style="padding:10px 0px; font-size:20px;"> '.$entry->year.' </span>';
                                     echo '<a href="' . base_url('resources/articles/' . $entry->id) . '" class="entry" >' . $entry->name . ' ';
                                     echo '</a></br>';
                                     if ($entry->author != NULL) {
-                                        echo  '- '. $entry->author;
+                                        echo  '．'. $entry->author;
     
                                     } else if ($entry->year != NULL) {
                                          echo  $entry->year;
                                     }
 									if($entry->publisher !=NULL){
-										echo '</br>- '. $entry->publisher;
+										echo '</br>．'. $entry->publisher;
 									}
 									
 									if($entry->website !=NULL){
