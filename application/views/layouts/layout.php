@@ -1,5 +1,6 @@
 <?php echo doctype('html5') ?>
 <html>
+
     <head>
         <?php $this->load->view('layouts/meta'); ?>
         <?php $this->load->view('layouts/title'); ?>
