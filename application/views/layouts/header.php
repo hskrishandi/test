@@ -130,8 +130,13 @@
                         <div class="login-box-title">
                             Login
                         </div>
+                        <div id="login-progress" class="progress" style="display:none;">
+                            <div id="login-progressbar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                <span class="sr-only">45%</span>
+                            </div>
+                        </div>
                         <!-- <form action="<?php echo base_url('account/login')?>" method="post" > -->
-                            <div class="user-login-group">
+                            <div id="user-login-group" class="user-login-group">
                                 <input id="login-username" type="email" name="email" class="form-control form-control-left" placeholder="Email">
                                 <input id="login-password" type="password" name="pwd" class="form-control form-control-right" placeholder="Password">
                             </div>
@@ -246,7 +251,14 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="clearFloat"></div>
+                    <div id="logout-progress" class="progress"  style="display:none;margin-top:20px;">
+                        <div id="logout-progressbar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">45%</span>
+                        </div>
+                    </div>
                 </div>
+
             </li>
         </ul>
         <img class="userlogo" src="<?php echo resource_url('img', 'icons/userIcon_white_large.png'); ?>" />
