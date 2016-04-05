@@ -8,13 +8,13 @@
 		<?php echo get_extended_block(); ?>
 		<script src="<?php echo resource_url('js', 'account_create.js'); ?>" type="text/javascript"></script>
 	<?php endblock(); ?>
-	
+
 	<?php startblock('side_menu'); ?>
         <?php echo get_extended_block(); ?>
         <?php $this->load->view('account/account_block'); ?>
 		<?php $this->load->view('credit'); ?>
 	<?php endblock(); ?>
-	
+
 	<?php startblock('css'); ?>
         <?php echo get_extended_block(); ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'account_create.css'); ?>" media="all" />
@@ -115,8 +115,8 @@
 			</from>
 			</div>
 		</div>
-		
-		
+
+
 	<?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>
