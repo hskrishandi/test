@@ -173,35 +173,35 @@
                         Registration
                     </div>
                     <div class="register-info">
-                        <form>
+                        <form action="<?php echo base_url('account/create_submit')?>" method="post">
                             <div class="register-info-title">
                                 Personal Information
                             </div>
                             <div class="register-name-group">
-                                <input type="firstname" name="firstname" class="form-control form-control-left" placeholder="First Name*">
-                                <input type="lastname" name="lastname" class="form-control form-control-right" placeholder="Last Name*">
+                                <input type="text" name="first_name" class="form-control form-control-left" placeholder="First Name*">
+                                <input type="text" name="last_name" class="form-control form-control-right" placeholder="Last Name*">
                             </div>
                             <div class="register-displayname-group">
-                                <input type="displayname" name="displayname" class="form-control" placeholder="Display Name*">
+                                <input type="text" name="displayname" class="form-control" placeholder="Display Name*">
                             </div>
                             <div class="register-company-group">
-                                <input type="company" name="company" class="form-control" placeholder="Company*">
+                                <input type="text" name="organization" class="form-control" placeholder="Company*">
                             </div>
                             <div class="register-position-group">
-                                <input type="position" name="position" class="form-control" placeholder="Position Title">
+                                <input type="text" name="position" class="form-control" placeholder="Position Title">
                             </div>
                             <div class="register-address-group">
-                                <input type="address" name="address" class="form-control" placeholder="Address">
+                                <input type="text" name="address" class="form-control" placeholder="Address">
                             </div>
                             <div class="register-contact-group">
-                                <input type="tel" name="tel" class="form-control form-control-left" placeholder="Telephone">
-                                <input type="fax" name="fax" class="form-control form-control-right" placeholder="Fax">
+                                <input type="text" name="tel" class="form-control form-control-left" placeholder="Telephone">
+                                <input type="text" name="fax" class="form-control form-control-right" placeholder="Fax">
                             </div>
                             <div class="register-info-title">
                                 Account Information
                             </div>
                             <div class="register-email-group">
-                                <input type="email" name="email" class="form-control" placeholder="Email Address*">
+                                <input type="text" name="email" class="form-control" placeholder="Email Address*">
                             </div>
                             <div class="register-info-description">
                                 The EMAIL ADDRESS is for log-in use. Please make sure the EMAIL ADDRESS is correct.
@@ -209,7 +209,7 @@
 
                             <div class="register-password-group">
                                 <input type="password" name="password" class="form-control" placeholder="Password*">
-                                <input type="password" name="passwordretype" class="form-control" placeholder="Retype Password*">
+                                <input type="password" name="retypepassword" class="form-control" placeholder="Retype Password*">
                             </div>
                             <div class="register-info-title">
                                 Verification Code
@@ -224,7 +224,7 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-primary btn-block">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -254,7 +254,7 @@
                     <div class="clearFloat"></div>
                     <div id="logout-progress" class="progress"  style="display:none;margin-top:20px;">
                         <div id="logout-progressbar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                            <span class="sr-only">45%</span>
+                            <span class="sr-only">0%</span>
                         </div>
                     </div>
                 </div>
