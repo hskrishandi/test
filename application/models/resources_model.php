@@ -279,7 +279,7 @@ class Resources_model extends CI_Model {
 		
 	}
 
-
+	
 
 	/**
 	 * Get tools, sorted by name

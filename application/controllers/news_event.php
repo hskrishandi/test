@@ -10,6 +10,7 @@ class news_event extends CI_Controller {
 		$this->load->model('Resources_model');
 		$this->load->model('Account_model');		
 		$this->config->load('news_event');
+		$this->load->library('pagination');
 	}
 
 	/**
@@ -72,11 +73,12 @@ class news_event extends CI_Controller {
 			'news_status'=>$this->Resources_model->check_inapproavl_news($id));
 			
 		} else {
-		
+		$page=($this->uri->segment(3))?$this->uri->segment(3):0;
 			$data = array(		
 				'display_list' => true,
 				'userInfo' => $this->Account_model->isLogin(),
-				'news' => $this->Resources_model->get_news_adv('undelete',NULL)
+				'news' => $this->Resources_model->get_news_adv('undelete'),
+				'links'=>$this->pagination->create_links()
 			);
 
 			

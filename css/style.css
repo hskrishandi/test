@@ -324,7 +324,7 @@
 	position: relative;
 	/* margin: 5px 0 15px 10px; */ /*Edit by leon 20160316*/
 	min-height: 200px;
-	width: 800px;
+	/*width: 800px;*/ /*Edit by Grace 20160330*/
 }
 
 

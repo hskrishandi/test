@@ -14,6 +14,7 @@
 					<div class="postSeparateLine">
 					&#x7c;
 					</div>
+
 					<a class="post" href="<?php echo base_url('resources/post/news'); ?>">Post News</a>
 				</div>
                 
@@ -27,6 +28,7 @@
 					</li>
 					<?php endforeach; ?>
                  </ul>
+                
                     <?php else:?>
                     <div class="title">News 
                     	<a class="return-link" href="<?php echo base_url('news_event'); ?>" onclick="history.go(-1); return false;">
