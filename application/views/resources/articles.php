@@ -3,12 +3,14 @@
 		Articles
 	<?php endblock(); ?>	
 	
+	<?php startblock('side_menu'); ?>
+	<?php endblock(); ?>
+	
 	<?php startblock('content'); ?>
 		<div id="resources">
 			<div id="resource-content">
             	<?php if($display_list):?>
                 <h2 class="title">Articles</h2>
-					
                        
                         <ul class="item-list">
                         <?php foreach($articles as $title => $entries): ?>

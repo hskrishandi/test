@@ -3,11 +3,17 @@
 		Organizations
 	<?php endblock(); ?>	
 	
+	<?php startblock('side_menu'); ?>
+	<?php endblock(); ?>
+	
 	<?php startblock('content'); ?>
-		<div id="resources">
-			
-			<div id="resource-content">
-				<h2 class="title">Organizations</h2>
+		<div id="resources">		
+			<p id="pageTitle">Resources</p>
+				<div class="title">Organizations
+					<div class="postSeparateLine">
+					</div>
+					<a class="post" href="<?php echo base_url('resources/post/groups'); ?>">Post Organization</a>
+				</div>
 				<ul class="item-list">
 					<?php foreach($groups as $entry): ?>
 					<li>

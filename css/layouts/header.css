@@ -1,38 +1,383 @@
 .header {
-    height: 64px;
+    height: 65px;
     background-color: rgb(26, 26, 26);
 }
 
 .header .logo {
     float: left;
-    width: 150px;
-    height: 50%;
-    margin: 0px;
-    clear: none;
-    color: rgb(0, 0, 0);
-    min-height: 0px;
-    padding-top: 1.2%;
-    padding-bottom: 1.2%;
-    padding-left: 3%;
-    display: inline;
+    height: 100%;
+}
+
+.header button {
+    width: 72px;
 }
 
 .header .logo img {
-    width: 100%;
+    height: 34px;
+    margin: 15px 30px;
 }
 
 .header .menu {
     float: left;
+    height: 26px;
+    margin: 19px 10px;
+}
+
+.header .menu ul {
+    height: 100%;
+    list-style: none;
+}
+
+.header .menu ul li {
+    float: left;
+    height: 100%;
+    margin: 0 10px;
+}
+
+.header .menu ul li a {
+    float: left;
+    height: 100%;
+}
+
+.header .menu .menu-image {
+    float: left;
+    height: 100%;
+    margin: 0 10px;
+}
+
+.header .menu .menu-title {
+    float: left;
+    line-height: 26px;
+    font-size: 14px;
+    color: #FFF;
 }
 
 .header .submenu {
     float: left;
+    height: 26px;
+    margin: 19px 10px;
 }
 
-.header .search {
+.header .submenu ul {
+    height: 100%;
+    list-style: none;
+}
+
+.header .submenu > ul > li {
     float: left;
+    height: 100%;
+    margin: 0 5px;
+}
+
+.header .submenu .submenu-title {
+    line-height: 26px;
+    font-size: 11px;
+    color: #FFF;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.header .submenu .submenu-box {
+    display: none;
+    position: absolute;
+    top: 65px;
+    z-index: 1000;
+    float: left;
+    padding: 0;
+    height: auto;
+    list-style: none;
+    background-color: #DADCDF;
+    filter: alpha(opacity=90);
+    -moz-opacity: 0.9;
+    -khtml-opacity: 0.9;
+    opacity: 0.9;
+    -webkit-box-shadow: 3px 1px 10px #888;
+    -moz-box-shadow: 3px 1px 10px #888;
+    box-shadow: 3px 1px 10px #888;
+}
+
+.header .submenu .submenu-box li {
+    cursor: pointer;
+}
+
+.header .submenu .submenu-box li:hover {
+    background: -moz-linear-gradient(left top, #D08638, #D5A72A);
+    background: -webkit-linear-gradient(left top, #D08638, #D5A72A);
+    background: -o-linear-gradient(left top, #D08638, #D5A72A);
+}
+
+.header .submenu .submenu-box li:hover a {
+    color: #FFF;
+}
+
+.header .submenu .submenu-box li a {
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+    display: block;
+    padding: 12px 30px;
+}
+
+.header .submenu .submenu-box {
+    color: #666;
+}
+
+.header .separate-line {
+    cursor: default;
+    color: #FFF;
+}
+
+.header .submenu .contact-box {
+    padding: 20px 40px;
+    max-width: 720px;
+}
+
+.header .submenu .submenu-box .contact-title {
+    border-bottom: 1px solid #666;
+    line-height: 30px;
+}
+
+.header .submenu .submenu-box h1 {
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    color: #4D4D4D;
+}
+
+
+/* close button for contact-box, id= contact-close*/
+
+.header .submenu .submenu-box .contact-title a {
+    width: 40px;
+    text-align: right;
+    font-size: 24px;
+    font-weight: 200;
+    float: right;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 13px;
+    color: #4D4D4D;
+}
+
+.header .submenu .submenu-box .contact-title a:hover {
+    color: red;
+}
+
+.header .submenu .submenu-box .contact-content {
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.header .submenu .submenu-box .contact-content p {
+    color: #666;
+    text-align: justify;
+}
+
+.header .submenu .submenu-box .contact-info h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    line-height: 30px;
+}
+
+.header .submenu .submenu-box .contact-info .control-label {
+    text-align: left !important;
+    /* Override bootstrap */
 }
 
 .header .user {
+    height: 26px;
+    margin: 19px 20px;
+    float: right;
+}
+
+.header .user ul {
+    list-style: none;
+    float: right;
+}
+
+.header .user li {
+    display: inline;
+    /*text-align: center;*/
+    margin: 0 5px;
+}
+
+.header .user .user-title {
+    line-height: 26px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.header .user > ul > li > a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.header .user > img {
+    float: right;
+    height: 20px;
+    margin: 3px;
+}
+
+.header .user .login-box,
+.header .user .register-box,
+.header .user .user-box {
+    display: none;
+    position: absolute;
+    top: 65px;
+    z-index: 1000;
+    float: right;
+    right: 60px;
+    padding: 20px 30px;
+    height: auto;
+    list-style: none;
+    background-color: #DADCDF;
+    filter: alpha(opacity=90);
+    -moz-opacity: 0.9;
+    -khtml-opacity: 0.9;
+    opacity: 0.9;
+    -webkit-box-shadow: 3px 1px 10px #888;
+    -moz-box-shadow: 3px 1px 10px #888;
+    box-shadow: 3px 1px 10px #888;
+    width: 430px;
+}
+
+.header .user .login-box form {
+    margin-top: 10px;
+}
+
+.header .user .login-box button {
+    float: right;
+}
+
+.header .user .login-box .forget-field {
+    margin-top: 10px;
+    border-top: 1px solid #999;
+}
+
+.header .user .login-box .login-box-title,
+.header .user .register-box .register-title {
+    line-height: 30px;
+    font-weight: bold;
+    color: #4D4D4D;
+}
+
+.header .user .login-box .login-box-description {
+    color: #666;
+}
+
+.header .form-control-left,
+.header .form-control-right {
+    display: inline;
+    width: 180px;
+}
+
+.header .form-control-left {
     float: left;
+}
+
+.header .form-control-right {
+    float: right;
+}
+
+.header .user .login-box .login-field .login-button {
+    margin-top: 15px;
+}
+
+.header .user .register-box input {
+    margin-bottom: 10px;
+}
+
+.header .user .register-box button {
+    width: 100%;
+}
+
+.header .user .register-box .register-info-title {
+    font-size: 13px;
+    line-height: 30px;
+    color: #666;
+}
+
+.header .user .register-box .register-info-description {
+    font-size: 11px;
+    text-align: justify;
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.header .user .register-box .register-recaptcha-group {
+    width: 100%;
+}
+
+.header .user .register-box .register-recaptcha-group > div > div > div {
+    margin: 10px auto;
+}
+
+.header .user .logined {
+    display: none;
+    margin-right: 60px;
+}
+
+.header .user .user-box .welcome-login {
+    float: left;
+    width: 40%;
+    font-size: 16px;
+    color: #666;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.header .user .user-box .welcome-login > div {
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #4D4D4D;
+}
+
+.header .user .user-box .user-menu {
+    float: right;
+    width: 60%;
+}
+
+.header .user .user-box .user-menu li {
+    display: block;
+}
+
+.header .user .user-box .user-menu a {
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 32px;
+}
+
+.header .search {
+    float: right;
+    margin-top: 20px;
+}
+
+.header .search form {
+    width: 180px;
+    height: 26px;
+    border-radius: 25px;
+    background-color: #FFF;
+    border: none;
+}
+
+.header .search img {
+    height: 18px;
+    float: left;
+    margin: 3px 6px;
+}
+
+.header .search input {
+    float: left;
+    height: 100%;
+    width: 130px;
+    text-align: right;
+    border: none;
+    outline: 0 none !important;
+}
+
+.clearFloat {
+    clear: both;
 }

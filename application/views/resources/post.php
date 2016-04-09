@@ -8,6 +8,9 @@
     <script src="<?php echo resource_url('js', 'ckeditor/ckeditor.js'); ?>" type="text/javascript"></script>
 <?php endblock(); ?>
 
+<?php startblock('side_menu'); ?>
+<?php endblock(); ?>
+	
 <?php startblock('content'); ?>
 
 <script>
@@ -163,7 +166,7 @@ $(document).ready(function(){
                 
                 <?php } else if($res=='groups'){?>
                		<div class="form">
-                    <h2 class="title">Organization</h2>
+                    <h2>Post Organiztion</h2>
                     <form name="groups_form" id="articles_form" action="<?php echo base_url('/resources/submit/groups');?>" method="post">
                     <table class="form_table">
                       <tr>
@@ -187,7 +190,7 @@ $(document).ready(function(){
 	      </div>                
                 <?php } else if($res=='models'){?>
        		  <div class="form">
-                <h2 class="title">Models</h2>
+                <h2>Post Reference</h2>
                     <form name="models_form" id="models_form" action="<?php echo base_url('/resources/submit/models');?>" method="post">
                       <table class="form_table">
                         <tr>
@@ -221,7 +224,7 @@ $(document).ready(function(){
                 
                		</div>                
                 <?php } else if($res=='tools'){?>
-                	<h2 class="title">Tools</h2>
+                	<h2>Post Tools</h2>
    		  <div class="form">
                     <form name="tools_form" id="tools_form" action="<?php echo base_url('/resources/submit/tools');?>" method="post">
                       <table class="form_table">
@@ -309,6 +312,7 @@ $(document).ready(function(){
                       <?php
                       $backpath = 'resources/'.$_GET['res'];
                       if ($_GET['res'] == 'activities') $backpath = 'cms/'.$_GET['res'];
+					  if ($_GET['res'] == 'articles') $backpath = 'documents';
                       ?>
                       <a class="return-link" href="<?php echo base_url($backpath); ?>">Back</a>
        
