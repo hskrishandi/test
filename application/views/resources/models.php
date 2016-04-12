@@ -3,10 +3,17 @@
 		Device Models
 	<?php endblock(); ?>	
 	
+	<?php startblock('side_menu'); ?>
+	<?php endblock(); ?>
+
 	<?php startblock('content'); ?>
 		<div id="resources">
-			<div id="resource-content">
-            <h2 class="title">Device Models</h2>
+			<p id="pageTitle">Resources</p>
+            <div class="title">Device Models Reference
+				<div class="postSeparateLine">
+				</div>
+				<a class="post" href="<?php echo base_url('resources/post/models'); ?>">Post Reference</a>
+			</div>
             <ul class="item-list">
 				<?php foreach($models as $status => $entries): ?>
 					

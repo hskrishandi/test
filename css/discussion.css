@@ -73,6 +73,7 @@
 #main_content div.user_post {
 	width: 700px;
 	margin-bottom: 10px;
+	border-bottom: gray 1px solid;
 }
 
 #main_content div#content {
@@ -201,6 +202,10 @@ display: block;
 padding: 5px  5px 5px 5px ;
 }
 
+.post_details .post_content div {
+	color: black;
+}
+
 .post_details .post_title{
 	padding-bottom:10px;
 }
@@ -225,6 +230,7 @@ padding: 5px  5px 5px 5px ;
 	word-break: break-all;
 	width: 550px;
 	float: left;
+	color: black;
 }
 
 .post_details .comment .user_reply_info {
@@ -314,19 +320,6 @@ div.posting {
 	display:block;
 }
 
-.blog .bottom .entries .user_entry .content{
-	padding:5px;
-}
-
-.blog .bottom .entries .user_entry .date{
-	padding-bottom:10px;
-}
-.blog .bottom .entries .user_entry .entry_tool{
-	padding-top:10px;
-	padding-bottom:10px;
-	text-align:right;
-}
-
 .posting div.formContent {
 	width: 500px;
 	border-right: 1px solid gray;
@@ -347,7 +340,7 @@ div.prompt * {
 
 div.userInfo {
 	float: left;
-	margin-left: 15px;
+	margin-left: 10px;
 }
 
 div.userInfo * {
@@ -454,7 +447,7 @@ div.comment_title {
 	float:left;
 	width:560px;
 	border-right: gray 1px solid;
-	margin-bottom: 20px;
+	padding-bottom: 30px;
 }
 
 #main_content .user_post .postContent div.rightPanel {
@@ -469,6 +462,7 @@ div.comment_title {
 
 #main_content .user_post div.postContent {
 	overflow: hidden;
+	margin-bottom: 20px;
 }
 
 #main_content .posts .user_post .reply {
@@ -484,4 +478,70 @@ div.comment_title {
 
 #main_content .posts .user_post .userInfo {
 	float:left;
+}
+
+#main_content .discussion div.top {
+	border-bottom: gray 1px solid;
+	overflow: hidden;
+	width: 700px;
+	padding-bottom: 10px;
+}
+
+#main_content .blog .bottom .entries .user_entry .entry_topic a {
+	color: black;
+}
+
+#main_content .blog .bottom .entries .user_entry div.date {
+	padding-bottom: 0;
+}
+
+#main_content .blog .bottom .entries .user_entry .entry_tool a {
+	color: black;
+}
+
+#main_content .blog .bottom .entries .user_entry .entry_tool a:hover {
+	font-weight: normal;
+}
+
+#main_content .blog .bottom .entries .user_entry div.entry_tool {
+	color: black;
+}
+
+#main_content .discussion .posting #posting div.form {
+	float:left;
+}
+
+#main_content .discussion .bottom .posts .backtop a {
+	color: black;
+	font-weight: bold;
+}
+
+#main_content .discussion .bottom .posts div.backtop {
+	margin-bottom: 10px;
+}
+
+#main_content .post_details .posts .user_post .navigation a {
+	color: black;
+	font-weight: bold;
+}
+
+#main_content .post_details .posts .user_post div.navigation  {
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+#main_content .post_details .posts .user_post div.commentheader  {
+	margin-top: 40px;
+	padding-bottom: 10px;
+	border-bottom: gray 1px solid;
+	color: black;
+	font-weight: bold;
+}
+
+#main_content .post_details .posts .user_post .postContent .rightPanel a {
+	color: black;
+}
+
+#main_content .post_details .posts .user_post .postContent .rightPanel a:hover {
+	font-weight: normal;
 }

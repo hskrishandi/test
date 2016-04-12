@@ -4,7 +4,7 @@
     float: none;
     height: auto;
     clear: none;
-    width: 1280px;
+    width: 100%;
     display: block;
     position: relative;
     top: 0px;
@@ -30,7 +30,6 @@
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    height: 650px;
 }
 
 #slideOverlay {
@@ -58,7 +57,9 @@
     z-index: 1;
 }
 
+
 /*SlideImage - End*/
+
 
 /*Introduction - Start*/
 
@@ -67,13 +68,13 @@
     height: auto;
     margin: 0px auto;
     clear: none;
-    width: 1280px;
+    width: 100%;
     position: relative;
     top: 0px;
     left: 0px;
     padding-bottom: 6em;
     z-index: auto;
-	background-color: rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
 }
 
 #introTextBox {
@@ -85,9 +86,9 @@
 }
 
 .textTitle {
-	color: rgb(77, 77, 77);
-	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
-	font-size: 2.1em;
+    color: rgb(77, 77, 77);
+    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+    font-size: 2.1em;
     line-height: 1.22em;
 }
 
@@ -102,12 +103,12 @@
 }
 
 .iconBoxes {
-	float: none;
+    float: none;
     height: auto;
-	clear: none;
-	width: 49.997942%;
-	margin-left: auto;
-	margin-right: auto;
+    clear: none;
+    width: 49.997942%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #Icon1Box {
@@ -131,7 +132,7 @@
     clear: none;
     color: rgb(0, 0, 0);
     min-width: 0px;
-	display: block;
+    display: block;
 }
 
 .introBoxIconText {
@@ -151,16 +152,15 @@
     height: auto;
     margin-left: auto;
     /* margin-top: 30px;  reference: http://stackoverflow.com/questions/4198269/margin-top-not-working-with-clear-both */
-	padding-top: 30px;
+    padding-top: 30px;
     clear: both;
-	display: block;
+    display: block;
     width: 78.5%;
     margin-right: auto;
-	
 }
 
 .screenShotImage {
-	width: auto;
+    width: auto;
     max-width: 45%;
     height: auto;
     margin: 0px;
@@ -174,7 +174,9 @@
     float: right;
 }
 
+
 /*Introduction - End*/
+
 
 /*Model Library - Start*/
 
@@ -183,7 +185,7 @@
     height: auto;
     margin: 0px auto;
     clear: none;
-    width: 1280px;
+    width: 100%;
     min-width: 0px;
     position: relative;
     top: 0px;
@@ -198,7 +200,7 @@
     height: 100%;
     margin: 0px auto;
     clear: none;
-    width: 1280px;
+    width: 100%;
     min-height: 0px;
 }
 
@@ -227,7 +229,7 @@
     margin: 1em auto auto;
     clear: none;
     color: rgb(0, 0, 0);
-	display: block;
+    display: block;
 }
 
 #MLTextBox {
@@ -245,24 +247,24 @@
     margin-left: auto;
     margin-right: auto;
     /* margin-top: 435px; */
-	padding-top: 80px;
+    padding-top: 80px;
     clear: both;
-	display: block;
+    display: block;
     width: 76%;
 }
 
 .modelBoxContainer {
     float: left;
-	clear: none;
-	height: auto;
+    clear: none;
+    height: auto;
     width: 20%;
 }
 
-.modelBoxes{
-	height: auto;
+.modelBoxes {
+    height: auto;
     width: 80%;
     margin: 0px auto;
-	background-color: rgb(230, 230, 230);
+    background-color: rgb(230, 230, 230);
     -webkit-box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
     box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
 }
@@ -274,11 +276,11 @@
     height: 98px;
     margin-left: auto;
     /* margin-top: 27px; */
-	padding-top: 27px;
+    padding-top: 27px;
     clear: both;
     color: rgb(0, 0, 0);
     margin-right: auto;
-	display: block;
+    display: block;
 }
 
 .modelInfo {
@@ -289,9 +291,9 @@
     margin: 24px auto 0px;
     clear: none;
     min-height: 46px;
-	font-family: DINPro;
+    font-family: DINPro;
     color: rgb(31, 31, 31);
-	font-size: 0.7em;
+    font-size: 0.7em;
     line-height: 1.6em;
 }
 
@@ -332,11 +334,12 @@
 }
 
 .modelRatingStars {
-	float: right;
+    float: right;
     width: 42%;
     clear: none;
     margin-right: 1.5%;
 }
+
 .ratingStar {
     float: right;
     width: 0.7em;
@@ -344,29 +347,35 @@
     height: auto;
     clear: none;
     color: rgb(0, 0, 0);
-	margin-top: 7px;
+    margin-top: 7px;
     margin-right: 1%;
 }
+
 .ratingLightStar {
-    color: rgb(255,255,0);
+    color: rgb(255, 255, 0);
 }
+
 .ratingDimStar {
     color: rgb(0, 0, 0);
 }
 
+
 /*Model Library - End*/
+
 
 /*User Experience & News HighLights - Start*/
 
+
 /*Uswe Experience - Start*/
+
 #UENHBox {
     float: none;
     height: auto;
     margin: 0px auto;
     clear: none;
-    width: 1280px;
+    width: 100%;
     padding-bottom: 6em;
-	background-color: rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
 }
 
 #UserExperienceBox {
@@ -381,8 +390,8 @@
 
 #ExperienceBox {
     float: right;
-/*     height: 278px; */
-	height: auto;
+    /*     height: 278px; */
+    height: auto;
     margin-left: 0px;
     margin-top: 0px;
     clear: none;
@@ -419,26 +428,27 @@
     border-top-style: solid;
 }
 
-
-.EMessageText{
-	float: none;
+.EMessageText {
+    float: none;
     font-size: 1em;
     width: 100%;
     height: auto;
     margin: 0.7em auto 0px;
-	line-height: 1.63em;
+    line-height: 1.63em;
 }
 
-.EMessageNameText{
-	float: none;
+.EMessageNameText {
+    float: none;
     width: 100%;
     height: auto;
     text-align: right;
     margin: 2em auto 0px;
-	font-size: 0.85em;
+    font-size: 0.85em;
 }
 
+
 /*User Experience - End*/
+
 
 /*News Highlights - Start*/
 
@@ -461,8 +471,8 @@
     min-width: 0px;
 }
 
-.NLimage{
-	width: 30%;
+.NLimage {
+    width: 30%;
     height: auto;
 }
 
@@ -481,7 +491,9 @@
     margin: 0px;
 }
 
+
 /*News Highlights - End*/
+
 
 /*iMos Activities - Start*/
 
@@ -521,12 +533,16 @@
 }
 
 #iMOSActivitiesMore {
-	float: right;
+    float: right;
     clear: none;
     line-height: 1em;
-	margin-right: 1em;
-    position:relative; height:1.9em; top:50%; margin-top:0.95em; /* div高度的一半 */
-	font-size: 0.9em;
+    margin-right: 1em;
+    position: relative;
+    height: 1.9em;
+    top: 50%;
+    margin-top: 0.95em;
+    /* div高度的一半 */
+    font-size: 0.9em;
     color: rgb(255, 255, 255);
 }
 
@@ -537,16 +553,16 @@
     clear: both;
     width: 100%;
     min-width: 0px;
-	overflow: hidden;
+    overflow: hidden;
 }
 
-.iMosActivityTitle{
-	font-size: 1em;
-	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+.iMosActivityTitle {
+    font-size: 1em;
+    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
 }
 
-.iMosActivityContent{
-	font-size: 0.9em;
+.iMosActivityContent {
+    font-size: 0.9em;
 }
 
 .iMosActivityColumn1 {
@@ -568,11 +584,13 @@
 }
 
 .iMosActivityLink {
-	float: none;
+    float: none;
     font-size: 0.6em;
     color: rgb(41, 171, 226);
 }
 
+
 /*iMos Activities - End*/
+
 
 /*User Experience & News HighLights - End*/

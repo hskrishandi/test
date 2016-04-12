@@ -51,7 +51,7 @@
     <div class="post_details">   
         <div class="posts">
         	<?php foreach ($posts as $row): ?>
-        	<div class="user_post">
+        	<div class="user_post" style="border:none">
 
                 <div class="postContent">
                     <div class="leftPanel">
@@ -84,6 +84,13 @@
                                 </span>
                             </a>
                         </div>
+                        <?php if($userInfo!=false){
+                            if ($userid==$row->userid||$userInfo->email=="model@i-mos.org"){?>
+                                <br>
+                                <a href="<?php echo base_url('discussion/edit_post/'.$row->postid);?>">&gt; Edit</a>
+                                <br>
+                                <a href="<?php echo base_url('discussion/maintain?action=del&blogid='.$row->userid.'&postid='.$row->postid);?>">&gt; Delete</a>
+                        <?php }}?>
                     </div>
                 </div>
 
@@ -98,6 +105,13 @@
                     </div>
                 </div>
                 <?php endforeach ?>
+
+                <div class="navigation">
+                    <a href="#">Back to the top</a>
+                    <a href="<?php echo base_url('discussion/'); ?>" style="float:right">Back to Discussion Page</a>
+                </div>
+
+                <div class="commentheader">Write a comment:</div>
       
                 <div class="reply">
                     <div id="error"></div>
@@ -136,6 +150,7 @@
                         <input type="hidden" name="userid" value="<?php if($userInfo!=false) echo $userInfo->id;?>" />
                         </form>
                     </div>
+                    <?php if ($userInfo!=false): ?>
                     <div class="userInfo">
                         <div>
                             <?php if($userInfo->email=='model@i-mos.org'): ?>
@@ -163,6 +178,7 @@
                         <div><?php echo date("Y-m-d"); ?></div>
                         <div><?php echo date("H:i:s"); ?></div>
                     </div>
+                <?php endif; ?>
                 </div>
             </div>
             <?php endforeach ?>
