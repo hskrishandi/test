@@ -22,7 +22,7 @@
 
     <p class="mainTitle">Discussion</p>
     <div class="subTitle">
-        <span>My Posts</span>
+        <span><?php echo $displayname->displayname;?>'s Blog</span>
         <span class="links">
             <a href="<?php echo base_url('discussion/posting');?>">Create Post</a>
             &nbsp;&nbsp;|&nbsp;&nbsp;
