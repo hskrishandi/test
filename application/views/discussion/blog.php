@@ -1,5 +1,5 @@
 
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 <?php startblock('title'); ?>
 		Discussion
@@ -46,7 +46,7 @@
                 <a href="<?php echo base_url('discussion/maintain?action=del&pre=blog&blogid='.$blogOwnerid.'&postid='.$row->postid);?>">Delete</a>
         <?php }}?>
     </div> 
-    <div class="content">   
+    <div class="blogcontent">   
     
     <table width="530">
     <tr>
