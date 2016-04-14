@@ -1,5 +1,5 @@
 
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 <?php startblock('title'); ?>
 	Discussion
@@ -56,7 +56,7 @@
                 <?php $datetime=date("Y-m-d H:i:s");//current datetime YYYY-MM-DD 00:00:00 UTC+8 ?>
                 <input class="subject" name="subject" type="text" size="67" />
                 <input type="hidden" name="datetime" value="<?php echo $datetime;?>" />
-                <div class="content">
+                <div class="inputcontent">
                     <textarea name="editor1"  id="editor1"></textarea>
              	    <script type="text/javascript">
     				    CKEDITOR.replace('editor1',

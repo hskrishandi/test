@@ -1,5 +1,5 @@
 
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 <?php startblock('title'); ?>
 		Discussion
@@ -67,7 +67,7 @@
          
          <div class="content_title"></div>
 
-         <div class="content">
+         <div class="inputcontent">
                   <textarea name="editor1"  id="editor1"><?php echo $row->content;?></textarea>
          			<script type="text/javascript">
 								CKEDITOR.replace( 'editor1',

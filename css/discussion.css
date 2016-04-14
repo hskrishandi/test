@@ -1,3 +1,7 @@
+body {
+	background: white;
+}
+
 .discussion{
 	padding-left:20px;
 	padding-top:20px;
@@ -62,77 +66,78 @@
 	width: 450px;
 }
 
-#main_content .user_post .rightcol .title a {
+.content .user_post .rightcol .title a {
 	color: black;
 }
 
-#main_content .user_post .rightcol .date {
+.content .user_post .rightcol .date {
 	color: black;
 }
 
-#main_content div.user_post {
+.content div.user_post {
 	width: 700px;
 	margin-bottom: 10px;
 	border-bottom: gray 1px solid;
 }
 
-#main_content div#content {
+.content div#content {
 	margin-left: 150px;
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
 
-#main_content div.discussion {
+.content div.discussion {
 	margin-top: 40px;
 	border-color: gray;
 	border-width: 1px;
 	border-style: solid;
 }
 
-#main_content p.mainTitle {
+.content p.mainTitle {
 	font-size: 35px;
 	color: black;
 }
 
-#main_content div.subTitle {
+.content div.subTitle {
 	background-color: rgb(26, 26, 26);
 	padding-left: 10px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	width: 794px;
 }
 
-#main_content div.subTitle span {
+.content div.subTitle span {
 	font-size: 20px;
 	color: white;
 }
 
-#main_content div.discussionHeader {
+.content div.discussionHeader {
 	float: left;
 	font-weight: bold;
 	color: black;
 }
 
-#main_content div.short_content * {
+.content div.short_content * {
 	color: black;
 }
 
-#main_content :not(#FooterBox) p {
+.content :not(#FooterBox) p {
 	margin: 0;
 }
 
-#main_content a span.displayName {
+.content a span.displayName {
 	color: black;
 	font-weight: bold;
 }
 
-#main_content div.replies {
+.content div.replies {
 	float: left;
 	margin-top: 10px;
 	margin-left: 10px;
 	color: black;
 }
 
-#main_content .subTitle span.links {
+.content .subTitle span.links {
 	float: right;
 	color: white;
 	font-size: 15px;
@@ -140,12 +145,12 @@
 	padding-right: 10px;
 }
 
-#main_content .subTitle span.links a {
+.content .subTitle span.links a {
 	color:white;
 	font-size: 15px;
 }
 
-#main_content .subTitle span.links a:hover {
+.content .subTitle span.links a:hover {
 	color:white;
 	font-size: 15px;
 	font-weight: normal;
@@ -240,12 +245,12 @@ padding: 5px  5px 5px 5px ;
 	padding-left: 10px;
 }
 
-#main_content .post_details .comment .user_reply_info div.replyUser a {
+.content .post_details .comment .user_reply_info div.replyUser a {
 	color: black;
 	font-weight: bold;
 }
 
-#main_content .post_details .comment div.user_reply_info {
+.content .post_details .comment div.user_reply_info {
 	color: black;
 }
 
@@ -287,6 +292,7 @@ div.posting {
 	padding-left: 40px;
 	padding-right: 40px;
 	overflow: hidden;
+	width: 720px;
 }
 
 .blog{	
@@ -377,11 +383,11 @@ display: block;
 padding-bottom:5px;
 }
 
-#main_content .date a {
+.content .date a {
 	color: black;
 }
 
-#main_content .date a:hover {
+.content .date a:hover {
 	font-weight: normal;
 }
 
@@ -417,7 +423,7 @@ padding-bottom:5px;
 
 .post_details .posts .user_post h1.title {
 	color: black;
-	font-size: 35px;
+	font-size: 25px;
 	font-weight: bold;
 }
 
@@ -433,104 +439,104 @@ div.comment_title {
 	padding-bottom: 10px;
 }
 
-#main_content div.form_submit a.submit {
+.content div.form_submit a.submit {
 	background-color: rgb(26, 26, 26);
 	padding: 5px 10px;
 	cursor: default;
 }
 
-#main_content div.form_submit a.submit:hover {
+.content div.form_submit a.submit:hover {
 	font-weight: normal;
 }
 
-#main_content .user_post .postContent div.leftPanel {
+.content .user_post .postContent div.leftPanel {
 	float:left;
 	width:560px;
 	border-right: gray 1px solid;
 	padding-bottom: 30px;
 }
 
-#main_content .user_post .postContent div.rightPanel {
+.content .user_post .postContent div.rightPanel {
 	float:left;
 	padding-left: 10px;
 }
 
-#main_content .user_post .postContent .rightPanel div.userName {
+.content .user_post .postContent .rightPanel div.userName {
 	color: black;
 	font-weight: bold;
 }
 
-#main_content .user_post div.postContent {
+.content .user_post div.postContent {
 	overflow: hidden;
 	margin-bottom: 20px;
 }
 
-#main_content .posts .user_post .reply {
+.content .posts .user_post .reply {
 	overflow: hidden;
 }
 
-#main_content .posts .user_post .reply .formContent {
+.content .posts .user_post .reply .formContent {
 	float: left;
 	width: 500px;
 	border-right: gray 1px solid;
 	padding-right: 60px;
 }
 
-#main_content .posts .user_post .userInfo {
+.content .posts .user_post .userInfo {
 	float:left;
 }
 
-#main_content .discussion div.top {
+.content .discussion div.top {
 	border-bottom: gray 1px solid;
 	overflow: hidden;
 	width: 700px;
 	padding-bottom: 10px;
 }
 
-#main_content .blog .bottom .entries .user_entry .entry_topic a {
+.content .blog .bottom .entries .user_entry .entry_topic a {
 	color: black;
 }
 
-#main_content .blog .bottom .entries .user_entry div.date {
+.content .blog .bottom .entries .user_entry div.date {
 	padding-bottom: 0;
 }
 
-#main_content .blog .bottom .entries .user_entry .entry_tool a {
+.content .blog .bottom .entries .user_entry .entry_tool a {
 	color: black;
 }
 
-#main_content .blog .bottom .entries .user_entry .entry_tool a:hover {
+.content .blog .bottom .entries .user_entry .entry_tool a:hover {
 	font-weight: normal;
 }
 
-#main_content .blog .bottom .entries .user_entry div.entry_tool {
+.content .blog .bottom .entries .user_entry div.entry_tool {
 	color: black;
 }
 
-#main_content .discussion .posting #posting div.form {
+.content .discussion .posting #posting div.form {
 	float:left;
 }
 
-#main_content .discussion .bottom .posts .backtop a {
+.content .discussion .bottom .posts .backtop a {
 	color: black;
 	font-weight: bold;
 }
 
-#main_content .discussion .bottom .posts div.backtop {
+.content .discussion .bottom .posts div.backtop {
 	margin-bottom: 10px;
 }
 
-#main_content .post_details .posts .user_post .navigation a {
+.content .post_details .posts .user_post .navigation a {
 	color: black;
 	font-weight: bold;
 }
 
-#main_content .post_details .posts .user_post div.navigation  {
+.content .post_details .posts .user_post div.navigation  {
 	margin-top: 5px;
 	margin-bottom: 10px;
 }
 
-#main_content .post_details .posts .user_post div.commentheader  {
+.content .post_details .posts .user_post div.commentheader  {
 	margin-top: 40px;
 	padding-bottom: 10px;
 	border-bottom: gray 1px solid;
@@ -538,10 +544,17 @@ div.comment_title {
 	font-weight: bold;
 }
 
-#main_content .post_details .posts .user_post .postContent .rightPanel a {
+.content .post_details .posts .user_post .postContent .rightPanel a {
 	color: black;
 }
 
-#main_content .post_details .posts .user_post .postContent .rightPanel a:hover {
+.content .post_details .posts .user_post .postContent .rightPanel a:hover {
 	font-weight: normal;
+}
+
+.content {
+	overflow: hidden;
+	margin-top: 50px;
+	margin-left: 100px;
+	margin-bottom: 30px;
 }
