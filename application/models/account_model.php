@@ -30,7 +30,9 @@ class Account_model extends CI_Model {
 				if ($row->isactivated=='1'){
 					//$this->db->where('id',$row->id)->update('users', array("sessionid"=>$this->session->userdata['session_id']));
 					$this->session->set_userdata(array('id'=>$row->id));
-					return "ok";
+                    // edit by leon 20160405
+					// return "ok";
+                    return $row->displayname;
 				}else{
 					return "noactive";
 				}
@@ -87,9 +89,9 @@ class Account_model extends CI_Model {
 			return false;
 		};
 	}
-	
+
 	public function getAllUsrInfo(){
-		$this->db->from('users')->order_by('displayname');	
+		$this->db->from('users')->order_by('displayname');
 		return $this->db->get()->result();
 	}
 
@@ -118,10 +120,10 @@ class Account_model extends CI_Model {
 		$this->email->message($msg);
 		$this->email->send();
 	}
-	
+
 	public function info_update($data){
-		$this->db->where('id', $this->islogin()->id);	
-		$this->db->update('users', $data); 
+		$this->db->where('id', $this->islogin()->id);
+		$this->db->update('users', $data);
 	}
 
 	public function changePass($email, $oldpass, $newpass){
@@ -130,8 +132,8 @@ class Account_model extends CI_Model {
 			$row = $query->first_row();
 			if ($this->_isPassVaild($row->password, $oldpass)){
 				$data['password'] = _password_crypt('sha512', $newpass, _password_generate_salt(DRUPAL_HASH_COUNT));
-				$this->db->where('id', $row->id);	
-				$this->db->update('users', $data); 
+				$this->db->where('id', $row->id);
+				$this->db->update('users', $data);
 				return true;
             }else{
 				return false;
@@ -140,14 +142,14 @@ class Account_model extends CI_Model {
 			return false;
 		}
 	}
-	
+
 	public function newPass($email){
 		$query = $this->db->get_where("users", array('email'=>$email),1,0);
 		$newpass = uniqid();
 		if ($query->num_rows() > 0){
 			$row = $query->first_row();
 			$data['password'] = _password_crypt('sha512', $newpass, _password_generate_salt(DRUPAL_HASH_COUNT));
-			$this->db->where('id', $row->id);	
+			$this->db->where('id', $row->id);
 			$this->db->update('users', $data);
 			$config['mailtype']='html';
 			$this->email->initialize($config);
@@ -183,7 +185,7 @@ class Account_model extends CI_Model {
 			return false;
 		}
 	}
-	
+
 	public function isAuth($userlevel=0){
 		$info = $this->Account_model->islogin();
 		if (uri_string() !=="account/authErr")
@@ -203,8 +205,8 @@ class Account_model extends CI_Model {
 		if($hidden==true)
 			$del_status = 1;
 		else if($hidden==false)
-			$del_status = 0; 	
-		
+			$del_status = 0;
+
 		if($array!=NULL){
 			for($i=0; $i<count($array);$i++){
 				$id=$array[$i];
@@ -221,21 +223,21 @@ class Account_model extends CI_Model {
 			for($i=0; $i<count($array);$i++){
 				$id=$array[$i];
 				$this->db->query("DELETE FROM $type WHERE  id = '$id'");
-			}		
+			}
 		}
 		else{
-			$this->db->query("DELETE FROM $type WHERE id = '$id'");	
+			$this->db->query("DELETE FROM $type WHERE id = '$id'");
 		}
 	}
 	public function getUserInfoById($id){
 		$this->db->from('users')->where("id", $id);
 		return $this->db->get()->result();
 	}
-	
-		
+
+
 	public function updateAcc($data){
 		extract($data);
-		$this->db->query("UPDATE  `imos2`.`users` SET  
+		$this->db->query("UPDATE  `imos2`.`users` SET
 `first_name` =  '$first_name',
 `last_name` =  '$last_name',
 `organization` =  '$organization',
@@ -243,10 +245,10 @@ class Account_model extends CI_Model {
 `address` =  '$address',
 `position` =  '$position',
 `tel` =  '$tel',
-`fax` =  '$fax' WHERE  `users`.`id` ='$id'");	
+`fax` =  '$fax' WHERE  `users`.`id` ='$id'");
 	}
-	
-	
+
+
 }
 
 ?>

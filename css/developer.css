@@ -28,19 +28,20 @@
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    height:250px;
 }
 
 #slideOverlay {
     position: absolute;
     bottom: auto;
     z-index: auto;
-    height: 203px;
+    height: 250px; 
 
 }
 
 #slideText {
     float: left;
-    font-size: 2.45em;
+    font-size: 4.5em;
     width: auto;
     height: auto;
     text-align: left;
@@ -50,7 +51,7 @@
     clear: none;
     min-height: 0px;
     position: absolute;
-    top:30%;
+    top:10%;
     left: 100px;
     color: rgb(255, 255, 255);
     bottom: auto;
@@ -73,17 +74,22 @@
 #developer textarea {
 	display: inline-block;
 	margin-top: 2px;
-	width: 60%;
+	width: 395px;
 	resize: none;
 }
 
 #developer .tos {
-	margin-top: 7px;
-	padding: 2%;
-	width: 96%;
-	height: 250px;
-	overflow: auto;
-	border: 1px solid #9E9EC3;
+	
+	padding: 40px;
+	width: 1000px;
+	
+	position: absolute;
+	left:100px;
+	top:300px;
+	background: #E7E5E2;
+	color:black;
+	line-height: 1.5em;
+	font-size: 1.5em;
 }
 
 #developer .progress {
@@ -107,15 +113,19 @@
 	margin: 5px 0 5px 10px;
 }
 
-#developer h3 {
-	margin: 5px;
+#developer h2 {
+	color:black;
+	font-weight: bold;
 }
 
 #developer div .labels {
-	padding: 5px;
-	min-height: 320px;
-	border-width:1px;
-	border-style:solid;
+	
+	
+	padding-left: 40px;
+	padding-right:20px;
+	padding-bottom: 20px;
+	
+	overflow: hidden;
 }
 
 
@@ -134,38 +144,32 @@
 #developer label {
 	display: inline-block;
 	position: relative;
-	margin: 5px 5px 0 5px;
-	width: 100%;
+	margin: 0px 0px 10px 5px;
+	
 	font-size: larger;
 }
 
 
-#developer span {
+#developer #page1 .labels .label_left span {
 	display: inline-block;
-	vertical-align: middle
+	vertical-align: middle;
 	position: relative;
 	margin: 0px 0px;
-	width: 35%
+	width: 90px;
 }
 
 #developer .uploaded{
-	padding-right: 25px;
-	color: chocolate;
-	font-size: smaller;
-	width: 10%
+	
+	font-size: 1em;
+	
 }
 
 #developer input[type=text]
 {
 	display: inline-block;
-	width: 60%;
+	width: 395px;
 }
 
-#developer input[type=file]
-{
-	display: inline-block;
-	width: 25%;
-}
 
 
 #developer select {
@@ -404,33 +408,58 @@
 
 
 #developer .submit {
-	background-color: #726fb2;
+    background-color: #4D4C4A;
+    color: #FFF;
+    display: block;
+    position: relative;
+    float: right;
+    margin-top: 50px;
+    margin-left: 22px;
+    height: 32px;
+    width: 95px;
+    border: 0;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+    padding: 5px 0px;
+    font-size: 1.2em;
+}
+
+#developer .submitModelBut{
+	background: rgb(1,155,225); /* For browsers that do not support gradients */ 
+	background: -webkit-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Firefox 3.6 to 15 */   
+    background:linear-gradient(rgb(40,200,240), rgb(1,155,225));
 	color: #FFF;
 	display: block;
-	position: relative;	
+	position: absolute;	
+	top:120px;
+	right:30px;
 	float: right;
-	margin-top: 15px;
-	margin-left: 22px;
-	height: 22px;
-	width: 95px;
+	border-radius: 400px;
+	height: 32px;
+	width: 200px;
 	border: 0;
 	text-align: center;
-	line-height: 22px;
+	line-height: 30px;
 	cursor: pointer;
+	padding:5px 0px;
+	font-size: 1.8em;
 }
 
 #developer .save,
 #developer .back,
 #developer .next {
-	background-color: #726fb2;
+	background-color: #4D4C4A;
 	color: #FFF;
 	display: block;
-	position: relative;	
+		
 	float: right;
 	margin-top: 15px;
-	margin-right: 10px;
-	height: 22px;
-	width: 95px;
+	margin-left: 800px;
+	height: 25px;
+	width: 150px;
 	border: 0;
 	text-align: center;
 	line-height: 22px;
@@ -449,7 +478,7 @@
 	border-right: 11px solid #726fb2;
 }
 
-#developer .next:after {
+/*#developer .next:after {
 	content: "";
 	position: absolute;
 	right: -11px;
@@ -459,7 +488,7 @@
 	border-top: 11px solid transparent;
 	border-bottom: 11px solid transparent;
 	border-left: 11px solid #726fb2;
-}
+}*/
 
 #developer .save:hover,
 #developer .back:hover,
@@ -530,4 +559,142 @@ div.ui-dialog  div.ui-dialog-titlebar  {
 div.ui-dialog,
 div.ui-dialog .ui-widget-content {
 	border-color: #9E9EC3;
+}
+#main_content{
+	min-height: 900px;
+}
+
+/*added by Grace*/
+
+#developer .form-page{
+	color:black;
+	line-height: 1.5em;
+	background: #E7E5E2;
+	
+	position: relative;
+	width: 1100px;
+	margin-top: 25px;
+	overflow: hidden;
+}
+
+#developer .form-page .formStepTitle{
+	padding: 40px 40px;
+	background: #E7E5E2;
+}
+
+#developer .form-page .label_right{
+	width: 470px;
+	background: white;
+	float:right;
+	padding:15px 15px;
+	
+}
+#developer #page1 .label_right{
+
+	height:290px;
+}
+
+#developer #page3 .label_left{
+	background: white;
+	padding:15px 15px;
+	width: 470px;
+}
+
+
+.label_left{
+	float: left;
+	width: 500px;
+}
+
+#developer form{
+	padding-left: 100px;
+	padding-top: 80px;
+
+}
+
+#developer .previous_simulator 
+{
+	width: 498px	!important;	
+}
+
+#developer #page2 .labels .label_left div{
+	float: right;
+}
+
+#developer #page4 .submit_area{
+	float: right;
+	width: 500px;
+	background: white;
+	position: absolute;
+	top:30px;
+	padding-bottom: 20px;
+	z-index: 2;
+	left: 560px;
+	height:260px;
+}
+	
+#developer #page4 .submit_area img{
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	top:40px;
+	left:40px;
+}
+#developer #page4 .labels{
+	height: 210px;
+}
+
+#developer .form-page .uploadFile input[type="file"]{
+	opacity:0;  
+	width: 470px;
+	height: 45px;
+	position:absolute;
+    top:0; left:0;
+    cursor: pointer;
+
+}
+#developer .form-page .uploadFile{
+	position: relative;
+	
+}
+#developer .form-page .uploadFile span{
+	font-size: 13px;
+	font-weight: bold;
+	color: rgb(0,113,185);
+}
+
+#developer .form-page .uploadFile .uploadImg{
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+	
+}
+
+#developer .form-page .fileImg{
+	height: 70px;
+	width: 55px;
+	vertical-align: text-top;
+}
+
+#developer .form-page .uploadMessage{
+	float: right;
+	width: 400px;
+}
+#developer .form-page .uploadMessage p{
+	margin-bottom: 0px	!important;
+
+}
+
+#developer #page2 .labels .label_left span {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	margin: 0px 0px;
+	width: 400px;
+}
+
+#developer #page1 .labels .label_right #imagePreview{
+	height: 180px;
+	margin: 20px 0px;
+	max-width: 470px;
 }

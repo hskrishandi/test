@@ -30,9 +30,9 @@
 		
 		<!-- SlideImage-->
 		<div id="slideBox" class="clearfix">
-			<img id="slideImage" class="slide" src="<?php echo resource_url('img', 'develop/slider.jpg'); ?>" />
+			<img id="slideImage" class="slide" src="<?php echo resource_url('img', 'develop/developerslider.jpg'); ?>" />
 			<p id="slideText">
-				Developer <br/>Model<br/>
+				Your<br/>Developer <br/>Model<br/>
 			</p>
 			<img id="slideOverlay" class="slide"src="<?php echo resource_url('img', 'develop/slideOverlay.svg'); ?>" />
 		</div>

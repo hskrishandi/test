@@ -11,7 +11,7 @@
 
 #main_content a {
 	text-decoration:none;
-	color: #7575a9;
+	/*color: #7575a9;*/
 }
 
 #main_content a:hover, #main_content a:active {
@@ -282,28 +282,33 @@
 	display: block;
 	margin-top: 25px;
 	padding-left: 15px;
-	color: #85859C;
-	background: transparent url(../images/icons/back-icon.png) no-repeat center left;
-	width: 32px;
+	background-color: #4E4E4E;
+	color: white;
+	height: 22px;
+	line-height: 22px;
+	/*background: transparent url(../images/icons/back-icon.png) no-repeat center left;*/
+	width: 30px;
+	text-align: center;
+	position: relative;
 }
 
 #main_content a.return-link:hover,
 #main_content a.return-link:active
 {
-	background: transparent url(../images/icons/back-icon-active.png) no-repeat center left;
+	/*background: transparent url(../images/icons/back-icon-active.png) no-repeat center left;*/
 }
 
 #main_content a.more {
 	display: block;
 	padding-right: 10px;
-	//background: transparent url(../images/icons/forward-icon.png) no-repeat center right;
+	/*background: transparent url(../images/icons/forward-icon.png) no-repeat center right;*/
 	width: 36px;
 	float: right;
 }
 
 #main_content a.more:hover,
 #main_content a.more:active {
-	//background: transparent url(../images/icons/forward-icon-active.png) no-repeat center right;
+	/*background: transparent url(../images/icons/forward-icon-active.png) no-repeat center right;*/
 }
 
 /*  Main Page  */
@@ -324,7 +329,7 @@
 	position: relative;
 	/* margin: 5px 0 15px 10px; */ /*Edit by leon 20160316*/
 	min-height: 200px;
-	width: 800px;
+	/*width: 800px;*/ /*Edit by Grace 20160330*/
 }
 
 

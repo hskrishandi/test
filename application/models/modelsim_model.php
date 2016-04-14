@@ -29,7 +29,7 @@ class Modelsim_model extends CI_Model {
 			    GROUP BY benchmark_id
 			) AS outputs ON mb.id=outputs.id
 			LEFT JOIN
-			
+
 			(
 				SELECT mbo.benchmark_id AS id,
 				CONCAT('[', GROUP_CONCAT(
@@ -52,7 +52,7 @@ class Modelsim_model extends CI_Model {
 			ORDER BY mb.orders");
 		return $query->result_array();
 	}
-        	
+
 	public function getBenchmarkingInfoById($id) {
 		$query = $this->db->query("SELECT * FROM model_benchmark WHERE id=?", array($id));
 		if($query->num_rows() > 0) return $query->row();
@@ -92,7 +92,7 @@ class Modelsim_model extends CI_Model {
 		->group_by("model_id")->order_by("rate DESC")->limit(5);
 		return $this->db->get()->result();
 	}
-	
+
 	/**
 	 * Get Models with rating and post comments count
 	 */
@@ -101,7 +101,7 @@ class Modelsim_model extends CI_Model {
 			->join("(SELECT postid, count(*) AS countComment from post_comments WHERE type = 'model' GROUP BY `postid`) comments", "comments.postid = model_info.post_id", "left")
 			->join("(SELECT model_id, AVG(rate) AS rate from starrating GROUP BY `model_id`) rating", "rating.model_id = model_info.name", "left")
 		->group_by("short_name")->order_by("id asc");
-		
+
 		return $this->db->get()->result();
 	}
 
@@ -113,7 +113,7 @@ class Modelsim_model extends CI_Model {
 		if ($query->num_rows() > 0) {
 			return $query->row();
 		}
-		
+
 		return null;
 	}
 
@@ -131,9 +131,9 @@ class Modelsim_model extends CI_Model {
 		if ($query->num_rows() > 0) {
 			return $query->row();
 		}
-		
+
 		return null;
-	}	
+	}
 	public function updatetModelInfo($data,$model_id){
 		/*
 		extract($data);
@@ -143,21 +143,21 @@ class Modelsim_model extends CI_Model {
 `desc_name` =  '$desc_name',
 `organization` =  '$organization',
 `type` =  '$type' WHERE  `model_info`.`id` ='$model_id'");
-		
+
 		*/
-		
+
 		$this->db->update('model_info',$data,array('id' => $model_id));
 	}
 	public function getModelCount()
 	{
 		$this->db->select('COUNT(id) as count')->from('model_info');
 		$query = $this->db->get();
-		
+
 		if ($query->num_rows() > 0) {
 			$result = $query->row();
 			return $result->count;
 		}
-	
+
 		return 0;
 	}
 	/**
@@ -245,11 +245,11 @@ class Modelsim_model extends CI_Model {
 		return null;
 	}
 	// ---------------------------;Version Tree-------------------------------
-    
+
 	public function getModelCardInfo($model_card_name)
 	{
 		$this->db->select('user_param_sets.data as param_data')->from('user_param_sets')
-			 ->where('user_param_sets.name', $model_card_name);	
+			 ->where('user_param_sets.name', $model_card_name);
 
 		return $this->db->get()->result();
 	}
@@ -257,7 +257,7 @@ class Modelsim_model extends CI_Model {
 	public function getModelCardInfo2($model_card_name, $user_id)
 	{
 		$this->db->select('user_param_sets.data as param_data')->from('user_param_sets')
-			 ->where(array('user_param_sets.name' => $model_card_name, 'user_id' => $user_id));	
+			 ->where(array('user_param_sets.name' => $model_card_name, 'user_id' => $user_id));
 
 		return $this->db->get()->result();
 	}
@@ -266,12 +266,12 @@ class Modelsim_model extends CI_Model {
 	{
 		$this->db->select('model_info.id as model_id, model_info.short_name as model_name, user_param_sets.id as id, user_param_sets.name, user_param_sets.data')->from('model_info')
 			->join('user_param_sets', 'model_info.id = user_param_sets.model_id', 'left')
-			->where('user_param_sets.user_id', $user_id)			
+			->where('user_param_sets.user_id', $user_id)
 			->order_by("model_id asc")->distinct();
 
 		return $this->db->get()->result();
 	}
-    	
+
 	public function getModelLibraryEntry($user_id, $id)
 	{
 		$this->db->select('data')->from('user_param_sets')->where(array("user_id" => $user_id, "id" => $id));
@@ -281,10 +281,10 @@ class Modelsim_model extends CI_Model {
 			$result = $query->row();
 			return json_decode($result->data);
 		}
-		
+
 		return null;
 	}
-		
+
 	public function addModelLibraryEntry($user_id, $model_id, $name, $data)
 	{
 		$this->db->select('id')->from('user_param_sets')->where(array("user_id" => $user_id, "model_id" => $model_id, "name" => $name));
@@ -294,29 +294,29 @@ class Modelsim_model extends CI_Model {
 			$result = $query->row();
 			$this->deleteModelLibraryEntry($user_id, $result->id);
 		}
-		
+
 		$this->db->insert('user_param_sets', array("user_id" => $user_id, "model_id" => $model_id, "name" => $name, "data" => $data));
 		return ($this->db->affected_rows() > 0 ? $this->db->insert_id() : -1);
 	}
-		
+
 	public function deleteModelLibraryEntry($user_id, $id)
 	{
 		$this->db->where(array("id" => $id, "user_id" => $user_id));
 		$this->db->delete('user_param_sets');
 		return $this->db->affected_rows() > 0;
 	}
-	
+
 	public function newModelLibrary($user_id)
 	{
 		$this->db->where('user_id', $user_id);
-		$this->db->delete('user_param_sets'); 
+		$this->db->delete('user_param_sets');
 		return $this->db->affected_rows();
 	}
-	
+
 	public function loadModelLibrary($user_id, $data)
 	{
 		$insert = array();
-		
+
 		foreach ($data as $i => $val) {
 			$insert[$i] = array();
 			$insert[$i]["user_id"] = $user_id;
@@ -324,11 +324,11 @@ class Modelsim_model extends CI_Model {
 			$insert[$i]["name"] = $data[$i]["name"];
 			$insert[$i]["model_id"] = $data[$i]["model_id"];
 		}
-		
-		$this->db->insert_batch('user_param_sets', $insert); 
+
+		$this->db->insert_batch('user_param_sets', $insert);
 		return $this->db->affected_rows();
 	}
-        
+
 	public function getParamSets($model_id)
 	{
 		$this->db->select('id, name')->from('param_sets')->where("model_id", $model_id);
@@ -336,7 +336,7 @@ class Modelsim_model extends CI_Model {
 
 		return $query->result();
 	}
-	
+
 	public function getParamSet($model_id, $id)
 	{
 		$this->db->select('data')->from('param_sets')->where(array("model_id" => $model_id, "id" => $id));
@@ -346,27 +346,27 @@ class Modelsim_model extends CI_Model {
 			$result = $query->row();
 			return $result->data;
 		}
-		
+
 		return null;
 	}
-		
+
 	public function getModelBiases($model_id)
 	{
 		$this->db->select('name, default')->from('model_bias')->where(array("model_id" => $model_id))->order_by('node_order', 'asc');
 		$query = $this->db->get();
 		return $query->result();
 	}
-		
+
 	public function getModelParams($model_id, $editable = true)
 	{
 		$this->db->select('name, description, unit, default, instance')->from('model_params')
 				->where(array("model_id" => $model_id, "editable" => $editable))
 				->order_by('instance', 'asc');
-		
+
 		$query = $this->db->get();
 		$ret = array('instance' => array(), 'model' => array());
 		$result = $query->result();
-		
+
 		foreach ($result as $param) {
 			if ($param->instance == 1) {
 				$ret['instance'][] = $param;
@@ -382,59 +382,59 @@ class Modelsim_model extends CI_Model {
 		$this->db->select('name, description, unit, default, instance')->from('model_params')
 				->where(array("model_id" => $model_id, "editable" => $editable, "instance" =>1))
 				->order_by('instance', 'asc');
-		
+
 		$query = $this->db->get();
 		$ret = array('instance' => array());
 		$result = $query->result();
-		
+
 		foreach ($result as $param) {
 			if ($param->instance == 1) {
 				$ret['instance'][] = $param;
-			} 
+			}
 		}
 		return $ret;
 	}
-	
+
 	public function getModelParamsTabTitle($model_id)
 	{
 		$this->db->select('instance,title')->from('model_params_tab_title')
 		->where(array("model_id" => $model_id))
 		->order_by('instance', 'asc');
-		
+
 		$query = $this->db->get();
     $ret = array();
 		$result = $query->result();
-		
+
 		foreach ($result as $param) {
       $ret[$param->instance] = $param->title;
 		}
-		
+
 		return $ret;
 	}
-			
+
 	public function getModelOutputs($model_id)
 	{
 		$this->db->select('id, name, unit, variable, column_id')->from('model_outputs')->where(array("model_id" => $model_id))->order_by('column_id', 'asc');
 		$query = $this->db->get();
 		return $query->result();
-	}	
+	}
 
-/*		
+/*
 	User library
-	
+
 	public function addParamSet($user_id, $model_id, $name, $data)
 	{
 		$this->db->insert('user_param_sets', array("user_id" => $user_id, "model_id" => $model_id, "name" => $name, "data" => $data));
 		return ($this->db->affected_rows() > 0 ? $this->db->insert_id() : -1);
 	}
-	
+
 	public function updateParamSet($user_id, $model_id, $id, $data)
 	{
 		$this->db->where(array("id" => $id, "model_id" => $model_id, "user_id" => $user_id));
 		$this->db->update('user_param_sets', array("data" => $data, "last_modify" => date('Y-m-d H:i:s')));
 		return $this->db->affected_rows() > 0;
 	}
-	
+
 	public function deleteParamSet($user_id, $model_id, $id)
 	{
 		$this->db->where(array("id" => $id, "model_id" => $model_id, "user_id" => $user_id));
