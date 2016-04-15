@@ -46,6 +46,7 @@
 				<br>
 				<span>Members</span>
 				<br>Leon Liang
+				<br>Junda Zhong
 				<br>Yankun Cao
 				<br>Wong Man Ting Grace
 				<br>Chu Chun Kit Tony
