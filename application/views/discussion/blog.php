@@ -67,7 +67,7 @@
     <?php echo "<script language='javascript'>checkContent(".$row->postid.",".substr_count($row->content, '<br />').",".strlen($row->content).");</script>" ;?>
     
     </div> 
-    
+    </div>
     <?php endforeach;?>
 	</div><!--end entry-->
     </div><!--end bottom-->

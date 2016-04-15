@@ -62,7 +62,7 @@
            <input type="hidden" name="datetime" value="<?php echo $datetime;?>" />
 
          
-         <div class="topic"><input class="subject" name="subject" type="text" size="60" value="<?php echo $row->subject;?>"/></div>
+         <div class="topic"><input class="subject" name="subject" type="text" value="<?php echo $row->subject;?>" style="width:100%"/></div>
          
          
          <div class="content_title"></div>

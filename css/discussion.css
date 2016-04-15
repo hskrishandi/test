@@ -4,11 +4,11 @@ body {
 
 .discussion{
 	padding-left:20px;
+	padding-right:20px;
 	padding-top:20px;
-	width: 780px;
 	min-height: 500px;
-	float: left;	
 	position: relative;
+	overflow: hidden;
 }
 .discussion .active_users{
 	border-bottom:solid;
@@ -28,10 +28,8 @@ body {
 }
 
 .discussion .bottom .posts{
-	width:640px;
 	float:left;
 	padding-top:20px;
-	padding-right:20px;
 }
 
 
@@ -40,7 +38,7 @@ body {
 }
 
 .discussion .bottom .posts .user_post .leftcol{
-	width:100;
+	width: 6%;
 	float:left;
 	display:block;
 	padding-right:10px;
@@ -52,7 +50,7 @@ body {
 }
 
 .discussion .bottom .posts .user_post .rightcol{
-	width:450px;
+	width:64%;
 	float:left;
 	display:block;
 }
@@ -63,7 +61,6 @@ body {
 	margin-top:0px;
 	margin-bottom:0px;
 	display:block;
-	width: 450px;
 }
 
 .content .user_post .rightcol .title a {
@@ -75,7 +72,7 @@ body {
 }
 
 .content div.user_post {
-	width: 700px;
+	width: 100%;
 	margin-bottom: 10px;
 	border-bottom: gray 1px solid;
 }
@@ -103,7 +100,6 @@ body {
 	padding-left: 10px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	width: 794px;
 }
 
 .content div.subTitle span {
@@ -191,7 +187,7 @@ overflow: hidden;
 
 
 .post_details{
-	width: 720px;
+	width: 100%;
 	min-height: 500px;
 	float: left;
 	border: gray 1px solid;
@@ -216,11 +212,8 @@ padding: 5px  5px 5px 5px ;
 }
 
 .post_details .comment{
-	width:680px;
 	padding-top:8px;
-	padding-left:10px;
 	padding-bottom:10px;
-	padding-right:10px;
 	margin-top: 5px;
 	border-bottom:solid;
 	border-width:1px;
@@ -233,7 +226,7 @@ padding: 5px  5px 5px 5px ;
 	display:block;
 	padding-bottom:5px;
 	word-break: break-all;
-	width: 550px;
+	width: 75%;
 	float: left;
 	color: black;
 }
@@ -241,7 +234,7 @@ padding: 5px  5px 5px 5px ;
 .post_details .comment .user_reply_info {
 	border-left: gray 1px solid;
 	float: left;
-	width: 100px;
+	width: 25%;
 	padding-left: 10px;
 }
 
@@ -256,7 +249,6 @@ padding: 5px  5px 5px 5px ;
 
 .post_details  .reply{
 	padding-top:20px;
-	width:700px;
 	display:block;
 }
 
@@ -292,13 +284,12 @@ div.posting {
 	padding-left: 40px;
 	padding-right: 40px;
 	overflow: hidden;
-	width: 720px;
 }
 
 .blog{	
 	padding-left:20px;
 	padding-top:20px;
-	width: 700px;
+	width: 100%;
 	min-height: 500px;
 	float: left;	
 }
@@ -327,7 +318,7 @@ div.posting {
 }
 
 .posting div.formContent {
-	width: 500px;
+	width: 70%;
 	border-right: 1px solid gray;
 	float: left;
 	padding-right: 15px;
@@ -347,6 +338,7 @@ div.prompt * {
 div.userInfo {
 	float: left;
 	margin-left: 10px;
+	width: 20%;
 }
 
 div.userInfo * {
@@ -451,7 +443,7 @@ div.comment_title {
 
 .content .user_post .postContent div.leftPanel {
 	float:left;
-	width:560px;
+	width:75%;
 	border-right: gray 1px solid;
 	padding-bottom: 30px;
 }
@@ -459,6 +451,7 @@ div.comment_title {
 .content .user_post .postContent div.rightPanel {
 	float:left;
 	padding-left: 10px;
+	width: 25%;
 }
 
 .content .user_post .postContent .rightPanel div.userName {
@@ -477,9 +470,9 @@ div.comment_title {
 
 .content .posts .user_post .reply .formContent {
 	float: left;
-	width: 500px;
+	width: 75%;
 	border-right: gray 1px solid;
-	padding-right: 60px;
+	padding-right: 15%;
 }
 
 .content .posts .user_post .userInfo {
@@ -489,7 +482,6 @@ div.comment_title {
 .content .discussion div.top {
 	border-bottom: gray 1px solid;
 	overflow: hidden;
-	width: 700px;
 	padding-bottom: 10px;
 }
 
@@ -515,6 +507,7 @@ div.comment_title {
 
 .content .discussion .posting #posting div.form {
 	float:left;
+	width: 70%;
 }
 
 .content .discussion .bottom .posts .backtop a {
@@ -554,7 +547,9 @@ div.comment_title {
 
 .content {
 	overflow: hidden;
+	width: 80%;
 	margin-top: 50px;
-	margin-left: 100px;
+	margin-left: 10%;
 	margin-bottom: 30px;
+	margin-right: 10%;
 }
