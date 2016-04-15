@@ -55,9 +55,8 @@
 	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
 	color:white	!important;
 	background: black;
-	height: 30px;
-	padding-top: 10px;
-	padding-left: 15px;
+	height: 5%;
+	padding: 0.5% 2%;
 	font-size: 1.5em;
 }
 
@@ -90,36 +89,36 @@ a.post {
 	margin-left:800px;	
 }
 
-#page #content ul {
+#resources ul {
 	display: block;	
 	
 }
 
-#page #content ul.item-list {
+#resources ul.item-list {
 	padding: 0px;
-	margin-left: 350px;
+	margin-left: 40%;
 	overflow-x: hidden;
 	/*line-height: 1.8em;*/
 	color: #4E4E4E;
 }
 
-#page #content  ul.item-list li {
+#resourcest  ul.item-list li {
 	list-style-type: none;
 	display: block;
 	margin: 13px 5px 18px;
 	/*font-weight: bold;*/
 }
 
-#page #content  ul.item-list.article li {
+#resources  ul.item-list.article li {
 	font-weight: bold;
 }
 
-#page #content  ul.item-list li .date {
+#resources  ul.item-list li .date {
 	list-style-type: none;
 	display: block;
 }
 
-#page #content  ul.item-list a.link {
+#resources  ul.item-list a.link {
 	color: #4E4E4E;
 	font-weight: normal;
 	display: block;
@@ -129,19 +128,19 @@ a.post {
 	/*text-decoration: underline;*/
 }
 
-#page #content  ul.item-list a.link:hover,
-#page #content  ul.item-list a.link:active {
+#resources  ul.item-list a.link:hover,
+#resources  ul.item-list a.link:active {
 	font-weight: normal;
 	/*text-decoration: underline;*/
 }
 
-#page #content  ul.item-list.article a.link,
-#page #content  ul.item-list.article a.link:hover,
-#page #content  ul.item-list.article a.link:active {
+#resources  ul.item-list.article a.link,
+#resources  ul.item-list.article a.link:hover,
+#resources  ul.item-list.article a.link:active {
 	text-decoration: underline;
 }
 
-#page #content .entry {
+#resources .entry {
 	margin: 3px 0;
 	display: inline-block;
 	font-size: 1.05em;
@@ -151,35 +150,35 @@ a.post {
 	color: #4E4E4E;
 }
 
-#page #content .entry:hover,
-#page #content .entry:active {
+#resources .entry:hover,
+#resources .entry:active {
 	/*font-weight: bolder;*/
 	font-weight: normal;
 }
 
-#page #content .article .entry,
-#page #content .article .entry:hover,
-#page #content .article .entry:active {
+#resources .article .entry,
+#resources .article .entry:hover,
+#resources .article .entry:active {
 	font-weight:bold;
 }
 
-#page #content span.name {
+#resources span.name {
 	font-weight: bolder;
 }
 
-#page #content span.description {
+#resources span.description {
 	color: #4E4E4E;
 /*	display: block;
 	margin: 5px;
 	width: 80%; */
 }
 
-#page #content span.date {
+#resources span.date {
 	
 	font-size: 1em;
 }
 
-#page #content span.user-detail {
+#resources span.user-detail {
 	color: #4E4E4E;
 	text-align: left;
 	padding: 0.5em 0.2em;	
@@ -187,32 +186,29 @@ a.post {
 	display: block;
 }
 
-#page #content span.website  {
+#resources span.website  {
 	padding-top:5px;
 	display: block;	
 	color: #4E4E4E;
 }
-#page #content span.website a.link:hover,
-#page #content span.website a.link:active {
+#resources span.website a.link:hover,
+#resources span.website a.link:active {
 	text-decoration: underline;
 	font-weight: normal;
 }
 
 /* Resource index page columns */
-
-#page #resources {
-	width: 980px;
-	margin: 10px 150px;
-	position: relative;
-	float: left;
+#resources{
+	margin:0 10%;
 }
 
-#page #resources .row {
+
+#resources .row {
 	position: relative;
 	clear: both;
 }
 
-#page #resources .block {
+#resources .block {
 	float: left;
 	width: 344px;
 	min-height: 150px;
@@ -220,7 +216,7 @@ a.post {
 	margin: 10px 0;
 }
 
-#page #resources .block ul.item-list a.link {
+#resources .block ul.item-list a.link {
 	color: inherit;
 	font-style: normal;
 	display: block;
@@ -229,12 +225,12 @@ a.post {
 
 /* Resource page content */
 
-#page #resource-content {
+#resource-content {
 	width: 85%;
 	margin: 20px;
 }
 
-#page #resource-content .title{
+#resource-content .title{
 	margin-top:0px;
 }
 
@@ -243,7 +239,7 @@ a.post {
 	text-align:right;
 }
 
-#page #resource-content ul.item-list li .date {
+#resource-content ul.item-list li .date {
 	list-style-type: none;
 	display: block;
 	margin: 0px 0px;
@@ -366,7 +362,7 @@ width: 75px;
 	border-color:red;
 }
 
-#page #resources #pageTitle{
+#resources #pageTitle{
 	font-size: 4em;
 	font-weight: bolder;
     text-align: left;
@@ -411,22 +407,22 @@ a.return-link{
 	font-size: 1.2em;
 }
 
-#page #resources #newsEventHL{
+#resources #newsEventHL{
 	font-size: 2.5em;
     text-align: center;
     font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
-    margin-top: 65px;
+    margin-top: 5%;
 }
 
 #resources .highlightImage{
-	height: 180px;
-	width: 317px;
-	padding-right: 10px;
+	height: 100%;
+	width: 34.5%;
+	padding-right: 4%;
 }
 
 #resources  #lastImage{
-	height: 180px;
-	width: 317px;
+	height: 100%;
+	width: 30%;
 	padding: 0px;
 }
 
@@ -437,4 +433,8 @@ a.return-link{
 #resources .details .newsTitle{
 	font-size: 3em;
 	line-height: 1em;
+}
+
+#resources .highlightImageContainer{
+	margin: 3% 0;
 }
