@@ -387,9 +387,10 @@ width: 75px;
 }
 
 .item-list .entryTitle{
-	color:black;
+	color:black		!important;
 	font-size: 1.2em;
 	font-weight: bold;
+	line-height: 1.2em;
 }
 
 a.return-link{
@@ -398,19 +399,42 @@ a.return-link{
 	font-size: 0.7em;
 	padding-top: 3px;
 	padding-right: 15px;
-	/*color:white		!important;*/
-	color: #4E4E4E;
+	color:white;
 }
 
-.entryTitle{
-	font-size: 3em;
-	line-height: 1em;
-	padding:10px 0px;
-}
+
 .details{
-	color:black		!important;
+	color:black;
 	margin-left: 250px;
 	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
 	line-height: 1.5em;
 	font-size: 1.2em;
+}
+
+#page #resources #newsEventHL{
+	font-size: 2.5em;
+    text-align: center;
+    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+    margin-top: 65px;
+}
+
+#resources .highlightImage{
+	height: 180px;
+	width: 317px;
+	padding-right: 10px;
+}
+
+#resources  #lastImage{
+	height: 180px;
+	width: 317px;
+	padding: 0px;
+}
+
+#resources .details a{
+	color:black;
+}
+
+#resources .details .newsTitle{
+	font-size: 3em;
+	line-height: 1em;
 }

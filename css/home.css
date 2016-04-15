@@ -39,22 +39,21 @@
 }
 
 #slideText {
-    float: left;
-    font-size: 2.45em;
+    float: right;
+    font-size: 2.5em;
     width: auto;
     height: auto;
-    text-align: left;
+    text-align: right;
     font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
     font-weight: bold;
     line-height: 1.15em;
     clear: none;
     min-height: 0px;
     position: absolute;
-    top: 64%;
-    left: 100px;
+    top: 80%;
     color: rgb(255, 255, 255);
     bottom: auto;
-    right: 0%;
+    right: 50px;
     z-index: 1;
 }
 

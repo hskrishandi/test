@@ -1,11 +1,11 @@
 <?php echo doctype('html5') ?>
 <html>
 
-<?php $menu_items = array('News and Events' => base_url('news'),
+<?php $menu_items = array('News and Events' => base_url('news_event'),
 						'Discussion' => base_url('discussion'),
 						'Documents' => base_url('documents'),
 						'Resources' => base_url('resources'),
-						'Contributiors' => base_url('contributors'),
+						'Contributors' => base_url('contributors'),
 						'Developers' => base_url('developer')); ?>
 
 <head>
@@ -116,9 +116,9 @@
 	<div id="MenuItemsBox" class="MenuDropDown" style="display:none;">
 		<ul>
 		<?php foreach ($menu_items as $title => $url) : ?>
-			<il>
+			<li>
 				<a href="<?php echo $url; ?>"><?php echo $title; ?></a>
-			</il>
+			</li>
 		<?php endforeach; ?>
 		</ul>
 	</div>

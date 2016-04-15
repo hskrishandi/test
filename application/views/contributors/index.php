@@ -1,4 +1,4 @@
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Contributors
@@ -30,7 +30,7 @@
 		</div>
 		<p class="subTitle">The i-Mos Team</p>
 		<div class="divContainer">
-			<div id="col1">
+			<div class="col1">
 				<br>
 				<span>Principal Investigator</span>
 				<br>Prof. Mansun Chan
@@ -61,7 +61,7 @@
 				<span>User Interface Designer</span>
 				<br>Lawrence Choy
 			</div>
-			<div id="col2">
+			<div class="col2">
 				<br>
 				<span>Past Contributors</span>
 				<br>Chun Ming Kenneth Au

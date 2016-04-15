@@ -16,14 +16,13 @@
 						<?php foreach($events as $entry): ?>
 						<li>
                         
-                        	<span class="date">[  <?php echo date_range(strtotime($entry->start_date), strtotime($entry->end_date)) ;?> ]</span>
-							<?php 
-								echo '<a href="' . $entry->website . '" class="entry"  target="_blank" >' . $entry->name . ', '.$entry->full_name.'</a><br>';
-								echo $entry->location ;
-								if ($entry->website != NULL) {
+                        	<?php 
+							echo '<div class="entryTitle">'.$entry->full_name.'</div>';
+							echo '<span class="date">'. date_range(strtotime($entry->start_date), strtotime($entry->end_date)).' &#x7c; '.$entry->location.'</span>';
+							if ($entry->website != NULL) {
 									echo '<a href="' . $entry->website . '" class="link"  target="_blank" >' .  strip_text($entry->website, MAX_LINK_LENGTH) . '</a>'; 
-								}
-							?>
+							}
+						?>
 
 						</li>
 						<?php endforeach; ?>

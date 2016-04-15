@@ -54,7 +54,7 @@
             <form id="posting" name="posting" method="post" action="<?php echo base_url('discussion/submitPostForm')?>">
                 <input type="hidden" name="userid" value="<?php  echo $userid;?>" />
                 <?php $datetime=date("Y-m-d H:i:s");//current datetime YYYY-MM-DD 00:00:00 UTC+8 ?>
-                <input class="subject" name="subject" type="text" size="67" />
+                <input class="subject" name="subject" type="text" style="width:100%" />
                 <input type="hidden" name="datetime" value="<?php echo $datetime;?>" />
                 <div class="inputcontent">
                     <textarea name="editor1"  id="editor1"></textarea>

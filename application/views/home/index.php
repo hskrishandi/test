@@ -14,7 +14,7 @@
 <?php endblock(); ?>
 
 <?php startblock('banner'); ?>
-<img id="slideImage" src="<?php echo resource_url('img', 'home/slider3.jpg'); ?>" class="slide" />
+<img id="slideImage" src="<?php echo resource_url('img', 'home/newslider.jpg'); ?>" class="slide" />
 <?php endblock(); ?>
 
 <?php startblock('content'); ?>

@@ -11,7 +11,7 @@
 
 #main_content a {
 	text-decoration:none;
-	color: #7575a9;
+	/*color: #7575a9;*/
 }
 
 #main_content a:hover, #main_content a:active {
@@ -329,7 +329,7 @@
 	position: relative;
 	/* margin: 5px 0 15px 10px; */ /*Edit by leon 20160316*/
 	min-height: 200px;
-	width: 800px;
+	/*width: 800px;*/ /*Edit by Grace 20160330*/
 }
 
 
