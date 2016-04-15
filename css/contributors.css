@@ -7,7 +7,7 @@ div.content {
 	width: 80%;
 }
 
-div.divIcons {
+.content div.divIcons {
 	margin-left: 35%;
 	margin-top: 30px;
 	margin-bottom: 30px;
@@ -17,27 +17,27 @@ div.divIcons {
 	border-top-style: solid;
 }
 
-div.divContainer {
+.content div.divContainer {
 	margin-left: 35%;
 	color: black;
 	font-size: 15px;
 	line-height: 1.5;
 }
 
-div.col1 {
+.content .divContainer div.col1 {
 	float: left;
 }
 
-div.col2 {
+.content .divContainer div.col2 {
 	float: left;
 	margin-left: 50px
 }
 
-p.mainTitle {
+.content p.mainTitle {
 	font-size: 35px;
 }
 
-p.subTitle {
+.content p.subTitle {
 	font-size: 20px;
 	color: white;
 	background-color: rgb(26, 26, 26);
@@ -46,6 +46,6 @@ p.subTitle {
 	padding-bottom: 5px;
 }
 
-span {
+.content .divContainer span {
 	font-weight: bold;
 }
