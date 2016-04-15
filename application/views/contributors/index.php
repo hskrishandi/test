@@ -36,7 +36,7 @@
 				<br>Prof. Mansun Chan
 				<br>
 				<br>
-				<span>Project Officer</span>
+				<span>Project Director</span>
 				<br>Dr. Lining Zhang
 				<br>
 				<br>
@@ -45,17 +45,10 @@
 				<br>
 				<br>
 				<span>Members</span>
-				<br>Raju Salahuddin
-				<br>Clarissa Cyrilla Prawoto
-				<br>Yin Sun
-				<br>Ying Zhu
-				<br>Salahuddin Shairfe Muhammad
-				<br>
-				<br>
-				<span>Programmers</span>
-				<br>Kent Wang
-				<br>Keda Ruan
-				<br>Lei Sun
+				<br>Leon Liang
+				<br>Yankun Cao
+				<br>Wong Man Ting Grace
+				<br>Chu Chun Kit Tony
 				<br>
 				<br>
 				<span>User Interface Designer</span>
@@ -77,6 +70,14 @@
 				<br>Kwok Shiu Andy Wong
 				<br>Aixi Zhang
 				<br>Hamza Zia
+				<br>Raju Salahuddin
+				<br>Clarissa Cyrilla Prawoto
+				<br>Yin Sun
+				<br>Ying Zhu
+				<br>Salahuddin Shairfe Muhammad
+				<br>Kent Wang
+				<br>Keda Ruan
+				<br>Lei Sun
 				<br>
 				<br>
 				<span>Collaborators</span>
