@@ -1,5 +1,5 @@
 
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 <?php startblock('title'); ?>
 		Discussion
@@ -22,7 +22,7 @@
 
     <p class="mainTitle">Discussion</p>
     <div class="subTitle">
-        <span>My Posts</span>
+        <span><?php echo $displayname->displayname;?>'s Blog</span>
         <span class="links">
             <a href="<?php echo base_url('discussion/posting');?>">Create Post</a>
             &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -46,7 +46,7 @@
                 <a href="<?php echo base_url('discussion/maintain?action=del&pre=blog&blogid='.$blogOwnerid.'&postid='.$row->postid);?>">Delete</a>
         <?php }}?>
     </div> 
-    <div class="content">   
+    <div class="blogcontent">   
     
     <table width="530">
     <tr>
@@ -67,7 +67,7 @@
     <?php echo "<script language='javascript'>checkContent(".$row->postid.",".substr_count($row->content, '<br />').",".strlen($row->content).");</script>" ;?>
     
     </div> 
-    
+    </div>
     <?php endforeach;?>
 	</div><!--end entry-->
     </div><!--end bottom-->

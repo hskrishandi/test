@@ -30,7 +30,10 @@ class resources extends CI_Controller {
 				'articles' => $this->Resources_model->get_articles_adv('undelete','all', $num_rows),
 				'models' => $this->Resources_model->get_models_adv('undelete','released', $num_rows),
 				/*'news' => $this->Resources_model->get_news_adv('undelete',$num_rows),*/
-				'tools' => $this->Resources_model->get_tools_adv('undelete', 'all', $num_rows),		
+				'tools1' => $this->Resources_model->get_tools_adv('undelete', 'device_sim', $num_rows),
+				'tools2' => $this->Resources_model->get_tools_adv('undelete', 'circuit_sim', $num_rows),
+				'tools3' => $this->Resources_model->get_tools_adv('undelete', 'param_extract', $num_rows),
+				'tools4' => $this->Resources_model->get_tools_adv('undelete', 'interface', $num_rows)
 						
 		);
 		

@@ -1,4 +1,4 @@
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Contributors
@@ -30,13 +30,13 @@
 		</div>
 		<p class="subTitle">The i-Mos Team</p>
 		<div class="divContainer">
-			<div id="col1">
+			<div class="col1">
 				<br>
 				<span>Principal Investigator</span>
 				<br>Prof. Mansun Chan
 				<br>
 				<br>
-				<span>Project Officer</span>
+				<span>Project Director</span>
 				<br>Dr. Lining Zhang
 				<br>
 				<br>
@@ -45,23 +45,17 @@
 				<br>
 				<br>
 				<span>Members</span>
-				<br>Raju Salahuddin
-				<br>Clarissa Cyrilla Prawoto
-				<br>Yin Sun
-				<br>Ying Zhu
-				<br>Salahuddin Shairfe Muhammad
-				<br>
-				<br>
-				<span>Programmers</span>
-				<br>Kent Wang
-				<br>Keda Ruan
-				<br>Lei Sun
+				<br>Leon Liang
+				<br>Junda Zhong
+				<br>Yankun Cao
+				<br>Wong Man Ting Grace
+				<br>Chu Chun Kit Tony
 				<br>
 				<br>
 				<span>User Interface Designer</span>
 				<br>Lawrence Choy
 			</div>
-			<div id="col2">
+			<div class="col2">
 				<br>
 				<span>Past Contributors</span>
 				<br>Chun Ming Kenneth Au
@@ -77,6 +71,14 @@
 				<br>Kwok Shiu Andy Wong
 				<br>Aixi Zhang
 				<br>Hamza Zia
+				<br>Raju Salahuddin
+				<br>Clarissa Cyrilla Prawoto
+				<br>Yin Sun
+				<br>Ying Zhu
+				<br>Salahuddin Shairfe Muhammad
+				<br>Kent Wang
+				<br>Keda Ruan
+				<br>Lei Sun
 				<br>
 				<br>
 				<span>Collaborators</span>
