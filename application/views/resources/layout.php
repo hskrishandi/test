@@ -33,30 +33,10 @@
 * Keep this notice intact for use.
 ***********************************************/
 
-</script>
+	</script>
     <?php endblock(); ?>
     
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-        <?php $this->load->view('account/account_block'); ?>
-		<div class="block">
-			<div class="resources">
-				<h2>Resources</h2>
-				<p>
-					<ul class="menu">
-					<?php foreach($resources_items as $key => $item): ?>
-						<li>
-							<?php echo '<a href="' . $item['url'] . '" title="">'; ?>
-								<?php echo $item['title']; ?>
-							</a>
-						</li>
-					<?php endforeach; ?>
-					</ul>
-				</p>
-			</div>
-		</div>
-		<?php $this->load->view('credit'); ?>
-	<?php endblock(); ?>
+	
 	
 
 <?php end_extend(); ?>

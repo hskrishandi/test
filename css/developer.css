@@ -1,66 +1,25 @@
-#slideBox {
-    float: none;
-    height: auto;
-    clear: none;
-    width: 1280px;
-    display: block;
-    position: relative;
-    top: 0px;
-    left: 0px;
-    min-width: 0px;
-    z-index: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .slide {
 	float: none;
 	width: 100%;
-    max-width: 100%;
-    height: auto;
-    clear: none;
-    color: rgb(0, 0, 0);
+	max-width: 100%;
+	height: auto;
+	clear: none;
+	color: rgb(0, 0, 0);
 	top: 0px;
-    left: 0px;
+	left: 0px;
 }
 
 #slideImage {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    height:250px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	height:250px;
 }
 
-#slideOverlay {
-    position: absolute;
-    bottom: auto;
-    z-index: auto;
-    height: 250px; 
-
-}
-
-#slideText {
-    float: left;
-    font-size: 4.5em;
-    width: auto;
-    height: auto;
-    text-align: left;
-	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
-    font-weight: bold;
-    line-height: 1.15em;
-    clear: none;
-    min-height: 0px;
-    position: absolute;
-    top:10%;
-    left: 100px;
-    color: rgb(255, 255, 255);
-    bottom: auto;
-    right: 0%;
-    z-index: 1;
-}
-#developer {
+.content {
 	
-	//width: 95%;
+	width: 80%;
+	margin: 5% 10%;
 }
 
 #developer a{
@@ -73,23 +32,22 @@
 
 #developer textarea {
 	display: inline-block;
-	margin-top: 2px;
-	width: 395px;
+	
+	width: 75%;
 	resize: none;
 }
 
 #developer .tos {
 	
 	padding: 40px;
-	width: 1000px;
+	width: 100%;
 	
-	position: absolute;
-	left:100px;
-	top:300px;
+	
 	background: #E7E5E2;
 	color:black;
 	line-height: 1.5em;
 	font-size: 1.5em;
+	overflow: hidden;
 }
 
 #developer .progress {
@@ -141,12 +99,12 @@
 }
 
 
-#developer label {
+.content .form-page label {
 	display: inline-block;
 	position: relative;
-	margin: 0px 0px 10px 5px;
+
+	width: 100%;
 	
-	font-size: larger;
 }
 
 
@@ -154,10 +112,17 @@
 	display: inline-block;
 	vertical-align: middle;
 	position: relative;
-	margin: 0px 0px;
-	width: 90px;
+	
+	width: 22%;
 }
 
+#developer #page2 .labels .label_left>label>span {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	
+	width: 75%;
+}
 #developer .uploaded{
 	
 	font-size: 1em;
@@ -167,7 +132,7 @@
 #developer input[type=text]
 {
 	display: inline-block;
-	width: 395px;
+	width: 75%;
 }
 
 
@@ -207,22 +172,14 @@
 	cursor: pointer;
 }
 
-#developer #newModel{
-	background: rgb(1,155,225); /* For browsers that do not support gradients */ 
-	background: -webkit-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Firefox 3.6 to 15 */   
-    background:linear-gradient(rgb(40,200,240), rgb(1,155,225));
+#developer #progress-page #button_table .progress_button .progress_bar{
+	padding: 0;
+	margin-left: 20%;
 }
-
-#developer #update{
-	background: rgb(200,225,155); /* For browsers that do not support gradients */ 
-	background: -webkit-linear-gradient(rgb(200,225,155), rgb(130,180,70)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgb(200,225,155), rgb(130,180,70)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgb(200,225,155), rgb(130,180,70)); /* For Firefox 3.6 to 15 */   
-    background:linear-gradient(rgb(200,225,155), rgb(130,180,70));
+#developer #progress-page #button_table .progress_button .progress_bar img{
+width: 100%;
+text-align: center;
 }
-
 #developer #progress-page{
 	margin: 50px;
 }
@@ -230,8 +187,8 @@
 #developer .progress_col{
 	background: #83807B;
 	background: -webkit-linear-gradient(#83807B, #CDC9C4); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#83807B, #CDC9C4); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#83807B, #CDC9C4); /* For Firefox 3.6 to 15 */ 
+	background: -o-linear-gradient(#83807B, #CDC9C4); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#83807B, #CDC9C4); /* For Firefox 3.6 to 15 */ 
 	background:linear-gradient(#83807B, #CDC9C4);
 	display: table; 
 	table-layout: fixed; 
@@ -240,17 +197,17 @@
 }
 
 #developer .progress_col li{
-	 display: table-cell;
-	 color:white;
-	 padding-left: 5px;
+	display: table-cell;
+	color:white;
+	padding-left: 5px;
 
 }
 
 #developer .recevied{
 	background: #FFAA00;
 	background: -webkit-linear-gradient(#FFAA00, #FFDC5F); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(##FFAA00, #FFDC5F); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#FFAA00, #FFDC5F); /* For Firefox 3.6 to 15 */ 
+	background: -o-linear-gradient(##FFAA00, #FFDC5F); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#FFAA00, #FFDC5F); /* For Firefox 3.6 to 15 */ 
 	background:linear-gradient(#FFAA00, #FFDC5F);
 }
 
@@ -261,9 +218,9 @@
 #developer .processing{
 	background: rgb(130,180,70); /* For browsers that do not support gradients */ 
 	background: -webkit-linear-gradient(rgb(130,180,70), rgb(200,225,155)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgb(130,180,70), rgb(200,225,155)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgb(130,180,70), rgb(200,225,155)); /* For Firefox 3.6 to 15 */   
-    background:linear-gradient(rgb(130,180,70), rgb(200,225,155));
+	background: -o-linear-gradient(rgb(130,180,70), rgb(200,225,155)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(rgb(130,180,70), rgb(200,225,155)); /* For Firefox 3.6 to 15 */   
+	background:linear-gradient(rgb(130,180,70), rgb(200,225,155));
 }
 
 #developer .processing:after{
@@ -273,9 +230,9 @@
 #developer .complete{
 	background: rgb(40,200,240); /* For browsers that do not support gradients */ 
 	background: -webkit-linear-gradient(rgb(1,155,225), rgb(40,200,240)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgb(1,155,225), rgb(40,200,240)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgb(1,155,225), rgb(40,200,240)); /* For Firefox 3.6 to 15 */   
-    background:linear-gradient(rgb(1,155,225), rgb(40,200,240));
+	background: -o-linear-gradient(rgb(1,155,225), rgb(40,200,240)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(rgb(1,155,225), rgb(40,200,240)); /* For Firefox 3.6 to 15 */   
+	background:linear-gradient(rgb(1,155,225), rgb(40,200,240));
 }
 
 #developer .complete:after{
@@ -338,8 +295,8 @@
 }
 
 #developer .progress_button{
-    width: 50%; 
-    text-align: center;     
+	width: 50%; 
+	text-align: center;     
 }
 
 #developer .progress_table{
@@ -408,29 +365,29 @@
 
 
 #developer .submit {
-    background-color: #4D4C4A;
-    color: #FFF;
-    display: block;
-    position: relative;
-    float: right;
-    margin-top: 50px;
-    margin-left: 22px;
-    height: 32px;
-    width: 95px;
-    border: 0;
-    text-align: center;
-    line-height: 22px;
-    cursor: pointer;
-    padding: 5px 0px;
-    font-size: 1.2em;
+	background-color: #4D4C4A;
+	color: #FFF;
+	display: block;
+	position: relative;
+	float: right;
+	margin-top: 100px;
+	margin-left: 22px;
+	height: 32px;
+	width: 95px;
+	border: 0;
+	text-align: center;
+	line-height: 22px;
+	cursor: pointer;
+	padding: 5px 0px;
+	font-size: 1.2em;
 }
 
 #developer .submitModelBut{
 	background: rgb(1,155,225); /* For browsers that do not support gradients */ 
 	background: -webkit-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Firefox 3.6 to 15 */   
-    background:linear-gradient(rgb(40,200,240), rgb(1,155,225));
+	background: -o-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(rgb(40,200,240), rgb(1,155,225)); /* For Firefox 3.6 to 15 */   
+	background:linear-gradient(rgb(40,200,240), rgb(1,155,225));
 	color: #FFF;
 	display: block;
 	position: absolute;	
@@ -454,7 +411,7 @@
 	background-color: #4D4C4A;
 	color: #FFF;
 	display: block;
-		
+
 	float: right;
 	margin-top: 15px;
 	margin-left: 800px;
@@ -477,18 +434,6 @@
 	border-bottom: 11px solid transparent;
 	border-right: 11px solid #726fb2;
 }
-
-/*#developer .next:after {
-	content: "";
-	position: absolute;
-	right: -11px;
-	top: 0;
-	display: block;
-	height: 0;
-	border-top: 11px solid transparent;
-	border-bottom: 11px solid transparent;
-	border-left: 11px solid #726fb2;
-}*/
 
 #developer .save:hover,
 #developer .back:hover,
@@ -560,9 +505,7 @@ div.ui-dialog,
 div.ui-dialog .ui-widget-content {
 	border-color: #9E9EC3;
 }
-#main_content{
-	min-height: 900px;
-}
+
 
 /*added by Grace*/
 
@@ -570,9 +513,9 @@ div.ui-dialog .ui-widget-content {
 	color:black;
 	line-height: 1.5em;
 	background: #E7E5E2;
-	
+
 	position: relative;
-	width: 1100px;
+
 	margin-top: 25px;
 	overflow: hidden;
 }
@@ -583,38 +526,33 @@ div.ui-dialog .ui-widget-content {
 }
 
 #developer .form-page .label_right{
-	width: 470px;
+	width: 48%;
 	background: white;
 	float:right;
 	padding:15px 15px;
-	
+
 }
 #developer #page1 .label_right{
 
-	height:290px;
+	height:400px;
 }
 
 #developer #page3 .label_left{
 	background: white;
 	padding:15px 15px;
-	width: 470px;
+	width: 48%;
 }
 
 
-.label_left{
+.content .form-page .labels .label_left{
 	float: left;
-	width: 500px;
+	width: 48%;
 }
 
-#developer form{
-	padding-left: 100px;
-	padding-top: 80px;
 
-}
 
-#developer .previous_simulator 
-{
-	width: 498px	!important;	
+#developer #page2 .labels .label_left input[type=text]{
+	width: 100%;	
 }
 
 #developer #page2 .labels .label_left div{
@@ -623,16 +561,16 @@ div.ui-dialog .ui-widget-content {
 
 #developer #page4 .submit_area{
 	float: right;
-	width: 500px;
+	width: 45%;
 	background: white;
 	position: absolute;
 	top:30px;
 	padding-bottom: 20px;
 	z-index: 2;
-	left: 560px;
-	height:260px;
+	left: 53%;
+	height:80%;
 }
-	
+
 #developer #page4 .submit_area img{
 	width: 200px;
 	height: 200px;
@@ -649,13 +587,13 @@ div.ui-dialog .ui-widget-content {
 	width: 470px;
 	height: 45px;
 	position:absolute;
-    top:0; left:0;
-    cursor: pointer;
+	top:0; left:0;
+	cursor: pointer;
 
 }
 #developer .form-page .uploadFile{
 	position: relative;
-	
+
 }
 #developer .form-page .uploadFile span{
 	font-size: 13px;
@@ -667,7 +605,7 @@ div.ui-dialog .ui-widget-content {
 	width: 40px;
 	height: 40px;
 	vertical-align: middle;
-	
+
 }
 
 #developer .form-page .fileImg{
@@ -681,11 +619,11 @@ div.ui-dialog .ui-widget-content {
 	width: 400px;
 }
 #developer .form-page .uploadMessage p{
-	margin-bottom: 0px	!important;
+	margin-bottom: 0px;
 
 }
 
-#developer #page2 .labels .label_left span {
+#developer #page2 .labels .label_left>span {
 	display: inline-block;
 	vertical-align: middle;
 	position: relative;
@@ -694,7 +632,51 @@ div.ui-dialog .ui-widget-content {
 }
 
 #developer #page1 .labels .label_right #imagePreview{
-	height: 180px;
+	height: 500px;
 	margin: 20px 0px;
 	max-width: 470px;
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+.content #page2 .labels .label_left input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    border-radius:  50%;
+}
+
+input[type="radio"] + label span {
+     background-color:white;
+}
+
+input[type="radio"]:checked + label span{
+     background-color:black;
+}
+
+.content #page2 .labels .label_left .radioBut{
+	width: 50px;
+	margin-left: 5px;
+}
+
+.content #page2 .labels .label_left label:not(:last-child){
+	margin-bottom: 15px;
+
+}
+
+.content #page2 .labels .label_left .lastSpan{
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.content .form-page .labels hr{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #eee;
+
 }
