@@ -1,22 +1,37 @@
-<?php extend('resources/layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 	<?php startblock('title'); ?>
 		Resources
 	<?php endblock(); ?>
 
-	<?php startblock('side_menu'); ?>
-	<?php endblock(); ?>
+    <?php startblock('css'); ?>
+        <?php echo get_extended_block(); ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'resources.css'); ?>" media="all" />
+    <?php endblock(); ?>
+
+    <?php startblock('script'); ?>
+        <?php echo get_extended_block(); ?>
+        <script type="text/javascript" src="<?php echo resource_url('js', 'library/jquery.validate.min.js');?>"></script>
+        <script type="text/javascript" src="<?php echo resource_url('js', 'resources.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo resource_url('js', 'calendarDateInput.js'); ?>">
+            /***********************************************
+            * Jason's Date Input Calendar- By Jason Moon http://calendar.moonscript.com/dateinput.cfm
+            * Script featured on and available at http://www.dynamicdrive.com
+            * Keep this notice intact for use.
+            ***********************************************/
+        </script>
+    <?php endblock(); ?>
 
 	<?php startblock('content'); ?>
 		<div id="resources">
-			<p class="page-title">Resources</p>
+			<h2>Resources</h2>
 
-			<div class='page-subtitle'>Device Models Reference
+			<div class="page-subtitle">
+                <span class="page-subtitle-title">Device Models Reference</span>
 				<a class="page-subtitle-more" href="<?php echo base_url('resources/models'); ?>">more</a>
-				<div class="postSeparateLine">
-					&#x7c;
-				</div>
+				<span class="page-subtitle-separater">&#x7c;</span>
 				<a class="page-subtitle-more" href="<?php echo base_url('resources/post/models'); ?>">Post Reference</a>
 			</div>
+            
 			<ul class="item-list">
 				<?php foreach($models as $entry): ?>
 					<li>
@@ -35,17 +50,16 @@
 				<?php endforeach; ?>
 			</ul>
 
-			<div class='page-subtitle'>Tools
-			<a class="page-subtitle-more" href="<?php echo base_url('resources/tools'); ?>">more</a>
-			<div class="postSeparateLine">
-				&#x7c;
-			</div>
-			<a class="page-subtitle-more" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
+			<div class="page-subtitle">
+                <span class="page-subtitle-title">Tools</span>
+                <a class="page-subtitle-more" href="<?php echo base_url('resources/tools'); ?>">more</a>
+                <span class="page-subtitle-separater">&#x7c;</span>
+                <a class="page-subtitle-more" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
 			</div>
 
 
 			<?php foreach ($this->config->item('tool_type') as $type => $title) :?>
-			<h2 class="sub_title"><?php echo $title; ?></h2>
+			<h5 class="sub_title"><?php echo $title; ?></h5>
 			<ul class="item-list">
 			<?php if($type == 'device_sim'){ ?>
 				<?php foreach($tools1 as $entry): ?>
@@ -93,16 +107,14 @@
 				<?php endforeach; ?>
 			<?php } ?>
 			</ul>
-			<br/>
 			<hr>
 			<?php endforeach; ?>
 
 
-			<div class="page-subtitle">Organizations
+			<div class="page-subtitle">
+                <span class="page-subtitle-title">Organizations</span>
 				<a class="page-subtitle-more" href="<?php echo base_url('resources/groups'); ?>">more</a>
-				<div class="postSeparateLine">
-					&#x7c;
-				</div>
+				<span class="page-subtitle-separater">&#x7c;</span>
 				<a class="page-subtitle-more" href="<?php echo base_url('resources/post/groups'); ?>">Post Organization</a>
 			</div>
 			<ul class="item-list">
@@ -120,7 +132,7 @@
 			</ul>
 
 		</div>
-		<div class="clearFloat"></div>	
+		<div class="clearFloat"></div>
 	<?php endblock(); ?>
 
 <?php end_extend(); ?>

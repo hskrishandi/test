@@ -14,13 +14,13 @@
 	<?php startblock('title'); ?>
 		Resources
 	<?php endblock(); ?>
-	
+
 	<?php startblock('css'); ?>
         <?php echo get_extended_block(); ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'resources.css'); ?>" media="all" />
     <?php endblock(); ?>
-	
-    
+
+
     <?php startblock('script'); ?>
 		<?php echo get_extended_block(); ?>
 			<script type="text/javascript" src="<?php echo resource_url('js', 'library/jquery.validate.min.js');?>"></script>
@@ -35,8 +35,8 @@
 
 	</script>
     <?php endblock(); ?>
-    
-	
-	
+
+
+
 
 <?php end_extend(); ?>

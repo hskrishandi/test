@@ -1,18 +1,12 @@
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Terms of Use
 	<?php endblock(); ?>
-	
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-		<?php $this->load->view('account/account_block'); ?>
-		<?php $this->load->view('credit'); ?>
-	<?php endblock(); ?>
-	
+
 	<?php startblock('content'); ?>
 	<div id="static-page">
-		<h2 class="title">Terms of Use</h2>
+		<h2>Terms of Use</h2>
 		<div>
 			<p><?php echo imos_mark() ?> (Interactive Modeling and Online Simulation) is an academic based university project intended for the greater benefit of the modeling community who would like to access, evaluate or distribute models with a readily accessible platform. The <?php echo imos_mark() ?> platform is maintained and administered by a team of scholars and students at the Hong Kong University of Science and Technology. Once your submitted your registration and it is accepted by the <?php echo imos_mark() ?> site, it marks that you have read, accepted and will follow the restrictions imposed by the below stated terms of use.</p>
 			<h3>Registration and Personal Information</h3>
@@ -39,4 +33,4 @@
 	</div>
 	<?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>

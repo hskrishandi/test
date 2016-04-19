@@ -132,7 +132,7 @@
         <img src="<?php echo resource_url('img', 'home/NLimage3.jpg'); ?>" />
     </div>
     <div class="page-subtitle">
-         i-MOS Activities
+        <span class="page-subtitle-title">i-MOS Activities</span>
          <a class="page-subtitle-more" href="<?php echo base_url('news_event'); ?>">more</a>
     </div>
     <div class="news-box">

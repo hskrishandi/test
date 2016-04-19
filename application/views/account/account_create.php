@@ -1,4 +1,4 @@
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Registration
@@ -7,12 +7,6 @@
 	<?php startblock('script'); ?>
 		<?php echo get_extended_block(); ?>
 		<script src="<?php echo resource_url('js', 'account_create.js'); ?>" type="text/javascript"></script>
-	<?php endblock(); ?>
-
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-        <?php $this->load->view('account/account_block'); ?>
-		<?php $this->load->view('credit'); ?>
 	<?php endblock(); ?>
 
 	<?php startblock('css'); ?>

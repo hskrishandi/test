@@ -1,7 +1,3 @@
-body {
-	background: white;
-}
-
 .discussion{
 	padding-left:20px;
 	padding-right:20px;
@@ -14,7 +10,7 @@ body {
 	border-bottom:solid;
 	border-bottom-width:1px;
 	border-bottom-color:#9E9EC3;
-	
+
 }
 .discussion .active_users .active_users_title{
 	color:#434367;
@@ -170,14 +166,14 @@ body {
 }
 
 .user_icon{
-	
+
 	margin:3px;
 	margin-right:20px;
 	text-align:center;
 }
 
 .post_user_icon{
-	
+
 margin: 5px;
 text-align: center;
 overflow: hidden;
@@ -218,7 +214,7 @@ padding: 5px  5px 5px 5px ;
 	border-bottom:solid;
 	border-width:1px;
 	border-color:gray;
-	word-break: break-all; 
+	word-break: break-all;
 	overflow: hidden;
 }
 
@@ -259,13 +255,13 @@ padding: 5px  5px 5px 5px ;
 }
 
 .post_details .reply .post_submit{
-	
+
 	float:right;
 }
 
 .post_details .rating {
-	padding-bottom: 20px; 
-} 
+	padding-bottom: 20px;
+}
 
 .post_details .rating strong {
 	float: left;
@@ -286,12 +282,12 @@ div.posting {
 	overflow: hidden;
 }
 
-.blog{	
+.blog{
 	padding-left:20px;
 	padding-top:20px;
 	width: 100%;
 	min-height: 500px;
-	float: left;	
+	float: left;
 }
 
 .blog .top{
@@ -306,8 +302,8 @@ div.posting {
 }
 
 .blog .bottom .entries .user_entry{
-	padding-bottom:20px;	
-	
+	padding-bottom:20px;
+
 }
 
 .blog .bottom .entries .user_entry .entry_topic{
@@ -388,7 +384,7 @@ padding-bottom:5px;
 }
 
 .short_content{
-	
+
 	margin-bottom:10px;
 }
 
@@ -543,13 +539,4 @@ div.comment_title {
 
 .content .post_details .posts .user_post .postContent .rightPanel a:hover {
 	font-weight: normal;
-}
-
-.content {
-	overflow: hidden;
-	width: 80%;
-	margin-top: 50px;
-	margin-left: 10%;
-	margin-bottom: 30px;
-	margin-right: 10%;
 }

@@ -125,6 +125,7 @@
 .header .separate-line {
     cursor: default;
     color: #FFF;
+    line-height: 26px;
 }
 
 .header .submenu .contact-box {
@@ -353,14 +354,15 @@
 .header .search {
     float: right;
     margin-top: 20px;
+    width: 11%;
+    height: 26px;
+    background-color: #FFF;
+    border-radius: 25px;
+    border: none;
 }
 
 .header .search form {
-    width: 180px;
-    height: 26px;
-    border-radius: 25px;
-    background-color: #FFF;
-    border: none;
+    height: 100%;
 }
 
 .header .search img {
@@ -370,13 +372,16 @@
 }
 
 .header .search input {
-    float: left;
+    float: right;
     height: 100%;
-    width: 130px;
+    width: 61%;
+    margin-right: 10px;
     text-align: right;
     border: none;
+    background-color: rgba(0, 0, 0, 0);
     outline: 0 none !important;
 }
+
 
 .clearFloat {
     clear: both;

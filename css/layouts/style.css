@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: sans-serif, 'Noto Sans', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma';
+    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif, 'Noto Sans', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma';
     font-weight: inherit
 }
 
@@ -9,11 +9,34 @@ body {
     min-width: 980px;
 }
 
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+}
+
+h2 {
+    font-size: 2.5em;
+    text-align: left;
+    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+}
+
+.content{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 80px;
+}
+
 .page-subtitle {
     background-color: #333;
     padding-left: 20px;
     padding-right: 20px;
     line-height: 38px;
+    margin-bottom: 20px;
+}
+
+.page-subtitle .page-subtitle-title {
     color: #FFF;
     font-size: 16px;
     font-weight: bold;
@@ -24,4 +47,16 @@ body {
     color: #FFF;
     font-size: 12px;
     font-weight: normal;
+}
+
+.page-subtitle .page-subtitle-separater {
+    margin-left: 10px;
+    margin-right: 10px;
+    float: right;
+    color: #FFF;
+    cursor: default;
+}
+
+.clearFloat {
+    clear: both;
 }

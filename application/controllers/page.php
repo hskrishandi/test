@@ -33,15 +33,15 @@ class page extends CI_Controller
 
     public function terms()
     {
-        $this->load->view('terms');
+        $this->load->view('page/terms');
     }
     public function privacy()
     {
-        $this->load->view('privacy');
+        $this->load->view('page/privacy');
     }
     public function disclaimers()
     {
-        $this->load->view('disclaimers');
+        $this->load->view('page/disclaimers');
     }
     public function credits()
     {
@@ -53,7 +53,7 @@ class page extends CI_Controller
         $data = array(
             'model_info' => $this->Simulation_model->getModelList(),
         );
-        $this->load->view('sitemap', $data);
+        $this->load->view('page/sitemap', $data);
     }
 
     public function d($id)

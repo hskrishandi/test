@@ -1,89 +1,65 @@
-<?php extend('resources/layout.php'); ?>	
+<?php extend('layouts/layout.php'); ?>
 	<?php startblock('title'); ?>
-
 		Resources
-	<?php endblock(); ?>		
-    
+	<?php endblock(); ?>
+
 <?php startblock('content'); ?>
 
 
 <script>
-
-
 $(document).ready(function(){
-						$('#submit').click(function(){
-							//$('#commentForm').submit();	
-							$('#news_form').submit();	
-							$('#events_form').submit();	
-							$('#articles_form').submit();
-							$('#groups_form').submit();	
-							$('#models_form').submit();		
-							$('#tools_form').submit();					
-
-						})
-				});
-				
-
-			</script>
-
-  
-        	<div id="post_forms">
-            
-            
-				<?php if($res=='news'){?>
-       
-                
-                
-                
-                	<h2 class="title">News</h2>
-               		  <div class="form">
-    
-                      <?php foreach($news_details as $entry): ?>
-               		  <form class="form" name="news_form" id="news_form" action="<?php echo base_url('/resources/edit_resources_submit/news/?newsid='.$entry->id);?>" method="post">
-            
-                        
-                        <table class="form_table">
-                          <tr>
-                          
+    $('#submit').click(function(){
+        //$('#commentForm').submit();
+        $('#news_form').submit();
+        $('#events_form').submit();
+        $('#articles_form').submit();
+        $('#groups_form').submit();
+        $('#models_form').submit();
+        $('#tools_form').submit();
+    })
+});
+</script>
+<div id="post_forms">
+    <?php if($res=='news'){?>
+        <h2>Edit</h2>
+        <div class="form">
+            <?php foreach($news_details as $entry): ?>
+                <form class="form" name="news_form" id="news_form" action="<?php echo base_url('/resources/edit_resources_submit/news/?newsid='.$entry->id);?>" method="post">
+                    <table class="form_table">
+                        <tr>
                             <td class="label">Name:</td>
                             <td><input name="title" type="text" id="cname"  class="required" value="<?php  echo $entry->title;?>"/></td>
-                          </tr>
-                          <tr>
-
+                        </tr>
+                        <tr>
                             <td class="label">Source Link:</td>
                             <td><input name="slink" type="text" id="cname"  class="required" value="<?php  echo $entry->source_link;?>"/></td>
-                          </tr>
-                          <tr>
+                         </tr>
+                         <tr>
                             <td colspan="2">Content:</td>
-                          </tr>
-                          <tr>
+                         </tr>
+                         <tr>
                             <td colspan="2"><textarea name="content" cols="50" rows="6" class="required"><?php  echo $entry->content;?>
                             </textarea>
                             </td>
-                          </tr>
-                          <tr>
-                          	<td colspan="2"><div class="form_submit"><a class="submit" id="submit">Submit</a>
-                         
-                          	</div>
-                            </td>
-                          </tr>
-                        </table>
-                       
-                        <input type="hidden" name="post_date" value="<?php echo date("Y-m-d H:i:s");?>" />
-                    
-               		  </form>
-                      <?php endforeach;?>
-                      </div>
-               		
- 
-                <?php } else if($res=='events'){?>
-                
-                
-                		<h2 class="title">Event</h2>
-	  <div class="form">
+                         </tr>
+                         <tr>
+                             <td colspan="2">
+                                 <div class="form_submit">
+                                     <a class="submit" id="submit">Submit</a>
+                                 </div>
+                             </td>
+                         </tr>
+                     </table>
+                     <input type="hidden" name="post_date" value="<?php echo date("Y-m-d H:i:s");?>" />
+                 </form>
+             <?php endforeach;?>
+         </div>
+     <?php } else if($res=='events'){?>
+         <h2 class="title">Event</h2>
+         <div class="form">
       					<?php foreach($event_details as $row):?>
                     	<form name="events_form" id="events_form" action="<?php echo base_url('/resources/edit_resources_submit/events');?>" method="post">
-                        
+
                         <table class="form_table">
                           <tr>
                             <td class="label">Event Name:</td>
@@ -93,7 +69,7 @@ $(document).ready(function(){
                           </tr>
                           <tr>
                             <td class="label">Event Full Name:
-                              
+
                             </td>
                             <td>
                               <input name="full_name" type="text" class="required" id="full_name" value="<?php echo $row->full_name;?>" />
@@ -120,28 +96,28 @@ $(document).ready(function(){
                             <td colspan="2"><div class="form_submit"><a class="submit" id="submit">Submit</a></div></td>
                           </tr>
                         </table>
-                  
-    			
-       	  				</form>   
+
+
+       	  				</form>
                         		<script language="javascript">
 								document.getElementById("end_date_Year_ID").value=<?php echo date('Y',strtotime($row->end_date));?>;
 								document.getElementById("start_date_Day_ID").options[<?php echo date('d',strtotime($row->start_date))-1;?>].selected=true;
 								document.getElementById("start_date_Month_ID").options[<?php echo date('m',strtotime($row->start_date))-1;?>].selected=true;
-								
+
 								document.getElementById("start_date_Year_ID").value=<?php echo date('Y',strtotime($row->start_date));?>;
                         		document.getElementById("end_date_Day_ID").options[<?php echo date('d',strtotime($row->end_date))-1;?>].selected=true;
 								document.getElementById("end_date_Month_ID").options[<?php echo date('m',strtotime($row->end_date))-1;?>].selected=true;
                         </script>
-                        <?php endforeach;?>   
-                                   
-                               		
+                        <?php endforeach;?>
+
+
 	      </div>
-              
+
                 <?php } else if($res=='articles'){?>
            <div class="form">
            			  <h2 class="title">Article</h2>
                       <?php foreach($article_details as $entry):?>
-                   	  <form name="articles_form" id="articles_form" action="<?php echo base_url('/resources/edit_resources_submit/articles');?>" method="post">                     
+                   	  <form name="articles_form" id="articles_form" action="<?php echo base_url('/resources/edit_resources_submit/articles');?>" method="post">
                       	<table class="form_table">
                           <tr>
                             <td class="label">Name:</td>
@@ -189,9 +165,9 @@ $(document).ready(function(){
                         </table>
                       	<label for="select"></label>
 </form>
-                	<?php endforeach;?>  
+                	<?php endforeach;?>
                		</div>
-                
+
                 <?php } else if($res=='groups'){?>
                		<div class="form">
                     <h2 class="title">Organization</h2>
@@ -209,17 +185,17 @@ $(document).ready(function(){
                       <tr>
                         <td colspan="2"><div class="form_submit"><a class="submit" id="submit">Submit</a></div>
                         <input type="hidden" name="groupid" value="<?php echo $entry->id;?>" /></td>
-                        
+
                       </tr>
                     </table>
 
-                    
+
                     </form>
                     <?php endforeach;?>
-                    
-                    
-                
-	      </div>                
+
+
+
+	      </div>
                 <?php } else if($res=='models'){?>
        		  <div class="form">
                 <h2 class="title">Models</h2>
@@ -256,7 +232,7 @@ $(document).ready(function(){
                       </table>
     </form>
                 <?php endforeach;?>
-               		</div>                
+               		</div>
                 <?php } else if($res=='tools'){?>
                 	<h2 class="title">Tools</h2>
    		  <div class="form">
@@ -295,18 +271,18 @@ $(document).ready(function(){
                       </table>
     </form>
                 <?php endforeach;?>
-               		</div>        
-                <?php } if($res=='submited'){?>     
+               		</div>
+                <?php } if($res=='submited'){?>
                     	Your input is submited. Thank you.
-                        
+
                       <a class="return-link" href="<?php echo base_url('resources/'.$_GET['res']); ?>">
 					Back
 				</a>
-       
+
                 <?php }/*endif*/ ?>
-            
-            
-            </div>			
+
+
+            </div>
 
 <?php endblock(); ?>
 

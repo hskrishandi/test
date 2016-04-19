@@ -50,11 +50,6 @@
     z-index: 1;
 }
 /* Resources content  */
-.content{
-	width: 80%;
-	margin-left: 10%;
-	margin-right: 10%;
-}
 
 .page-title{
 	font-size: 4em;
@@ -64,49 +59,20 @@
 	margin-top: 40px;
 }
 
-.page-subtitle {
-	font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
-	color:white	!important;
-	background: black;
-	height: 50%;
-	padding-top: 10px;
-	padding-left: 15px;
-	font-size: 1.5em;
-}
-
-a.more {
-	float: right;
-	position:relative;
-	font-size: 0.7em;
-	padding-top: 3px;
-	color:white		!important;
-}
-
-
-a.page-subtitle-more {
-	//display: block;
-	float: right;
-	position:relative;
-	color:white 	!important;
-	padding-top: 3px;
-	font-size: 0.7em;
-}
-
 .documents{
-	 min-height: 300px;
+    margin-bottom: 80px;
 }
 
-.link1{
-  position:absolute;
-  right: 30%;
-  margin-top:2%;
+.link1, .link2{
+    float: right;
+    width: 25%;
+    margin-left: 2%;
 }
 
-.link2{
-  position:absolute;
-  right: 4%;
-  margin-top: 2%;
+.link1 img, .link2 img {
+    width: 100%;
 }
+
 
 ul {
 	display: block;

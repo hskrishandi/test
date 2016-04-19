@@ -3,7 +3,7 @@
 	<?php startblock('title'); ?>
 		Discussion
 	<?php endblock(); ?>
-    
+
     <?php startblock('css'); ?>
         <?php echo get_extended_block(); ?>
         <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />
@@ -16,25 +16,24 @@
     <?php endblock(); ?>
 
 	<?php startblock('content'); ?>
-    
+
     <script>
         $(document).ready(function(){
     		$('#submit').click(function(){
-    			$('#reply_form').submit();	
+    			$('#reply_form').submit();
     		});
         });
 	</script>
-	 
-    <p class="mainTitle">Discussion</p>
-    <div class="subTitle">
-        <span>Post</span>
-        <span class="links">
-            <a href="<?php echo base_url('discussion/posting');?>">Create Post</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <?php if($userInfo==NULL):?>
-            <a href="<?php echo base_url('account/authErr');?>">My Posts</a>
-            <?php else: ?>  
-            <a href="<?php 
+
+    <h2>Discussion</h2>
+    <div class="page-subtitle">
+        <span class="page-subtitle-title">Post</span>
+        <a class="page-subtitle-more" href="<?php echo base_url('discussion/'); ?>">Back to Discussion Page</a>
+        <span class="page-subtitle-separater">&#x7c;</span>
+        <?php if($userInfo==NULL):?>
+            <a class="page-subtitle-more" href="<?php echo base_url('account/authErr');?>">My Posts</a>
+        <?php else: ?>
+            <a class="page-subtitle-more" href="<?php
                 if ($userInfo==false) {
                     echo base_url('discussion/blog/');
                 } else {
@@ -42,20 +41,19 @@
                     $userid=$userInfo->id;
                 }
             ?>">My Posts</a>
-            <?php endif ?>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="<?php echo base_url('discussion/'); ?>">Back to Discussion Page</a>
-        </span>
+        <?php endif ?>
+        <span class="page-subtitle-separater">&#x7c;</span>
+        <a class="page-subtitle-more" href="<?php echo base_url('discussion/posting');?>">Create Post</a>
     </div>
 
-    <div class="post_details">   
+    <div class="post_details">
         <div class="posts">
         	<?php foreach ($posts as $row): ?>
         	<div class="user_post" style="border:none">
 
                 <div class="postContent">
                     <div class="leftPanel">
-                        <div><h1 class="title"><?php echo $row->subject; ?></h1></div> 
+                        <div><h1 class="title"><?php echo $row->subject; ?></h1></div>
                         <div class="date"><?php echo $row->datetime; ?>&nbsp;&nbsp;&nbsp;<a href="<?php echo base_url('discussion/blog/'. $row->id); ?>"><?php echo $row->displayname;?></a></div>
                         <div class="post_content"><?php echo $row->content; ?></div>
                     </div>
@@ -67,14 +65,14 @@
                                 <?php else: ?>
                                     <img src="<?php echo base_url('images/simulation/'.$row->name.".png"); ?>" width="75" />
                                 <?php endif;?>
-                                                    
+
                             <?php else:
                                 if ($row->photo_path == ""):?>
                                     <img src="<?php echo resource_url('css', 'images/usericon.gif'); ?>" width="75" />
                                 <?php else:?>
                                     <img src="<?php echo resource_url('user_image', $row->photo_path.'_n'.$row->photo_ext); ?>" width="75" />
                                 <?php endif;?>
-                                 
+
                             <?php endif;?>
                         </div>
                         <div class="userName">
@@ -112,7 +110,7 @@
                 </div>
 
                 <div class="commentheader">Write a comment:</div>
-      
+
                 <div class="reply">
                     <div id="error"></div>
                     <div class="formContent">
@@ -138,9 +136,9 @@
                                             });
                                         }
                                     }
-                                });		
+                                });
                             CKEDITOR.replace( 'comment' );
-    				        toolbar : 'MyToolbar';	
+    				        toolbar : 'MyToolbar';
                         </script>
 
                         <div class="form_submit"><a class="submit" id="submit">Post Comment</a></div>
@@ -159,13 +157,13 @@
                                 <?php else: ?>
                                     <img src="<?php echo base_url('images/simulation/'.$userInfo->name.".png"); ?>" width="75" />
                                 <?php endif;?>
-                                            
+
                             <?php else:
                                 if ($userInfo->photo_path == ""):?>
                                     <img src="<?php echo resource_url('css', 'images/usericon.gif'); ?>" width="75" />
                                 <?php else:?>
                                     <img src="<?php echo resource_url('user_image', $userInfo->photo_path.'_n'.$userInfo->photo_ext); ?>" width="75" />
-                                <?php endif;?>     
+                                <?php endif;?>
                             <?php endif;?>
                         </div>
                         <div class="userName">
@@ -186,4 +184,4 @@
     </div>
 <?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>

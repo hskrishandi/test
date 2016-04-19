@@ -1,14 +1,19 @@
 
 .div_inline, .auth_err div.title{
-	float: left;
 	position: relative;
 }
 .auth_err{
 	margin-left: 20px;
 	margin-top: 20px;
-	float: left;
 	min-height: 500px;
 	position: relative;
+}
+.auth_err .title,
+.auth_err > p {
+    text-align: center !important;
+}
+.auth_err > form {
+    margin-top: 80px;
 }
 .auth_err .title{
 	margin-left: 0px;
@@ -41,7 +46,7 @@
 .auth_err .page-item-list{
 	float: left;
 	position: relative;
-	
+
 }
 .auth_err .page-item-list ul{
 	list-style-type:none;

@@ -1,4 +1,4 @@
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Account Update
@@ -9,13 +9,7 @@
 		<script src="<?php echo resource_url('js', 'info_update.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/ajaxfileupload.js'); ?>" type="text/javascript"></script>
 	<?php endblock(); ?>
-	
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-        <?php $this->load->view('account/account_block'); ?>
-		<?php $this->load->view('credit'); ?>
-	<?php endblock(); ?>
-	
+
 	<?php startblock('css'); ?>
         <?php echo get_extended_block(); ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'info_update.css'); ?>" media="all" />
@@ -69,7 +63,7 @@
 				<h4 class="title">User Picture:</h4>
 				<div class="user_pic">
 					<div class="pic">
-						
+
 						<?php
 							if ($userinfo->photo_path !== ""){
 						?>
@@ -85,7 +79,7 @@
 					<div class="pic_sel">
 							<div>Please select the user picture and click Upload:</div>
 							<div class="pic_form">
-							
+
 								<input type='file' name="photo" value="<?php if(isset($photo_value)) echo $photo_value?>"/>
 								<a class="submit" id="submit">Upload</a>
 							</div>
@@ -102,8 +96,8 @@
 			</form>
 			</div>
 		</div>
-		
-		
+
+
 	<?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>

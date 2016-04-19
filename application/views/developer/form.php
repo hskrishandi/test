@@ -19,7 +19,7 @@ Developer
 <?php endblock(); ?>
 
 <?php startblock('banner'); ?>
-<img id="slideImage" class="slide" src="<?php echo resource_url('img', 'develop/developerslider.png'); ?>" />
+<img src="<?php echo resource_url('img', 'develop/developerslider.png'); ?>" />
 <?php endblock(); ?>
 
 <?php startblock('content'); ?>
@@ -97,7 +97,7 @@ Developer
 					<input type="radio" id="radio3" name="is_author" data-bind="checked:has_tested" value="Yes" />
 					<label class="radioBut" for="radio3"><span></span>Yes</label>
 					<input type="radio" id="radio4"name="is_author" data-bind="checked:has_tested" value="No" />
-					<label class="radioBut" for="radio4"><span></span>No</label>	
+					<label class="radioBut" for="radio4"><span></span>No</label>
 					<p class="error" id="has_tested_error"></p>
 				</label>
 				<label>
@@ -106,7 +106,7 @@ Developer
 					<p class="error" id="pre_simulator_error"></p>
 				</label>
 			</div>
-			<div class="label_right">	
+			<div class="label_right">
 				<div class="uploadFile">
 					<img class="uploadImg" src="<?php echo resource_url('img', 'develop/modelLibrary.png'); ?>" />
 					&nbsp;&nbsp;
@@ -125,7 +125,7 @@ Developer
 				</label>
 
 
-			</div>	
+			</div>
 		</div>
 	</div>
 	<div class="form-page" id="page3">
@@ -150,7 +150,7 @@ Developer
 					<input type="hidden" name="parameter_list" data-bind="value: parameter_list" />
 					<span class="uploaded">No File selected</span>
 					<p class="error" id="parameter_list_error"></p>
-				</label>	
+				</label>
 
 
 
@@ -164,7 +164,7 @@ Developer
 
 				</div>
 				<hr/>
-				
+
 				<img class="fileImg" src="<?php echo resource_url('img', 'develop/fileImage.png'); ?>"/>
 				<label class="uploadMessage">
 					<p>
@@ -201,4 +201,4 @@ Developer
 </div>
 <?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>

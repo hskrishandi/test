@@ -1,3 +1,4 @@
+<div class="clearFloat"></div>
 <div class="footer">
     <div class="copyright">
         All rights reserved. &copy 2016 i-MOS Team

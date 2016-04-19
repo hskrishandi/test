@@ -1,18 +1,12 @@
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Privacy Policy
 	<?php endblock(); ?>
-	
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-		<?php $this->load->view('account/account_block'); ?>
-		<?php $this->load->view('credit'); ?>
-	<?php endblock(); ?>
-	
+
 	<?php startblock('content'); ?>
 	<div id="static-page">
-		<h2 class="title">Privacy Policy</h2>
+		<h2>Privacy Policy</h2>
 		<div>
 			<p>We, the <?php echo imos_mark() ?> team, as responsible members of the scientific community uphold your privacy and try our level best to maintain highest standards possible.  All information collected will solely be used to control access to the <?php echo imos_mark() ?> platform.  No information will be released to a third party without consent of the corresponding users.</p>
 			<h3>Registered Users</h3>
@@ -27,4 +21,4 @@
 	</div>
 	<?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>

@@ -24,7 +24,7 @@ Developer
 <?php endblock(); ?>
 
 <?php startblock('banner'); ?>
-<img id="slideImage" class="slide" src="<?php echo resource_url('img', 'develop/developerslider.png'); ?>" />
+<img src="<?php echo resource_url('img', 'develop/developerslider.png'); ?>" />
 <?php endblock(); ?>
 
 
@@ -48,7 +48,7 @@ Developer
 				</td>
 			</tr>
 		</table>
-		
+
 		<div class="tbody-scroll">
 			<table class="progress_table">
 				<thead>
@@ -58,7 +58,7 @@ Developer
 						<th  class="thead">Contributor</th>
 						<th>Progress</th>
 					</tr>
-					
+
 				</thead>
 				<tbody>
 					<!-- ko foreach: models_info -->
@@ -76,4 +76,4 @@ Developer
 </div>
 <?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>

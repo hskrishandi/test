@@ -4,33 +4,34 @@
 <?php startblock('title'); ?>
 	Discussion
 <?php endblock(); ?>
-    
+
     <?php startblock('css'); ?>
         <?php echo get_extended_block(); ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />
         <script src="<?php echo resource_url('js', 'ckeditor/ckeditor.js'); ?>" type="text/javascript"></script>
     <?php endblock(); ?>
-	  
-    
+
+
 
     <?php startblock('content'); ?>
 
     <script>
     	$(document).ready(function(){
     		$('#submit').click(function(){
-    			$('#reply_form').submit();	
+    			$('#reply_form').submit();
     		});
         });
 	</script>
 
-    <p class="mainTitle">Discussion</p>
-    <div class="subTitle">
-        <span>Create a new post</span>
-        <span class="links">
-            <?php if($userInfo==NULL):?>
-            <a href="<?php echo base_url('account/authErr');?>">My Posts</a>
-            <?php else: ?>  
-            <a href="<?php 
+    <h2>Discussion</h2>
+    <div class="page-subtitle">
+        <span class="page-subtitle-title">Create a new post</span>
+        <a class="page-subtitle-more" href="<?php echo base_url('discussion/'); ?>">Back to Discussion Page</a>
+        <span class="page-subtitle-separater">&#x7c;</span>
+        <?php if($userInfo==NULL):?>
+            <a class="page-subtitle-more" href="<?php echo base_url('account/authErr');?>">My Posts</a>
+        <?php else: ?>
+            <a class="page-subtitle-more" href="<?php
                 if ($userInfo==false) {
                     echo base_url('discussion/blog/');
                 } else {
@@ -38,12 +39,8 @@
                     $userid=$userInfo->id;
                 }
             ?>">My Posts</a>
-            <?php endif ?>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="<?php echo base_url('discussion/'); ?>">Back to Discussion Page</a>
-        </span>
+        <?php endif ?>
     </div>
-
 
     <div class="posting">
         <div class="prompt">
@@ -75,7 +72,7 @@
                                     });
                                 }
                             }
-                        });		
+                        });
     					CKEDITOR.replace( 'editor1' );
     				    toolbar : 'MyToolbar';
                     </script>
@@ -91,13 +88,13 @@
                     <?php else: ?>
                         <img src="<?php echo base_url('images/simulation/'.$userInfo->name.".png"); ?>" width="100" />
                     <?php endif;?>
-                                
+
                 <?php else:
                     if ($userInfo->photo_path == ""):?>
                         <img src="<?php echo resource_url('css', 'images/usericon.gif'); ?>" width="100" />
                     <?php else:?>
                         <img src="<?php echo resource_url('user_image', $userInfo->photo_path.'_n'.$userInfo->photo_ext); ?>" width="100" />
-                    <?php endif;?>     
+                    <?php endif;?>
                 <?php endif;?>
             </div>
             <div class="userName">
@@ -113,4 +110,4 @@
     </div>
 <?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>

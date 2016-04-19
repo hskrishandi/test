@@ -10,8 +10,10 @@
 	<?php endblock(); ?>
 
 	<?php startblock('content'); ?>
-		<p class="mainTitle">Contributors</p>
-		<p class="subTitle">Credits</p>
+		<h2>Contributors</h2>
+        <div class="page-subtitle">
+            <span class="page-subtitle-title">Credits</span>
+        </div>
 		<div class="divContainer">
 			<br>The Hong Kong University of Science and Technology (HKUST)
 			<br>The University of Hong Kong (HKU)
@@ -28,7 +30,9 @@
 				<img src="<?php echo resource_url('img', 'contributors/' . $img); ?>" alt="" />
 			<?php endforeach; ?>
 		</div>
-		<p class="subTitle">The i-Mos Team</p>
+        <div class="page-subtitle">
+            <span class="page-subtitle-title">The i-Mos Team</span>
+        </div>
 		<div class="divContainer">
 			<div class="col1">
 				<br>

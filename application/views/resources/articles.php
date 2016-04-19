@@ -1,17 +1,31 @@
-<?php extend('resources/layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 	<?php startblock('title'); ?>
 		Articles
 	<?php endblock(); ?>
 
-	<?php startblock('side_menu'); ?>
-	<?php endblock(); ?>
+    <?php startblock('css'); ?>
+        <?php echo get_extended_block(); ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'resources.css'); ?>" media="all" />
+    <?php endblock(); ?>
+
+    <?php startblock('script'); ?>
+        <?php echo get_extended_block(); ?>
+        <script type="text/javascript" src="<?php echo resource_url('js', 'library/jquery.validate.min.js');?>"></script>
+        <script type="text/javascript" src="<?php echo resource_url('js', 'resources.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo resource_url('js', 'calendarDateInput.js'); ?>">
+            /***********************************************
+            * Jason's Date Input Calendar- By Jason Moon http://calendar.moonscript.com/dateinput.cfm
+            * Script featured on and available at http://www.dynamicdrive.com
+            * Keep this notice intact for use.
+            ***********************************************/
+        </script>
+    <?php endblock(); ?>
 
 	<?php startblock('content'); ?>
 		<div id="resources">
 			<div id="resource-content">
             	<?php if($display_list):?>
-                <h2 class="title">Articles</h2>
-
+                <h2>Articles</h2>
                         <ul class="item-list">
                         <?php foreach($articles as $title => $entries): ?>
                             <?php $year=NULL; foreach($entries as $entry): ?>
@@ -37,19 +51,16 @@
 
                   				$year=$entry->year;
                                 ?>
-
                             </li>
-
                             <?php endforeach; ?>
                             <?php endforeach; ?>
                         </ul>
-
-
                 <?php else:?>
-
-
                 <?php foreach($articles_details as $articles_details_entry): ?>
-                    	<h2 class="page-subtitle"><?php echo $articles_details_entry->name;?></h2>
+                    <div class="page-subtitle">
+                        <span class="page-subtitle-title"><?php echo $articles_details_entry->name;?></span>
+                        <a class="page-subtitle-more" href="<?php echo base_url('articles'); ?>" onclick="history.go(-1); return false;">Back</a>
+                    </div>
                         <span class="user-detail"><?php echo $articles_details_entry->author;?><?php if($articles_details_entry->author!=NULL AND $articles_details_entry->year!=NULL) echo"&nbsp;-&nbsp;";?><?php echo $articles_details_entry->year;?></span>
                         <span><?php echo nl2br($articles_details_entry->summary);?></span>
                         <span class="website"><?php if ($articles_details_entry->website != NULL) {
@@ -64,12 +75,6 @@
                                 ?>
                          </span>
                          <?php } ?>
-
-
-                        <a class="return-link" href="<?php echo base_url('articles'); ?>" onclick="history.go(-1); return false;">
-					Back
-				</a>
-
                     	<?php endforeach; ?>
 
                 <?php endif ?>

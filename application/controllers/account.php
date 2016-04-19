@@ -124,6 +124,20 @@ class account extends CI_Controller
         echo $this->Account_model->login($email, $pwd);
     }
 
+    public function loginForm()
+    {
+        $email = $this->input->post('email');
+        $pwd = $this->input->post('pwd');
+        $loginResult = $this->Account_model->login($email, $pwd);
+        if ($loginResult == "noactive") {
+            redirect('/authErr');
+        } elseif ($loginResult == "noaccpass") {
+            redirect('/authErr');
+        } else {
+            redirect('/');
+        }
+    }
+
     public function reAuth()
     {
         $email = $this->input->post('email');

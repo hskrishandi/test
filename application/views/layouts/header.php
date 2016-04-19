@@ -52,7 +52,7 @@
             </li>
 
             <li>
-                <a class="separate-line"> | </a>
+                <a class="separate-line"> &#x7c; </a>
             </li>
 
             <li>
