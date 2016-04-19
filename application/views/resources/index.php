@@ -1,32 +1,32 @@
-<?php extend('resources/layout.php'); ?>	
+<?php extend('resources/layout.php'); ?>
 	<?php startblock('title'); ?>
 		Resources
 	<?php endblock(); ?>
-	
+
 	<?php startblock('side_menu'); ?>
 	<?php endblock(); ?>
-	
+
 	<?php startblock('content'); ?>
 		<div id="resources">
-			<p id="pageTitle">Resources</p>
-			
-			<div class='title'>Device Models Reference
-				<a class="more" href="<?php echo base_url('resources/models'); ?>">more</a>
+			<p class="page-title">Resources</p>
+
+			<div class='page-subtitle'>Device Models Reference
+				<a class="page-subtitle-more" href="<?php echo base_url('resources/models'); ?>">more</a>
 				<div class="postSeparateLine">
 					&#x7c;
 				</div>
-				<a class="post" href="<?php echo base_url('resources/post/models'); ?>">Post Reference</a>
+				<a class="page-subtitle-more" href="<?php echo base_url('resources/post/models'); ?>">Post Reference</a>
 			</div>
 			<ul class="item-list">
 				<?php foreach($models as $entry): ?>
 					<li>
-						<?php 
+						<?php
 							$content = $entry->name;
 							if ($entry->author != NULL) {
 								$content .= ', ' . $entry->author;
 							}
 							if ($entry->website != NULL) {
-								echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $content . '</a>'; 
+								echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $content . '</a>';
 							} else {
 								echo $content;
 							}
@@ -35,14 +35,14 @@
 				<?php endforeach; ?>
 			</ul>
 
-			<div class='title'>Tools
-			<a class="more" href="<?php echo base_url('resources/tools'); ?>">more</a>
+			<div class='page-subtitle'>Tools
+			<a class="page-subtitle-more" href="<?php echo base_url('resources/tools'); ?>">more</a>
 			<div class="postSeparateLine">
 				&#x7c;
 			</div>
-			<a class="post" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
+			<a class="page-subtitle-more" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
 			</div>
-			
+
 
 			<?php foreach ($this->config->item('tool_type') as $type => $title) :?>
 			<h2 class="sub_title"><?php echo $title; ?></h2>
@@ -97,20 +97,20 @@
 			<hr>
 			<?php endforeach; ?>
 
-			
-			<div class="title">Organizations
-				<a class="more" href="<?php echo base_url('resources/groups'); ?>">more</a>
+
+			<div class="page-subtitle">Organizations
+				<a class="page-subtitle-more" href="<?php echo base_url('resources/groups'); ?>">more</a>
 				<div class="postSeparateLine">
 					&#x7c;
 				</div>
-				<a class="post" href="<?php echo base_url('resources/post/groups'); ?>">Post Organization</a>
+				<a class="page-subtitle-more" href="<?php echo base_url('resources/post/groups'); ?>">Post Organization</a>
 			</div>
 			<ul class="item-list">
 				<?php foreach($groups as $entry): ?>
 					<li>
-						<?php 
+						<?php
 							if ($entry->website != NULL) {
-								echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $entry->name . '</a>'; 
+								echo '<a href="' . $entry->website . '" class="link"  target="_blank">' . $entry->name . '</a>';
 							} else {
 								echo $entry->name;
 							}
@@ -120,6 +120,7 @@
 			</ul>
 
 		</div>
+		<div class="clearFloat"></div>	
 	<?php endblock(); ?>
 
 <?php end_extend(); ?>

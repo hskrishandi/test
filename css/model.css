@@ -151,7 +151,7 @@ a#model_name{
 	background-color:#FFF;
 	padding-left:20px;
 	padding-right:20px;
-	color:#7575a9;;
+	color:#7575a9;
 	cursor: default;
 	pointer-events: none;
 	font-weight:bold;
@@ -223,8 +223,10 @@ div.model-library  #model-library-menu {
 	top: 0px;
 }
 
-#content {
-	*z-index: -1;
+.content {
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
 }
 
 div.model-library  #model-library-menu li a {
@@ -708,9 +710,7 @@ select.param_inputs {
 }
 
 #model-list {
-	margin-left:20px;
-	margin-top:20px;
-	width: 1200px;
+	width: 100%;
 }
 
 #model-list  :hover{
@@ -718,7 +718,7 @@ select.param_inputs {
 }
 
 #MLitemBox {
-    float: left;
+    /*float: left;*/
     height: auto;
     /*margin-left: auto;
     margin-right: auto;*/
@@ -726,7 +726,8 @@ select.param_inputs {
 	padding: 18px;
     clear: both;
 	display: block;
-    width: 73%;
+    /*width: 73%;*/
+	width: 100%;
 }
 
 .modelBoxContainer {
@@ -772,7 +773,7 @@ select.param_inputs {
     text-align: left;
     margin: 24px auto 0px;
     clear: none;
-    min-height: 46px;
+    min-height: 60px;
 	font-family: DINPro;
     color: rgb(0, 0, 0);
 	font-size: 0.7em;

@@ -9,7 +9,7 @@
 	);
 ?>
 
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Resources
@@ -17,7 +17,7 @@
 	
 	<?php startblock('css'); ?>
         <?php echo get_extended_block(); ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'resources.css'); ?>" media="all" />
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'documents.css'); ?>" media="all" />
     <?php endblock(); ?>
 	
     

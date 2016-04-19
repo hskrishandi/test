@@ -8,12 +8,12 @@
 
 	<?php startblock('content'); ?>
 		<div id="resources">
-			<p id="pageTitle">Resources</p>
+			<p class="page-title">Resources</p>
 				
-			<div class='title'>Tools
+			<div class='page-subtitle'>Tools
 				<div class="postSeparateLine">
 				</div>
-				<a class="post" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
+				<a class="page-subtitle-more" href="<?php echo base_url('resources/post/tools'); ?>">Post Tools</a>
 			</div>
 			
 			<?php foreach($tools as $title => $entries): ?>
