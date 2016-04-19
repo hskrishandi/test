@@ -1,3 +1,213 @@
+.introduction {
+    width: 80%;
+    margin: 80px 10%;
+}
+
+.introduction h1,
+.model-introduction h1 {
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 42px;
+    margin-bottom: 20px;
+}
+
+.introduction p,
+.model-introduction p {
+    color: rgb(77, 77, 77);
+    text-align: justify;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.introduction a,
+.model-introduction a {
+    color: #35A9DD;
+}
+
+.introduction .introduction-description {
+    float: left;
+    width: 70%
+}
+
+.introduction .introduction-icon {
+    float: right;
+    width: 30%;
+    text-align: center;
+}
+
+.introduction .introduction-icon > div {
+    margin-bottom: 50px;
+}
+
+.introduction .introduction-icon img {
+    width: 25%;
+    margin-bottom: 20px;
+}
+
+.introduction .introduction-icon label {
+    display: block;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.introduction .introduction-screenshot {
+    float: left;
+    width: 50%;
+}
+
+.introduction .introduction-screenshot img {
+    width: 100%;
+}
+
+.model-introduction {
+    background-color: #EFEFEF;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.model-introduction .model-introduction-icon {
+    float: left;
+    width: 20%;
+    margin-left: 10%;
+    text-align: center;
+    margin-top: 1%;
+}
+
+.model-introduction .model-introduction-description {
+    float: right;
+    width: 60%;
+    margin-right: 10%;
+}
+
+.model-introduction .model-introduction-icon img {
+    width: 50%;
+    padding: 7%;
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    -webkit-box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
+    box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
+}
+
+.model-introduction .mLitemBox {
+    float: none;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-top: 435px; */
+    padding-top: 80px;
+    clear: both;
+    display: block;
+    width: 76%;
+}
+
+.model-introduction .mLitemBox .modelInfo {
+    float: none;
+    width: 85.362975%;
+    height: auto;
+    text-align: left;
+    margin: 24px auto 0px;
+    clear: none;
+    min-height: 46px;
+    color: rgb(31, 31, 31);
+    font-size: 0.7em;
+    line-height: 1.6em;
+}
+
+.model-introduction .user-experience {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 80px;
+}
+
+.model-introduction .user-experience h1 {
+    text-align: center;
+}
+
+.model-introduction .user-experience .user-experience-box {
+    background-color: #969696;
+    width: 48%;
+    float: left;
+    margin-left: 1%;
+    margin-right: 1%;
+    padding: 20px;
+    min-height: 160px;
+    position: relative;
+}
+
+.model-introduction .user-experience .user-experience-box p {
+    margin-bottom: 0px !important;
+    color: #FFF;
+}
+
+.model-introduction .user-experience .user-experience-box .user-experience-message {
+    font-size: 18px;
+}
+
+.model-introduction .user-experience .user-experience-box .user-experience-name {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 12px;
+}
+
+.model-introduction .user-experience .user-experience-more {
+    margin-top: 20px;
+}
+
+.model-introduction .user-experience .user-experience-more a {
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: 12px;
+    color: #333;
+}
+
+.news-highlight {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 80px;
+}
+
+.news-highlight > h1 {
+    text-align: center;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 42px;
+    margin-bottom: 20px;
+}
+
+.news-highlight .news-image {
+    margin-bottom: 60px;
+}
+
+.news-highlight .news-image img {
+    width: 30%;
+    margin: 1.5%;
+}
+
+.news-highlight .news-box .news-box-column {
+    float: left;
+    width: 48%;
+    margin: 1%;
+    font-size: 1em;
+    line-height: 0.9em;
+}
+
+.news-highlight .news-box .news-box-column h6 {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.news-highlight .news-box .news-box-column p {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+
 /*SlideImage - Start*/
 
 #slideBox {
@@ -281,20 +491,6 @@
     color: rgb(0, 0, 0);
     margin-right: auto;
     display: block;
-}
-
-.modelInfo {
-    float: none;
-    width: 85.362975%;
-    height: auto;
-    text-align: left;
-    margin: 24px auto 0px;
-    clear: none;
-    min-height: 46px;
-    font-family: DINPro;
-    color: rgb(31, 31, 31);
-    font-size: 0.7em;
-    line-height: 1.6em;
 }
 
 .modelGreyBox {

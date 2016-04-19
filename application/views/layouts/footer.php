@@ -3,10 +3,6 @@
         All rights reserved. &copy 2016 i-MOS Team
     </div>
 
-    <div class="browser">
-        ** Best viewed by Chrome 25+, Firefox 15+ &#38 Safari 5+ with 1024x768+ screen resolution.
-    </div>
-
     <div class="referencelink">
         <ul>
             <li>
