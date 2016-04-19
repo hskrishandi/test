@@ -1,5 +1,5 @@
 
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Discussion
@@ -30,9 +30,9 @@
 
     <div class="discussion">
     <div class="top">
-    <div style="width:520px" class="discussionHeader">Topics</div>
-    <div style="width:100px" class="discussionHeader">Replies</div>
-    <div style="width:80px" class="discussionHeader"></div>
+    <div style="width:70%" class="discussionHeader">Topics</div>
+    <div style="width:20%" class="discussionHeader">Replies</div>
+    <div style="width:0" class="discussionHeader"></div>
     </div>
     <div class="bottom">
     <div class="posts">
@@ -78,7 +78,7 @@
         <?php }}?>
     </div>
 
-    <div width="400">
+    <div>
     <div class="short_content" id="s<?php echo $row->postid;?>">
         <?php echo "<s".$row->postid.">"?>
         <?php  echo substr( // remove divs and blank lines

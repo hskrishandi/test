@@ -30,7 +30,7 @@
 
                 <ul id="sitemenu-box" class="submenu-box">
                     <li>
-                        <a href="<?php echo base_url('news'); ?>">News and Events</a>
+                        <a href="<?php echo base_url('news_event'); ?>">News and Events</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('discussion'); ?>">Discussion</a>
