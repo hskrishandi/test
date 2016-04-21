@@ -16,9 +16,8 @@ div.error_box p.error {
 
 /* General styles */
 
-body {
+/*body {
 	background-color: #FFF;
-	/* //font-size:80%; */ /* Fix font-size bug, by Leon 20160316 */
 }
 
 h1, h2, h3, h4 {
@@ -55,7 +54,7 @@ table tbody {
 
 table th {
 	vertical-align: middle;
-	padding: 5px 0;	
+	padding: 5px 0;
 	color: #434367;
 }
 
@@ -66,6 +65,10 @@ table td {
 ol li {
 	list-style-position: inside;
 	margin: 3px 0;
+}*/
+
+#model-page {
+    font-size: 12px;
 }
 
 .icon-checkbox, .icon-checkbox:before {
@@ -78,7 +81,7 @@ ol li {
 }
 
 .hidden {
-	display:none;  
+	display:none;
 }
 
 span.error {
@@ -87,7 +90,7 @@ span.error {
 }
 
 p.error {
-	display: block;	
+	display: block;
 	width: 100%;
 	color: red;
 	margin: 8px 0 0 0;
@@ -122,7 +125,7 @@ div.ui-tabs {
 }
 
 .ui-tabs ul.ui-tabs-nav li.ui-tabs-selected a {
-	cursor: default;	
+	cursor: default;
 }
 
 .ui-tabs ul.ui-tabs-nav li a:hover, .ui-tabs ul.ui-tabs-nav li a:active {
@@ -144,7 +147,7 @@ div.ui-tabs {
 li#model_name_bar{
 	float:right;
 	border:none;
-		
+
 }
 
 a#model_name{
@@ -264,7 +267,7 @@ div.model-library  #model-library-menu li font:active {
 	position: relative;
 	z-index: 15;
 	margin-right: 2px;
-} 
+}
 
 #side_menu .model-library h2 a.action.active {
 	color: #9e9ec3;
@@ -275,7 +278,7 @@ div.model-library  #model-library-menu li font:active {
 	-webkit-border-top-right-radius: 2px;
 	-moz-border-radius-topright: 2px;
 	border-top-right-radius: 2px;
-} 
+}
 
 #side_menu .model-library h2 a.action.active:hover {
 	font-weight: normal;
@@ -337,7 +340,7 @@ div.model-benchmark-side-menu div {
 	position: relative;
 	z-index: 15;
 	margin-right: 2px;
-} 
+}
 
 #side_menu .model-benchmark-side-menu h2 a.action.active {
 	color: #9e9ec3;
@@ -348,7 +351,7 @@ div.model-benchmark-side-menu div {
 	-webkit-border-top-right-radius: 2px;
 	-moz-border-radius-topright: 2px;
 	border-top-right-radius: 2px;
-} 
+}
 
 #side_menu .model-benchmark-side-menu h2 a.action.active:hover {
 	font-weight: normal;
@@ -383,7 +386,7 @@ div.model-benchmark-side-menu div {
 
 /*  none overflow */
 div.no-overflow{
-	overflow:hidden !important; 
+	overflow:hidden !important;
 }
 
 /* Model simulation page */
@@ -412,7 +415,7 @@ div.no-overflow{
 }
 
 .toolbar a.action,
-.toolbar a.action:active {	
+.toolbar a.action:active {
 	font-weight: normal;
 	/*padding: 10px;*/
 }
@@ -439,7 +442,7 @@ div.no-overflow{
 
 .inputs label {
 	text-align: left;
-	position: relative;	
+	position: relative;
 }
 
 .inputs input {
@@ -462,11 +465,11 @@ div.no-overflow{
 #description div.structure-figure {
 	float: right;
 	width: 300px;
-	margin: 0 10px; 
+	margin: 0 10px;
 }
 
 #description .structure-figure img {
-	display: block;	
+	display: block;
 	max-width: 300px;
 	margin: 0 auto;
 }
@@ -478,7 +481,7 @@ div.no-overflow{
 }
 
 #description .structure-figure.full img {
-	display: block;	
+	display: block;
 	max-width: 95%;
 	margin: 0 auto;
 }
@@ -499,7 +502,7 @@ div.no-overflow{
 }
 
 #bias table th, #bias table td {
-	padding-right: 10px;	
+	padding-right: 10px;
 }
 
 #bias table td  {
@@ -520,8 +523,8 @@ div#param-sets h4 {
 }
 
 #param-tabs label {
-	margin: 5px 5px;	
-	display: inline-block;	
+	margin: 5px 5px;
+	display: inline-block;
 	line-height: 22px;
 	width: 230px;
 	min-height: 26px;
@@ -534,7 +537,7 @@ div#param-sets h4 {
 	width: 120px;
 	display: inline-block;
 	vertical-align: middle;
-	padding-right: 10px;	
+	padding-right: 10px;
 }
 
 #param-tabs label input {
@@ -573,15 +576,15 @@ div#param-sets h4 {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #bfbfe6;  
+   color: #bfbfe6;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #bfbfe6;  
+   color: #bfbfe6;
 }
 
-:-ms-input-placeholder {  
-   color: #bfbfe6;  
+:-ms-input-placeholder {
+   color: #bfbfe6;
 }
 
 .ui-autocomplete {
@@ -603,14 +606,14 @@ input.param_inputs {
 	width: 70px;
 	border-radius: 3px;
 	border: solid 1px #B5BCC7;
-	padding: 3px 5px;	
+	padding: 3px 5px;
 }
 
 select.param_inputs {
 	width: 80px;
 	border-radius: 3px;
 	border: solid 1px #B5BCC7;
-	padding: 3px 0px;	
+	padding: 3px 0px;
 }
 
 /* IE 6 doesn't support max-height
@@ -762,7 +765,7 @@ select.param_inputs {
 }
 
 @font-face{
-   font-family: DINPro; 
+   font-family: DINPro;
    src: url('../fonts/DINPro-Regular.ttf');
 }
 
