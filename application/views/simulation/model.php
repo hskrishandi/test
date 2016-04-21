@@ -51,18 +51,18 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('js', 'star-rating/jquery.rating.css'); ?>" media="all" />
 	<?php endblock(); ?>
 
-	<?php startblock('MenuBar'); ?>
-	<?php endblock(); ?>
-	
 	<?php startblock('side_menu'); ?>
-		<?php echo get_extended_block(); ?>		
+		<?php echo get_extended_block(); ?>
 		<div class="block model-library" style="border:0">
-			<ul id="model-lib-list" data-bind="foreach: tree" data-current="<?php echo $model_info->id; ?>">	
+			<ul id="model-lib-list" data-bind="foreach: tree" data-current="<?php echo $model_info->id; ?>">
 			</ul>
 		</div>
-		<div class="model-benchmark-side-menu">	
+		<div class="model-benchmark-side-menu">
 		</div>
 	<?php endblock(); ?>
+
+    <?php startblock('header'); ?>
+    <?php endblock(); ?>
 
 	<?php startblock('content'); ?>
 	<div id="model-page" style="height: 100%;">
@@ -323,5 +323,8 @@
         <p>Press F5 to refresh if<br/>no response</p>
 	</div>
 	<?php endblock(); ?>
+
+    <?php startblock('footer'); ?>
+    <?php endblock(); ?>
 
 <?php end_extend(); ?>

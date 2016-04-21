@@ -1,3 +1,4 @@
+<?php start_block_marker('header'); ?>
 <div class="header">
 
     <div class="logo">
@@ -317,3 +318,4 @@
     };
 
 </script>
+<?php end_block_marker(); ?>

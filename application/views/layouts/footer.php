@@ -1,4 +1,5 @@
 <div class="clearFloat"></div>
+<?php start_block_marker('header'); ?>
 <div class="footer">
     <div class="copyright">
         All rights reserved. &copy 2016 i-MOS Team
@@ -37,3 +38,4 @@
     </div>
 
 </div>
+<?php end_block_marker(); ?>
