@@ -24,7 +24,7 @@ Developer
 
 <?php startblock('content'); ?>
 <div id="developer">
-	<form /*action="<?php echo base_url('developer/submit/step4')?>"*/ data-bind="with:formDataStatus" id="developer_form" method="post" enctype="multipart/form-data">
+	<form data-bind="with:formDataStatus" id="developer_form" method="post" enctype="multipart/form-data">
 		<div class="form-page" id="page1" >
 			<h2 class="formStepTitle">Step 1: Fill in the description of your model</h2>
 			<div class="labels">

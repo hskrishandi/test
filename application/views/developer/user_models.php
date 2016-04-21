@@ -1,9 +1,9 @@
-<?php extend('layout.php'); ?>
+<?php extend('layouts/layout.php'); ?>
 
 	<?php startblock('title'); ?>
 		Developer
 	<?php endblock(); ?>
-	
+
 	<?php startblock('css'); ?>
 		<?php echo get_extended_block(); ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'font/font-awesome.min.css'); ?>">
@@ -22,12 +22,7 @@
 		<script src="<?php echo resource_url('js', 'library/jquery.jqplot.min.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/jquery.validate.min.js'); ?>" type="text/javascript"></script>
 	<?php endblock(); ?>
-	
-	<?php startblock('side_menu'); ?>
-        <?php echo get_extended_block(); ?>
-		<?php $this->load->view('credit'); ?>
-	<?php endblock(); ?>
-	
+
 	<?php startblock('content'); ?>
 	<div id="developer">
 		<div class="form-page" id="user_models">
@@ -95,4 +90,4 @@
 	</div>
 	<?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>
