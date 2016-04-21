@@ -716,9 +716,6 @@ select.param_inputs {
 	width: 100%;
 }
 
-#model-list  :hover{
-	font-weight: normal;
-}
 
 #MLitemBox {
     /*float: left;*/
