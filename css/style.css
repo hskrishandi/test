@@ -329,7 +329,7 @@
 	position: relative;
 	/* margin: 5px 0 15px 10px; */ /*Edit by leon 20160316*/
 	min-height: 200px;
-	/*width: 800px;*/ /*Edit by Grace 20160330*/
+	width: 800px;
 }
 
 
@@ -356,7 +356,7 @@
 	margin-top: 1px;
 	margin-bottom: 5px;
 	padding: 2px;
-	
+	width: 130px;
 }
 
 #side_menu .block label{
