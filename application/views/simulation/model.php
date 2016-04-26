@@ -1,7 +1,7 @@
-<?php extend('layouts/layout.php'); ?>
+<?php extend('layout.php'); ?>
 
 	<?php startblock('title'); ?>
-		Model
+		Simulation
 	<?php endblock(); ?>
 
 	<?php startblock('script'); ?>
@@ -30,12 +30,7 @@
 		<script src="<?php echo resource_url('js', 'modelsim/graphs.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'modelsim/controllers.js'); ?>" type="text/javascript"></script>
 
-		<script src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
-
-		<script src="<?php echo resource_url('js', 'fivestar.js'); ?>" type="text/javascript" charset="utf-8"></script>
-		<script src="<?php echo resource_url('js', 'star-rating/jquery.form.js'); ?>" type="text/javascript" charset="utf-8"></script>
-		<script src="<?php echo resource_url('js', 'star-rating/jquery.MetaData.js'); ?>" type="text/javascript" charset="utf-8"></script>
-		<script src="<?php echo resource_url('js', 'star-rating/jquery.rating.js'); ?>" type="text/javascript" charset="utf-8"></script>
+		<script  src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
 	<?php endblock(); ?>
 
 	<?php startblock('css'); ?>
@@ -46,24 +41,59 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery-ui/themes/base/jquery-ui.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'jquery.jqplot.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'model.css'); ?>"/>
-		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('js', 'star-rating/jquery.rating.css'); ?>" media="all" />
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'discussion.css'); ?>" media="all" />
 	<?php endblock(); ?>
 
 	<?php startblock('side_menu'); ?>
 		<?php echo get_extended_block(); ?>
-		<div class="block model-library" style="border:0">
+		<div class="block model-library">
+			<h2><a href="#" class="action drop-down-btn icon-cog" title="Settings" data-bind="modelLibMenu: '#model-library-menu'"></a>User Library</h2>
+            <ul id="model-library-menu">
+				<li><font class="action new"><i class="icon-file"></i>New</font></li>
+
+				<li><font class="action model-library-save-as"><i class="icon-download"></i>Download</font></li>
+
+				<li><font class="action model-library-upload"><i class="icon-upload"></i>Upload</font></li>
+			</ul>
+
 			<ul id="model-lib-list" data-bind="foreach: tree" data-current="<?php echo $model_info->id; ?>">
+                <li>
+                    <a class="tree-icon" data-bind="css: { 'icon-caret-down': expanded(), 'icon-caret-right': expanded() == false }"> </a>
+					<font class="model-page-direct" data-bind="attr: { href: id }, text: name"></font>
+					<ul class="model-lib" data-bind="modelLibExpandable: expanded, foreach: library">
+                        <li class="model-lib-entry" data-bind="modelLibEntry: true">
+                            <a href="#" title="Select model library" class="load" data-bind="text: name"></a>
+                            <a href="#" class="action model-lib-entry-remove delete icon-trash" title="Delete model library"></a>
+                        </li>
+					</ul>
+				</li>
 			</ul>
 		</div>
+        <div style="clear:both"></div>
 		<div class="model-benchmark-side-menu">
+			<!-- ko if: selectedTab()==2-->
+			<div class="block" >
+				<h2>Mode Choice</h2>
+
+				<ul id="model-lib-list" data-bind="foreach: choice">
+					<li>
+						<a class="tree-icon" data-bind="css: { 'icon-caret-down': expanded(), 'icon-caret-right': expanded() == false }"> </a>
+						<font class="model-choice" data-bind="text: name,click:$root.changeSelectedMode.bind($data,id)"></font>
+						<ul class="model-lib" data-bind="modelLibExpandable: expanded,foreach: b_name">
+							<li>
+								<a href="#" data-bind="text:name,click:$root.sideMenuCtrl.bind($data,order)"></a>
+							</li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+			<!-- /ko -->
 		</div>
 	<?php endblock(); ?>
 
-    <?php startblock('header'); ?>
-    <?php endblock(); ?>
-
 	<?php startblock('content'); ?>
-	<div id="model-page" style="height: 100%;">
+	<div id="model-page">
 		<div id="model-tabs" data-bind="tabs: selectedTab, loadingWhen: isLoading">
 			<ul>
 
@@ -78,7 +108,7 @@
 
 
 			<div id="description">
-				<?php $this->load->view('simulation/descriptions/' . $model_info->name); ?>
+				<?php $this->load->view('simulation/descriptions/' . $model_info->name . '.php'); ?>
 			</div>
 
 			<div id="params">
@@ -311,6 +341,11 @@
 			</div>
 
 			<div id="comments">
+                <style media="screen">
+                    .post_details {
+                        width: 90% !important;
+                    }
+                </style>
 				<?php $this->load->view('discussion/model_comment', $comment_data); ?>
 			</div>
 		</div>
@@ -321,8 +356,5 @@
         <p>Press F5 to refresh if<br/>no response</p>
 	</div>
 	<?php endblock(); ?>
-
-    <?php startblock('footer'); ?>
-    <?php endblock(); ?>
 
 <?php end_extend(); ?>

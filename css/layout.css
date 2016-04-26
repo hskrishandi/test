@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: rgb(60, 60, 60);
+    background-color: #FFF;
     font-family: 'Noto Sans', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma', sans-serif;
 }
 
@@ -23,8 +23,9 @@ h7 {
     margin-left: auto;
     margin-right: auto;
     min-height: 100%;
-    width: 1280px;
-    min-width: 0px;
+    /*width: 1280px;*/
+    width: 100%;
+    min-width: 1080px;
     /*padding-bottom: 1em;*/
     /* edit by Leon, remove homepage bottom padding */
     position: relative;
@@ -32,21 +33,18 @@ h7 {
 
 #main_content {
     display: inline;
-    float: left;
+    float: right;
     position: relative;
-    margin-left: 0px;
-    margin-right: 0px;
-    width: 1280px;
+    /*width: 1280px;*/
     min-height: 500px;
     background-color: rgb(255, 255, 255);
+    width: 80%;
+    margin: 10%;
+    min-width: 1000px;
 }
 
 a {
-<<<<<<< HEAD
-	color: rgb(60,60,60);
-=======
     color: rgb(41, 171, 226);
->>>>>>> 659eb6f2b9390781eacce528e4ef0434a262cd10
 }
 
 a:link {
@@ -71,11 +69,11 @@ a:active {
     /* text-decoration: underline; */
 }
 #MenuItemsBox li a{
-	
+
 	display: block;
 }
 #MenuItemsBox li:hover{
-	background: #FFAA00; /* For browsers that do not support gradients */    
+	background: #FFAA00; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left, #FFDC5F , #FFAA00); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(right, #FFDC5F, #FFAA00); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, #FFDC5F, #FFAA00); /* For Firefox 3.6 to 15 */
@@ -83,19 +81,19 @@ a:active {
 	font-weight: bold;
 }
 #MenuItemsBox li{
-	
+
 	padding:2% 8%;
 }
 #MenuItemsBox li:first-child{
-	
+
 	padding-top: 8%;
 }
 #MenuItemsBox li:last-child{
-	
+
 	padding-bottom: 8%;
 }
 #MenuItemsBox li:nth-child(3){
-	
+
 }
 p {
     /* font-size: 1.15em; */

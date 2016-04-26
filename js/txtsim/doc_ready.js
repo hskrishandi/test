@@ -26,7 +26,7 @@ function simappear() {
 	});
 	$("#SClib").attr({
 		// "style": "z-index:50;visibility:visible;position:absolute;"
-		"style": "display:inline;float:left;clear:both;"
+		"style": "display:block;float:left;clear:both;"
 	});
 }
 
@@ -36,7 +36,7 @@ function simappear() {
 function simdappear() {
 	$("#userlib").attr({
 		// "style": "z-index:50;visibility:visible;position:absolute;"
-		"style": "display:inline;float:left;clear:both;"
+		"style": "display:block;float:left;clear:both;"
 	});
 	$("#targetbox").attr({
 		// "style": "visibility:hidden;z-index:500;position:absolute;"

@@ -329,7 +329,7 @@
 	position: relative;
 	/* margin: 5px 0 15px 10px; */ /*Edit by leon 20160316*/
 	min-height: 200px;
-	width: 800px;
+	width: 75%;
 }
 
 
@@ -341,7 +341,12 @@
 	position: relative;
 	margin-left: 0px;
 	margin-right: 0px;
-	width: 137px;
+	width: 20%;
+    min-width: 120px;
+}
+
+#main_content #side_menu > div {
+    float: right !important;
 }
 
 #side_menu #block-Title {

@@ -61,8 +61,8 @@
 
 <div id="page">
 
-	<!-- MenuBar - Start -->
-	<div id="MenuBar">
+
+	<!-- <div id="MenuBar">
 		<?php start_block_marker('MenuBar'); ?>
 		<a href="<?php echo base_url(); ?>">
 			<img id="logo" src="<?php echo resource_url('img', 'home/Logo.png'); ?>" />
@@ -112,7 +112,6 @@
 
 	</div>
 
-	<!-- MenuDropDowns - Start -->
 	<div id="MenuItemsBox" class="MenuDropDown" style="display:none;">
 		<ul>
 		<?php foreach ($menu_items as $title => $url) : ?>
@@ -126,11 +125,9 @@
 	<?php $this->load->view('menubar_contactbox'); ?>
 
 	<div id="block-user" class="MenuDropDown" style="display:none;"></div>
-	<!-- MenuDropDowns - End -->
 
-	<?php end_block_marker(); ?>
+	<?php end_block_marker(); ?> -->
 
-	<!-- MenuBar - End -->
 
 
 	<div id="main_content">
@@ -151,7 +148,8 @@
 
 
 	<!-- Footer - Start-->
-	<?php start_block_marker('FooterBox'); ?>
+
+	<!-- <?php start_block_marker('FooterBox'); ?>
     <div id="FooterBox" class="clearfix">
         <p id="footerLeftText" class="footerText">
         <span>All rights reserved. &copy; 2015 i-MOS Team</span><br />
@@ -163,7 +161,7 @@
         <span><a href="<?php echo base_url('page/terms');?>">Terms of Use</a>  &nbsp;&nbsp;  &#x7c;  &nbsp;&nbsp;  <a href="<?php echo base_url('page/privacy');?>">Privacy Policy</a>  &nbsp;&nbsp;  &#x7c;  &nbsp;&nbsp;  <a href="<?php echo base_url('page/disclaimers');?>">Disclaimers</a>  &nbsp;&nbsp;  &#x7c;  &nbsp;&nbsp;  <a href="<?php echo base_url('page/sitemap');?>">Sitemap</a></span><br />
         </p>
     </div>
-	<?php end_block_marker(); ?>
+	<?php end_block_marker(); ?> -->
 
     <!-- Footer - End-->
 
