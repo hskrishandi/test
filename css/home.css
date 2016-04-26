@@ -214,6 +214,33 @@
     margin-bottom: 20px;
 }
 
+.experience-page,
+.post-experience {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.experience-page h2 {
+    margin-bottom: 40px;
+}
+
+.experience-page .user-detail {
+    float: right;
+}
+
+.experience-page .return-link {
+    margin-top: 80px;
+}
+
+.experience-page .return-link a {
+    font-size: 18px;
+}
+
+.post-experience .alert {
+    display: none;
+}
+
 
 /*SlideImage - Start*/
 

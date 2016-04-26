@@ -30,7 +30,7 @@
         <p>
             Please note that the site is lightly moderated. We'll honor all the postings, but we will exercise our right to remove spam, hostile, irrelevant and offending postings.
         </p>
-        <a href="<?php echo base_url('resources/news'); ?>">&gt; BROWSE NEWS ABOUT iMOS</a>
+        <a href="<?php echo base_url('news_event'); ?>">&gt; Browse News About iMOS</a>
     </div>
     <div class="introduction-icon">
         <div class="introduction-icon-group">
@@ -62,7 +62,7 @@
     <div class="model-introduction-description">
         <h1>Expanding model library</h1>
         <p>It is the intention of iMOS to provide an authoring tool for model developer to upload their model implemented in Verilog-A code directly to iMOS for users to test and evaluate. Currently we are using the Automatic Device Model Synthesizer(ADMS) together with experienced programmers to help the compilation of worthwhile models to the i-MOS platform.</p>
-        <a href="<?php echo base_url(); ?>">&gt; Launch Model Library</a>
+        <a href="<?php echo base_url('modelsim'); ?>" target="_blank">&gt; Launch Model Library</a>
     </div>
     <div class="clearFloat"></div>
     <div class="mLitemBox" class="clearfix">
