@@ -15,6 +15,16 @@ $(document).ready(function() {
             }
         }
     });
+    $('#login-username').keypress(function(e) {
+        if(e.which == 13) {
+            $('#login-submit').click();
+        }
+    });
+    $('#login-password').keypress(function(e) {
+        if(e.which == 13) {
+            $('#login-submit').click();
+        }
+    });
     $('#login-submit').click(function() {
 
         $('#login-progress').show();
