@@ -30,7 +30,7 @@
         <p>
             Please note that the site is lightly moderated. We'll honor all the postings, but we will exercise our right to remove spam, hostile, irrelevant and offending postings.
         </p>
-        <a href="<?php echo base_url('news_event'); ?>">&gt; Browse News About iMOS</a>
+        <a href="<?php echo base_url('news_event'); ?>">&gt; Browse News About i-MOS</a>
     </div>
     <div class="introduction-icon">
         <div class="introduction-icon-group">
@@ -48,10 +48,10 @@
     </div>
     <div class="clearFloat"></div>
     <div class="introduction-screenshot">
-        <img src="<?php echo resource_url('img', 'home/Screen%20Dummy%20Template%20B1.png'); ?>"/>
+        <img src="<?php echo resource_url('img', 'home/imosScreenshot1.png'); ?>"/>
     </div>
     <div class="introduction-screenshot">
-        <img src="<?php echo resource_url('img', 'home/Screen%20Dummy%20Template%20B3.png'); ?>" />
+        <img src="<?php echo resource_url('img', 'home/imosScreenshot2.png'); ?>" />
     </div>
 </div>
 <div class="clearFloat"></div>
@@ -61,7 +61,7 @@
     </div>
     <div class="model-introduction-description">
         <h1>Expanding model library</h1>
-        <p>It is the intention of iMOS to provide an authoring tool for model developer to upload their model implemented in Verilog-A code directly to iMOS for users to test and evaluate. Currently we are using the Automatic Device Model Synthesizer(ADMS) together with experienced programmers to help the compilation of worthwhile models to the i-MOS platform.</p>
+        <p>It is the intention of i-MOS to provide an authoring tool for model developer to upload their model implemented in Verilog-A code directly to i-MOS for users to test and evaluate. Currently we are using the Automatic Device Model Synthesizer(ADMS) together with experienced programmers to help the compilation of worthwhile models to the i-MOS platform.</p>
         <a href="<?php echo base_url('modelsim'); ?>" target="_blank">&gt; Launch Model Library</a>
     </div>
     <div class="clearFloat"></div>

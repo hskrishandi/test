@@ -60,10 +60,12 @@
 .introduction .introduction-screenshot {
     float: left;
     width: 50%;
+    margin-bottom: 20px;
 }
 
 .introduction .introduction-screenshot img {
-    width: 100%;
+    width: 95%;
+    border: 1px solid #EFEFEF;
 }
 
 .model-introduction {

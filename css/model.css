@@ -69,6 +69,7 @@ ol li {
 
 #model-page {
     font-size: 12px;
+    margin-left: 20px;
 }
 
 .icon-checkbox, .icon-checkbox:before {
@@ -914,4 +915,109 @@ select.param_inputs {
 
 #eq-expand{
 
+}
+
+/*
+ * Following code is adjusted by Leon,
+ * for the temp version
+ */
+
+.post_details {
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 700px;
+    min-height: 500px;
+    float: left;
+}
+
+.post_details .comment {
+    width: inherit;
+    padding-top: 8px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-top: 15px;
+    border: solid;
+    border-width: 1px;
+    border-color: #9E9EC3;
+}
+
+.post_details .comment .user_comment {
+    display: block;
+    padding-bottom: 5px;
+}
+
+.post_details .comment .user_reply_info {
+    display: block;
+    color: #85859C;
+    text-align: right;
+}
+
+.post_details .rating {
+    padding-bottom: 20px;
+}
+
+.post_details .rating > strong {
+    float: left;
+    margin-right: 10px;
+}
+
+.post_details .rating .fivestar {
+    float: left;
+}
+
+.post_details .rating .starrate_msg {
+    float: right;
+}
+
+#symdg {
+    width: 150px;
+}
+
+.post_details .comment_title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.posts .reply {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.posts .reply form {
+    width: 100%;
+}
+
+.form_submit {
+    padding-top: 10px;
+    float: right;
+    bottom: 2px;
+    margin-right: 50px;
+}
+
+.submit {
+    background-color: #726FB2;
+    border: 0 none;
+    color: white;
+    cursor: default;
+    display: block;
+    float: right;
+    height: 22px;
+    line-height: 22px;
+    margin-right: 22px;
+    position: relative;
+    text-align: center;
+    width: 75px;
+}
+
+.submit:after {
+    border-bottom: 11px solid transparent;
+    border-left: 11px solid #726FB2;
+    border-top: 11px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: -11px;
+    top: 0;
 }

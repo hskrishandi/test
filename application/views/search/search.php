@@ -3,12 +3,12 @@
 	<?php startblock('title'); ?>
 		Search
 	<?php endblock(); ?>
-	
+
 	<?php startblock('side_menu'); ?>
         <?php echo get_extended_block(); ?>
-		<?php $this->load->view('credit'); ?>
+		<!-- <?php $this->load->view('credit'); ?> -->
 	<?php endblock(); ?>
-	
+
 	<?php startblock('css'); ?>
         <?php echo get_extended_block(); ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'contacts.css'); ?>" media="all" />
@@ -16,7 +16,7 @@
 	<?php startblock('content'); ?>
 		<div id="cse" style="width: 100%;">Loading</div>
 		<script src="https://www.google.com/jsapi" type="text/javascript"></script>
-		<script type="text/javascript"> 
+		<script type="text/javascript">
 		  google.load('search', '1', {language : 'en', style : google.loader.themes.V2_DEFAULT});
 		  google.setOnLoadCallback(function() {
 			var customSearchOptions = {};
@@ -197,8 +197,8 @@
 		  .gs-promotion .gs-visibleUrl,
 		  .gs-promotion .gs-visibleUrl-short {
 			color: #009933;
-		  }</style> 	
-		
+		  }</style>
+
 	<?php endblock(); ?>
 
-<?php end_extend(); ?> 
+<?php end_extend(); ?>

@@ -14,35 +14,29 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'auth_err.css'); ?>" media="all" />
     <?php endblock(); ?>
 	<?php startblock('content'); ?>
-			<div class="auth_err">
-				<h2><?php echo $title ?></h2>
-				<h4>Please login again to update account information.</h4>
-
-				<div class="forms">
-				<div id="user-login">
-				<form id="login" accept-charset="UTF-8" method="post" action="">
-					<div class="item">
-						<div class="title">E-mail*: </div>
-						<div><input type="text" class="form-text required" maxlength="60" size="15" value="" name="name" id="login-name" /></div>
-					</div>
-					<div class="item">
-						<div class="title">Password*: </div>
-						<div><input type="password" class="form-text required" maxlength="60" size="15" value="" name="password" id="login-password" /><div id="err">&nbsp </div> </div>
-					</div>
-					<div class="page-function-block">
-						<div class="page-item-list">
-							<ul>
-								<li><a href="<?php echo base_url('account/create') ?>">Registration</a></li>
-								<li><a href="<?php echo base_url('account/newPass') ?>">Request new password</a></li>
-							</ul>
-
-						</div>
-						<div class="page-submit-block"><a class="submit" id="login-submit">Log in</a></div>
-					</div>
-				</form>
-				</div>
-				</div>
-			</div>
+        <div class="form auth_err">
+            <h2><?php echo $title ?></h2>
+            <h4>Please login again to update account information.</h4>
+            <form class="form-horizontal" action="" method="post" id="login" accept-charset="UTF-8">
+                <div id="form-group-email" class="form-group">
+                    <label for="login-name" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input id="login-name" name="name" type="text" class="form-control required" placeholder="Email">
+                    </div>
+                </div>
+                <div id="form-group-password" class="form-group">
+                    <label for="login-password" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input id="login-password" name="password" type="password" class="form-control required" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" id="login-submit" class="btn btn-default">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 	<?php endblock(); ?>
 
 <?php end_extend(); ?>

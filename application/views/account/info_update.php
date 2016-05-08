@@ -15,89 +15,87 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'info_update.css'); ?>" media="all" />
     <?php endblock(); ?>
 	<?php startblock('content'); ?>
-		<div class="account_update">
-			<div class="forms">
-			<h2 class="title">Account Update</h2>
-			<h4><?php if(isset($msg)) echo $msg ?></h4>
-			<h4 class="title">Personal Information:</h4>
-			<form action="<?php echo base_url('account/infoUpdate')?>" method="post" class="form_update" enctype='multipart/form-data'>
-			<table class="form_table" >
-				<tr>
-					<td class="title">LAST NAME*:</td>
-					<td><input type="text" name="last_name" class="<?php if (form_error('last_name') !=="") echo 'err' ?>" value="<?php echo set_value('last_name', $userinfo->last_name); ?>"/><br />
-					<h4 class="error"><?php echo form_error('last_name');?></h4>
-					</td>
-					<td class="title">FIRST NAME*:</td>
-					<td><input type="text" name="first_name" class="<?php if (form_error('first_name') !=="") echo 'err' ?>" value="<?php echo set_value('first_name', $userinfo->first_name); ?>"/><br />
-					<h4 class="error"><?php echo form_error('first_name');?></h4>
-					</td>
-				</tr>
-				<tr>
-
-				</tr>
-				<tr>
-					<td class="title">DISPLAY NAME*:</td>
-					<td><input type="text" name="displayname" class="<?php if (form_error('displayname') !=="") echo 'err' ?>" value="<?php echo set_value('displayname',$userinfo->displayname); ?>"/><br />
-					<h4 class="error"><?php echo form_error('displayname');?></h4>
-					</td>
-					<td class="title">ADDRESS:</td>
-					<td><input type="text" name="address"  value="<?php echo set_value('address', $userinfo->address); ?>"/></td>
-				</tr>
-				<tr>
-					<td class="title">COMPANY*:</td>
-					<td><input type="text" name="organization" class="<?php if (form_error('organization') !=="") echo 'err' ?>"  value="<?php echo set_value('organization', $userinfo->organization); ?>"/>
-					<h4 class="error"><?php echo form_error('organization');?> </h4>
-					</td>
-					<td class="title">POSITION TITLE:</td>
-					<td><input type="text" name="position"  value="<?php echo set_value('position', $userinfo->position); ?>"/></td>
-				</tr>
-				<tr>
-					<td class="title">TEL:</td>
-					<td><input type="text" name="tel"  value="<?php echo set_value('tel', $userinfo->tel); ?>"/></td>
-										<td class="title">FAX:</td>
-					<td><input type="text" name="fax"  value="<?php echo set_value('fax', $userinfo->fax); ?>"/></td>
-				</tr>
-				</table>
-				<input type="hidden" name="submited" value="1"/>
-				<br />
-				<h4 class="title">User Picture:</h4>
-				<div class="user_pic">
-					<div class="pic">
-
-						<?php
-							if ($userinfo->photo_path !== ""){
-						?>
-						<img src="<?php echo resource_url('user_image', $userinfo->photo_path.'_n'.$userinfo->photo_ext);?>" />
-						<?php
-						 }else{
-						 ?>
-						<div class="no_pic"><center>No Picture Submitted</center></div>
-						<?php
-							}
-						?>
-					</div>
-					<div class="pic_sel">
-							<div>Please select the user picture and click Upload:</div>
-							<div class="pic_form">
-
-								<input type='file' name="photo" value="<?php if(isset($photo_value)) echo $photo_value?>"/>
-								<a class="submit" id="submit">Upload</a>
-							</div>
-							<h4 class="error"><?php if (isset($photo_err)) echo $photo_err;?></h4>
-					</div>
-				</div>
-				<div class="verification">
-					<div  class="div_inline float_right">
-						<div class="form_submit">
-						<a class="submit" id="submit">Submit</a>
-						</div>
-					</div>
-				</div>
-			</form>
-			</div>
-		</div>
-
-
+        <div class="form">
+            <h2>Account Update</h2>
+            <h4>Personal Information:</h4>
+            <form class="form-horizontal" action="<?php echo base_url('account/infoUpdate')?>" method="post" enctype='multipart/form-data'>
+                <div id="form-group-lastname" class="form-group">
+                    <label for="last-name" class="col-sm-2 control-label">Last Name</label>
+                    <div class="col-sm-10">
+                        <input id="last-name" name="last_name" type="text" class="form-control required" placeholder="Last Name" value="<?php echo set_value('last_name', $userinfo->last_name); ?>">
+                    </div>
+                </div>
+                <div id="form-group-firstname" class="form-group">
+                    <label for="first-name" class="col-sm-2 control-label">First Name</label>
+                    <div class="col-sm-10">
+                        <input id="first-name" name="first_name" type="text" class="form-control required" placeholder="First Name" value="<?php echo set_value('first_name', $userinfo->first_name); ?>">
+                    </div>
+                </div>
+                <div id="form-group-displayname" class="form-group">
+                    <label for="display-name" class="col-sm-2 control-label">Display Name</label>
+                    <div class="col-sm-10">
+                        <input id="display-name" name="displayname" type="text" class="form-control required" placeholder="Display Name" value="<?php echo set_value('displayname',$userinfo->displayname); ?>">
+                    </div>
+                </div>
+                <div id="form-group-organization" class="form-group">
+                    <label for="organization" class="col-sm-2 control-label">Company</label>
+                    <div class="col-sm-10">
+                        <input id="organization" name="organization" type="text" class="form-control required" placeholder="Company" value="<?php echo set_value('organization', $userinfo->organization); ?>">
+                    </div>
+                </div>
+                <div id="form-group-position" class="form-group">
+                    <label for="position" class="col-sm-2 control-label">Position Title</label>
+                    <div class="col-sm-10">
+                        <input id="position" name="position" type="text" class="form-control" placeholder="Position Title" value="<?php echo set_value('position', $userinfo->position); ?>">
+                    </div>
+                </div>
+                <div id="form-group-address" class="form-group">
+                    <label for="address" class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-10">
+                        <input id="address" name="address" type="text" class="form-control" placeholder="Address" value="<?php echo set_value('address', $userinfo->address); ?>">
+                    </div>
+                </div>
+                <div id="form-group-tel" class="form-group">
+                    <label for="tel" class="col-sm-2 control-label">Tel</label>
+                    <div class="col-sm-10">
+                        <input id="tel" name="tel" type="text" class="form-control" placeholder="Tel" value="<?php echo set_value('tel', $userinfo->tel); ?>">
+                    </div>
+                </div>
+                <div id="form-group-fax" class="form-group">
+                    <label for="fax" class="col-sm-2 control-label">Fax</label>
+                    <div class="col-sm-10">
+                        <input id="fax" name="fax" type="text" class="form-control" placeholder="Fax" value="<?php echo set_value('fax', $userinfo->fax); ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="user-picture" class="col-sm-2 control-label">User Picture</label>
+                    <div id="user-picture" class="pic col-sm-10">
+                        <?php
+                            if ($userinfo->photo_path !== ""){
+                        ?>
+                            <img src="<?php echo resource_url('user_image', $userinfo->photo_path.'_n'.$userinfo->photo_ext);?>" />
+                        <?php
+                            }else{
+                        ?>
+                            <div class="no_pic">No Picture Submitted</div>
+                        <?php
+                            }
+                        ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <input type="file" name="photo" value="<?php if(isset($photo_value)) echo $photo_value?>">
+                    </div>
+                </div>
+                <input type="hidden" name="submited" value="1">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 	<?php endblock(); ?>
 
 <?php end_extend(); ?>

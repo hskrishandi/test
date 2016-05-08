@@ -1,15 +1,15 @@
-<div class="post_details">  
+<div class="post_details">
 	<div class="rating">
 		<strong>Model Rating: </strong><div class="fivestar" id="<?php echo $model_name; ?>"/></div>
 	</div>
-	
+
 	<div class="posts">
-    
+
         <script>
 	$(document).ready(function(){
 						$('#submit').click(function(){
-							
-							$('#reply_form').submit();	
+
+							$('#reply_form').submit();
 								})
 });
 	</script>
@@ -32,10 +32,10 @@
 				<input type="hidden" name="datetime" value="<?php echo $datetime;?>" />
 				<textarea name="comment" rows="5"  id="comment" style="width:600px;" ></textarea>
 				<div class="error" id="error"></div>
-				<div class="form_submit"><a onclick="form[0].sumbit()" class="submit" id="submit">Submit</a></div>   
+				<div class="form_submit"><a onclick="form[0].sumbit()" class="submit" id="submit">Submit</a></div>
       			<input name="first_name" type="hidden" value="<?php echo $row->first_name;?>" />
-      			<input name="last_name" type="hidden" value="<?php echo $row->last_name;?>" />   
-			</form>  
+      			<input name="last_name" type="hidden" value="<?php echo $row->last_name;?>" />
+			</form>
 		</div>
 
 	<?php endforeach ?>

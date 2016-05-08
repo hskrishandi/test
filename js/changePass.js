@@ -21,14 +21,15 @@
 					type: "POST",
 					url: CI_ROOT+'account/changePass_en',
 					data:{
-							email: $('.email').val(),
-							newpass: $('.new_pass').val(),
-							oldpass: $('.old_pass').val()
-						 }					
+							email: $('#email').val(),
+							newpass: $('#new_pass').val(),
+							oldpass: $('#old_pass').val()
+						 }
 				})
 				changePass.done(function(msg){
 					if(msg.indexOf("ok") >= 0){
 						alert(changePassSuccess);
+                        window.location.reload();
 					}else{
 						alert(LogInEmailPassErrMsg);
 					}

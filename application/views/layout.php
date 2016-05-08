@@ -32,7 +32,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'layout.css'); ?>" media="all" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'header.css'); ?>" media="all" />
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'footer.css'); ?>" media="all" />
-		<!--<link rel="stylesheet" type="text/css" href="<?php echo resource_url('js', 'star-rating/jquery.rating.css'); ?>" media="all" />-->
+		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('js', 'star-rating/jquery.rating.css'); ?>" media="all" />
     <?php end_block_marker(); ?>
 
 	<?php start_block_marker('script'); ?>
@@ -48,11 +48,12 @@
 		<script src="<?php echo resource_url('js', 'menuBar.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'login.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'constant.js'); ?>" type="text/javascript" charset="utf-8"></script>
-		<!--<script src="<?php echo resource_url('js', 'fivestar.js'); ?>" type="text/javascript" charset="utf-8"></script>
+
+        <script src="<?php echo resource_url('js', 'fivestar.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'star-rating/jquery.form.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'star-rating/jquery.MetaData.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'star-rating/jquery.rating.js'); ?>" type="text/javascript" charset="utf-8"></script>
-		<script src="<?php echo resource_url('js', 'jTPS.js'); ?>" type="text/javascript" charset="utf-8"></script>-->
+		<script src="<?php echo resource_url('js', 'jTPS.js'); ?>" type="text/javascript" charset="utf-8"></script>
 
     <?php end_block_marker(); ?>
 </head>

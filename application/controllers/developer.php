@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class developer extends CI_Controller {
-	
+
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 		$this->load->helper(array('template_inheritance', 'html', 'form', 'url','file'));
 		//$this->load->driver('session');
 		$this->load->model(array('Developer_model','Account_model'));
@@ -22,28 +22,28 @@ class developer extends CI_Controller {
 		if (!$this->session->flashdata('developer_tos')) {
 			redirect('developer/progress');
 		}
-    
+
 		$this->load->view('developer/message');
 	}
-	
+
 	public function progress()
 	{
 		if (!$this->Account_model->isAuth()) return;
 		$this->load->view('developer/progress');
 	}
-	
+
 	public function modelsInProgressInfo()
 	{
 		$models_in_progress_info = $this->Developer_model->getModelsInProgress();
 		$this->outputJSON($models_in_progress_info);
 	}
-	
+
 	public function loadSavedModelInfo($model_id)
 	{
 		if (!$this->Account_model->isAuth()) return;
 		$user_info = $this->Account_model->isLogin();
 		$USER_ID = $user_info->id;
-		
+
 		$data = read_file('uploads/developer_models/unfinished/'.$model_id.'@'.$USER_ID.'/form_data.dat');
 		$fieldname = NULL;
 		$value = NULL;
@@ -57,13 +57,18 @@ class developer extends CI_Controller {
 		);
 		$this->outputJSON($output);
 	}
-	
+
 	public function user_models()
 	{
 		if (!$this->Account_model->isAuth()) return;
-		$this->load->view('developer/user_models');
+        /**
+         * Under Construction
+         * by leon 20160508
+         */
+        // $this->load->view('developer/user_models');
+		$this->load->view('developer/501');
 	}
-	
+
 	public function loadUserModelList()
 	{
 		if (!$this->Account_model->isAuth()) return;
@@ -72,7 +77,7 @@ class developer extends CI_Controller {
 		$models_info = $this->Developer_model->getUserModelList($USER_ID);
 		$this->outputJSON($models_info);
 	}
-	
+
 	public function tos()
 	{
 		if (!$this->Account_model->isAuth()) return;
@@ -86,10 +91,15 @@ class developer extends CI_Controller {
 				redirect('');
 			}
 		}
-		
-		$this->load->view('developer/tos');
+
+        /**
+         * Under Construction
+         * by leon 20160508
+         */
+        // $this->load->view('developer/tos');
+		$this->load->view('developer/501');
 	}
-	
+
 	/*
 	public function delete($filename)
 	{
@@ -97,7 +107,7 @@ class developer extends CI_Controller {
 		rmdir('./uploads/developer_models'.$filename);
 	}
 	*/
-	
+
 	public function deleteModel($model_id)
 	{
 		if(!$this->Account_model->isAuth()) return;
@@ -113,14 +123,14 @@ class developer extends CI_Controller {
 			$this->Developer_model->deleteModel($data);
 		}
 	}
-	
+
 	public function fill_form($model_id)
 	{
 		if(!$this->Account_model->isAuth()) return;
 		$data['model_id'] = $model_id;
 		$this->load->view('developer/form');
 	}
-	
+
 	public function submit($step)
 	{
 		$model_id = $_POST['model_id'];
@@ -276,7 +286,7 @@ class developer extends CI_Controller {
 				//redirect('developer/');
 		}
 	}
-	
+
 	public function submit_done($current_email)
 	{
 		if (!$this->Account_model->isAuth()) return;
@@ -291,20 +301,20 @@ class developer extends CI_Controller {
 			$receiver[] = $current_email;
 		}
 		$receiver[] = "model@i-mos.org";
-		
+
 		$this->email->to($receiver);
 		$this->email->subject("[i-MOS]Model Submitted");
 		$msg="Dear ".$user_info->first_name.' '.$user_info->last_name.'<br /> <br />Thank you for your interest in <i>i</i>-MOS. We have received your model code. Kindly, note that the processing period for the code is one month. Our i-MOS team will contact you after processing the code successfully.<br /><br />For more information, visit www.i-mos.org<br /><br />Regards,<br /><i>i</i>-MOS Team';
 		$this->email->message($msg);
 		$this->email->send();
 	}
-	
+
 	public function download($foldername,$filename)
 	{
 		$this->load->helper('download');
 		force_download($filename, file_get_contents('files/manual/'.$filename));
 	}
-	
+
 	private function outputJSON($output)
 	{
 		echo json_encode($output);
