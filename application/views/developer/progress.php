@@ -34,7 +34,7 @@ Developer
 		<table id="button_table">
 			<tr>
 				<td class="progress_button" >
-					<a id="newModel" class="progress_bar" name="response" value="New Model">
+					<a id="newModel_temp" class="progress_bar" name="response" value="New Model" href="<?php echo base_url('/developer/tos?model_id=0') ?>">
 						<img src="<?php echo resource_url('img', 'develop/newModel.png'); ?>" />
 					</a>
 				</td>
@@ -42,7 +42,7 @@ Developer
 			</tr>
 			<tr>
 				<td class="progress_button">
-					<a id="update" class="progress_bar"  name="response" value="Update">
+					<a id="update_temp" class="progress_bar"  name="response" value="Update" href="<?php echo base_url('/developer/user_models') ?>">
 						<img src="<?php echo resource_url('img', 'develop/updateModel.png'); ?>" />
 					</a>
 				</td>
