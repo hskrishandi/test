@@ -18,30 +18,28 @@ h7 {
     font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
 }
 
-#page {
+/*#page {
     height: auto;
     margin-left: auto;
     margin-right: auto;
     min-height: 100%;
-    /*width: 1280px;*/
     width: 100%;
-    min-width: 1080px;
+    min-width: 1080px;*/
     /*padding-bottom: 1em;*/
     /* edit by Leon, remove homepage bottom padding */
-    position: relative;
-}
+    /*position: relative;
+}*/
 
-#main_content {
+/*#main_content {
     display: inline;
     float: right;
     position: relative;
-    /*width: 1280px;*/
     min-height: 500px;
     background-color: rgb(255, 255, 255);
     width: 80%;
     margin: 10%;
     min-width: 1060px;
-}
+}*/
 
 a {
     color: rgb(41, 171, 226);
