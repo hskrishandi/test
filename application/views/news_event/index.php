@@ -34,6 +34,7 @@
 				<img class="highlightImage" src="<?php echo resource_url('img', 'home/NLimage2.jpg'); ?>" />
 				<img  id="lastImage" src="<?php echo resource_url('img', 'home/NLimage3.jpg'); ?>" />
 			</div>
+            <?php if(count($news) > 0) { ?>
             <div class="page-subtitle">
                 <span class="page-subtitle-title">Latest News</span>
                 <a class="page-subtitle-more" href="<?php echo base_url('news_event/news'); ?>">more</a>
@@ -51,40 +52,47 @@
 					</li>
 				<?php endforeach;?>
 			</ul>
-            <div class="page-subtitle">
-                <span class="page-subtitle-title">Upcoming Events</span>
-                <a class="page-subtitle-more" href="<?php echo base_url('news_event/events'); ?>">more</a>
-            </div>
-			<ul class="item-list">
-				<?php foreach($upcoming_events as $entry): ?>
-					<li>
-						<?php
-							echo '<div class="entryTitle">'.$entry->full_name.'</div>';
-							echo '<span class="date">'. date_range(strtotime($entry->start_date), strtotime($entry->end_date)).' &#x7c; '.$entry->location.'</span>';
-							if ($entry->website != NULL) {
-									echo '<a href="' . $entry->website . '" class="link"  target="_blank" >' .  strip_text($entry->website, MAX_LINK_LENGTH) . '</a>';
-							}
-						?>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-			<div class="page-subtitle">
-                <span class="page-subtitle-title">Past Events</span>
-				<a class="page-subtitle-more" href="<?php echo base_url('news_event/events'); ?>">more</a>
-			</div>
-			<ul class="item-list">
-				<?php foreach($past_events as $entry): ?>
-					<li>
-						<?php
-							echo '<div class="entryTitle">'.$entry->full_name.'</div>';
-							echo '<span class="date">'. date_range(strtotime($entry->start_date), strtotime($entry->end_date)).' &#x7c; '.$entry->location.'</span>';
-							if ($entry->website != NULL) {
-									echo '<a href="' . $entry->website . '" class="link"  target="_blank" >' .  strip_text($entry->website, MAX_LINK_LENGTH) . '</a>';
-							}
-						?>
-					</li>
-				<?php endforeach; ?>
-			</ul>
+            <?php } ?>
+
+            <?php if(count($upcoming_events) > 0) { ?>
+                <div class="page-subtitle">
+                    <span class="page-subtitle-title">Upcoming Events</span>
+                    <a class="page-subtitle-more" href="<?php echo base_url('news_event/events'); ?>">more</a>
+                </div>
+    			<ul class="item-list">
+    				<?php foreach($upcoming_events as $entry): ?>
+    					<li>
+    						<?php
+    							echo '<div class="entryTitle">'.$entry->full_name.'</div>';
+    							echo '<span class="date">'. date_range(strtotime($entry->start_date), strtotime($entry->end_date)).' &#x7c; '.$entry->location.'</span>';
+    							if ($entry->website != NULL) {
+    									echo '<a href="' . $entry->website . '" class="link"  target="_blank" >' .  strip_text($entry->website, MAX_LINK_LENGTH) . '</a>';
+    							}
+    						?>
+    					</li>
+    				<?php endforeach; ?>
+    			</ul>
+            <?php } ?>
+
+            <?php if(count($past_events) > 0) { ?>
+    			<div class="page-subtitle">
+                    <span class="page-subtitle-title">Past Events</span>
+    				<a class="page-subtitle-more" href="<?php echo base_url('news_event/events'); ?>">more</a>
+    			</div>
+    			<ul class="item-list">
+    				<?php foreach($past_events as $entry): ?>
+    					<li>
+    						<?php
+    							echo '<div class="entryTitle">'.$entry->full_name.'</div>';
+    							echo '<span class="date">'. date_range(strtotime($entry->start_date), strtotime($entry->end_date)).' &#x7c; '.$entry->location.'</span>';
+    							if ($entry->website != NULL) {
+    									echo '<a href="' . $entry->website . '" class="link"  target="_blank" >' .  strip_text($entry->website, MAX_LINK_LENGTH) . '</a>';
+    							}
+    						?>
+    					</li>
+    				<?php endforeach; ?>
+    			</ul>
+            <?php } ?>
 		</div>
 	<?php endblock(); ?>
 
