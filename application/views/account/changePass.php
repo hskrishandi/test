@@ -64,25 +64,25 @@
             <h4>Please enter the required information to change password</h4>
             <form class="form-horizontal">
                 <div id="form-group-email" class="form-group">
-                    <label for="email" class="col-sm-2 control-label">Email</label>
+                    <label for="email" class="col-sm-2 control-label">Email <sup>*</sup></label>
                     <div class="col-sm-10">
                         <input id="email" name="email" type="text" class="form-control" placeholder="Email">
                     </div>
                 </div>
                 <div id="form-group-oldpass" class="form-group">
-                    <label for="old_pass" class="col-sm-2 control-label">Old Password</label>
+                    <label for="old_pass" class="col-sm-2 control-label">Old Password <sup>*</sup></label>
                     <div class="col-sm-10">
                         <input id="old_pass" name="old_pass" type="password" class="form-control" placeholder="Old Password">
                     </div>
                 </div>
                 <div id="form-group-newpass" class="form-group">
-                    <label for="new_pass" class="col-sm-2 control-label">New Password</label>
+                    <label for="new_pass" class="col-sm-2 control-label">New Password <sup>*</sup></label>
                     <div class="col-sm-10">
                         <input id="new_pass" name="new_pass" type="password" class="form-control" placeholder="New Password">
                     </div>
                 </div>
                 <div id="form-group-newpassre" class="form-group">
-                    <label for="new_pass_re" class="col-sm-2 control-label">Retype Password</label>
+                    <label for="new_pass_re" class="col-sm-2 control-label">Retype Password <sup>*</sup></label>
                     <div class="col-sm-10">
                         <input id="new_pass_re" name="new_pass_re" type="password" class="form-control" placeholder="Retype New Password">
                     </div>

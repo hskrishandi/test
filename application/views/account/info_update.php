@@ -20,27 +20,27 @@
             <h4>Personal Information:</h4>
             <form class="form-horizontal" action="<?php echo base_url('account/infoUpdate')?>" method="post" enctype='multipart/form-data'>
                 <div id="form-group-lastname" class="form-group">
-                    <label for="last-name" class="col-sm-2 control-label">Last Name</label>
+                    <label for="last-name" class="col-sm-2 control-label">Last Name <sup>*</sup></label>
                     <div class="col-sm-10">
-                        <input id="last-name" name="last_name" type="text" class="form-control required" placeholder="Last Name" value="<?php echo set_value('last_name', $userinfo->last_name); ?>">
+                        <input id="last-name" name="last_name" type="text" class="form-control required" placeholder="Last Name, required" value="<?php echo set_value('last_name', $userinfo->last_name); ?>">
                     </div>
                 </div>
                 <div id="form-group-firstname" class="form-group">
-                    <label for="first-name" class="col-sm-2 control-label">First Name</label>
+                    <label for="first-name" class="col-sm-2 control-label">First Name <sup>*</sup></label>
                     <div class="col-sm-10">
-                        <input id="first-name" name="first_name" type="text" class="form-control required" placeholder="First Name" value="<?php echo set_value('first_name', $userinfo->first_name); ?>">
+                        <input id="first-name" name="first_name" type="text" class="form-control required" placeholder="First Name, required" value="<?php echo set_value('first_name', $userinfo->first_name); ?>">
                     </div>
                 </div>
                 <div id="form-group-displayname" class="form-group">
-                    <label for="display-name" class="col-sm-2 control-label">Display Name</label>
+                    <label for="display-name" class="col-sm-2 control-label">Display Name <sup>*</sup></label>
                     <div class="col-sm-10">
-                        <input id="display-name" name="displayname" type="text" class="form-control required" placeholder="Display Name" value="<?php echo set_value('displayname',$userinfo->displayname); ?>">
+                        <input id="display-name" name="displayname" type="text" class="form-control required" placeholder="Display Name, required" value="<?php echo set_value('displayname',$userinfo->displayname); ?>">
                     </div>
                 </div>
                 <div id="form-group-organization" class="form-group">
-                    <label for="organization" class="col-sm-2 control-label">Company</label>
+                    <label for="organization" class="col-sm-2 control-label">Company <sup>*</sup></label>
                     <div class="col-sm-10">
-                        <input id="organization" name="organization" type="text" class="form-control required" placeholder="Company" value="<?php echo set_value('organization', $userinfo->organization); ?>">
+                        <input id="organization" name="organization" type="text" class="form-control required" placeholder="Company, required" value="<?php echo set_value('organization', $userinfo->organization); ?>">
                     </div>
                 </div>
                 <div id="form-group-position" class="form-group">
