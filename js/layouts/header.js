@@ -6,7 +6,7 @@ $(document).ready(function() {
      */
     String.prototype.formatUsername = function() {
         var length = 20;
-        return this < length ? this : this.substr(0, length) + "...";
+        return this.length < length ? this : this.substr(0, length) + "...";
     };
     $.ajax({
         cache: false,
