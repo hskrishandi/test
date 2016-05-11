@@ -1,12 +1,21 @@
 $(document).ready(function() {
+    /*
+     * Format the username when display, to prevent that the username is too long,
+     * we fix the max length here and return the name.
+     * Leon 20160511
+     */
+    String.prototype.formatUsername = function() {
+        var length = 20;
+        return this < length ? this : this.substr(0, length) + "...";
+    };
     $.ajax({
         cache: false,
         type: "POST",
         url: CI_ROOT + 'account/isLogin',
         success: function(data) {
             if (data != "") {
-                $('#logined-username').text(data);
-                $('#logined-username-detail').text(data);
+                $('#logined-username').text(data.formatUsername());
+                $('#logined-username-detail').text(data.formatUsername());
                 $('#notlogined').hide();
                 $('#logined').show();
             } else {
@@ -16,12 +25,12 @@ $(document).ready(function() {
         }
     });
     $('#login-username').keypress(function(e) {
-        if(e.which == 13) {
+        if (e.which == 13) {
             $('#login-submit').click();
         }
     });
     $('#login-password').keypress(function(e) {
-        if(e.which == 13) {
+        if (e.which == 13) {
             $('#login-submit').click();
         }
     });
@@ -49,8 +58,8 @@ $(document).ready(function() {
                         alert(LogInEmailPassErrMsg);
                         $('#user-login-group').addClass('has-error');
                     } else {
-                        $('#logined-username').text(msg);
-                        $('#logined-username-detail').text(msg);
+                        $('#logined-username').text(msg.formatUsername());
+                        $('#logined-username-detail').text(msg.formatUsername());
                         $('#notlogined').hide();
                         $('#logined').show();
                     }

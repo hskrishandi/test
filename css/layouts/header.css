@@ -191,7 +191,7 @@
     float: right;
 }
 
-.header .user ul {
+.header .user  ul {
     list-style: none;
     float: right;
 }
@@ -315,7 +315,7 @@
 
 .header .user .logined {
     display: none;
-    margin-right: 60px;
+    margin-right: 10px;
 }
 
 .header .user .user-box .welcome-login {
