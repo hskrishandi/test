@@ -6,6 +6,7 @@
 
 	<?php startblock('script'); ?>
 		<?php echo get_extended_block(); ?>
+
 		<script src="<?php echo resource_url('js', 'library/jquery-ui.min.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'library/knockout.mapping.js'); ?>" type="text/javascript"></script>
@@ -32,12 +33,13 @@
 
 		<script  src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
 
+
         <script src="<?php echo resource_url('js', 'scripts.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo resource_url('js', 'menuBar.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo resource_url('js', 'login.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo resource_url('js', 'constant.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo resource_url('js', 'layouts/header.js'); ?>" type="text/javascript" charset="utf-8"></script>
-        <script src="<?php echo resource_url('js', 'bootstrap/bootstrap.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <?php $this->load->view('layouts/header'); ?>
 	<?php endblock(); ?>
 
 	<?php startblock('css'); ?>
@@ -53,12 +55,16 @@
         <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'layouts/header.css'); ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'layouts/footer.css'); ?>"/>
 
-
         <?php $this->load->view('layouts/css') ?>
-        <?php $this->load->view('layouts/header'); ?>
 	<?php endblock(); ?>
 
 	<?php startblock('side_menu'); ?>
+    <style media="screen">
+        #side_menu #model-lib-list {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
 		<?php echo get_extended_block(); ?>
 		<div class="block model-library">
 			<h2><a href="#" class="action drop-down-btn icon-cog" title="Settings" data-bind="modelLibMenu: '#model-library-menu'"></a>User Library</h2>
