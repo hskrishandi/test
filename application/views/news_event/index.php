@@ -52,7 +52,7 @@
                                  * 40 words of the content.
                                  */
                                 $content = explode(" ", $entry->content);
-                                echo implode(" ", array_splice($content, 0, 40)) . "...";
+                                echo implode(" ", array_splice($content, 0, 40)) . " ...";
                             ?>
                         </p>
 						<span class="date"> <?php echo date('d M Y', $entry->post_date); ?></span>

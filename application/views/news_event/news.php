@@ -41,6 +41,16 @@
 			<?php
 			echo '<a href="' . base_url('news_event/news/' . $entry->id) . '" class="entryTitle"  >' . $entry->title . '</a>';
 			?>
+            <p>
+                <?php
+                    /**
+                     * The following functions is getting the first
+                     * 40 words of the content.
+                     */
+                    $content = explode(" ", $entry->content);
+                    echo implode(" ", array_splice($content, 0, 40)) . " ...";
+                ?>
+            </p>
 			<span class="date"> <?php echo date('d M Y', $entry->post_date); ?> </span>
 		</li>
 	<?php endforeach; ?>

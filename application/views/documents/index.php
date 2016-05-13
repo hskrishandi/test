@@ -50,25 +50,25 @@
                         <?php $year=NULL; foreach($entries as $entry): ?>
                             <li>
                                 <?php
-                                if($year!=$entry->year)
-                                echo '<span class="date" style="padding:10px 0px; font-size:20px;"> '.$entry->year.' </span>';
-                                echo '<a href="' . base_url('resources/articles/' . $entry->id) . '" class="entry" >' . $entry->name . ' ';
-                                echo '</a></br>';
-                                if ($entry->author != NULL) {
-                                    echo  '．'. $entry->author;
+                                    if($year!=$entry->year)
+                                    echo '<span class="date" style="padding:10px 0px; font-size:20px;"> '.$entry->year.' </span>';
+                                    echo '<a href="' . base_url('resources/articles/' . $entry->id) . '" class="entry" >' . $entry->name . ' ';
+                                    echo '</a></br>';
+                                    if ($entry->author != NULL) {
+                                        echo  '．'. $entry->author;
 
-                                } else if ($entry->year != NULL) {
-                                    echo  $entry->year;
-                                }
-                                if($entry->publisher !=NULL){
-                                    echo '</br>．'. $entry->publisher;
-                                }
+                                    } else if ($entry->year != NULL) {
+                                        echo  $entry->year;
+                                    }
+                                    if($entry->publisher !=NULL){
+                                        echo '</br>．'. $entry->publisher;
+                                    }
 
-                                if($entry->website !=NULL){
-                                    echo '<a href="' . $entry->website . '" class="link"  target="_blank" >' .  strip_text($entry->website, MAX_LINK_LENGTH) . '</a>';
-                                }
+                                    if($entry->website !=NULL){
+                                        echo '<a href="' . $entry->website . '" class="link"  target="_blank" >' .  strip_text($entry->website, MAX_LINK_LENGTH) . '</a>';
+                                    }
 
-                                $year=$entry->year;
+                                    $year=$entry->year;
                                 ?>
 
                             </li>
