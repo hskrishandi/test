@@ -118,8 +118,8 @@
         </div>
         <div class="clearFloat"></div>
         <div class="user-experience-more">
-            <a href="<?php echo base_url('home/user_experience'); ?>">More User Experiences</a>
-            <a href="<?php echo base_url('home/post_experience'); ?>">Post a User Experience</a>
+            <a href="<?php echo base_url('home/user_experience'); ?>">More User Experiences <img src="<?php echo resource_url('img', 'icons/add.png'); ?>" width="15px;" /></a>
+            <a href="<?php echo base_url('home/post_experience'); ?>">Post a User Experience <img src="<?php echo resource_url('img', 'icons/comment.png'); ?>" width="10px;" /></a>
         </div>
     </div>
     <div class="clearFloat"></div>
