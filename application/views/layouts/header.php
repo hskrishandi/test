@@ -233,11 +233,11 @@
         </ul>
         <ul id="logined" class="logined">
             <li>
-                <a id="logined-username" class="user-title"></a>
+                <a id="logined-username" class="user-title" unselectable="on" style="-moz-user-select:none;" onselectstart="return false;"></a>
                 <div id="logined-user-box" class="user-box">
                     <div class="welcome-login">
                         You are login as:
-                        <div id="logined-username-detail"></div>
+                        <div id="logined-username-detail" unselectable="on" style="-moz-user-select:none;" onselectstart="return false;"></div>
                     </div>
                     <div class="user-menu">
                         <ul>
