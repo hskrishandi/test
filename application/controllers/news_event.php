@@ -30,7 +30,7 @@ class news_event extends CI_Controller {
 				'groups' => $this->Resources_model->get_groups_adv('undelete',$num_rows),
 				'articles' => $this->Resources_model->get_articles_adv('undelete','all', $num_rows),
 				'models' => $this->Resources_model->get_models_adv('undelete','released', $num_rows),
-				'news' => $this->Resources_model->get_news_adv('undelete',$num_rows)
+				'news' => $this->Resources_model->get_news_adv('undelete',$num_rows),
 				'tools' => $this->Resources_model->get_tools_adv('undelete', 'all', $num_rows),
 
 		);
