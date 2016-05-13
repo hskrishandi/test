@@ -45,16 +45,11 @@
 
         <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'layouts/header.css'); ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'layouts/footer.css'); ?>"/>
-	<?php endblock(); ?>
 
-    <?php $this->load->view('layouts/javascript') ?>
-    <?php $this->load->view('layouts/css') ?>
-    <?php $this->load->view('layouts/header'); ?>
-    <style media="screen">
-        .header .submenu .submenu-title {
-            font-size: 11px !important;
-        }
-    </style>
+        <?php $this->load->view('layouts/javascript') ?>
+        <?php $this->load->view('layouts/css') ?>
+        <?php $this->load->view('layouts/header'); ?>
+	<?php endblock(); ?>
 
 	<?php startblock('side_menu'); ?>
 		<?php echo get_extended_block(); ?>

@@ -7,14 +7,7 @@
     Simulation
   <?php endblock(); ?>
 
-  <?php $this->load->view('layouts/javascript') ?>
-  <?php $this->load->view('layouts/css') ?>
-  <?php $this->load->view('layouts/header'); ?>
-  <style media="screen">
-      .header .submenu .submenu-title {
-          font-size: 11px !important;
-      }
-  </style>
+
 
   <?php startblock('side_menu'); ?>
   <?php echo get_extended_block(); ?>
@@ -790,6 +783,10 @@
 		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'font/font-awesome-ie7.min.css'); ?>"><![endif]-->
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'lib/codemirror.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'lib/codemirror-ui.css')?>">
+        
+        <?php $this->load->view('layouts/javascript') ?>
+        <?php $this->load->view('layouts/css') ?>
+        <?php $this->load->view('layouts/header'); ?>
 
 	<?php endblock(); ?>
 

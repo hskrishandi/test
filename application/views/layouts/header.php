@@ -27,7 +27,10 @@
     <div class="submenu">
         <ul>
             <li>
-                <a id="sitemenu" class="submenu-title">Site Menu</a>
+                <div class="submenu-title-box">
+                    <a id="sitemenu" class="submenu-title">Site Menu</a>
+                </div>
+
 
                 <ul id="sitemenu-box" class="submenu-box">
                     <li>
