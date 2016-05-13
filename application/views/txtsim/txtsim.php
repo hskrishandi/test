@@ -760,15 +760,15 @@
 		<script src="<?php echo resource_url('js', 'txtsim/buckets.js'); ?>" type="text/javascript"></script>
 		<script src="<?php echo resource_url('js', 'txtsim/FileSaver.js'); ?>" type="text/javascript"></script>
 
-
-
-
-
-
-
-
 		<?php start_block_marker('model_script'); ?>
 		<?php end_block_marker(); ?>
+
+        <script src="<?php echo resource_url('js', 'scripts.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'menuBar.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'login.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'constant.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'layouts/header.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'bootstrap/bootstrap.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
 
 	<?php endblock(); ?>
 
@@ -783,8 +783,7 @@
 		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'font/font-awesome-ie7.min.css'); ?>"><![endif]-->
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'lib/codemirror.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'lib/codemirror-ui.css')?>">
-        
-        <?php $this->load->view('layouts/javascript') ?>
+
         <?php $this->load->view('layouts/css') ?>
         <?php $this->load->view('layouts/header'); ?>
 

@@ -31,6 +31,13 @@
 		<script src="<?php echo resource_url('js', 'modelsim/controllers.js'); ?>" type="text/javascript"></script>
 
 		<script  src="<?php echo resource_url('js', 'discussion.js'); ?>" type="text/javascript"></script>
+
+        <script src="<?php echo resource_url('js', 'scripts.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'menuBar.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'login.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'constant.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'layouts/header.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'bootstrap/bootstrap.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
 	<?php endblock(); ?>
 
 	<?php startblock('css'); ?>
@@ -46,7 +53,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'layouts/header.css'); ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo resource_url('css', 'layouts/footer.css'); ?>"/>
 
-        <?php $this->load->view('layouts/javascript') ?>
+
         <?php $this->load->view('layouts/css') ?>
         <?php $this->load->view('layouts/header'); ?>
 	<?php endblock(); ?>
