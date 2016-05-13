@@ -46,6 +46,9 @@
                         <a href="<?php echo base_url('resources'); ?>">Resources</a>
                     </li>
                     <li>
+                        <a href="<?php echo base_url('activities'); ?>">Activities</a>
+                    </li>
+                    <li>
                         <a href="<?php echo base_url('contributors'); ?>">Contributors</a>
                     </li>
                     <li>
@@ -236,7 +239,7 @@
         </ul>
         <ul id="logined" class="logined">
             <li>
-                <a id="logined-username" class="user-title" unselectable="on" style="-moz-user-select:none;" onselectstart="return false;"></a>
+                <a id="logined-username" class="user-title"></a>
                 <div id="logined-user-box" class="user-box">
                     <div class="welcome-login">
                         You are login as:
@@ -314,6 +317,11 @@
         $("#contact-box").hide();
         $("#login-box").hide();
         $("#register-box").hide();
+    });
+    $("a").attr({
+         'unselectable': 'on',
+         'style': '-moz-user-select:none;',
+         'onselectstart': 'return false;'
     });
     var RecaptchaOptions = {
         lang : 'fr',

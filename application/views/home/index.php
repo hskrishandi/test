@@ -133,7 +133,7 @@
     </div>
     <div class="page-subtitle">
         <span class="page-subtitle-title">i-MOS Activities</span>
-         <a class="page-subtitle-more" href="<?php echo base_url('news_event'); ?>">more</a>
+         <a class="page-subtitle-more" href="<?php echo base_url('activities'); ?>">more</a>
     </div>
     <div class="news-box">
         <div class="news-box-column">

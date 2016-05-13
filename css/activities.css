@@ -1,0 +1,19 @@
+.item-list {
+    margin-left: 30%;
+}
+
+.item-list li {
+    list-style-type: none;
+    margin: 20px 0;
+}
+
+.item-list p {
+    /*margin: 0 0 10px;*/
+    margin-bottom: 5px;
+}
+
+.item-list .date {
+    list-style-type: none;
+    display: block;
+    color: #999;
+}
