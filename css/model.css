@@ -110,7 +110,7 @@ div.ui-tabs {
 }
 
 .ui-widget-content , .ui-widget-content a {
-	color: #7575a9;
+	color: #969696;
 }
 
 .ui-tabs ul.ui-tabs-nav li {
@@ -155,7 +155,7 @@ a#model_name{
 	background-color:#FFF;
 	padding-left:20px;
 	padding-right:20px;
-	color:#7575a9;
+	color:#969696;
 	cursor: default;
 	pointer-events: none;
 	font-weight:bold;

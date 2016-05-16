@@ -11,7 +11,7 @@ div.ui-tabs {
 }
 
 .ui-widget-content , .ui-widget-content a {
-	color: #7575a9;
+	color: #969696;
 }
 
 .ui-tabs ul.ui-tabs-nav li {
@@ -323,7 +323,7 @@ div.simulation_block div {
 	position: relative;
 	padding: 5px 10px 5px 10px;
 	margin: 2px 9px 2px 9px;
-	border: 1px solid #7575A9;
+	border: 1px solid #969696;
 }
 
 #params .param-set:hover {

@@ -268,11 +268,11 @@ text-align: center;
 	cursor: pointer;
 	display: block;
 	margin: 8px;
-	color: #7575a9;
+	color: #969696;
 }
 
 #validation_alert .show a{
-	color: #7575a9;
+	color: #969696;
 }
 
 #validation_alert .hidden{
