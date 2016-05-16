@@ -173,7 +173,7 @@ ol li {
 #tab_container a.right_but,
 #tab_container a.default_button, 
 #tab_container a.btn_submit {
-	background-color: #726fb2;
+	background-color: #969696;
 	color: #FFF;
 	display: block;
 	position: relative;	
@@ -227,7 +227,7 @@ ol li {
 	height: 0;
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
-    border-left: 12px solid #726fb2;
+    border-left: 12px solid #969696;
 } 
 
 #tab_container a.right_but:active:after {
@@ -244,7 +244,7 @@ ol li {
 	height: 0;
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
-    border-right: 12px solid #726fb2;
+    border-right: 12px solid #969696;
 } 
 
 #tab_container a.left_but:active:before {
@@ -344,7 +344,7 @@ div.simulation_block div {
     -khtml-border-radius: 20px;
     border-radius: 20px;
 	text-align: center;	
-	background-color: #726fb2;
+	background-color: #969696;
 	color: #FFF;
 	cursor: default;
 	display: inline-block;
@@ -586,7 +586,7 @@ a.close {
 	line-height: 22px;
 	text-align: center;
 	font-weight: bold;
-	background-color: #726fb2;
+	background-color: #969696;
 	color: #FFF;
 	cursor: default;
 	z-index: 1100;

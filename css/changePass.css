@@ -58,7 +58,7 @@
 }
 .change_pass a.submit:after {
     border-bottom: 11px solid transparent;
-    border-left: 11px solid #726FB2;
+    border-left: 11px solid #969696;
     border-top: 11px solid transparent;
     content: "";
     display: block;
@@ -68,7 +68,7 @@
     top: 0;
 }
 .change_pass a.submit {
-    background-color: #726FB2;
+    background-color: #969696;
     border: 0 none;
     color: #FFFFFF;
     cursor: default;

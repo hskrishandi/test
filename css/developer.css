@@ -152,7 +152,7 @@
 }
 
 #developer .progress_bar {
-	/*background-color: #726fb2;*/
+	/*background-color: #969696;*/
 	
 	color: #FFF;
 	padding: 25px;
@@ -240,7 +240,7 @@ text-align: center;
 }
 
 #user_models .update_button {
-	background-color: #726fb2;
+	background-color: #969696;
 
 	color: #FFF;
 	display: block;
@@ -432,7 +432,7 @@ text-align: center;
 	height: 0;
 	border-top: 11px solid transparent;
 	border-bottom: 11px solid transparent;
-	border-right: 11px solid #726fb2;
+	border-right: 11px solid #969696;
 }
 
 #developer .save:hover,
