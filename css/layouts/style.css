@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif, 'Noto Sans', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma';
+    font-family: 'Tahoma', 'Montserrat', sans-serif, 'Noto Sans', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma';
     font-weight: inherit
 }
 
@@ -12,13 +12,13 @@ body {
 h1 {
     font-size: 2.5em;
     text-align: center;
-    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
     font-size: 2.5em;
     text-align: left;
-    font-family: 'Go A', 'Go B', 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .content{

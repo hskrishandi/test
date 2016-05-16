@@ -21,7 +21,7 @@
 .introduction p,
 .model-introduction p {
     color: rgb(77, 77, 77);
-    text-align: justify;
+    /*text-align: justify;*/
     font-size: 16px;
     margin-bottom: 20px;
 }
@@ -91,7 +91,7 @@
 .model-introduction .model-introduction-icon img {
     width: 35%;
     padding: 7%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(230, 230, 230);
     border-top-left-radius: 10%;
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
@@ -510,7 +510,7 @@
     height: auto;
     width: 80%;
     margin: 0px auto;
-    background-color: rgb(230, 230, 230);
+    background-color: white;
     -webkit-box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
     box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
 }
