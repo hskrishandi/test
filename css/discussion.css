@@ -9,7 +9,7 @@
 .discussion .active_users{
 	border-bottom:solid;
 	border-bottom-width:1px;
-	border-bottom-color:#9E9EC3;
+	border-bottom-color:#969696;
 
 }
 .discussion .active_users .active_users_title{
@@ -293,7 +293,7 @@ div.posting {
 .blog .top{
 	border-bottom:solid;
 	border-width:2px;
-	border-color:#9E9EC3;
+	border-color:#969696;
 	margin-bottom:25px;
 }
 

@@ -323,7 +323,7 @@ div.model-library  #model-library-menu {
 	z-index: 10;
 	padding: 10px 15px 10px 5px;
 	width: 110px;
-	border-color: #9e9ec3;
+	border-color: #969696;
 	-webkit-border-top-left-radius: 0;
 	-moz-border-radius-topleft: 0;
 	border-top-left-radius: 0;
@@ -369,7 +369,7 @@ div.model-library  #model-library-menu li font:active {
 }
 
 #side_menu .model-library h2 a.action.active {
-	color: #9e9ec3;
+	color: #969696;
 	background-color: #FFF;
 	-webkit-border-top-left-radius: 2px;
 	-moz-border-radius-topleft: 2px;
@@ -418,7 +418,7 @@ div.ui-dialog {
 div.ui-dialog,
 div.ui-dialog div.ui-dialog-titlebar,
 div.ui-dialog button {
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 	border-radius: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -427,7 +427,7 @@ div.ui-dialog button {
 div.ui-dialog  div.ui-dialog-titlebar  {
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-	background-color: #9E9EC3;
+	background-color: #969696;
 	background-image: none;
 	color: #FFF;
 	font-size: 0.75em;
@@ -435,7 +435,7 @@ div.ui-dialog  div.ui-dialog-titlebar  {
 
 div.ui-dialog,
 div.ui-dialog .ui-widget-content {
-	border-color: #9E9EC3;
+	border-color: #969696;
 }
 
 .ui-dialog-buttonset .ui-button-text-only .ui-button-text {

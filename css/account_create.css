@@ -24,20 +24,20 @@
 }
 .account_create .forms input{
 	width: 220px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 	margin-right:50px;
 }
 .account_create .forms input.submit{
 	width: 75px;
 	height: 35px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 }
 .account_create .forms .err{
 	border: 1px solid red;
 }
 .account_create .forms textarea{
 	width: 530px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 }
 .account_create .forms .error{
 	color: red;

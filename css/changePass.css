@@ -24,20 +24,20 @@
 }
 .change_pass .forms input{
 	width: 250px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 	margin-right:50px;
 }
 .change_pass .forms input.submit{
 	width: 75px;
 	height: 35px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 }
 .change_pass .forms .err{
 	border: 1px solid red;
 }
 .change_pass .forms textarea{
 	width: 530px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 }
 .change_pass .forms .error{
 	color: red;

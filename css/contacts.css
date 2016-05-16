@@ -23,19 +23,19 @@
 }
 .contacts .forms input{
 	width: 400px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 }
 .contacts .forms input.submit{
 	width: 75px;
 	height: 35px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 }
 .contacts .forms .err{
 	border: 1px solid red;
 }
 .contacts .forms textarea{
 	width: 530px;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 }
 .contacts .forms .error{
 	color: red;

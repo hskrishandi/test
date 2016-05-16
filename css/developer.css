@@ -56,7 +56,7 @@
 	padding: 1%;
 	//width: 100%;
 	overflow: auto;
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 }
 
 #developer .progress-form{
@@ -487,7 +487,7 @@ div.ui-dialog {
 div.ui-dialog,
 div.ui-dialog div.ui-dialog-titlebar,
 div.ui-dialog button {
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 	border-radius: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -496,14 +496,14 @@ div.ui-dialog button {
 div.ui-dialog  div.ui-dialog-titlebar  {
 	padding-top: 0.7em;
 	padding-bottom: 0.7em;
-	background-color: #9E9EC3;
+	background-color: #969696;
 	background-image: none;
 	color: #FFF;
 }
 
 div.ui-dialog,
 div.ui-dialog .ui-widget-content {
-	border-color: #9E9EC3;
+	border-color: #969696;
 }
 
 

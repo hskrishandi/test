@@ -60,7 +60,7 @@ div.ui-dialog.alert-box {
 div.ui-dialog.alert-box,
 div.ui-dialog.alert-box div.ui-dialog-titlebar,
 div.ui-dialog.alert-box button {
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 	border-radius: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -69,14 +69,14 @@ div.ui-dialog.alert-box button {
 div.ui-dialog.alert-box div.ui-dialog-titlebar  {
 	padding-top: 0.7em;
 	padding-bottom: 0.7em;
-	background-color: #9E9EC3;
+	background-color: #969696;
 	background-image: none;
 	color: #FFF;
 }
 
 div.ui-dialog.alert-box button {
-	background-color: #9E9EC3;
-	border-color: #9E9EC3;
+	background-color: #969696;
+	border-color: #969696;
 	background-image: none;
 	color: #FFF;
 	min-width: 70px;
@@ -84,7 +84,7 @@ div.ui-dialog.alert-box button {
 
 div.ui-dialog.alert-box,
 div.ui-dialog.alert-box .ui-widget-content {
-	border-color: #9E9EC3;
+	border-color: #969696;
 }
 
 .alert-icon {
@@ -651,7 +651,7 @@ a.close:active {
 }
 
 #side_menu a.action {
-	border: 1px solid #9e9ec3;
+	border: 1px solid #969696;
 	display: block;
 	position: relative;	
 	float: right;

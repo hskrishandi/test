@@ -173,7 +173,7 @@ div.ui-dialog {
 div.ui-dialog,
 div.ui-dialog div.ui-dialog-titlebar,
 div.ui-dialog button {
-	border: 1px solid #9E9EC3;
+	border: 1px solid #969696;
 	border-radius: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -182,14 +182,14 @@ div.ui-dialog button {
 div.ui-dialog  div.ui-dialog-titlebar  {
 	padding-top: 0.7em;
 	padding-bottom: 0.7em;
-	background-color: #9E9EC3;
+	background-color: #969696;
 	background-image: none;
 	color: #FFF;
 }
 
 div.ui-dialog,
 div.ui-dialog .ui-widget-content {
-	border-color: #9E9EC3;
+	border-color: #969696;
 }
 
 /* Model library side menu */
@@ -218,7 +218,7 @@ div.model-library  #model-library-menu {
 	z-index:2;
 	padding: 10px 15px 10px 5px;
 	width: 135px;
-	border-color: #9e9ec3;
+	border-color: #969696;
 	-webkit-border-top-left-radius: 0;
 	-moz-border-radius-topleft: 0;
 	border-top-left-radius: 0;
@@ -271,7 +271,7 @@ div.model-library  #model-library-menu li font:active {
 }
 
 #side_menu .model-library h2 a.action.active {
-	color: #9e9ec3;
+	color: #969696;
 	background-color: #FFF;
 	-webkit-border-top-left-radius: 2px;
 	-moz-border-radius-topleft: 2px;
@@ -344,7 +344,7 @@ div.model-benchmark-side-menu div {
 }
 
 #side_menu .model-benchmark-side-menu h2 a.action.active {
-	color: #9e9ec3;
+	color: #969696;
 	background-color: #FFF;
 	-webkit-border-top-left-radius: 2px;
 	-moz-border-radius-topleft: 2px;
@@ -940,7 +940,7 @@ select.param_inputs {
     margin-top: 15px;
     border: solid;
     border-width: 1px;
-    border-color: #9E9EC3;
+    border-color: #969696;
 }
 
 .post_details .comment .user_comment {
