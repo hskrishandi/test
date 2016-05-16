@@ -566,26 +566,26 @@ div#param-sets h4 {
 #search_param{
 	width: 150px;
 	border-radius: 5px;
-	border: solid 1px #bfbfe6;
+	border: solid 1px #969696;
 	padding: 3px 5px;
     float: right;
 	display: block;
 }
 
 ::-webkit-input-placeholder {
-   color: #bfbfe6;
+   color: #969696;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #bfbfe6;
+   color: #969696;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #bfbfe6;
+   color: #969696;
 }
 
 :-ms-input-placeholder {
-   color: #bfbfe6;
+   color: #969696;
 }
 
 .ui-autocomplete {
@@ -880,7 +880,7 @@ select.param_inputs {
 #add_param{
 	width: 150px;
 	border-radius: 5px;
-	border: solid 1px #bfbfe6;
+	border: solid 1px #969696;
 	padding: 3px 5px;
 }
 #equalizer-temp {

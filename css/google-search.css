@@ -89,12 +89,12 @@ input.gsc-search-button {
   height: 29px;
   min-width: 54px;
 
-  border: 1px solid #BFBFE6;
+  border: 1px solid #969696;
   border-radius: 1px;
   -moz-border-radius: 1px;
   -webkit-border-radius: 1px;
 
-  border-color: #BFBFE6;
+  border-color: #969696;
   background-color: #A2A2CE;
   background-image: -webkit-gradient(linear,left top,left bottom,from(#A2A2CE),to(#A2A2CE));
   background-image: -webkit-linear-gradient(top,#A2A2CE,#A2A2CE);
@@ -106,14 +106,14 @@ input.gsc-search-button {
 }
 .cse input.gsc-search-button:hover,
 input.gsc-search-button:hover {
-  border-color: #BFBFE6;
+  border-color: #969696;
   background-image: -moz-linear-gradient(center top , #A2A2CE, #A2A2CE);
   background-color: #A2A2CE;
 }
 
 .cse input.gsc-search-button:focus,
 input.gsc-search-button:focus {
-  border-color: #BFBFE6;
+  border-color: #969696;
   background-color: #A2A2CE;
 }
 
