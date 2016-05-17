@@ -17,7 +17,9 @@
 					<a target="_blank" href="<?php echo base_url('modelsim/model/' . $model->id);?>">
 					<div class="clearfix modelBoxContainer">
 						<div class="modelBoxes">
-							<img alt="<?php echo $model->name; ?>" src="<?php echo resource_url('img', 'simulation/' . $model->name . '.png');?>" class="modelImage"/>
+                            <div class="modelImage">
+                                <img alt="<?php echo $model->name; ?>" src="<?php echo resource_url('img', 'simulation/' . $model->name . '.png');?>"/>
+                            </div>
 							<p class="modelInfo">
 								<span>
 									<?php echo $model->icon_name . '<br/>' . $model->desc_name . '<br/>by ' . $model->organization; ?>
