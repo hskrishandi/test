@@ -14,7 +14,7 @@
 			<h2>Device Models</h2>
 				<div id="MLitemBox" class="clearfix" style="background-color:#C9C9C9; overflow:hidden;">
 				<?php foreach ($model_list as $model) : ?>
-					<a target="_blank" href="<?php echo base_url('modelsim/model/' . $model->id);?>">
+					<a href="<?php echo base_url('modelsim/model/' . $model->id);?>">
 					<div class="clearfix modelBoxContainer">
 						<div class="modelBoxes">
                             <div class="modelImage">
