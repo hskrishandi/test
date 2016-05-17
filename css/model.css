@@ -744,12 +744,10 @@ select.param_inputs {
 }
 
 .modelBoxes{
-	height: auto;
-    width: 147px;
+    height: auto;
+    width: 100%;
     margin: 0px auto;
-	background-color: white;
-    -webkit-box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
-    box-shadow: rgb(157, 157, 157) 2.5px 1.8px 0.4em 0px;
+    background-color: white;
 }
 
 .modelImage {
