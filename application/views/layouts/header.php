@@ -10,13 +10,13 @@
     <div class="menu">
         <ul>
             <li>
-                <a href="<?php echo base_url('modelsim'); ?>" target="_blank">
+                <a href="<?php echo base_url('modelsim'); ?>">
                     <img class="menu-image" src="<?php echo resource_url('img', 'home/icon_ML.png'); ?>" />
                     <span class="menu-title">Model Library</span>
                 </a>
             </li>
             <li>
-                <a href="<?php echo base_url('txtsim'); ?>" target="_blank">
+                <a href="<?php echo base_url('txtsim'); ?>">
                     <img class="menu-image" src="<?php echo resource_url('img', 'home/icon_SP.png'); ?>" />
                     <span class="menu-title">Simulation Platform</span>
                 </a>
