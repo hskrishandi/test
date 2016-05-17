@@ -43,6 +43,14 @@
 					</div>
 					</a>
 				<?php endforeach; ?>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $(".modelImage").height($(".modelImage").width()/3 * 2);
+                        window.onresize = function(){
+                            $(".modelImage").height($(".modelImage").width()/3 * 2);
+                        }
+                    }) ;
+                </script>
 				</div>
 		</div>
 	<?php endblock(); ?>
