@@ -5,7 +5,7 @@ $(document).ready(function() {
      * Leon 20160511
      */
     String.prototype.formatUsername = function() {
-        var length = 20;
+        var length = 18;
         return this.length < length ? this : this.substr(0, length) + "...";
     };
     $.ajax({

@@ -66,14 +66,18 @@
     </div>
     <div class="clearFloat"></div>
     <div class="mLitemBox" class="clearfix">
+        <?php $modelCount = 0 ?>
         <?php foreach ($top_models as $key => $model) : ?>
         <a href="<?php echo base_url('modelsim/model/' . $model->id);?>">
-            <div class="clearfix modelBoxContainer">
+            <div class="clearfix modelBoxContainer<?php echo $modelCount == 0 ? ' noLeftMargin' : ''?><?php echo $modelCount++ == 4 ? ' noRightMargin' : ''?>">
                 <div class="modelBoxes">
-                    <img alt="<?php echo $model->name; ?>" src="<?php echo resource_url('img', 'simulation/' . $model->name . '.png');?>" class="modelImage" />
+                    <div class="modelImage">
+                        <img alt="<?php echo $model->name; ?>" src="<?php echo resource_url('img', 'simulation/' . $model->name . '.png');?>"/>
+                    </div>
                     <p class="modelInfo">
                         <?php echo $model->icon_name . '<br/>' . $model->desc_name . '<br/>by ' . $model->organization; ?>
                     </p>
+                    <div class="clearFloat"></div>
                     <div class="clearfix modelGreyBox">
                         <img src="<?php echo resource_url('img', 'home/messageIcon.svg'); ?>" class="MessageIcon" />
                         <font class="MessageNumber">
@@ -92,11 +96,19 @@
             </div>
         </a>
         <?php endforeach; ?>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".modelImage").height($(".modelImage").width()/3 * 2);
+                window.onresize = function(){
+                    $(".modelImage").height($(".modelImage").width()/3 * 2);
+                }
+            }) ;
+        </script>
     </div>
     <div class="clearFloat"></div>
     <div class="user-experience">
         <h1>User Experience</h1>
-        <div class="user-experience-box">
+        <div class="user-experience-box noLeftMargin">
             <?php if (!empty($user_experience) && count($user_experience) > 0) $entry = $user_experience[0]; ?>
                 <p class="user-experience-message">
                     “<?php echo htmlspecialchars($entry->comment); ?>”
@@ -106,7 +118,7 @@
                 </p>
             <? endif; ?>
         </div>
-        <div class="user-experience-box">
+        <div class="user-experience-box noRightMargin">
             <?php if (!empty($user_experience) && count($user_experience) > 0) $entry = $user_experience[1]; ?>
                 <p class="user-experience-message">
                     “<?php echo htmlspecialchars($entry->comment); ?>”
@@ -127,22 +139,22 @@
 <div class="news-highlight">
     <h1>News and Event Highlights</h1>
     <div class="news-image">
-        <img src="<?php echo resource_url('img', 'home/NLimage1.jpg'); ?>" />
+        <img src="<?php echo resource_url('img', 'home/NLimage1.jpg'); ?>" class="noLeftMargin"/>
         <img src="<?php echo resource_url('img', 'home/NLimage2.jpg'); ?>" />
-        <img src="<?php echo resource_url('img', 'home/NLimage3.jpg'); ?>" />
+        <img src="<?php echo resource_url('img', 'home/NLimage3.jpg'); ?>" class="noRightMargin"/>
     </div>
     <div class="page-subtitle">
         <span class="page-subtitle-title">i-MOS Activities</span>
          <a class="page-subtitle-more" href="<?php echo base_url('activities'); ?>">more</a>
     </div>
     <div class="news-box">
-        <div class="news-box-column">
+        <div class="news-box-column noLeftMargin">
             <?php for ($i=0; $i<min(3,count($activities)); $i++) : ?>
                 <h6><?php echo date('d M Y', $activities[$i]->date); ?></h6>
                 <p><?php echo $activities[$i]->content; ?></p>
             <?php endfor; ?>
         </div>
-        <div class="news-box-column">
+        <div class="news-box-column noRightMargin">
             <?php for ($i=3; $i<min(6,count($activities)); $i++) : ?>
                 <h6><?php echo date('d M Y', $activities[$i]->date); ?></h6>
                 <p><?php echo $activities[$i]->content; ?></p>

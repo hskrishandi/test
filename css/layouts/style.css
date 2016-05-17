@@ -12,16 +12,21 @@ body {
 h1 {
     font-size: 2.5em;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 h2 {
     font-size: 2.5em;
     text-align: left;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
-.content{
+p,
+a {
+    font-family: 'Tahoma', sans-serif;
+}
+
+.content {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;

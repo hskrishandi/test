@@ -1,6 +1,10 @@
 .header {
-    height: 65px;
+    height: 50px;
     background-color: rgb(26, 26, 26);
+}
+
+.header button {
+    width: 72px;
 }
 
 .header .logo {
@@ -8,19 +12,15 @@
     height: 100%;
 }
 
-.header button {
-    width: 72px;
-}
-
 .header .logo img {
-    height: 34px;
-    margin: 15px 30px;
+    height: 30px;
+    margin: 10px 38px;
 }
 
 .header .menu {
     float: left;
     height: 26px;
-    margin: 19px 10px;
+    margin: 12px 10px;
 }
 
 .header .menu ul {
@@ -50,12 +50,13 @@
     line-height: 26px;
     font-size: 14px;
     color: #FFF;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .header .submenu {
     float: left;
     height: 26px;
-    margin: 19px 10px;
+    margin: 12px 10px;
 }
 
 .header .submenu ul {
@@ -75,12 +76,13 @@
     color: #FFF;
     text-decoration: none;
     cursor: pointer;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .header .submenu .submenu-box {
     display: none;
     position: absolute;
-    top: 65px;
+    top: 50px;
     z-index: 1000;
     float: left;
     padding: 0;
@@ -187,7 +189,7 @@
 
 .header .user {
     height: 26px;
-    margin: 19px 20px;
+    margin: 12px 20px;
     float: right;
 }
 
@@ -211,6 +213,8 @@
 .header .user > ul > li > a {
     color: #FFF;
     text-decoration: none;
+
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .header .user > img {
@@ -224,7 +228,7 @@
 .header .user .user-box {
     display: none;
     position: absolute;
-    top: 65px;
+    top: 50px;
     z-index: 1000;
     float: right;
     right: 60px;
@@ -353,7 +357,7 @@
 
 .header .search {
     float: right;
-    margin-top: 20px;
+    margin-top: 12px;
     width: 11%;
     height: 26px;
     background-color: #FFF;
@@ -381,6 +385,8 @@
     background-color: rgba(0, 0, 0, 0);
     outline: 0 none !important;
     font-size: 11px;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: bold;
 }
 
 
