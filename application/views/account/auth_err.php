@@ -21,13 +21,13 @@
 				<p>This page requires user authentication. Please login to access the service.<br />If you are not yet a registered <?php echo imos_mark() ?> user, you may register for free by clicking the Registration button on the top right corner of the page.</p>
 
                 <form class="form-horizontal" method="post" action="<?php echo base_url('account/loginForm') ?>">
-                    <div class="form-group">
+                    <div class="form-group<?php echo $error == 'noaccpass' ? ' has-error' : '' ?>">
                         <label for="loginEmail" class="col-sm-2 control-label">Email<sup>*</sup></label>
                         <div class="col-sm-10">
-                            <input name="email" type="email" class="form-control" id="loginEmail" placeholder="Email">
+                            <input name="email" type="email" class="form-control" id="loginEmail" placeholder="Email" value="<?php echo isset($email) ? $email : '' ?>">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group<?php echo $error == 'noaccpass' ? ' has-error' : '' ?>">
                         <label for="loginPassword" class="col-sm-2 control-label">Password<sup>*</sup></label>
                         <div class="col-sm-10">
                             <input name="pwd" type="password" class="form-control" id="loginPassword" placeholder="Password">
@@ -45,6 +45,12 @@
                         </div>
                     </div>
                 </form>
+
+                <?php if($error == 'noactive'): ?>
+                    <script type="text/javascript">
+                        alert(LogInAccInActMsg);
+                    </script>
+                <?php endif; ?>
 
 				<!-- <div class="forms">
 				<div id="user-login">
@@ -79,21 +85,21 @@
 
 			</div>
 		<script>
-		$(document).ready(function() {
-			var i = 10;
-			$('#sec').html(i);
-			var sec1 = window.setInterval(
-				function(){
-					$('#sec').html(--i);
+    		$(document).ready(function() {
+    			var i = 10;
+    			$('#sec').html(i);
+    			var sec1 = window.setInterval(
+    				function(){
+    					$('#sec').html(--i);
 
-				}
-				,1000);
-			window.setTimeout ( function() {
-				clearInterval(sec1);
-				window.location = '<?php echo base_url('/') ?>'; }
-				, 10000);
+    				}
+    				,1000);
+    			window.setTimeout ( function() {
+    				clearInterval(sec1);
+    				window.location = '<?php echo base_url('/') ?>'; }
+    				, 10000);
 
-		});
+    		});
 		</script>
 		<?php endif; ?>
 	<?php endblock(); ?>

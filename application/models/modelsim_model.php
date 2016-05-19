@@ -89,7 +89,8 @@ class Modelsim_model extends CI_Model {
 		$this->db->select("model_info.*, AVG(rate) AS rate, IFNULL(countComment,0) AS countComment", FALSE)->from('model_info, starrating')
 			->join("(SELECT postid, count(*) AS countComment from post_comments WHERE type = 'model' GROUP BY `postid`) comments", "comments.postid = model_info.post_id", "left")
 		->where("`model_info`.`name`=`starrating`.`model_id`")
-		->group_by("model_id")->order_by("rate DESC")->limit(5);
+        // ->group_by("model_id")->order_by("rate DESC")->limit(5);
+		->group_by("model_id")->order_by("RAND()")->limit(5); // random return 5 results
 		return $this->db->get()->result();
 	}
 

@@ -86,11 +86,11 @@
                             <?php echo $model->countComment; ?>
                         </font>
                         <div class="modelRatingStars">
-                            <?php for ($i=0; $i<round($model->rate); $i++) : ?>
-                            <img src="<?php echo resource_url('img', 'home/yellowStar.svg'); ?>" class="ratingStar ratingLightStar" />
-                            <?php endfor; ?>
                             <?php for ($i=round($model->rate); $i<5; $i++) : ?>
                             <img src="<?php echo resource_url('img', 'home/greyStar.svg'); ?>" class="ratingStar ratingDimStar" />
+                            <?php endfor; ?>
+                            <?php for ($i=0; $i<round($model->rate); $i++) : ?>
+                            <img src="<?php echo resource_url('img', 'home/yellowStar.svg'); ?>" class="ratingStar ratingLightStar" />
                             <?php endfor; ?>
                         </div>
                     </div>

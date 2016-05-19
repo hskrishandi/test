@@ -328,6 +328,12 @@
         lang : 'fr',
         theme : 'white'
     };
-
+    /**
+     * Solve the position fixed problem.
+     * When scroll horizontally, makes the header scroll as well.
+     */
+    $(window).scroll(function(){
+            $('.header').css('left', 0 - $(this).scrollLeft());
+    });
 </script>
 <?php end_block_marker(); ?>

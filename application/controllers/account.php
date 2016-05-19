@@ -130,10 +130,18 @@ class account extends CI_Controller
         $pwd = $this->input->post('pwd');
         $loginResult = $this->Account_model->login($email, $pwd);
         if ($loginResult == "noactive") {
-            redirect('/account/authErr');
+            $data['logined'] = false;
+            $data['error'] = 'noactive';
+            // redirect('/account/authErr');
+            $this->load->view('account/auth_err', $data);
         } elseif ($loginResult == "noaccpass") {
-            redirect('/account/authErr');
+            // redirect('/account/authErr');
+            $data['logined'] = false;
+            $data['error'] = 'noaccpass';
+            $data['email'] = $email;
+            $this->load->view('account/auth_err', $data);
         } else {
+            $data['logined'] = true;
             redirect('/');
         }
     }
@@ -288,6 +296,7 @@ class account extends CI_Controller
     }
     public function authErr()
     {
+        $data['error'] = null;
         if ($this->Account_model->islogin() === false) {
             $data['logined'] = false;
             $this->load->view('account/auth_err', $data);

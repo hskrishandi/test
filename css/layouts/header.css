@@ -3,6 +3,7 @@
     z-index: 100;
     top: 0;
     width: 100%;
+    min-width: 1110px;
     height: 50px;
     background-color: rgb(26, 26, 26);
     -webkit-font-smoothing: subpixel-antialiased;; /* This solve font weight change when use position fixed*/
