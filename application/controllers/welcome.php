@@ -1,16 +1,32 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class imos extends CI_Controller {
+class welcome extends CI_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->helper('template_inheritance');
+        $this->load->helper('html');
+        $this->load->helper('url');
+        $this->load->helper('date');
+        $this->load->helper('credits_helper');
+        $this->load->helper('recaptchalib_helper');
+        $this->load->model('Account_model');
+        $this->load->library('form_validation');
+
+        $this->config->load('account_create_form');
+        $this->config->load('account_info_update');
+    }
 	/**
 	 * Index Page for this controller.
 	 *
 	 * Maps to the following URL
 	 * 		http://example.com/index.php/welcome
-	 *	- or -  
+	 *	- or -
 	 * 		http://example.com/index.php/welcome/index
 	 *	- or -
-	 * Since this controller is set as the default controller in 
+	 * Since this controller is set as the default controller in
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
 	 * So any other public methods not prefixed with an underscore will
@@ -19,7 +35,7 @@ class imos extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+        // $this->load->view('welcome_message');
 	}
 }
 

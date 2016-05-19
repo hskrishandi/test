@@ -57,7 +57,8 @@
 <div class="clearFloat"></div>
 <div class="model-introduction">
     <div class="model-introduction-icon">
-        <img src="<?php echo resource_url('img', 'home/MLBigicon.png'); ?>" />
+        <!-- Keep the image ratio in home.js-->
+        <img id="model-introduction-icon-img" src="<?php echo resource_url('img', 'home/MLBigicon.png'); ?>" />
     </div>
     <div class="model-introduction-description">
         <h1>Expanding model library</h1>
@@ -72,6 +73,7 @@
             <div class="clearfix modelBoxContainer<?php echo $modelCount == 0 ? ' noLeftMargin' : ''?><?php echo $modelCount++ == 4 ? ' noRightMargin' : ''?>">
                 <div class="modelBoxes">
                     <div class="modelImage">
+                        <!-- Keep the image ratio in home.js-->
                         <img alt="<?php echo $model->name; ?>" src="<?php echo resource_url('img', 'simulation/' . $model->name . '.png');?>"/>
                     </div>
                     <p class="modelInfo">
@@ -96,14 +98,6 @@
             </div>
         </a>
         <?php endforeach; ?>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $(".modelImage").height($(".modelImage").width()/3 * 2);
-                window.onresize = function(){
-                    $(".modelImage").height($(".modelImage").width()/3 * 2);
-                }
-            }) ;
-        </script>
     </div>
     <div class="clearFloat"></div>
     <div class="user-experience">
