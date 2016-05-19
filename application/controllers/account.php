@@ -130,9 +130,9 @@ class account extends CI_Controller
         $pwd = $this->input->post('pwd');
         $loginResult = $this->Account_model->login($email, $pwd);
         if ($loginResult == "noactive") {
-            redirect('/authErr');
+            redirect('/account/authErr');
         } elseif ($loginResult == "noaccpass") {
-            redirect('/authErr');
+            redirect('/account/authErr');
         } else {
             redirect('/');
         }
