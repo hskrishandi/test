@@ -795,7 +795,7 @@
                 <text class="id" x="35" y="9" font-family="sans-serif" font-size="14px" fill="black"></text>
             </g>
         </g>
-        <text x="25" y="355" font-family="sans-serif" font-size="14px" fill="black">eJIM</text>
+        <text x="40" y="355" font-family="sans-serif" font-size="14px" fill="black">eJIM</text>
     </g>
 	</svg>
 </div>
