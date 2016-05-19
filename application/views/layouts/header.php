@@ -278,6 +278,7 @@
         </form>
     </div>
 </div>
+<div class="header-placeholder"></div>
 
 <script type="text/javascript">
     $("#sitemenu").click(function() {

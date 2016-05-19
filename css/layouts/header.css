@@ -7,6 +7,13 @@
     background-color: rgb(26, 26, 26);
 }
 
+.header-placeholder {
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    width: 100%;
+}
+
 .header button {
     width: 72px;
 }
