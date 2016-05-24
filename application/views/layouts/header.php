@@ -180,58 +180,52 @@
                         Registration
                     </div>
                     <div class="register-info">
-                        <form action="<?php echo base_url('account/create_submit')?>" method="post">
+                        <form>
                             <div class="register-info-title">
                                 Personal Information
                             </div>
                             <div class="register-name-group">
-                                <input type="text" name="first_name" class="form-control form-control-left" placeholder="First Name*">
-                                <input type="text" name="last_name" class="form-control form-control-right" placeholder="Last Name*">
+                                <div id="register-first_name-group">
+                                    <input id="register-first_name" type="text" name="first_name" class="form-control form-control-left" placeholder="First Name*">
+                                </div>
+                                <div id="register-last_name-group">
+                                    <input id="register-last_name" type="text" name="last_name" class="form-control form-control-right" placeholder="Last Name*">
+                                </div>
                             </div>
-                            <div class="register-displayname-group">
-                                <input type="text" name="displayname" class="form-control" placeholder="Display Name*">
+                            <div id="register-displayname-group">
+                                <input id="register-displayname" type="text" name="displayname" class="form-control" placeholder="Display Name*">
                             </div>
-                            <div class="register-company-group">
-                                <input type="text" name="organization" class="form-control" placeholder="Company*">
+                            <div id="register-organization-group">
+                                <input id="register-organization" type="text" name="organization" class="form-control" placeholder="Company*">
                             </div>
                             <div class="register-position-group">
-                                <input type="text" name="position" class="form-control" placeholder="Position Title">
+                                <input id="register-position" type="text" name="position" class="form-control" placeholder="Position Title">
                             </div>
                             <div class="register-address-group">
-                                <input type="text" name="address" class="form-control" placeholder="Address">
+                                <input id="register-address" type="text" name="address" class="form-control" placeholder="Address">
                             </div>
                             <div class="register-contact-group">
-                                <input type="text" name="tel" class="form-control form-control-left" placeholder="Telephone">
-                                <input type="text" name="fax" class="form-control form-control-right" placeholder="Fax">
+                                <input id="register-tel" type="text" name="tel" class="form-control form-control-left" placeholder="Telephone">
+                                <input id="register-fax" type="text" name="fax" class="form-control form-control-right" placeholder="Fax">
                             </div>
                             <div class="register-info-title">
                                 Account Information
                             </div>
-                            <div class="register-email-group">
-                                <input type="text" name="email" class="form-control" placeholder="Email Address*">
+                            <div id="register-email-group">
+                                <input id="register-email" type="text" name="email" class="form-control" placeholder="Email Address*">
                             </div>
                             <div class="register-info-description">
                                 The EMAIL ADDRESS is for log-in use. Please make sure the EMAIL ADDRESS is correct.
                             </div>
-
-                            <div class="register-password-group">
-                                <input type="password" name="password" class="form-control" placeholder="Password*">
-                                <input type="password" name="retypepassword" class="form-control" placeholder="Retype Password*">
-                            </div>
-                            <div class="register-info-title">
-                                Verification Code
-                            </div>
-                            <div class="register-recaptcha-group">
-                                <div id="recaptcha">
-                                    <?php
-                                        $publickey = "6LfKDtASAAAAADfqnqFzbxPZQRzzdA0wggu8GhkN"; // you got this from the signup page
-                                        get_instance()->load->helper('recaptchalib_helper');
-                                        echo recaptcha_get_html($publickey, null, TRUE);
-                                    ?>
+                            <div id="register-password-group">
+                                <input id="register-password" type="password" name="password" class="form-control" placeholder="Password*">
+                                <input id="register-retypepassword" type="password" name="retypepassword" class="form-control" placeholder="Retype Password*">
+                                <div class="register-info-description">
+                                    At least 6 charaters or numbers are required.
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <button id="register-submit" type="button" class="btn btn-primary btn-block">Submit</button>
                         </form>
                     </div>
                 </div>

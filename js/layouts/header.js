@@ -96,6 +96,57 @@ $(document).ready(function() {
             });
         }, 800);
     });
+    $('#register-submit').click(function() {
+        var register = $.ajax({
+            cache: false,
+            type: "POST",
+            url: CI_ROOT + 'account/create_submit',
+            data: {
+                first_name: $('#register-first_name').val(),
+                last_name: $('#register-last_name').val(),
+                displayname: $('#register-displayname').val(),
+                organization: $('#register-organization').val(),
+                position: $('#register-position').val(),
+                address: $('#register-address').val(),
+                tel: $('#register-tel').val(),
+                fax: $('#register-fax').val(),
+                email: $('#register-email').val(),
+                password: $('#register-password').val(),
+                retypepassword: $('#register-retypepassword').val()
+            }
+        });
+        register.done(function(msg) {
+            try {
+                data = JSON && JSON.parse(msg) || $.parseJSON(msg);
+                if (data.success) {
+                    $('#register-first_name-group').removeClass('has-error');
+                    $('#register-last_name-group').removeClass('has-error');
+                    $('#register-displayname-group').removeClass('has-error');
+                    $('#register-organization-group').removeClass('has-error');
+                    $('#register-email-group').removeClass('has-error');
+                    $('#register-password-group').removeClass('has-error');
+                    $('#register-retypepassword-group').removeClass('has-error');
+                    location.href = "account/createDone";
+                } else {
+                    $.each(data, function(key, value) {
+                        if (key != "success" && value != "") {
+                            $('#' + key).addClass('has-error');
+                        } else {
+                            $('#' + key).removeClass('has-error');
+                        }
+                        $('#' + key + ">input").focus(function() {
+                            $('#' + key).removeClass('has-error');
+                        });
+                    });
+                }
+            } catch (e) {
+
+            }
+        });
+        register.fail(function(jqXHR, textStatus) {
+            alert(LogConnectionFailure)
+        });
+    });
     $('#login-username').focus(function() {
         $('#user-login-group').removeClass('has-error');
     });

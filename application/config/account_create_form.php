@@ -46,7 +46,7 @@ $config['account_create_form']	=array(
                      'field'   => 'position',
                      'label'   => 'POSITION TITLE',
                      'rules'   => ''
-                  ),   
+                  ),
                array(
                      'field'   => 'address',
                      'label'   => 'ADDRESS',
@@ -65,7 +65,7 @@ $config['account_create_form']	=array(
 			   array(
                      'field'   => 'password',
                      'label'   => 'PASSWORD*',
-                     'rules'   => 'required'
+                     'rules'   => 'required|min_length[6]'
                   ),
 			   array(
                      'field'   => 'retypepassword',
@@ -75,7 +75,7 @@ $config['account_create_form']	=array(
 			   array(
                      'field'   => 'email',
                      'label'   => 'E-MAIL ADDRESS*',
-                     'rules'   => 'valid_email|callback_email_check'
+                     'rules'   => 'required|valid_email|callback_email_check'
                   )
             );
 

@@ -50,6 +50,9 @@ class account extends CI_Controller
         $form = $this->config->item('account_create_form');
         $this->form_validation->set_rules($form);
         $data_vaild = $this->form_validation->run();
+        /*
+         * Remove the recaptcha verification
+         *
         $privatekey = '6LfKDtASAAAAAJ4tsQC3heEYHWofPt8oFpx19IKd';
         $resp = recaptcha_check_answer($privatekey,
                                 $_SERVER['REMOTE_ADDR'],
@@ -58,8 +61,10 @@ class account extends CI_Controller
         if (!$resp->is_valid) {
             // What happens when the CAPTCHA was entered incorrectly
                  $data['err'] = array('verification' => 'Verification code wrong. Please enter again.');
-            $this->load->view('account/account_create', $data);
+            // $this->load->view('account/account_create', $data);
+            echo json_encode($data);
         } else {
+        */
             if ($data_vaild) {
                 foreach ($form as $item) {
                     $form_data[$item['field']] = $this->db->escape_str($this->input->post($item['field']));
@@ -67,11 +72,31 @@ class account extends CI_Controller
 
                 $this->Account_model->createUser($form_data);
                 $_SESSION['referer'] = base_url($this->uri->uri_string());
-                $this->load->view('account/account_create_done', $data);
+                // $this->load->view('account/account_create_done', $data);
+                $data['success'] = true;
             } else {
-                $this->load->view('account/account_create', $data);
+                // $this->load->view('account/account_create', $data);
+                $data['success'] = false;
+                $data['register-first_name-group'] = form_error('first_name');
+                $data['register-last_name-group'] = form_error('last_name');
+                $data['register-displayname-group'] = form_error('displayname');
+                $data['register-organization-group'] = form_error('organization');
+                $data['register-email-group'] = form_error('email');
+                $data['register-password-group'] = form_error('password');
+                $data['register-retypepassword-group'] = form_error('retypepassword');
             }
-        }
+            echo json_encode($data);
+        // }
+    }
+
+    /**
+     * Load create done view
+     *
+     * @author Leon 20160524
+     */
+    public function createDone()
+    {
+        $this->load->view('account/account_create_done');
     }
 
     public function create_done()
