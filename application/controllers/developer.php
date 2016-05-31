@@ -96,8 +96,8 @@ class developer extends CI_Controller {
          * Under Construction
          * by leon 20160508
          */
-        $this->load->view('developer/tos');
-		// $this->load->view('developer/501');
+        // $this->load->view('developer/tos');
+		$this->load->view('developer/501');
 	}
 
 	/*
