@@ -133,9 +133,9 @@
 <div class="news-highlight">
     <h1>News and Event Highlights</h1>
     <div class="news-image">
-        <img src="<?php echo resource_url('img', 'home/NLimage1.jpg'); ?>" class="noLeftMargin"/>
-        <img src="<?php echo resource_url('img', 'home/NLimage2.jpg'); ?>" />
-        <img src="<?php echo resource_url('img', 'home/NLimage3.jpg'); ?>" class="noRightMargin"/>
+        <img src="<?php echo resource_url('img', 'home/billboard1.png'); ?>" class="noLeftMargin"/>
+        <img src="<?php echo resource_url('img', 'home/billboard2.png'); ?>" />
+        <img src="<?php echo resource_url('img', 'home/billboard3.png'); ?>" class="noRightMargin"/>
     </div>
     <div class="page-subtitle">
         <span class="page-subtitle-title">i-MOS Activities</span>
