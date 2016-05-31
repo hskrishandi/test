@@ -30,9 +30,9 @@
 		<div id="resources">
             <h1 id="newsEventHL">News and Event Highlights</h1>
 			<div class="highlightImageContainer">
-				<img class="highlightImage" src="<?php echo resource_url('img', 'home/NLimage1.jpg'); ?>" />
-				<img class="highlightImage" src="<?php echo resource_url('img', 'home/NLimage2.jpg'); ?>" />
-				<img  id="lastImage" src="<?php echo resource_url('img', 'home/NLimage3.jpg'); ?>" />
+				<img class="highlightImage" src="<?php echo resource_url('img', 'home/billboard1.png'); ?>" />
+				<img class="highlightImage" src="<?php echo resource_url('img', 'home/billboard2.png'); ?>" />
+				<img  id="lastImage" src="<?php echo resource_url('img', 'home/billboard3.png'); ?>" />
 			</div>
             <?php if(count($news) > 0) { ?>
             <div class="page-subtitle">

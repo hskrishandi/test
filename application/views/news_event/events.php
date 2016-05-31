@@ -28,6 +28,7 @@
 
 <?php startblock('content'); ?>
 <div id="resources">
+    <?php if(count($upcoming_events) > 0) { ?>
     <div class="page-subtitle">
         <span class="page-subtitle-title">Upcoming Events</span>
         <a class="page-subtitle-more" href="<?php echo base_url('news_event'); ?>" onclick="history.go(-1); return false;">Back to News and Event</a>
@@ -46,8 +47,11 @@
 		</li>
 	<?php endforeach; ?>
 	</ul>
+    <?php } ?>
+    <?php if(count($past_events) > 0) { ?>
     <div class="page-subtitle">
         <span class="page-subtitle-title">Past Events</span>
+        <a class="page-subtitle-more" href="<?php echo base_url('news_event'); ?>" onclick="history.go(-1); return false;">Back to News and Event</a>
     </div>
 	<ul class="item-list">
 		<?php foreach($past_events as $entry): ?>
@@ -63,6 +67,7 @@
 		</li>
 	<?php endforeach; ?>
 	</ul>
+    <?php } ?>
 
 
 </div>
