@@ -1317,7 +1317,7 @@ function dc_sim(event) {
         .dialog("open");
 }
 
-function ac_sim() {
+function ac_sim(event) {
     $(".simsim").each(function() {
         if ($(this).attr("id") != "ac_sim") {
             $(this).attr("checked", false);
@@ -1367,7 +1367,7 @@ function ac_sim() {
         .dialog("open");
 }
 
-function tran_sim() {
+function tran_sim(event) {
 
     $(".simsim").each(function() {
         if ($(this).attr("id") != "tran_sim") {
@@ -1661,7 +1661,7 @@ function lrotate(event) {
                     $current.find(".text").attr("transform", "translate(" + e + "," + f + ")");
                     break;
                 case "2":
-                    $current.find(".text").attr("transform", "translate(" + (e - 20) + "," + (f - 60) + ")");
+                    $current.find(".ttext").attr("transform", "translate(" + (e - 20) + "," + (f - 60) + ")");
                     break;
                 case "3":
                     $current.find(".text").attr("transform", "translate(" + (e - 40) + "," + (f - 40) + ")");
