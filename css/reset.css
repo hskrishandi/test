@@ -39,8 +39,8 @@ caption, th, td { text-align: left; font-weight: normal; }
 table, td, th { vertical-align: middle; }
 
 /* Remove possible quote marks (") from <q>, <blockquote>. */
-blockquote:before, blockquote:after, q:before, q:after { content: ""; }
-blockquote, q { quotes: "" ""; }
+/*blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+blockquote, q { quotes: "" ""; }*/
 
 /* Remove annoying border on linked images. */
 a img { border: none; }
@@ -62,7 +62,7 @@ a img { border: none; }
 html[xmlns] .clearfix {
 	display: block;
 }
- 
+
 * html .clearfix {
 	height: 1%;
 }

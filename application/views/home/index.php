@@ -105,7 +105,7 @@
         <div class="user-experience-box noLeftMargin">
             <?php if (!empty($user_experience) && count($user_experience) > 0) $entry = $user_experience[0]; ?>
                 <p class="user-experience-message">
-                    “<?php echo htmlspecialchars($entry->comment); ?>”
+                    <q><?php echo htmlspecialchars($entry->comment); ?></q>
                 </p>
                 <p class="user-experience-name">
                     <?php echo htmlspecialchars($entry->first_name . ' ' . $entry->last_name . ', ' . $entry->organization); ?>
@@ -115,7 +115,7 @@
         <div class="user-experience-box noRightMargin">
             <?php if (!empty($user_experience) && count($user_experience) > 0) $entry = $user_experience[1]; ?>
                 <p class="user-experience-message">
-                    “<?php echo htmlspecialchars($entry->comment); ?>”
+                    <q><?php echo htmlspecialchars($entry->comment); ?></q>
                 </p>
                 <p class="user-experience-name">
                     <?php echo htmlspecialchars($entry->first_name . ' ' . $entry->last_name . ', ' . $entry->organization); ?>
