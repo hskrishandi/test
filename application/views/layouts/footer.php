@@ -34,8 +34,13 @@
             <li>
                 <a href="<?php echo base_url('page/sitemap');?>" class="menu-list">Sitemap</a>
             </li>
+            <li class="cnzz" style="display:none">
+                <script type="text/javascript">
+                    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                    document.write(unescape("%3Cspan id='cnzz_stat_icon_1259472015'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1259472015%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+            </li>
         </ul>
     </div>
-
 </div>
 <?php end_block_marker(); ?>

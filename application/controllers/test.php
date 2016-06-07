@@ -30,5 +30,14 @@ class test extends CI_Controller {
         $this->load->view('test/layout');
     }
 
+    /**
+     * Test kity library
+     *
+     */
+    public function kity()
+    {
+        $this->load->view('test/kity');
+    }
+
 
 }
