@@ -4,3 +4,4 @@ application/simulation/tmp/
 application/config/database.php
 uploads/developer_models/finished/*
 uploads/developer_models/unfinished/*
+application/views/test/
