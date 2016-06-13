@@ -15,7 +15,7 @@
 
 
 <?php startblock('content'); ?>
-    <svg id="svg" width="100%" height="500px" style="background-color:#333">
+    <svg id="svg">
         <defs>
             <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
                 <path d="M 10 0 H 0 V 10" fill="none" stroke="gray" stroke-width="0.5"/>
@@ -26,41 +26,104 @@
             </pattern>
         </defs>
 
-        <!-- <g id="workspace" transform="matrix(1 0 0 1 0.5 0.5)" fill="url(#grid)">
+        <!-- <g id="workspace" fill="url(#grid)">
             <rect id="gridsystem" width="100%" height="100%" />
+            <rect x="0" y="0" width="100" height="100" fill="#cd0000"/>
         </g> -->
-        <rect x="0" y="0" width="100" height="100" fill="#cd0000"/>
-        <div id="location">
-            (0, 0)
-        </div>
     </svg>
+
+    <style media="screen">
+        .content {
+            margin: 0 !important;
+            width: 100% !important;
+            overflow: hidden;
+        }
+        .footer {
+            margin-top: 0 !important;
+        }
+    </style>
     <script type="text/javascript">
+        /**
+         * @Author Leon 20160608
+         */
         $(function(){
 
+            $(".content").css("height", $(window).height() - $(".header").height());
+            $(window).resize(function(){
+                $(".content").css("height", $(window).height() - $(".header").height());
+            });
+
+            var gridSizeFactor = 5;
+            var gridWidth = $(".content").width() * gridSizeFactor;
+            var gridHeight = $(".content").height() * gridSizeFactor;
+            var contentWidth = $(".content").width();
+            var contentHeight = $(".content").height();
+
             var move = function(dx, dy) {
-                var v = this.attr("viewBox")
+                /*
+                 * this.data('viewBox') is set in the start function, use to
+                 * record the initial position of the mouse click.
+                 * x and y are the final position of
+                 * the viewBox
+                 */
+                var viewBox = this.data('viewBox');
+                var x = 0;
+                var y = 0
+                
+                /*
+                 * The following two condition blocks is used to control the
+                 * boundary of the grid, if nothing out of the boundary,
+                 * calculate the new positio of the viewBox
+                 */
+                if ((viewBox.x - dx) < 0) {
+                    x = 0;
+                } else if ((viewBox.x - dx) > (gridWidth - contentWidth)) {
+                    x = gridWidth - contentWidth;
+                } else {
+                    x = viewBox.x - dx;
+                }
+                if ((viewBox.y - dy) < 0) {
+                    y = 0;
+                } else if ((viewBox.y - dy) > (gridHeight - contentHeight)) {
+                    y = gridHeight - contentHeight;
+                } else {
+                    y = viewBox.y - dy;
+                }
+
+                /*
+                 * Apply the new position
+                 */
                 this.attr({
-                    // transform: this.data('origTransform') + (this.data('origTransform') ? "T" : "t") + [dx, dy]
-                    viewBox: (v.x - dx) + "," + (v.y - dy) + "," + v.width + "," + v.height
+                    viewBox: x + "," + y + "," + viewBox.width + "," + viewBox.height
                 });
-                $("#location").text(v.x);
+                console.log('Now dragging');
             }
             var start = function() {
+                this.data('viewBox', this.attr("viewBox"));
                 console.log('Start dragging');
-                this.data('origTransform', this.transform().local );
-                // this.data('startPoint')
             }
             var stop = function() {
                 console.log('Finished dragging');
             }
 
-            var svg = Snap("#svg");
-            svg.attr({
-                viewBox: "0,0," + this.width + "," + this.height
+            var svg = Snap("#svg").attr({
+                width: "100%",
+                height: "100%",
+                viewBox: (gridWidth - contentWidth) / 2 + "," + (gridHeight - contentHeight) / 2 + "," + contentWidth + "," + contentHeight
+            });
+            svg.drag(move, start, stop);
+
+            var workspace = svg.g().attr({
+                id: "workspace",
+
             });
 
-            svg.drag(move, start, stop);
-            $("#location").text(svg.getBBox().vb);
+            var grid = workspace.rect().attr({
+                id: "gridSystem",
+                width: gridWidth,
+                height: gridHeight,
+                fill: "url(#grid)",
+            });
 
             /*
             var move = function(dx,dy) {
