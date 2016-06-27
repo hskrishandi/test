@@ -985,7 +985,7 @@ function changeParam(event) {
                 }
 
                 output_result = result.ins_params.instance;
-                var tmp_dialog = "<div class='model-library' title='" + $current.attr("type").substring(5) + "' id='param_dialog' style='display:none;'>" + "<select id='sel'><option value='' disabled selected>Choose ModelCard from your Library</option>";
+                var tmp_dialog = "<div class='model-library' title='" + $current.attr("type").substring(5) + "' id='param_dialog' style='display:none;'>" + "<select id='sel' style='width:85%; margin-bottom:10px;'><option value='' disabled selected>Default</option>";
                 $("#userlib").find(".model-page-direct").each(function() {
                     if ($(this).text() == $current.attr("type").substring(5)) {
                         $(this).next().find("font").each(function() {
@@ -1072,7 +1072,15 @@ function changeParam(event) {
                                     $(this).dialog("close");
                                     $(this).remove();
                                 } else {
-                                    alert("No model chosen, please calcel and use other model.");
+                                    // alert("No model chosen, please calcel and use other model.");
+                                    /**
+                                     * Add default option, if click ok, just close the pop up window.
+                                     * If we need to add some default parameters, we need to
+                                     * change value in this else closure
+                                     * @author Leon
+                                     */
+                                    $(this).dialog("close");
+                                    $(this).remove();
                                 }
                             },
                             "Cancel": function() {
