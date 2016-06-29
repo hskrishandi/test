@@ -9,15 +9,15 @@ class modelsim extends CI_Controller {
 		$this->load->helper(array('template_inheritance', 'html', 'credits', 'form', 'url', 'download','file'));
 		$this->load->model(array('Modelsim_model', 'Account_model', 'Discussion_model', 'Ngspice_model'));
 		$this->load->library('parser');
-		$this->config->load('simulation');	
-		
+		$this->config->load('simulation');
+
 		$this->uploadConfig = array(
 			'upload_path' => './uploads/',
 			'allowed_types' => 'ipa|iml|csv|pm|txt',
 			'max_size' => '1024'
 		);
 	}
-	
+
 	public function index()
 	{
 		$user_info = $this->Account_model->isLogin();
@@ -25,14 +25,14 @@ class modelsim extends CI_Controller {
 			//'models' => ($user_info ? $this->Modelsim_model->getModelLibrary($user_info->id) : array()), //not in use
 			'model_list' => $this->Modelsim_model->getModels()
 		);
-		
+
 		$this->load->view('simulation/model_list.php', $data);
 	}
 
 	public function model($id)
 	{
 		if (!$this->Account_model->isAuth()) return;
-        
+
         $model_info = $this->Modelsim_model->getModelInfoById($id);
         if ($model_info == null) {
 			redirect(base_url('modelsim'));
@@ -57,17 +57,17 @@ class modelsim extends CI_Controller {
 			// able to retrieve unlimited level of model version
 			//$data['versionmap'] = $this->Modelsim_model->getModelVersionTree($model_info);
 		}
-		
+
 		$this->load->view('simulation/model.php', $data);
 	}
-	
+
 	public function getExampleFilenames($model_id)
 	{
 		$filenames = get_filenames('./files/exampleFiles/model'.$model_id.'/');
 		//$response = array('data' => $filenams);
 		$this->outputJSON($filenames);
 	}
-	
+
 	public function readExampleFiles($model_id,$filename)
 	{
 		$data = read_file('./files/exampleFiles/model'.$model_id.'/'.$filename);
@@ -99,15 +99,15 @@ class modelsim extends CI_Controller {
 	public function modelCardinfo($card_name)
 	{
 		$user_info = $this->Account_model->isLogin();
-		$response = null; 
+		$response = null;
 
-		$infos = $this->Modelsim_model->getModelCardInfo($card_name) ; 
-		$response = array() ; 
+		$infos = $this->Modelsim_model->getModelCardInfo($card_name) ;
+		$response = array() ;
 
 		foreach ($infos as $info) {
 			if (!array_key_exists($info->param_data, $response)) {
 				$response[$info->param_data] = array(
-					'data' => $info->param_data,				
+					'data' => $info->param_data,
 				);
 			}
 		}
@@ -124,15 +124,15 @@ class modelsim extends CI_Controller {
 	public function modelCardinfo2($card_name)
 	{
 		$user_info = $this->Account_model->isLogin();
-		$response = null; 
+		$response = null;
 
-		$infos = $this->Modelsim_model->getModelCardInfo2($card_name, $user_info->id) ; 
-		$response = array() ; 
+		$infos = $this->Modelsim_model->getModelCardInfo2($card_name, $user_info->id) ;
+		$response = array() ;
 
 		foreach ($infos as $info) {
 			if (!array_key_exists($info->param_data, $response)) {
 				$response[$info->param_data] = array(
-					'data' => $info->param_data,				
+					'data' => $info->param_data,
 				);
 			}
 		}
@@ -146,8 +146,8 @@ class modelsim extends CI_Controller {
 		$this->outputJSON($response);
 	}
 
-	
-    public function modelLibrary($method, $id = 0) 
+
+    public function modelLibrary($method, $id = 0)
     {
         $user_info = $this->Account_model->isLogin();
         $response = null;
@@ -169,7 +169,7 @@ class modelsim extends CI_Controller {
 						}
 						$response[$model->model_name]['library'][] = array('id' => $model->id, 'name' => $model->name);
 					}
-			
+
 					$response_array = array();
 					foreach ($response as $item) {
 						$response_array[] = $item;
@@ -189,7 +189,7 @@ class modelsim extends CI_Controller {
 					$name = $this->input->post('name', true);
 					$modelID = $this->input->post('modelID', true);
 					$params = $this->input->post('params', true);
-			
+
 					if (!$modelID || !$name || !is_array($params)) {
 						$this->output->set_status_header('400');
 					} else {
@@ -206,9 +206,9 @@ class modelsim extends CI_Controller {
 				$data = json_decode($this->input->post('data'), true);
 				force_download($data['saveas_name'] . '.iml', json_encode($output));
 				break;
-			case "UPLOAD":			
+			case "UPLOAD":
 				$this->load->library('upload', $this->uploadConfig);
-				
+
 				if (!$this->upload->do_upload("file")) {
 					$response = array('success' => false, 'error' => $this->upload->display_errors());
 				} else {
@@ -217,7 +217,7 @@ class modelsim extends CI_Controller {
 
 					// assume correct format
 					if ($data_array) {
-						$this->Modelsim_model->newModelLibrary($user_info->id);				
+						$this->Modelsim_model->newModelLibrary($user_info->id);
 						$response = array(
 							'success' => true,
 							'data' => $this->Modelsim_model->loadModelLibrary($user_info->id, $data_array)
@@ -229,11 +229,11 @@ class modelsim extends CI_Controller {
 						);
 					}
 				}
-				
+
 				@unlink($data["full_path"]);
 				break;
-			case 'NEW':			
-				$this->Modelsim_model->newModelLibrary($user_info->id);	
+			case 'NEW':
+				$this->Modelsim_model->newModelLibrary($user_info->id);
 				$response = array('success' => true);
 				break;
 			default:
@@ -281,23 +281,23 @@ class modelsim extends CI_Controller {
 					$response = array('success' => false, 'error' => "Invalid input.");
 				} else {
 					$filename = ($modelID ? 'model' . $modelID : 'params');
-							
+
 					$params = json_decode($params);
 					$output = "";
-					
+
 					// Get database
 					$query = $this->db->get_where("model_info", array("id" => $modelID));
 					$result = $query->result();
 					$row = $result[0];
-					
+
 					$xxa = $xxb = "";
-					
+
 					if (empty($row->type_condition)) {
 						$xxb = $row->type;
 					} else {
 						$type = json_decode($row->type_condition);
 					}
-					
+
 					// Reverse loop
 					for ($i = sizeof($params)-1, $column = 0; $i >= 0; $i--, $column %= 3) {
 						$param = $params[$i];
@@ -310,20 +310,20 @@ class modelsim extends CI_Controller {
 									continue;
 								}
 							}
-							
+
 							if ($column == 0) {$output = trim($output) . "\r\n+";}
 							$output .= sprintf("%-8s = %-16s", $param->name, $param->value);
 							$column++;
 						}
 					}
-					
+
 					$xxa = $xxb;
-					
+
 					$output = ".model $xxa $xxb (\n" . trim($output) . " )";
 
 					force_download($filename . '.ipa', $output);
 					return;
-				}				
+				}
 				break;
 			case "UPLOAD":
 				if (empty($content)) $this->load->library('upload', $this->uploadConfig);
@@ -335,20 +335,20 @@ class modelsim extends CI_Controller {
 						$data = $this->upload->data();
 						$content = addslashes(file_get_contents($data["full_path"]));
 					}
-					
+
 					$params = array();
 					$errors = array();
 					if (preg_match_all ('/\.model\s*(\w*)\s*(\w*)\s*\(?([^\)]*)\)?/i', $content, $fields)) {
 						$xxa = $fields[1][0];
 						$xxb = $fields[2][0];
 						$content = $fields[3][0];
-						
+
 						// Get database
 
-						$query = $this->db->get_where("model_info", array("id" => $modelID));						
+						$query = $this->db->get_where("model_info", array("id" => $modelID));
 						$result = $query->result();
 						if (sizeof($result) > 0) {
-							$row = $result[0];	
+							$row = $result[0];
 							if (empty($row->type_condition)) {
 								$type = $row->type;
 								if (strtolower($xxb) != strtolower($type)) {
@@ -363,7 +363,7 @@ class modelsim extends CI_Controller {
 										$type_found = true;
 									}
 								}
-								
+
 								if (!$type_found) array_push($errors, "Model type mismatch!");
 							}
 						} else {
@@ -373,11 +373,11 @@ class modelsim extends CI_Controller {
 
 
 					} else {
-						array_push($errors, "Improper format!");	
+						array_push($errors, "Improper format!");
 					}
 
 					preg_match_all ('/[^=\r\n\+\s]+\s*=\s*[^\s]+/', $content, $fields);
-					
+
 					foreach ($fields[0] as $entry) {
 						$map = explode('=', $entry, 2);
 						$map[0] = strtolower(trim($map[0]));
@@ -385,7 +385,7 @@ class modelsim extends CI_Controller {
 						if (count($map) < 2 || !is_numeric($map[1])) continue;
 						$params[] = array("name" => $map[0], "value" => $map[1]);
 					}
-					
+
 
 					if (count($params) > 0) {
 						$response = array('success' => true, 'data' => $params, 'error' => $errors);
@@ -393,7 +393,7 @@ class modelsim extends CI_Controller {
 						$response = array('success' => false, 'error' => "Invalid file.");
 					}
 
-					
+
 					@unlink($data["full_path"]);
 				}
 				break;
@@ -406,7 +406,7 @@ class modelsim extends CI_Controller {
 
         $this->outputJSON($response);
 	}
-	
+
 	public function clientPlotData($method)
 	{
         $response = array('success' => false, 'error' => 'error');
@@ -431,10 +431,10 @@ class modelsim extends CI_Controller {
 						}
 					}
 					$output = trim($output);
-		
+
 					force_download($filename . ".csv", $output);
 					return;
-				}				
+				}
 				break;
 			case "UPLOAD":
 				$this->load->library('upload', $this->uploadConfig);
@@ -446,7 +446,7 @@ class modelsim extends CI_Controller {
 					$content = $this->getcsv(file_get_contents($data["full_path"]));
 					$success = count($content) > 0;
 					$result = array();
-					
+
 					if ($success) {
 						$plot = 0;
 						foreach ($content as $i => $point) {
@@ -462,13 +462,13 @@ class modelsim extends CI_Controller {
 							$result[$plot][] = array(floatval($point[0]), floatval($point[1]));
 						}
 					}
-					
+
 					if ($success) {
 						$response = array('success' => true, 'data' => array_values($result));
 					} else {
 						$response = array('success' => false, 'error' => 'Invalid format');
 					}
-			
+
 					@unlink($data["full_path"]);
 				}
 				break;
@@ -481,13 +481,14 @@ class modelsim extends CI_Controller {
 
         $this->outputJSON($response);
 	}
-	
+
 	public function modelDetails($model_id)
 	{
 		$response = null;
 		if ($this->Account_model->isLogin()) {
 				$model_info = $this->Modelsim_model->getModelInfoById($model_id);
 				$response = array(
+                    'name' => $this->Modelsim_model->getModelInfoById($model_id)->name,
 				'biases' => $this->Modelsim_model->getModelBiases($model_id),
 				'params' => $this->Modelsim_model->getModelParams($model_id),
 				'paramsTabTitle' => $this->Modelsim_model->getModelParamsTabTitle($model_id),
@@ -499,11 +500,11 @@ class modelsim extends CI_Controller {
             $this->output->set_status_header('401');
         }
         $this->outputJSON($response);
-	} 
+	}
 
-	public function modelInstanceParams($model_id) 
+	public function modelInstanceParams($model_id)
 	{
-		$response = null ; 
+		$response = null ;
 		if ($this->Account_model->isLogin()) {
 			$model_info = $this->Modelsim_model->getModelInfoById($model_id);
 			$response = array(
@@ -514,11 +515,11 @@ class modelsim extends CI_Controller {
 		}
 		$this->outputJSON($response);
 	}
-	
+
 	public function simulate()
-	{		
+	{
 		$response = null;
-		
+
 		if (!$this->Account_model->isLogin()) {
             $this->output->set_status_header('401');
         } else if (!$this->input->post()) {
@@ -527,8 +528,8 @@ class modelsim extends CI_Controller {
 			$modelID = $this->input->post('modelID', true);
 			$biases = $this->input->post('biases', true);
 			$params = $this->input->post('params', true);
-			
-			if (!$modelID || !is_array($biases) || !is_array($params) 
+
+			if (!$modelID || !is_array($biases) || !is_array($params)
 					|| !is_array($biases["variable"])) {
 				$this->output->set_status_header('400');
 			} else {
@@ -540,7 +541,7 @@ class modelsim extends CI_Controller {
 						return;
 					}
 				$vars["step"] = abs($vars["step"]);
-				
+
 				if (!isset($biases["fixed"])) {
 					$biases["fixed"] = array();
 				}
@@ -550,7 +551,7 @@ class modelsim extends CI_Controller {
 				if (!isset($params["instance"])) {
 					$params["instance"] = array();
 				}
-				
+
 				foreach (array("model", "instance") as $arr) {
 					foreach($params[$arr] as $key => $param) {
 						if (!isset($param["value"]) || trim($param["value"]) == '') {
@@ -558,7 +559,7 @@ class modelsim extends CI_Controller {
 						}
 					}
 				}
-				
+
 				//check biasing mode
 				$biasingMode = $this->input->post('biasingMode', true);
 				if($biasingMode == "General Biasing")
@@ -578,16 +579,16 @@ class modelsim extends CI_Controller {
 					$this->output->set_status_header('400');
 					return;
 				}
-				
+
 				if ($netlist != null) {
 					$response = $this->Ngspice_model->simulate($netlist);
 				}
 			}
-		}		
+		}
 
         $this->outputJSON($response);
 	}
-	
+
         public function simulationStatus()
         {
 				if (!$this->Account_model->isLogin())
@@ -615,11 +616,11 @@ class modelsim extends CI_Controller {
                 }
         }
 
-	
+
 	public function getData($token, $column_id)
 	{
 		$response = null;
-		
+
 		if (!$this->Account_model->isLogin()) {
             $this->output->set_status_header('401');
 		} else {
@@ -628,20 +629,20 @@ class modelsim extends CI_Controller {
 				$this->output->set_status_header('404');
 			}
 		}
-		
+
 		$this->outputJSON($response);
 	}
-	
+
 	private function getNetlist($modelID, $biases, $params, $benchmarkID = -1)
 	{
 		$model_info = $this->Modelsim_model->getModelInfoById($modelID);
 		if ($model_info == null) return null;
-		
+
 		if($benchmarkID != -1) {
 			$benchmark_info = $this->Modelsim_model->getBenchmarkingInfoById($benchmarkID);
 			if($benchmark_info == null) return null;
 		}
-		
+
 		$input = array();
 		$input["prefix"] = $model_info->prefix;
 		$input["suffix"] = $model_info->suffix;
@@ -651,7 +652,7 @@ class modelsim extends CI_Controller {
 			$input["mname"] = $input["type"] = $params["type"];
 		}
 		$input["iname"] = substr($model_info->name, 0, 7 - strlen($input["suffix"]));	// instance name is atmost 8 characters with prefix, eg. MXXXXXXXX
-		
+
 		if($benchmarkID == -1) {
 			$model_biases = $this->Modelsim_model->getModelBiases($modelID);
 			$model_outputs = $this->Modelsim_model->getModelOutputs($modelID);
@@ -667,12 +668,12 @@ class modelsim extends CI_Controller {
 		}
 
 		$fixed_params = $this->Modelsim_model->getModelParams($modelID, false);
-		
+
 		$outputs = ' ';
 		foreach ($model_outputs as $output) {
 			$outputs .= $this->parser->parse_string($output->variable, $input, true) . ' ';
 		}
-		
+
 		//this part is newly added, $moutputs is added to fix bugs, $moutputs stand for model output while $outputs stand for model output when benchmarkID = -1 and benchmark output when benchmarkID != -1
 		if($benchmarkID != -1){
 			$outputs1 = ' ';
@@ -681,20 +682,20 @@ class modelsim extends CI_Controller {
 			}
 			$input['moutputs'] = $outputs1;
 		}
-		
+
 		$input['outputs'] = $outputs;
 		$input['iparams'] = $params["instance"];
 		$input['mparams'] = $params["model"];
 		$input['varsources'] = $biases["variable"];
-		
+
 		foreach ($fixed_params["instance"] as $param) {
 			$input['iparams'][] = array("name" => $param->name, "value" => $param->default);
 		}
-		
+
 		foreach ($fixed_params["model"] as $param) {
 			$input['mparams'][] = array("name" => $param->name, "value" => $param->default);
 		}
-		
+
 		$input['sources'] = array();
 		foreach ($model_biases as $bias) {
 			$input['sources'][] = array("name" => $bias->name, "value" => $bias->default);
@@ -707,7 +708,7 @@ class modelsim extends CI_Controller {
 				}
 			}
 		}
-		
+
 		if($benchmarkID != -1)
 			return $this->Ngspice_model->getNetlistForModelSim($input, $benchmark_info->name);
 		else
@@ -720,17 +721,17 @@ class modelsim extends CI_Controller {
         //$this->output->set_output(json_encode($output));
        	echo json_encode($output);
     }
-			
-	private function getcsv($input, $delimiter=',', $enclosure='"', $escape=null, $eol=null) { 
-		$temp=fopen("php://memory", "rw"); 
-		fwrite($temp, $input); 
-		fseek($temp, 0); 
-		$r = array(); 
-		while (($data = fgetcsv($temp, 4096, $delimiter, $enclosure)) !== false) { 
-		$r[] = $data; 
-		} 
-		fclose($temp); 
-		return $r; 
+
+	private function getcsv($input, $delimiter=',', $enclosure='"', $escape=null, $eol=null) {
+		$temp=fopen("php://memory", "rw");
+		fwrite($temp, $input);
+		fseek($temp, 0);
+		$r = array();
+		while (($data = fgetcsv($temp, 4096, $delimiter, $enclosure)) !== false) {
+		$r[] = $data;
+		}
+		fclose($temp);
+		return $r;
 	}
 }
 

@@ -578,6 +578,45 @@ function drawComponent(event) {
                 $workspace_tmp.find("circle.term[order='2']").attr("cy", "50");
 
             }
+
+            /**
+             * This follwing code implements that when the mos is added to the workspace,
+             * add default instance value from the database, and set the attributes
+             * of these component. noted $workspace_tmp is the current
+             * component.
+             * @author Leon 2016-06-29
+             */
+            if ($workspace_tmp.attr("type").substring(1, 4) == "MOS") {
+                // Get model name
+                var modeShortName = $workspace_tmp.attr("type").substring(5);
+                // Get model type
+                var modelType = $workspace_tmp.attr("type").charAt(0) == "N" ? 1 : -1;
+                // Get default model parameters from database
+                $.ajax({
+                    url: ROOT + "/modelDetails/" + model2id[modeShortName],
+                    success: function(data) {
+                        try {
+                            var parsedData = JSON.parse(data);
+                            console.log(parsedData);
+                            // var parsedName = parsedData.name;
+                            var parsedInfo = parsedData.params.instance;
+                            var defaultInstanceParameters = "";
+                            $.each(parsedInfo, function(_, parameters) {
+                                $workspace_tmp.attr(parameters.name.toLowerCase(), parameters.default);
+                                defaultInstanceParameters += " " + parameters.name + "=" + parameters.default;
+                            });
+                            $workspace_tmp.attr("param_value", modeShortName + ".default" + defaultInstanceParameters);
+                        } catch (e) {
+                            console.log("Parse result error: " + e);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error: " + textStatus + "; " + errorThrown);
+                    },
+                    async: false
+                });
+            }
+
             // $workspace_tmp.children("text").text(parname + parnum);
             //      $("#workspace").append($workspace_tmp);
             //      if ($current.attr("id") == "gnd2" || $current.attr("id") == "dc2"
@@ -670,6 +709,49 @@ function drawComponent(event) {
         }
     });
     $("body").bind("keydown", cancel_draw_component);
+
+    // changeParam(event);
+
+    // $(".workspace_component").each(function() {
+    //     // Get mos element
+    //     if ($(this).attr("type").substring(1, 4) == "MOS") {
+    //         // Get model name
+    //         var modeShortName = $(this).attr("type").substring(5);
+    //         // Get default model parameters from database
+    //         $.ajax({
+    //             url: ROOT + "/modelInstanceParams/" + model2id[modeShortName],
+    //             type: 'GET',
+    //             success: function(data) {
+    //                 console.log(data);
+    //                 try {
+    //                     var output_result = JSON.parse(data).ins_params.instance;
+    //                     var instanceVal = "";
+    //                     instanceVal += $current.attr("type").substring(5) + "." + $("#sel option:selected").val() + " ";
+    //                     $.each(output_result, function(i, item) {
+    //                         instanceVal += item["name"] + "=" + $("#" + item["name"]).val() + " ";
+    //                         // $current.attr(""+item["name"],$("#"+item["name"]).val());
+    //                     });
+    //                     $(".param_value").each(function() {
+    //                         $current.attr($(this).attr("id"), $("#" + $(this).attr("id")).val());
+    //                         // param_value_tmp += $("#" + $(this).attr("id")).val() + " ";
+    //                     });
+    //                     // $current.attr("param_value", param_value_tmp);
+    //                     $current.attr("param_name", $("#param_name").val());
+    //                     $current.attr("param_value", instanceVal);
+    //                     console.log(instanceVal);
+    //                     $current.attr("modelcard", $("#sel option:selected").val());
+    //                     $current.find("text.id").text($("#param_name").val());
+    //                 } catch (e) {
+    //                     console.log("Parse result error: " + e);
+    //                 }
+    //             },
+    //             error: function(jqXHR, textStatus, errorThrown) {
+    //                 console.log("Error: " + textStatus + "; " + errorThrown);
+    //             },
+    //             async: false
+    //         });
+    //     }
+    // });
 }
 
 var cancel_draw_component = function(event) {
@@ -973,7 +1055,7 @@ function changeParam(event) {
     if ($current.attr("type") == "vnode" || $current.attr("type") == "gnd") {
         return;
     } else if ($current.attr("type").substring(1, 4) == "MOS") {
-        var output_result = []
+        var output_result = [];
         $.ajax({
             url: ROOT + "/modelInstanceParams/" + model2id[$current.attr("type").substring(5)],
             type: 'GET',
@@ -981,11 +1063,11 @@ function changeParam(event) {
                 try {
                     result = JSON.parse(result);
                 } catch (err) {
-                    alert(k);
+                    // alert(err);
                 }
 
                 output_result = result.ins_params.instance;
-                var tmp_dialog = "<div class='model-library' title='" + $current.attr("type").substring(5) + "' id='param_dialog' style='display:none;'>" + "<select id='sel' style='width:85%; margin-bottom:10px;'><option value='' disabled selected>Default</option>";
+                var tmp_dialog = "<div class='model-library' title='" + $current.attr("type").substring(5) + "' id='param_dialog' style='display:none;'>" + "<select id='sel' style='width:85%; margin-bottom:10px;'><option value='default' selected>Default</option>";
                 $("#userlib").find(".model-page-direct").each(function() {
                     if ($(this).text() == $current.attr("type").substring(5)) {
                         $(this).next().find("font").each(function() {
@@ -1013,10 +1095,12 @@ function changeParam(event) {
                                         }
                                         // Actually the distinguish between 1 and 0 are redundant, just convenient for debugging.
                                     } catch (err) {}
+
                                 },
                                 error: function(jqXHR, textStatus, errorThrown) {
                                     console.log("Error: " + textStatus + "; " + errorThrown);
                                 },
+
                                 async: false
                             });
 
@@ -1067,21 +1151,12 @@ function changeParam(event) {
                                     // $current.attr("param_value", param_value_tmp);
                                     $current.attr("param_name", $("#param_name").val());
                                     $current.attr("param_value", instanceVal);
+                                    console.log(instanceVal);
                                     $current.attr("modelcard", $("#sel option:selected").val());
                                     $current.find("text.id").text($("#param_name").val());
-                                    $(this).dialog("close");
-                                    $(this).remove();
-                                } else {
-                                    // alert("No model chosen, please calcel and use other model.");
-                                    /**
-                                     * Add default option, if click ok, just close the pop up window.
-                                     * If we need to add some default parameters, we need to
-                                     * change value in this else closure
-                                     * @author Leon
-                                     */
-                                    $(this).dialog("close");
-                                    $(this).remove();
                                 }
+                                $(this).dialog("close");
+                                $(this).remove();
                             },
                             "Cancel": function() {
                                 $(this).dialog("close");
@@ -1115,6 +1190,7 @@ function changeParam(event) {
             },
             async: false
         });
+
     } else {
         if ($current.attr("type") == "dcv" || $current.attr("type") == "dcc") {
             var tmp_dialog = "<div id='param_dialog' style='display:none;' type='DC'>" + "<label><span>Name</span><input id='param_name' maxlength='8'/></label>" + "<label><span>Value</span><input id='param_value' class='param_value' /></label></div>";
@@ -3048,7 +3124,57 @@ function get_netlist(event) {
 
             // console.log(typeof(result.modelcard));
 
+            /**
+             * Loop the workspace component and find the mos element, add default
+             * value for each elements that workspce contains
+             * @author Leon 2016-06-28
+             */
+            $(".workspace_component").each(function() {
+                // Get mos element
+                if ($(this).attr("type").substring(1, 4) == "MOS") {
+                    // Get model name
+                    var modeShortName = $(this).attr("type").substring(5);
+                    // Get model type
+                    var modelType = $(this).attr("type").charAt(0) == "N" ? 1 : -1;
+                    // Get default model parameters from database
+                    $.ajax({
+                        url: ROOT + "/modelDetails/" + model2id[modeShortName],
+                        success: function(data) {
+                            try {
+                                var parsedData = JSON.parse(data);
+                                var parsedName = parsedData.name;
+                                var parsedInfo = parsedData.params.model;
+                                // Default model value
+                                modeldef += ".MODEL " + modeShortName + ".default " + parsedName + " ";
+                                $.each(parsedInfo, function(_, parameters) {
+                                    if (parameters.name.toLowerCase() != "type") {
+                                        modeldef += parameters.name.toLowerCase() + "=" + parameters.default + " ";
+                                    } else {
+                                        modeldef += parameters.name.toLowerCase() + "=" + modelType + " ";
+                                    }
+                                });
+                                // console.log(r);
+                                modeldef += "\n"
+                                // console.log(modeldef);
+                            } catch (e) {
+                                console.log("Parse result error: " + e);
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error: " + textStatus + "; " + errorThrown);
+                        },
+                        async: false
+                    });
+                    // 1. get model from database
+                    // 2. get model name
+                    // 3. get model parameters
+                }
+
+            });
+
             modeldef += "" + result.modelcard;
+            // console.log(modeldef);
+
 
             fnetlist += "\n\n" + modeldef;
         },
