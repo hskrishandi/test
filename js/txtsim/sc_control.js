@@ -605,7 +605,7 @@ function drawComponent(event) {
                                 $workspace_tmp.attr(parameters.name.toLowerCase(), parameters.default);
                                 defaultInstanceParameters += " " + parameters.name + "=" + parameters.default;
                             });
-                            $workspace_tmp.attr("param_value", modeShortName + ".default" + defaultInstanceParameters);
+                            $workspace_tmp.attr("param_value", modeShortName + "." + (modelType == 1 ? "n" : "p" ) + "default" + defaultInstanceParameters);
                         } catch (e) {
                             console.log("Parse result error: " + e);
                         }
@@ -3145,7 +3145,7 @@ function get_netlist(event) {
                                 var parsedName = parsedData.name;
                                 var parsedInfo = parsedData.params.model;
                                 // Default model value
-                                modeldef += ".MODEL " + modeShortName + ".default " + parsedName + " ";
+                                modeldef += ".MODEL " + modeShortName + "." + (modelType == 1 ? "n" : "p" ) + "default " + parsedName + " ";
                                 $.each(parsedInfo, function(_, parameters) {
                                     if (parameters.name.toLowerCase() != "type") {
                                         modeldef += parameters.name.toLowerCase() + "=" + parameters.default + " ";
