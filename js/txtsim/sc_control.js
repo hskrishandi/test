@@ -3147,6 +3147,10 @@ function get_netlist(event) {
                                 try {
                                     var parsedData = JSON.parse(data);
                                     var parsedName = parsedData.type;
+                                    // Solve the bsim3 & bsim4 problem
+                                    if (parsedName == "nmos" && modelType == -1) {
+                                        parsedName = "pmos";
+                                    }
                                     var parsedInfo = parsedData.params.model;
                                     // Default model value
                                     modeldef += ".MODEL " + modelShortName + "." + (modelType == 1 ? "n" : "p") + "default " + parsedName + " ";
