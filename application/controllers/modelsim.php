@@ -489,6 +489,7 @@ class modelsim extends CI_Controller {
 				$model_info = $this->Modelsim_model->getModelInfoById($model_id);
 				$response = array(
                     'name' => $this->Modelsim_model->getModelInfoById($model_id)->name,
+                    'type' => $this->Modelsim_model->getModelInfoById($model_id)->type,
 				'biases' => $this->Modelsim_model->getModelBiases($model_id),
 				'params' => $this->Modelsim_model->getModelParams($model_id),
 				'paramsTabTitle' => $this->Modelsim_model->getModelParamsTabTitle($model_id),

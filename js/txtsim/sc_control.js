@@ -3146,7 +3146,7 @@ function get_netlist(event) {
                             success: function(data) {
                                 try {
                                     var parsedData = JSON.parse(data);
-                                    var parsedName = parsedData.name;
+                                    var parsedName = parsedData.type;
                                     var parsedInfo = parsedData.params.model;
                                     // Default model value
                                     modeldef += ".MODEL " + modelShortName + "." + (modelType == 1 ? "n" : "p") + "default " + parsedName + " ";
