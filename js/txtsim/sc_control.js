@@ -588,12 +588,12 @@ function drawComponent(event) {
              */
             if ($workspace_tmp.attr("type").substring(1, 4) == "MOS") {
                 // Get model name
-                var modeShortName = $workspace_tmp.attr("type").substring(5);
+                var modelShortName = $workspace_tmp.attr("type").substring(5);
                 // Get model type
                 var modelType = $workspace_tmp.attr("type").charAt(0) == "N" ? 1 : -1;
                 // Get default model parameters from database
                 $.ajax({
-                    url: ROOT + "/modelDetails/" + model2id[modeShortName],
+                    url: ROOT + "/modelDetails/" + model2id[modelShortName],
                     success: function(data) {
                         try {
                             var parsedData = JSON.parse(data);
@@ -605,7 +605,7 @@ function drawComponent(event) {
                                 $workspace_tmp.attr(parameters.name.toLowerCase(), parameters.default);
                                 defaultInstanceParameters += " " + parameters.name + "=" + parameters.default;
                             });
-                            $workspace_tmp.attr("param_value", modeShortName + "." + (modelType == 1 ? "n" : "p" ) + "default" + defaultInstanceParameters);
+                            $workspace_tmp.attr("param_value", modelShortName + "." + (modelType == 1 ? "n" : "p") + "default" + defaultInstanceParameters);
                         } catch (e) {
                             console.log("Parse result error: " + e);
                         }
@@ -716,10 +716,10 @@ function drawComponent(event) {
     //     // Get mos element
     //     if ($(this).attr("type").substring(1, 4) == "MOS") {
     //         // Get model name
-    //         var modeShortName = $(this).attr("type").substring(5);
+    //         var modelShortName = $(this).attr("type").substring(5);
     //         // Get default model parameters from database
     //         $.ajax({
-    //             url: ROOT + "/modelInstanceParams/" + model2id[modeShortName],
+    //             url: ROOT + "/modelInstanceParams/" + model2id[modelShortName],
     //             type: 'GET',
     //             success: function(data) {
     //                 console.log(data);
@@ -3129,42 +3129,47 @@ function get_netlist(event) {
              * value for each elements that workspce contains
              * @author Leon 2016-06-28
              */
+            var modelArray = [];
             $(".workspace_component").each(function() {
                 // Get mos element
                 if ($(this).attr("type").substring(1, 4) == "MOS") {
                     // Get model name
-                    var modeShortName = $(this).attr("type").substring(5);
+                    var modelShortName = $(this).attr("type").substring(5);
                     // Get model type
                     var modelType = $(this).attr("type").charAt(0) == "N" ? 1 : -1;
-                    // Get default model parameters from database
-                    $.ajax({
-                        url: ROOT + "/modelDetails/" + model2id[modeShortName],
-                        success: function(data) {
-                            try {
-                                var parsedData = JSON.parse(data);
-                                var parsedName = parsedData.name;
-                                var parsedInfo = parsedData.params.model;
-                                // Default model value
-                                modeldef += ".MODEL " + modeShortName + "." + (modelType == 1 ? "n" : "p" ) + "default " + parsedName + " ";
-                                $.each(parsedInfo, function(_, parameters) {
-                                    if (parameters.name.toLowerCase() != "type") {
-                                        modeldef += parameters.name.toLowerCase() + "=" + parameters.default + " ";
-                                    } else {
-                                        modeldef += parameters.name.toLowerCase() + "=" + modelType + " ";
-                                    }
-                                });
-                                // console.log(r);
-                                modeldef += "\n"
-                                // console.log(modeldef);
-                            } catch (e) {
-                                console.log("Parse result error: " + e);
-                            }
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            console.log("Error: " + textStatus + "; " + errorThrown);
-                        },
-                        async: false
-                    });
+                    // Check whether it contains the same default model
+                    if ($.inArray(modelShortName+modelType, modelArray) == -1) {
+                        modelArray.push(modelShortName+modelType);
+                        // Get default model parameters from database
+                        $.ajax({
+                            url: ROOT + "/modelDetails/" + model2id[modelShortName],
+                            success: function(data) {
+                                try {
+                                    var parsedData = JSON.parse(data);
+                                    var parsedName = parsedData.name;
+                                    var parsedInfo = parsedData.params.model;
+                                    // Default model value
+                                    modeldef += ".MODEL " + modelShortName + "." + (modelType == 1 ? "n" : "p") + "default " + parsedName + " ";
+                                    $.each(parsedInfo, function(_, parameters) {
+                                        if (parameters.name.toLowerCase() != "type") {
+                                            modeldef += parameters.name.toLowerCase() + "=" + parameters.default+" ";
+                                        } else {
+                                            modeldef += parameters.name.toLowerCase() + "=" + modelType + " ";
+                                        }
+                                    });
+                                    // console.log(r);
+                                    modeldef += "\n"
+                                        // console.log(modeldef);
+                                } catch (e) {
+                                    console.log("Parse result error: " + e);
+                                }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("Error: " + textStatus + "; " + errorThrown);
+                            },
+                            async: false
+                        });
+                    }
                     // 1. get model from database
                     // 2. get model name
                     // 3. get model parameters
