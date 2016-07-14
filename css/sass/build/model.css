@@ -1,0 +1,196 @@
+.content {
+    width: 100%;
+    overflow: hidden;
+    margin-left: 0%;
+    margin-right: 0%;
+    margin-top: 0px;
+    background-color: rgb(51, 53, 53);
+}
+
+.side-menu {
+    width: 10%;
+    color: white;
+    float: left;
+}
+
+.side-menu h4 {
+    margin-left: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    height: 30px;
+    line-height: 1.5em;
+    border-right: 1px solid gray;
+}
+
+.side-menu .library-title {
+    background-color: rgb(31, 31, 32);
+}
+
+.side-menu .library-title button {
+    float: right;
+    background-color: rgb(31, 31, 32);
+}
+
+.side-menu ul {
+    list-style-type: none;
+    padding-left: 15px;
+}
+
+.side-menu li {
+    padding-left: 15px;
+}
+
+.side-menu li:not(:last-child) {
+    border-bottom: 1px solid gray;
+}
+
+.main-content {
+    float: right;
+    width: 90%;
+}
+
+.main-content .top-menu {
+    background-color: rgb(51, 53, 53);
+    margin: 0;
+    padding-left: 15px;
+    color: white;
+    height: 40px;
+    line-height: 2em;
+    font-size: 18px;
+    width: 70%;
+    float: left;
+    border-right: 1px solid gray;
+}
+
+.main-content .discription-comment {
+    width: 30%;
+    float: right;
+    text-align: center;
+    color: rgb(101, 95, 85);
+    line-height: 2em;
+    font-size: 18px;
+}
+
+.modelBoxContainer {
+    float: left;
+    clear: none;
+    height: auto;
+    width: 200px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 40px;
+}
+
+.modelBoxes {
+    height: auto;
+    width: 100%;
+    margin: 0px auto;
+    background-color: white;
+}
+
+.modelImage {
+    width: 100%;
+    height: 100px;
+}
+
+.modelImage img {
+    width: 100%;
+    max-height: 100%;
+    padding: 10px;
+}
+
+.modelInfo {
+    float: none;
+    width: 100%;
+    height: 100px;
+    text-align: left;
+    clear: none;
+    color: rgb(31, 31, 31);
+    font-size: 0.7em;
+    line-height: 1.6em;
+    background-color: #DCDCDC;
+    margin-bottom: 0 !important;
+    padding: 20px;
+    margin-top: 10px;
+    word-break: normal;
+    overflow: hidden;
+}
+
+.modelGreyBox {
+    float: none;
+    height: 25px;
+    margin-left: auto;
+    clear: none;
+    width: 100%;
+    background-color: rgb(52, 53, 52);
+    margin-right: auto;
+}
+
+.MessageIcon {
+    float: left;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin-left: 4.5%;
+    margin-top: 6px;
+    clear: none;
+    color: rgb(0, 0, 0);
+}
+
+.MessageNumber {
+    float: left;
+    font-size: 1em;
+    width: 19.516034%;
+    height: auto;
+    text-align: left;
+    line-height: 1em;
+    margin-left: 2.99036%;
+    margin-top: 6px;
+    clear: none;
+    min-height: 19px;
+    color: rgb(230, 230, 230);
+}
+
+.modelRatingStars {
+    float: right;
+    width: 42%;
+    clear: none;
+    margin-right: 1.5%;
+}
+
+.ratingStar {
+    float: right;
+    width: 0.7em;
+    max-width: 100%;
+    height: auto;
+    clear: none;
+    color: rgb(0, 0, 0);
+    margin-top: 7px;
+    margin-right: 1%;
+}
+
+.ratingLightStar {
+    color: rgb(255, 255, 0);
+}
+
+.ratingDimStar {
+    color: rgb(0, 0, 0);
+}
+
+.MLitemBox {
+    height: auto;
+    padding: 40px 20px 20px 20px;
+    clear: both;
+    display: block;
+    width: 100%;
+    background-color: rgb(76, 76, 74);
+    overflow: hidden;
+}
+
+
+}
+
+}
+
+}

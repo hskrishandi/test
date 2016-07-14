@@ -24,7 +24,7 @@ class model extends CI_Controller
      */
     public function getModel()
     {
-        $result = $this->ModelService->getById(1);
+        $result = $this->ModelService->getById();
         echo json_encode($result);
     }
 }

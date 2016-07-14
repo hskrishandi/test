@@ -32,7 +32,7 @@ class ModelService extends BaseService
         $models = $this->ModelRepository->getById($id);
         // Append image url to the models
         foreach ($models as $key => $model) {
-            $model->imageUrl =  resource_url('img', 'simulation/') . $model->name . '.png';
+            $model->imageUrl =  resource_url('img', 'simulation/') . '/' . $model->name . '.png';
         }
         return $models;
     }
