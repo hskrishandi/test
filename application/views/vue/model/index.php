@@ -18,17 +18,27 @@
     <?php startblock('content'); ?>
     <div id="app">
         <div class="side-menu">
-            <h4>{{ sideMenu.title }}</h4>
-            <h4 class="library-title">{{ library.default.title }}  <button></button></h4>
+            <h4 class="top-title">
+                {{ sideMenu.title }}
+                <button class="top-button"><img src="<?php echo resource_url('img', 'modelpage_icon/Asset 2.png'); ?>" /></button>
+            </h4>
+            <h4 class="library-title">
+                {{ library.default.title }}
+                <button><img src="<?php echo resource_url('img', 'modelpage_icon/Asset 1.png'); ?>" /></button>
+            </h4>
             <ul>
                 <li v-for="m in model">{{ m.short_name }}</li>
             </ul>
-            <h4 class="library-title">{{ library.user.title }}  <button></button></h4>
-            <ul>
-                <li>eDouG</li>
-                <li>SNCNFET</li>
-                <li>e-HEMT</li>
-                <li>eNaW</li>
+            <h4 class="library-title">
+                {{ library.user.title }}
+                <button><img src="<?php echo resource_url('img', 'modelpage_icon/Asset 3.png'); ?>" /></button>
+                <button><img src="<?php echo resource_url('img', 'modelpage_icon/Asset 4.png'); ?>" /></button>
+            </h4>
+            <ul class="mylibrary-item">
+                <li><button><img src="<?php echo resource_url('img', 'modelpage_icon/Asset 5.png'); ?>" /></button>  eDouG</li>
+                <li><button><img src="<?php echo resource_url('img', 'modelpage_icon/Asset 5.png'); ?>" /></button>  SNCNFET</li>
+                <li><button><img src="<?php echo resource_url('img', 'modelpage_icon/Asset 5.png'); ?>" /></button>  e-HEMT</li>
+                <li><button><img src="<?php echo resource_url('img', 'modelpage_icon/Asset 5.png'); ?>" /></button>  eNaW</li>
             </ul>
         </div>
         <div class="main-content">
@@ -41,13 +51,11 @@
                       <div class="modelImage">
                           <img :src="m.imageUrl" />
                       </div>
-                      <p class="modelInfo">
-                              {{{ m.icon_name }}}
-                              <br>
-                              {{ m.desc_name }}
-                              <br>
-                              by {{ m.organization }}
-                     </p>
+                      <div class="modelInfo">
+                              <div>{{{ m.icon_name }}}</div>
+                              <div>{{ m.desc_name }}</div>
+                              <div>by {{ m.organization }}</div>
+                     </div>
                      <div class="clearFloat"></div>
                      <div class="clearfix modelGreyBox">
                          <img src="<?php echo resource_url('img', 'home/messageIcon.svg'); ?>" class="MessageIcon" />
