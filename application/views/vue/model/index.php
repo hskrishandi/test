@@ -59,6 +59,7 @@
                      <div class="clearfix modelGreyBox">
                          <img src="<?php echo resource_url('img', 'home/messageIcon.svg'); ?>" class="MessageIcon" />
                          <font class="MessageNumber">
+                             {{ m.commentCount }}
                          </font>
                          <div class="modelRatingStars">
                              <img src="<?php echo resource_url('img', 'home/greyStar.svg'); ?>" class="ratingStar ratingDimStar" v-for="i in 5-Math.round(m.rate)"/>
