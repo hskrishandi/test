@@ -11,7 +11,7 @@
 
     <?php startblock('script'); ?>
         <?php echo get_extended_block(); ?>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"  type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'vue/lib/vue.min.js'); ?>"  type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo resource_url('js', 'vue/model/app.js'); ?>" type="text/javascript" charset="utf-8"></script>
     <?php endblock(); ?>
 
