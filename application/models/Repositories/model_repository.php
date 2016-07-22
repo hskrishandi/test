@@ -4,12 +4,12 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-require 'BaseRepository.php';
+require 'base_repository.php';
 
 /**
  * API Model Model.
  */
-class ModelRepository extends BaseRepository
+class Model_repository extends Base_repository
 {
     /**
      * Get model from database. Return single model if $id not null,

@@ -4,18 +4,17 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-interface RepositoryInterface {
+interface ServiceInterface {
     public function getById($id);
 }
 
 /**
- * Base Repository
+ * Base Service
  */
-abstract class BaseRepository extends CI_Model implements RepositoryInterface
+abstract class Base_service extends CI_Model implements ServiceInterface
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->database();
     }
 }
