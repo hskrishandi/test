@@ -35,7 +35,6 @@
             <div class="top-menu">Select model for viewing in the below panel</div>
             <div class="discription-comment">Description and Comments</div>
             <div class="clearfix MLitemBox">
-            <?php for ($i = 0; $i < 1; ++$i) : ?>
               <div class="clearfix modelBoxContainer" v-for="m in model">
                   <div class="modelBoxes">
                       <div class="modelImage">
@@ -60,7 +59,6 @@
                     </div>
                  </div>
             </div>
-            <?php endfor; ?>
           </div>
         </div>
     </div>

@@ -20,6 +20,9 @@ $(function() {
         },
         ready: function () {
             fetchData(this);
+        },
+        method: {
+            
         }
     });
 

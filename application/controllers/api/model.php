@@ -27,4 +27,16 @@ class model extends CI_Controller
         $result = $this->ModelService->getById();
         echo json_encode($result);
     }
+
+    /**
+     * Get user library
+     *
+     * @return $value
+     *
+     * @author Leon
+     */
+    public function getUserModel()
+    {
+
+    }
 }

@@ -23,12 +23,27 @@ class ModelRepository extends BaseRepository
      */
     public function getById($id)
     {
-        if ($id === null) {
-            $this->db->from('model_info')->order_by('id asc');
-        } else {
-            $this->db->from('model_info')->where('id', $id);
-        }
-
-        return $this->db->get()->result();
+        return $this->db->query("
+            SELECT
+                model.*,
+                IFNULL(post.commentCount, 0) as commentCount,
+                IFNULL(rating.score, 0) as rate
+            FROM
+                model_info AS model
+                    LEFT JOIN
+                (SELECT
+                    postid, COUNT(DISTINCT commentid) AS commentCount
+                FROM
+                    post_comments
+                GROUP BY postid) AS post ON post.postid = model.post_id
+                    LEFT JOIN
+                (SELECT
+                    model_id, AVG(rate) AS score
+                FROM
+                    starrating
+                GROUP BY model_id) AS rating ON rating.model_id = model.name
+        " . ( $id === null ? "" : "WHERE model.id = $id" ) . "
+            ORDER BY model.id
+        ")->result();
     }
 }
