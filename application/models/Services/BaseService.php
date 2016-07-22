@@ -11,7 +11,7 @@ interface ServiceInterface {
 /**
  * Base Service
  */
-abstract class BaseService extends CI_Controller implements ServiceInterface
+abstract class BaseService extends CI_Model implements ServiceInterface
 {
     public function __construct()
     {
