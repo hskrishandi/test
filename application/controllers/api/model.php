@@ -12,7 +12,7 @@ class model extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Services/ModelService');
+        $this->load->model('Services/Model_service');
     }
 
     /**
@@ -24,7 +24,7 @@ class model extends CI_Controller
      */
     public function getModel()
     {
-        $result = $this->ModelService->getById();
+        $result = $this->Model_service->getById();
         echo json_encode($result);
     }
 
