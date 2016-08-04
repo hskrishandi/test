@@ -42,7 +42,7 @@ class Model_repository extends Base_repository
                 FROM
                     starrating
                 GROUP BY model_id) AS rating ON rating.model_id = model.name
-        ".($id === null ? "" : "WHERE model.id = $id")."
+        " . ($id === null ? "" : "WHERE model.id = $id") . "
             ORDER BY model.id
         ")->result();
     }

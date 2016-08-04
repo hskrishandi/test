@@ -80,13 +80,13 @@ class Model_service extends Base_service
     public function getParametersById($id)
     {
         $parameters = $this->Model_repository->getParametersById($id);
-        $result = [];
+        $result = array();
         if (count($parameters) > 0) {
-            $resultTmp = [];
-            $parameterArrayTmp = [];
+            $resultTmp = array();
+            $parameterArrayTmp = array();
             foreach ($parameters as $parameter) {
                 if (!array_key_exists($parameter->title, $resultTmp)) {
-                    $parameterArrayTmp = [];
+                    $parameterArrayTmp = array();
                 }
                 array_push($parameterArrayTmp, ['name' => $parameter->name, 'description' => $parameter->description, 'unit' => $parameter->unit, 'default' => $parameter->default]);
                 $resultTmp[$parameter->title] = $parameterArrayTmp;
@@ -151,13 +151,13 @@ class Model_service extends Base_service
     public function getUserLibraryByUserId($id)
     {
         $models = $this->Model_repository->getUserLibraryByUserId($id);
-        $result = [];
+        $result = array();
         if (count($models) > 0) {
-            $resultTmp = [];
-            $modelArrayTmp = [];
+            $resultTmp = array();
+            $modelArrayTmp = array();
             foreach ($models as $model) {
                 if (!array_key_exists($model->model_name, $resultTmp)) {
-                    $modelArrayTmp = [];
+                    $modelArrayTmp = array();
                 }
                 array_push($modelArrayTmp, ['nickName' => $model->nick_name, 'data' => $model->data]);
                 $resultTmp[$model->model_name] = $modelArrayTmp;
