@@ -30,10 +30,145 @@ class Model_service extends Base_service
     public function getById($id = null)
     {
         $models = $this->Model_repository->getById($id);
+        $result = null;
         // Append image url to the models
         foreach ($models as $key => $model) {
-            $model->imageUrl =  resource_url('img', 'simulation/') . '/' . $model->name . '.png';
+            $model->imageUrl = resource_url('img', 'simulation/').'/'.$model->name.'.png';
         }
-        return $models;
+        if (count($models) == 1) {
+            $result = $models[0];
+        } elseif (count($models) > 1) {
+            $result = $models;
+        } else {
+            $result = null;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get all models with image url.
+     *
+     * @return all models
+     *
+     * @author Leon
+     */
+    public function getAll()
+    {
+        return $this->getById();
+    }
+
+    /**
+     * Get model parameters by id, do some loop to reconstruct data,
+     * to make it easier use for front-end.
+     *
+     * @param  $id
+     *
+     * @return After reconstruction, the data structure will look like:
+     ** [{
+     **     "title": $title,
+     **     "parameters": [{
+     **         "name": $name,
+     **         "description": $description,
+     **         "unit": $unit,
+     **         "default": $default
+     **     }]
+     ** }]
+     *
+     * @author Leon
+     */
+    public function getParametersById($id)
+    {
+        $parameters = $this->Model_repository->getParametersById($id);
+        $result = [];
+        if (count($parameters) > 0) {
+            $resultTmp = [];
+            $parameterArrayTmp = [];
+            foreach ($parameters as $parameter) {
+                if (!array_key_exists($parameter->title, $resultTmp)) {
+                    $parameterArrayTmp = [];
+                }
+                array_push($parameterArrayTmp, ['name' => $parameter->name, 'description' => $parameter->description, 'unit' => $parameter->unit, 'default' => $parameter->default]);
+                $resultTmp[$parameter->title] = $parameterArrayTmp;
+            }
+            foreach ($resultTmp as $key => $value) {
+                array_push($result, ['title' => $key, 'parameters' => $value]);
+            }
+        } else {
+            $result = null;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get model bias.
+     *
+     * @param  $id
+     *
+     * @return model bias
+     *
+     * @author Leon
+     */
+    public function getBiasById($id)
+    {
+        $result = $this->Model_repository->getBiasById($id);
+        return count($result) > 0 ? $result : null;
+    }
+
+    /**
+     * Get model output.
+     *
+     * @param  $id
+     *
+     * @return model output
+     *
+     * @author Leon
+     */
+    public function getOutputById($id)
+    {
+        $result = $this->Model_repository->getOutputById($id);
+        return count($result) > 0 ? $result : null;
+    }
+
+    /**
+     * Get user library by user id.
+     *
+     * @param  $id
+     *
+     * @return user library
+     *
+     * @author Leon
+     *
+     ** [{
+     **     "modelName": $modelName,
+     **     "userParameter": [{
+     **         "nick_name": $nickName,
+     **         "data": $data,
+     **     }]
+     ** }]
+     */
+    public function getUserLibraryByUserId($id)
+    {
+        $models = $this->Model_repository->getUserLibraryByUserId($id);
+        $result = [];
+        if (count($models) > 0) {
+            $resultTmp = [];
+            $modelArrayTmp = [];
+            foreach ($models as $model) {
+                if (!array_key_exists($model->model_name, $resultTmp)) {
+                    $modelArrayTmp = [];
+                }
+                array_push($modelArrayTmp, ['nickName' => $model->nick_name, 'data' => $model->data]);
+                $resultTmp[$model->model_name] = $modelArrayTmp;
+            }
+            foreach ($resultTmp as $key => $value) {
+                array_push($result, ['modelName' => $key, 'userParameter' => $value]);
+            }
+        } else {
+            $result = null;
+        }
+
+        return $result;
     }
 }
