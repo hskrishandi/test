@@ -88,11 +88,11 @@ class Model_service extends Base_service
                 if (!array_key_exists($parameter->title, $resultTmp)) {
                     $parameterArrayTmp = array();
                 }
-                array_push($parameterArrayTmp, ['name' => $parameter->name, 'description' => $parameter->description, 'unit' => $parameter->unit, 'default' => $parameter->default]);
+                array_push($parameterArrayTmp, array('name' => $parameter->name, 'description' => $parameter->description, 'unit' => $parameter->unit, 'default' => $parameter->default));
                 $resultTmp[$parameter->title] = $parameterArrayTmp;
             }
             foreach ($resultTmp as $key => $value) {
-                array_push($result, ['title' => $key, 'parameters' => $value]);
+                array_push($result, array('title' => $key, 'parameters' => $value));
             }
         } else {
             $result = null;
@@ -159,11 +159,11 @@ class Model_service extends Base_service
                 if (!array_key_exists($model->model_name, $resultTmp)) {
                     $modelArrayTmp = array();
                 }
-                array_push($modelArrayTmp, ['nickName' => $model->nick_name, 'data' => $model->data]);
+                array_push($modelArrayTmp, array('nickName' => $model->nick_name, 'data' => $model->data));
                 $resultTmp[$model->model_name] = $modelArrayTmp;
             }
             foreach ($resultTmp as $key => $value) {
-                array_push($result, ['modelName' => $key, 'userParameter' => $value]);
+                array_push($result, array('modelName' => $key, 'userParameter' => $value));
             }
         } else {
             $result = null;
