@@ -514,7 +514,7 @@ var temp_store_for_user_data;
 						type: self.currentType()
 					},
 					biasingMode: "Benchmarking",
-					benchmarkingId: self.benchmarking()[self.selected`Benchmarking`Tab()].benchmarkingID
+					benchmarkingId: self.benchmarking()[self.selectedBenchmarkingTab()].benchmarkingID
 				});
 		};
 
