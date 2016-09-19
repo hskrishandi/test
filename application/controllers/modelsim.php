@@ -622,14 +622,14 @@ class modelsim extends CI_Controller {
 	{
 		$response = null;
 
-		if (!$this->Account_model->isLogin()) {
-            $this->output->set_status_header('401');
-		} else {
+		// if (!$this->Account_model->isLogin()) {
+        //     $this->output->set_status_header('401');
+		// } else {
 			$response = $this->Ngspice_model->getData($token, $column_id);
 			if (empty($response)) {
 				$this->output->set_status_header('404');
 			}
-		}
+		// }
 
 		$this->outputJSON($response);
 	}
