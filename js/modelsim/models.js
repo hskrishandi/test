@@ -697,7 +697,7 @@ var temp_store_for_user_data;
 			self.isLoading(true);
 
 			// Notes: All the ajax must be synchronized, including every parts like 'checkSimulationStatus' and its containing ajax part.
-
+            console.log(data);
 			$.ajax({
 				url: ROOT + "/simulate",
 				type: 'POST',

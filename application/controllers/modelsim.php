@@ -521,11 +521,11 @@ class modelsim extends CI_Controller {
 	{
 		$response = null;
 
-		if (!$this->Account_model->isLogin()) {
-            $this->output->set_status_header('401');
-        } else if (!$this->input->post()) {
-			$this->output->set_status_header('405');
-		} else {
+		// if (!$this->Account_model->isLogin()) {
+        //     $this->output->set_status_header('401');
+        // } else if (!$this->input->post()) {
+		// 	$this->output->set_status_header('405');
+		// } else {
 			$modelID = $this->input->post('modelID', true);
 			$biases = $this->input->post('biases', true);
 			$params = $this->input->post('params', true);
@@ -585,7 +585,7 @@ class modelsim extends CI_Controller {
 					$response = $this->Ngspice_model->simulate($netlist);
 				}
 			}
-		}
+		// }
 
         $this->outputJSON($response);
 	}
