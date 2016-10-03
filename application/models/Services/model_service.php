@@ -88,7 +88,7 @@ class Model_service extends Base_service
                 if (!array_key_exists($parameter->title, $resultTmp)) {
                     $parameterArrayTmp = array();
                 }
-                array_push($parameterArrayTmp, array('name' => $parameter->name, 'description' => $parameter->description, 'unit' => $parameter->unit, 'default' => $parameter->default));
+                array_push($parameterArrayTmp, array('name' => $parameter->name, 'description' => $parameter->description, 'unit' => $parameter->unit, 'value' => $parameter->default));
                 $resultTmp[$parameter->title] = $parameterArrayTmp;
             }
             foreach ($resultTmp as $key => $value) {
