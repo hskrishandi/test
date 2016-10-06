@@ -592,9 +592,10 @@ class modelsim extends CI_Controller {
 
         public function simulationStatus()
         {
-				if (!$this->Account_model->isLogin())
-                        $this->output->set_status_header('401');
-                else if (!$this->input->post())
+				// if (!$this->Account_model->isLogin())
+                //         $this->output->set_status_header('401');
+                // else
+                if (!$this->input->post())
                         $this->output->set_status_header('405');
                 else
                 {
