@@ -4,12 +4,10 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-require 'base_service.php';
-
 /**
- * API Model Service.
+ * Model Service.
  */
-class Model_service extends Base_service
+class Model_service extends CI_Model
 {
     public function __construct()
     {
@@ -113,6 +111,7 @@ class Model_service extends Base_service
     public function getBiasById($id)
     {
         $result = $this->Model_repository->getBiasById($id);
+
         return count($result) > 0 ? $result : null;
     }
 
@@ -128,6 +127,7 @@ class Model_service extends Base_service
     public function getOutputById($id)
     {
         $result = $this->Model_repository->getOutputById($id);
+
         return count($result) > 0 ? $result : null;
     }
 
@@ -167,6 +167,35 @@ class Model_service extends Base_service
             }
         } else {
             $result = null;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get random models.
+     *
+     * @param  $count
+     *
+     * @return models
+     *
+     * @author Leon
+     */
+    public function getRandomModels($count)
+    {
+        $result = [];
+        $models = $this->getAll();
+        $randomKey = [];
+        if ($count == 1) {
+            array_push($randomKey, array_rand($models, $count));
+        } elseif ($count > 1) {
+            if ($count > count($models)) {
+                $count = count($models);
+            }
+            $randomKey = array_rand($models, $count);
+        }
+        foreach ($randomKey as $value) {
+            array_push($result, $models[$value]);
         }
 
         return $result;

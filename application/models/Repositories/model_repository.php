@@ -4,13 +4,17 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-require 'base_repository.php';
-
 /**
- * API Model Model.
+ * Model Repositories.
  */
-class Model_repository extends Base_repository
+class Model_repository extends CI_Model
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
+    }
+
     /**
      * Get model from database. Return single model if $id not null,
      * if $id is null.
@@ -23,7 +27,7 @@ class Model_repository extends Base_repository
      */
     public function getById($id)
     {
-        return $this->db->query("
+        return $this->db->query('
             SELECT
                 model.*,
                 IFNULL(post.commentCount, 0) as commentCount,
@@ -42,9 +46,9 @@ class Model_repository extends Base_repository
                 FROM
                     starrating
                 GROUP BY model_id) AS rating ON rating.model_id = model.name
-        " . ($id === null ? "" : "WHERE model.id = $id") . "
+        '.($id === null ? '' : "WHERE model.id = $id").'
             ORDER BY model.id
-        ")->result();
+        ')->result();
     }
 
     /**
@@ -123,9 +127,10 @@ class Model_repository extends Base_repository
     }
 
     /**
-     * Get user library
+     * Get user library.
      *
      * @param $id
+     *
      * @return $value
      *
      * @author Leon
