@@ -17,6 +17,8 @@ class api extends CI_Controller
         $this->load->model('Services/Model_service');
         $this->load->model('Services/User_service');
         $this->load->model('Services/Activities_service');
+        $this->load->model('Services/News_service');
+        $this->load->model('Services/Events_service');
     }
 
     /**
@@ -134,6 +136,37 @@ class api extends CI_Controller
     {
         $count = $this->input->get('count', true);
         $result = $this->Activities_service->getActivities($count);
+        echo json_encode($result);
+    }
+
+    /**
+     * Get News.
+     *
+     * @param count
+     *
+     * @return news
+     *
+     * @author Leon
+     */
+    public function getNews()
+    {
+        $count = $this->input->get('count', true);
+        $result = $this->News_service->getNews($count);
+        echo json_encode($result);
+    }
+
+    /**
+     * Get Events
+     *
+     * @param count
+     * @return events
+     *
+     * @author Leon
+     */
+    public function getEvents()
+    {
+        $count = $this->input->get('count', true);
+        $result = $this->Events_service->getEvents($count);
         echo json_encode($result);
     }
 }

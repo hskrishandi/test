@@ -9,6 +9,12 @@ if (!defined('BASEPATH')) {
  */
 class Template_repository extends CI_Model
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
+    }
+    
     /**
      * This is a example function.
      *

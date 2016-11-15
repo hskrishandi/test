@@ -5,9 +5,9 @@ if (!defined('BASEPATH')) {
 }
 
 /**
- * Activities Repository.
+ * News repository.
  */
-class Activities_repository extends CI_Model
+class News_repository extends CI_Model
 {
     public function __construct()
     {
@@ -16,26 +16,26 @@ class Activities_repository extends CI_Model
     }
 
     /**
-     * Get activities.
+     * Get News.
      *
      * @param count, pageOffset, showDeleted
      *
-     * @return activities
+     * @return news
      *
      * @author Leon
      */
-    public function getActivities($limit = null, $offset = 0, $showDeleted = 0)
+    public function getNews($limit = null, $offset = 0, $showDeleted = 0)
     {
         if ($limit == null) {
-            $this->db->select('id, UNIX_TIMESTAMP(date) as date, content')
-            ->from('activities')
+            $this->db->select('id, UNIX_TIMESTAMP(post_date) as post_date, title, content')
+            ->from('news')
             ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
-            ->order_by('date desc');
+            ->order_by('post_date desc');
         } else {
-            $this->db->select('id, UNIX_TIMESTAMP(date) as date, content')
-            ->from('activities')
+            $this->db->select('id, UNIX_TIMESTAMP(post_date) as post_date, title, content')
+            ->from('news')
             ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
-            ->order_by('date desc')
+            ->order_by('post_date desc')
             ->limit($limit, $offset);
         }
 
