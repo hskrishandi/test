@@ -183,9 +183,9 @@ class Model_service extends CI_Model
      */
     public function getRandomModels($count)
     {
-        $result = [];
+        $result = array();
         $models = $this->getAll();
-        $randomKey = [];
+        $randomKey = array();
         if ($count == 1) {
             array_push($randomKey, array_rand($models, $count));
         } elseif ($count > 1) {
