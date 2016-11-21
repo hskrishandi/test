@@ -26,6 +26,12 @@ class News_service extends CI_Model
      */
     public function getNews($count)
     {
-        return $this->News_repository->getNews($count);
+        $news = $this->News_repository->getNews($count);
+        $result = array();
+        foreach ($news as $key => $value) {
+            $value->post_date = date('d M Y', $value->post_date);
+            array_push($result, $value);
+        }
+        return $news;
     }
 }
