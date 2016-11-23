@@ -140,9 +140,7 @@ class api extends CI_Controller
     }
 
     /**
-     * Get News.
-     *
-     * @param count
+     * Get News with the count.
      *
      * @return news
      *
@@ -151,14 +149,18 @@ class api extends CI_Controller
     public function getNews()
     {
         $count = $this->input->get('count', true);
-        $result = $this->News_service->getNews($count);
+        $id = $this->input->get('id', true);
+        // TODO: we might need to limit the count or even add page to
+        // truncate the return size.
+        $result = $this->News_service->getNews($count, $id);
         echo json_encode($result);
     }
 
     /**
-     * Get Events
+     * Get Events.
      *
      * @param count
+     *
      * @return events
      *
      * @author Leon
@@ -166,6 +168,8 @@ class api extends CI_Controller
     public function getEvents()
     {
         $count = $this->input->get('count', true);
+        // TODO: we might need to limit the count or even add page to
+        // truncate the return size.
         $result = $this->Events_service->getEvents($count);
         echo json_encode($result);
     }

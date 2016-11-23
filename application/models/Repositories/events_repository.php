@@ -18,7 +18,7 @@ class Events_repository extends CI_Model
     /**
      * Get Events.
      *
-     * @param count, showpast, pageOffset, showDeleted
+     * @param $limit(count), $past(showpast), $offset(pageOffset), $showDeleted
      *
      * @return events
      *
@@ -27,12 +27,14 @@ class Events_repository extends CI_Model
     public function getEvents($limit = null, $past = true, $offset = 0, $showDeleted = 0)
     {
         if ($limit == null) {
-            $this->db->from('events')
+            $this->db->select('id, name, full_name, location, website, start_date, end_date')
+            ->from('events')
             ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
             ->order_by('start_date '.($past ? 'desc' : 'asc'))
             ->where('end_date '.($past ? '<' : '>=').' CURDATE()');
         } else {
-            $this->db->from('events')
+            $this->db->select('id, name, full_name, location, website, start_date, end_date')
+            ->from('events')
             ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
             ->order_by('start_date '.($past ? 'desc' : 'asc'))
             ->where('end_date '.($past ? '<' : '>=').' CURDATE()')

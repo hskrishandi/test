@@ -25,7 +25,7 @@ class Events_service extends CI_Model
      *
      * @author Leon
      */
-    public function getEvents($count)
+    public function getEvents($count = null)
     {
         return $this->Events_repository->getEvents($count);
     }
