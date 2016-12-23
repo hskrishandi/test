@@ -172,7 +172,7 @@ class Model_repository extends CI_Model
     {
         $description = new stdClass(); // Create new class
         // Read model descriptions
-        $description->introduction = read_file('application/views/models/descriptions/' . $name . '/introduction.php');
+        $description->description = read_file('application/views/models/descriptions/' . $name . '/description.php');
         $description->information = read_file('application/views/models/descriptions/' . $name . '/information.php');
         $description->reference = read_file('application/views/models/descriptions/' . $name . '/reference.php');
         return $description;
