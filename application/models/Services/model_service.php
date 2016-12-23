@@ -32,6 +32,7 @@ class Model_service extends CI_Model
         // Append image url to the models
         foreach ($models as $key => $model) {
             $model->imageUrl = resource_url('img', 'simulation/').'/'.$model->name.'.png';
+            $model->description = $this->Model_repository->getDescriptionByName($model->name);
         }
         if (count($models) == 1) {
             $result = $models[0];

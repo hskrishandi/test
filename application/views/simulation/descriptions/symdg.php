@@ -2,12 +2,12 @@
 <p>Authors: Lining Zhang, J. Zhang, Y. Song, Xinnan Lin, Jin He, and Mansun Chan
 <br>Organization: Peking University and HKUST
 <br>Contact: <a href="mailto:mchan@ust.hk">mchan@ust.hk</a></p>
-<h4>Introduction</h4>			
+<h4>Introduction</h4>
 <div class="details">
 	<div class="structure-figure">
 		<img src="<?php echo base_url('images/simulation/symdg.png');?>" />
-	</div>			
-	<p>This is a complete charge-based model for ideal symmetric double MOSFET with structure shown in the given figure.  Its features include: 
+	</div>
+	<p>This is a complete charge-based model for ideal symmetric double MOSFET with structure shown in the given figure.  Its features include:
 		<ol>
 			<li>Inversion charge model from week inversion to strong inversion calculated from the solution of 1D Poisson-Boltzmann equation [2] in the direction perpendicular to the gate</li>
 			<li>Drain current model from the Pao-Sah’s dual integral [3]</li>

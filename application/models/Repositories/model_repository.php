@@ -13,6 +13,7 @@ class Model_repository extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+        $this->load->helper('file');
     }
 
     /**
@@ -153,5 +154,27 @@ class Model_repository extends CI_Model
                 param.user_id = $id
             ORDER BY model_id;
         ")->result();
+    }
+
+    /**
+     * Get Model Description
+     *
+     * @param $name
+     * @return description
+     *
+     * @NOTE This is not a good approach to do so, please improve this
+     * description feature if possible (e.g. use Markdown instead
+     * of html code, maybe save them in database)
+     *
+     * @author Leon
+     */
+    public function getDescriptionByName($name)
+    {
+        $description = new stdClass(); // Create new class
+        // Read model descriptions
+        $description->introduction = read_file('application/views/models/descriptions/' . $name . '/introduction.php');
+        $description->information = read_file('application/views/models/descriptions/' . $name . '/information.php');
+        $description->reference = read_file('application/views/models/descriptions/' . $name . '/reference.php');
+        return $description;
     }
 }
