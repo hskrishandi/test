@@ -3,9 +3,6 @@
     increases at higher bias as a power-law function
 </p>
 <p>
-    <img src="<?php echo base_url('images/simulation/otft3eqt.png');?>" />
-</p>
-<p>
     where the mobility enhancement factor γ>0 (gamma in the oTFT compact model) is in the exponent of the power-law function, and μo is a known value of the mobility at given overdrive voltage Vγ.
 </p>
 <p>
