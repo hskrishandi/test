@@ -29,10 +29,13 @@ class Model_service extends CI_Model
     {
         $models = $this->Model_repository->getById($id);
         $result = null;
-        // Append image url to the models
         foreach ($models as $key => $model) {
+            // Append image url to the models
             $model->imageUrl = resource_url('img', 'simulation/').'/'.$model->name.'.png';
+            // Append descriptions to models
             $model->description = $this->Model_repository->getDescriptionByName($model->name);
+            // Append comments to models
+            $model->comments = $this->Model_repository->getCommentsById($id);
         }
         if (count($models) == 1) {
             $result = $models[0];

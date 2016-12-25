@@ -157,6 +157,40 @@ class Model_repository extends CI_Model
     }
 
     /**
+     * Get comment by id
+     *
+     * @param $id
+     * @return comments
+     *
+     * @author Leon
+     */
+    public function getCommentsById($id)
+    {
+        return $this->db->query("
+            SELECT
+                comments.comment,
+                comments.datetime as time,
+                users.displayname as username
+            FROM
+                post_comments AS comments
+                    LEFT JOIN
+                (SELECT
+                    *
+                FROM
+                    users) AS users ON users.id = comments.userid
+            WHERE
+                postid IN (SELECT
+                        post_id
+                    FROM
+                        model_info
+                    WHERE
+                        id = 1)
+                    AND comments.type = 'model'
+            ORDER BY comments.commentid DESC;
+        ")->result();
+    }
+
+    /**
      * Get Model Description
      *
      * @param $name
