@@ -184,7 +184,7 @@ class Model_repository extends CI_Model
                     FROM
                         model_info
                     WHERE
-                        id = 1)
+                        id = $id)
                     AND comments.type = 'model'
             ORDER BY comments.commentid DESC;
         ")->result();

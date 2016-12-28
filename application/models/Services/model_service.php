@@ -35,7 +35,7 @@ class Model_service extends CI_Model
             // Append descriptions to models
             $model->description = $this->Model_repository->getDescriptionByName($model->name);
             // Append comments to models
-            $model->comments = $this->Model_repository->getCommentsById($id);
+            $model->comments = $this->Model_repository->getCommentsById($model->id);
         }
         if (count($models) == 1) {
             $result = $models[0];
