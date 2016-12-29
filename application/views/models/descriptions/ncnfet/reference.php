@@ -8,7 +8,8 @@
     <br> [3] J. Deng and H.-S. P. Wong, "Modeling and Analysis of Planar Gate Capacitance for 1-D FET with Multiple Cylindrical Conducting Channels", IEEE Transactions on Electron Devices, vol. 54, pp. 2377-2385, 2007.
     <a href="http://dx.doi.org/10.1109/TED.2007.902047" target="_blank">(link)</a>
 
-    <h4>Examples of analyses using the Stanford CNFET SPICE Model</h4>
+    <br>
+    <b>Examples of analyses using the Stanford CNFET SPICE Model</b>
     <br> [4] N. Patil, J. Deng, S. Mitra and H.-S. P. Wong, "Circuit-Level Performance Benchmarking and Scalability Analysis of Carbon Nanotube Transistor Circuits," IEEE Transactions on Nanotechnology, vol.8, no.1, pp.37-45, Jan. 2009.
     <a href="http://dx.doi.org/10.1109/TNANO.2008.2006903" target="_blank">(link)</a>
     <br> [5] J. Zhang, A. Lin, N. Patil, H. Wei, L. Wei, H.-S.P. Wong, and S. Mitra, "Carbon Nanotube Robust Digital VLSI," IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, vol.31, no.4, pp.453-471, April 2012.
