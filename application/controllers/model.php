@@ -15,8 +15,9 @@ class model extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Services/Model_service');
+        $this->load->helper('json');
     }
-    
+
     /**
      * Get all models.
      *
@@ -27,7 +28,7 @@ class model extends CI_Controller
     public function getAllModels()
     {
         $result = $this->Model_service->getAll();
-        echo json_encode($result);
+        outputJson($result);
     }
 
     /**
@@ -50,28 +51,7 @@ class model extends CI_Controller
         } else {
             $result['error'] = 'Invalid id';
         }
-        echo json_encode($result);
-    }
-
-    /**
-     * Get user library.
-     *
-     * @param user id
-     *
-     * @return user library
-     *
-     * @author Leon
-     */
-    public function getUserModel()
-    {
-        $id = $this->input->get('id', true);
-        if ($id != null) {
-            $result['library'] = $this->Model_service->getUserLibraryByUserId($id);
-        } else {
-            $result['error'] = 'Invalid id';
-        }
-
-        echo json_encode($result);
+        outputJson($result);
     }
 
     /**
@@ -91,6 +71,6 @@ class model extends CI_Controller
         } else {
             $result = $this->Model_service->getRandomModels(5);
         }
-        echo json_encode($result);
+        outputJson($result);
     }
 }

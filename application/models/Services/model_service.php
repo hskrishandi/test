@@ -136,47 +136,6 @@ class Model_service extends CI_Model
     }
 
     /**
-     * Get user library by user id.
-     *
-     * @param  $id
-     *
-     * @return user library
-     *
-     * @author Leon
-     *
-     ** [{
-     **     "modelName": $modelName,
-     **     "userParameter": [{
-     **         "nick_name": $nickName,
-     **         "data": $data,
-     **     }]
-     ** }]
-     */
-    public function getUserLibraryByUserId($id)
-    {
-        $models = $this->Model_repository->getUserLibraryByUserId($id);
-        $result = array();
-        if (count($models) > 0) {
-            $resultTmp = array();
-            $modelArrayTmp = array();
-            foreach ($models as $model) {
-                if (!array_key_exists($model->model_name, $resultTmp)) {
-                    $modelArrayTmp = array();
-                }
-                array_push($modelArrayTmp, array('nickName' => $model->nick_name, 'data' => $model->data));
-                $resultTmp[$model->model_name] = $modelArrayTmp;
-            }
-            foreach ($resultTmp as $key => $value) {
-                array_push($result, array('modelName' => $key, 'userParameter' => $value));
-            }
-        } else {
-            $result = null;
-        }
-
-        return $result;
-    }
-
-    /**
      * Get random models.
      *
      * @param  $count

@@ -15,6 +15,7 @@ class resources extends CI_Controller
         $this->load->model('Services/Activities_service');
         $this->load->model('Services/News_service');
         $this->load->model('Services/Events_service');
+        $this->load->helper('json');
     }
     /**
      * Get user experience.
@@ -26,7 +27,7 @@ class resources extends CI_Controller
     public function getUserExperience()
     {
         $result = $this->User_service->getUserExperience(2);
-        echo json_encode($result);
+        outputJson($result);
     }
 
     /**
@@ -42,7 +43,7 @@ class resources extends CI_Controller
     {
         $count = $this->input->get('count', true);
         $result = $this->Activities_service->getActivities($count);
-        echo json_encode($result);
+        outputJson($result);
     }
 
     /**
@@ -59,7 +60,7 @@ class resources extends CI_Controller
         // TODO: we might need to limit the count or even add page to
         // truncate the return size.
         $result = $this->News_service->getNews($count, $id);
-        echo json_encode($result);
+        outputJson($result);
     }
 
     /**
@@ -77,6 +78,6 @@ class resources extends CI_Controller
         // TODO: we might need to limit the count or even add page to
         // truncate the return size.
         $result = $this->Events_service->getEvents($count);
-        echo json_encode($result);
+        outputJson($result);
     }
 }

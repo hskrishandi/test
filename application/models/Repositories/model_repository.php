@@ -128,35 +128,6 @@ class Model_repository extends CI_Model
     }
 
     /**
-     * Get user library.
-     *
-     * @param $id
-     *
-     * @return $value
-     *
-     * @author Leon
-     */
-    public function getUserLibraryByUserId($id)
-    {
-        return $this->db->query("
-            SELECT
-                model.short_name AS model_name,
-                param.name AS nick_name,
-                param.data
-            FROM
-                model_info AS model
-                    LEFT JOIN
-                (SELECT
-                    *
-                FROM
-                    user_param_sets) AS param ON param.model_id = model.id
-            WHERE
-                param.user_id = $id
-            ORDER BY model_id;
-        ")->result();
-    }
-
-    /**
      * Get comment by id
      *
      * @param $id
