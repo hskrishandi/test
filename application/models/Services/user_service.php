@@ -41,9 +41,10 @@ class User_service extends CI_Model
      * @author Leon
      *
      ** [{
-     **     "modelName": $modelName,
-     **     "userParameter": [{
-     **         "nick_name": $nickName,
+     **     "id": $modelId
+     **     "name": $modelName,
+     **     "library": [{
+     **         "alias": $nickName,
      **         "data": $data,
      **     }]
      ** }]
@@ -53,20 +54,31 @@ class User_service extends CI_Model
         $models = $this->User_repository->getUserLibraryByUserId($id);
         $result = array();
         if (count($models) > 0) {
-            $resultTmp = array();
-            $modelArrayTmp = array();
+            // loop all the models, and constrcut the basic structure
             foreach ($models as $model) {
-                if (!array_key_exists($model->model_name, $resultTmp)) {
-                    $modelArrayTmp = array();
+                array_push($result, array('id' => $model->model_id, 'name' => $model->model_name, 'library' => array()));
+            }
+            // remove duplicated
+            $result = array_unique($result, SORT_REGULAR);
+            // rearrange index after array_unique
+            $result = array_values($result);
+            // loop the structured array
+            foreach ($result as $resultIndex => $value) {
+                // make a new temp library
+                $library = array();
+                // loop the models
+                foreach ($models as $modelIndex => $model) {
+                    // compare the model id
+                    if ($model->model_id == $value['id']) {
+                        // if id is same, push it to the library array
+                        array_push($library, array('alias' => $model->nick_name, 'data' => $model->data));
+                        // remove the model after pushing to reduce the loop
+                        unset($models[$modelIndex]);
+                    }
                 }
-                array_push($modelArrayTmp, array('alias' => $model->nick_name, 'data' => $model->data));
-                $resultTmp[$model->model_name] = $modelArrayTmp;
+                // assign the temp library to structured array
+                $result[$resultIndex]['library'] = $library;
             }
-            foreach ($resultTmp as $key => $value) {
-                array_push($result, array('model' => $key, 'library' => $value));
-            }
-        } else {
-            $result = null;
         }
         return $result;
     }

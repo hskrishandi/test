@@ -48,6 +48,7 @@ class User_repository extends CI_Model
     {
         return $this->db->query("
             SELECT
+                model.id As model_id,
                 model.short_name AS model_name,
                 param.name AS nick_name,
                 param.data
