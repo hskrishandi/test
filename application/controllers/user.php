@@ -55,9 +55,6 @@ class user extends CI_Controller
 
         // TODO: may need data validation here
 
-        // TODO: This is used for testing, delete it after auth system is done.
-        $userId = -1;
-
         if ($userId != null) {
             $result['success'] = $this->User_service->addModelToUserLibrary($userId, $modelId, $name, $data);
         } else {
@@ -79,9 +76,6 @@ class user extends CI_Controller
         $userId = $this->input->get('userId');
         $modelId = $this->input->get('modelId');
         $name = $this->input->get('name');
-
-        // TODO: This is used for testing, delete it after auth system is done.
-        $userId = -1;
 
         if ($userId != null) {
             $result['success'] = $this->User_service->deleteModelFromUserLibrary($userId, $modelId, $name);
