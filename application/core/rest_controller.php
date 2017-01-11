@@ -123,10 +123,10 @@ class REST_Controller extends CI_Controller
         } elseif (is_array($this->body) && key($this->body) === 401) {
             // if authentication has errors
             $this->status = 401;
-            $this->output->set_output(json_encode(current($this->body), JSON_PRETTY_PRINT));
+            $this->output->set_output(json_encode(current($this->body), 128)); // 128 for JSON_PRETTY_PRINT
         } elseif ($this->body !== null && $this->body !== false) {
             $this->status = 200;
-            $this->output->set_output(json_encode($this->body, JSON_PRETTY_PRINT));
+            $this->output->set_output(json_encode($this->body, 128)); // 128 for JSON_PRETTY_PRINT
         }
 
         $this->output

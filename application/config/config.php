@@ -373,7 +373,7 @@ function __autoload($class)
 {
 	if(strpos($class, 'CI_') !== 0)
  	{
-  		@include_once( APPPATH . 'core/'. $class . EXT );
+  		@include_once( APPPATH . 'core/'. strtolower($class) . EXT );
  	}
 }
 
