@@ -13,7 +13,6 @@ class News_service extends CI_Model
     {
         parent::__construct();
         $this->load->model('Repositories/News_repository');
-        $this->load->helper('url');
     }
 
     /**

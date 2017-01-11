@@ -52,7 +52,8 @@ class Auth_repository extends CI_Model
             UPDATE
                 users
             SET
-                sessionid = '$token'
+                sessionid = '$token',
+                numofvisit = numofvisit + 1
             WHERE
                 id = $userId;
         ");
@@ -86,11 +87,26 @@ class Auth_repository extends CI_Model
      *
      * @author Leon
      */
-    public function fetchAuthUserByToken($token)
+    public function fetchAuthUserByToken($token = '')
     {
         return $this->db->query("
             SELECT
-                id
+                id,
+                email,
+                displayname as name,
+                first_name as firstName,
+                last_name as lastName,
+                organization,
+                country,
+                address,
+                position,
+                tel,
+                fax,
+                class,
+                status,
+                isactivated,
+                photo_path as photoPath,
+                photo_ext as photoExt
             FROM
                 users
             WHERE

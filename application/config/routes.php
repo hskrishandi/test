@@ -1,4 +1,6 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if (! defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -39,8 +41,40 @@
 */
 
 $route['default_controller'] = "home";
-$route['404_override'] = '';
+$route['404_override'] = 'home/notFound';
 
+/**
+ * Following are new route rules for RESTful API.
+ *
+ * @author Leon
+ */
+// Auth
+$route['auth/login'] = "auth/login";
+$route['auth/logout'] = "auth/logout";
+
+// Users
+$route['user'] = "user/index";
+$route['user/brief'] = "user/getUserBriefInfo";
+$route['user/library'] = "user/userLibrary";
+
+// Models
+$route['models'] = "models/index";
+$route['models/(:num)'] = "models/index/$1";
+$route['models/random'] = "models/getRandomModels";
+$route['models/random/(:num)'] = "models/getRandomModels/$1";
+
+// Resources
+$route['experiences'] = "resources/index/userExperiences";
+$route['experiences/(:num)'] = "resources/index/userExperiences/(:num)";
+$route['activities'] = "resources/index/activities";
+$route['activities/(:num)'] = "resources/index/activities/(:num)";
+$route['news'] = "resources/index/news";
+$route['news/(:num)'] = "resources/index/news/(:num)";
+$route['events'] = "resources/index/events";
+$route['events/(:num)'] = "resources/index/events/(:num)";
+
+// All other not registerd routes
+$route['(:any)'] = "home/notFound";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

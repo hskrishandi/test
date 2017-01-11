@@ -13,7 +13,6 @@ class Template_service extends CI_Model
     {
         parent::__construct();
         $this->load->model('Repositories/Template_repository');
-        $this->load->helper('url');
     }
 
     /**

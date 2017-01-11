@@ -405,6 +405,9 @@ class CI_Session {
 			$this->CI->db->delete($this->sess_table_name);
 		}
 
+        // Disable write cookie to client, use auth token system instead
+        // @author Leon @20170110
+        /*
 		// Kill the cookie
 		setcookie(
 					$this->sess_cookie_name,
@@ -414,6 +417,7 @@ class CI_Session {
 					$this->cookie_domain,
 					0
 				);
+        */
 
 		// Kill session data
 		$this->userdata = array();
@@ -664,6 +668,9 @@ class CI_Session {
 
 		$expire = ($this->sess_expire_on_close === TRUE) ? 0 : $this->sess_expiration + time();
 
+        // Disable write cookie to client, use auth token system instead
+        // @author Leon @20170110
+        /*
 		// Set the cookie
 		setcookie(
 					$this->sess_cookie_name,
@@ -673,6 +680,7 @@ class CI_Session {
 					$this->cookie_domain,
 					$this->cookie_secure
 				);
+        */
 	}
 
 	// --------------------------------------------------------------------

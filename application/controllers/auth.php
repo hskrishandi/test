@@ -9,16 +9,8 @@ if (!defined('BASEPATH')) {
 /**
  * Auth Controller.
  */
-class auth extends CI_Controller
+class auth extends REST_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('Services/Auth_service');
-        $this->load->helper('json');
-        $this->load->helper('error');
-    }
-
     /**
      * Login
      *
@@ -29,14 +21,18 @@ class auth extends CI_Controller
      */
     public function login()
     {
-        $email = $this->input->post('email');
-        $password= $this->input->post('password');
-        if ($email && $password) {
-            $result = $this->Auth_service->login($email, $password);
+        if ($this->method == "POST") {
+            $email = $this->input->post('email');
+            $password= $this->input->post('password');
+            if ($email && $password) {
+                $this->body = $this->Auth_service->login($email, $password);
+            } else {
+                $this->status = 400;
+            }
         } else {
-            $result = getError('input', 'Invalid input');
+            $this->status = 405;
         }
-        outputJson($result);
+        $this->response();
     }
 
     /**
@@ -49,33 +45,51 @@ class auth extends CI_Controller
      */
     public function logout()
     {
-        $email = $this->input->post('email');
-        if ($email) {
-            $result = $this->Auth_service->logout($email);
+        $this->requireAuth();
+        if ($this->method == "DELETE") {
+            $this->body = $this->Auth_service->logout();
         } else {
-            $result = getError('input', 'Invalid input');
+            $this->status = 405;
         }
-        outputJson($result);
+        $this->response();
     }
 
     /**
-     * Check is login
-     * Not sure we will need this for auth controller
+     * Register
      *
-     * @param $token
-     * @return login result
+     * @param $param
+     * @return $value
      *
      * @author Leon
      */
-    public function _isLogin()
+    public function register()
     {
-        $token = $this->input->post('token');
-        if ($token) {
-            //
-            $result = $this->Auth_service->isLogin($token);
-        } else {
-            $result = getError('input', 'Invalid input');
-        }
-        outputJson($result);
+        // TODO: register
+    }
+
+    /**
+     * Reset passord
+     *
+     * @param type $param
+     * @return $value
+     *
+     * @author Leon
+     */
+    public function resetPassword()
+    {
+        // TODO: reset password
+    }
+
+    /**
+     * Activate account
+     *
+     * @param type $param
+     * @return $value
+     *
+     * @author Leon
+     */
+    public function activate()
+    {
+        // TODO: activate account
     }
 }

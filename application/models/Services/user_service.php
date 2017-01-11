@@ -13,7 +13,6 @@ class User_service extends CI_Model
     {
         parent::__construct();
         $this->load->model('Repositories/User_repository');
-        $this->load->helper('url');
     }
 
     /**
