@@ -201,7 +201,7 @@ class REST_Controller extends CI_Controller
             // How long the response to the preflight request can be cached
             header('Access-Control-Max-Age: 3600');
             // Allow custom headers, don't need right now.
-            // header('Access-Control-Allow-Headers: Authorization');
+            header('Access-Control-Allow-Headers: Authorization');
             // DON'T USE $this->output->set_header('xxx') cuz we use exit.
             exit;
         } elseif (!in_array(strtoupper($this->method), array_map('strtoupper', $this->allowed_http_methods))) {
