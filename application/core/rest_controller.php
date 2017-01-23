@@ -72,7 +72,7 @@ class REST_Controller extends CI_Controller
      *
      * @var array
      */
-    protected $allowed_http_methods = array('get', 'delete', 'post', 'put', 'options', 'patch', 'head');
+    protected $allowed_http_methods = array('get', 'delete', 'post', 'put');
 
     /**
      * Constructor
@@ -86,14 +86,6 @@ class REST_Controller extends CI_Controller
         parent::__construct();
         $this->load->model('Services/Auth_service');
         $this->preflight();
-
-        // // Get requested method
-        // $this->method = strtoupper($this->input->server('REQUEST_METHOD'));
-        // $this->token = $this->input->get_request_header('Authorization', true);
-        // $this->validateRequestMethods();
-        //
-        // // Set default header
-        // $this->contentType = $this->supported_format['json'];
     }
 
     /**
@@ -203,13 +195,14 @@ class REST_Controller extends CI_Controller
             $this->output->set_status_header(200);
             // Allow all origin
             // $this->set_header(array('Access-Control-Allow-Origin', 'http://eea258.ee.ust.hk, https://http://eea258.ee.ust.hk, http://i-mos.org, https://i-mos.org'));
-            $this->output->set_header(array('Access-Control-Allow-Origin', '*'));
+            header('Access-Control-Allow-Origin: *');
             // Allow http methods
-            $this->output->set_header(array('Access-Control-Allow-Methods', implode(' ,', $this->allowed_http_methods)));
+            header('Access-Control-Allow-Methods: ' . strtoupper(implode(', ', $this->allowed_http_methods)));
             // How long the response to the preflight request can be cached
-            $this->output->set_header(array('Access-Control-Max-Age', 3600));
+            header('Access-Control-Max-Age: 3600');
             // Allow custom headers, don't need right now.
-            // $this->output->set_header(array('Access-Control-Allow-Headers', ''));
+            // header('Access-Control-Allow-Headers: Authorization');
+            // DON'T USE $this->output->set_header('xxx') cuz we use exit.
             exit;
         } elseif (!in_array(strtoupper($this->method), array_map('strtoupper', $this->allowed_http_methods))) {
             // Check the HTTP methods, if not allowed, response 400 not supported.
@@ -220,21 +213,8 @@ class REST_Controller extends CI_Controller
         $this->token = $this->input->get_request_header('Authorization', true);
 
         // Set default header
-        // $this->status = 400;
         $this->contentType = $this->supported_format['json'];
     }
-
-    // /**
-    //  * Validate request parameters
-    //  *
-    //  * @author Leon
-    //  */
-    // private function validateRequestMethods()
-    // {
-    //     if (!in_array(strtoupper($this->method), array_map('strtoupper', $this->allowed_http_methods))) {
-    //         $this->exitWithStatus(405);
-    //     }
-    // }
 
     /**
      * Exit with status code
@@ -249,19 +229,4 @@ class REST_Controller extends CI_Controller
         $this->output->set_status_header($status);
         exit;
     }
-
-    /**
-     * Use this function to replace the default output function in
-     * 'system/core/Output.php/_display:441', we are
-     * using RESTful style and we need to
-     * output as json
-     *
-     * @param bool $require
-     *
-     * @author Leon
-     */
-    // public function _output($output)
-    // {
-    //     echo json_encode($this->body); // 128 for JSON_PRETTY_PRINT
-    // }
 }
