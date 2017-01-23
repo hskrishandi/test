@@ -1,7 +1,5 @@
 <?php
 
-// ini_set('display_errors', 'On');
-
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -9,7 +7,7 @@ if (!defined('BASEPATH')) {
 /**
  * API Controller.
  */
-class user extends REST_Controller
+class account extends REST_Controller
 {
     /*
      * Auth user would fetch from rest_controller
@@ -19,7 +17,7 @@ class user extends REST_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Services/User_service');
+        $this->load->model('Services/Account_Service');
         // The whole class requires auth.
         $this->requireAuth();
         $this->authUser = $this->getAuthUser();
@@ -159,7 +157,7 @@ class user extends REST_Controller
     private function getUserLibrary($userId)
     {
         if ($userId != null) {
-            $this->body = $this->User_service->getUserLibraryByUserId($userId);
+            $this->body = $this->Account_Service->getUserLibraryByUserId($userId);
         } else {
             $this->status = 401;
         }
@@ -182,7 +180,7 @@ class user extends REST_Controller
         // TODO: may need data validation here
 
         if ($userId != null) {
-            $this->body = $this->User_service->addModelToUserLibrary($userId, $modelId, $name, $data);
+            $this->body = $this->Account_Service->addModelToUserLibrary($userId, $modelId, $name, $data);
         } else {
             $this->status = 401;
         }
@@ -202,7 +200,7 @@ class user extends REST_Controller
         $name = $this->input->delete('name');
 
         if ($userId != null) {
-            $this->body = $this->User_service->deleteModelFromUserLibrary($userId, $modelId, $name);
+            $this->body = $this->Account_Service->deleteModelFromUserLibrary($userId, $modelId, $name);
         } else {
             $this->status = 401;
         }

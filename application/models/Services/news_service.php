@@ -7,7 +7,7 @@ if (!defined('BASEPATH')) {
 /**
  * News service.
  */
-class News_service extends CI_Model
+class News_service extends Base_service
 {
     public function __construct()
     {
@@ -16,37 +16,38 @@ class News_service extends CI_Model
     }
 
     /**
-     * Get News, here we need to cut the content, make it shorter for
-     * frontend to display. Frontend can retrieve the shorter
-     * content instead of whole content. Whole content
-     * is provided by getNewsById($id) below.\.
+     * Get by id
      *
-     * @param count
-     *
-     * @return news array
+     * @param $id
+     * @return $news
      *
      * @author Leon
      */
-    public function getNews($count = null, $id = null)
+    public function getById($id)
     {
-        if ($id) {
-            $news = $this->News_repository->getNewsById($id);
-            // Get the first element from news array (mysql return array even if
-            // it has only one element)
-            $news = reset($news);
-            $news->post_date = date('d M Y', $news->post_date);
-        } else {
-            $news = $this->News_repository->getNews($count);
-            $result = array();
-            foreach ($news as $key => $value) {
-                // format the date from unix time to human readable time
-            $value->post_date = date('d M Y', $value->post_date);
+        return $this->News_repository->getById($id);
+    }
+
+    /**
+     * Get news by options
+     * Here we need to truncate the content to make it shorter for
+     * frontend to display. Whole content is provided by
+     * getById($id)
+     *
+     * @param $count, $page
+     * @return $news
+     *
+     * @author Leon
+     */
+    public function getByOptions($count, $page)
+    {
+        $news = $this->News_repository->getByOptions($count, $count * ($page - 1));
+        $result = array();
+        foreach ($news as $key => $value) {
             // truncate the content shorter
             $value->content = preg_replace('/\s+?(\S+)?$/', '', substr($value->content, 0, 260)).' ...';
-                array_push($result, $value);
-            }
+            array_push($result, $value);
         }
-
-        return $news;
+        return $result;
     }
 }

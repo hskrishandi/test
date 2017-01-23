@@ -1,5 +1,7 @@
 <?php
 
+// ini_set('display_errors', 'On');
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -87,51 +89,44 @@ class REST_Controller extends CI_Controller
         // Get requested method
         $this->method = strtoupper($this->input->server('REQUEST_METHOD'));
         $this->token = $this->input->get_request_header('Authorization', true);
-        $this->validateRequestParameters();
+        $this->validateRequestMethods();
 
         // Set default header
-        $this->status = 400;
         $this->contentType = $this->supported_format['json'];
     }
 
     /**
-     * Destructor
-     * When 'exit;' is called, destructor will be trigger
-     *
-     * @author Leon
-     */
-    public function __destruct()
-    {
-        $this->output->set_status_header($this->status);
-    }
-
-    /**
-     * Comment
+     * Response to the request
      *
      * @param $body
      *
      * @author Leon
      */
-    protected function response($body = null)
+    protected function response()
     {
-        $this->body = $body != null ?: $this->body;
-
-        if ($this->body === true) {
-            $this->status = 200;
-        } elseif ($this->body === false) {
-            $this->status = 500;
-        } elseif (is_array($this->body) && key($this->body) === 401) {
-            // if authentication has errors
-            $this->status = 401;
-            $this->output->set_output(json_encode(current($this->body), 128)); // 128 for JSON_PRETTY_PRINT
-        } elseif ($this->body !== null && $this->body !== false) {
-            $this->status = 200;
-            $this->output->set_output(json_encode($this->body, 128)); // 128 for JSON_PRETTY_PRINT
+        // Status code is not set, else just response the error code, so
+        // we say that "status code > body"
+        if ($this->status === null) {
+            if ($this->body === true) {
+                // if the body is true without any other contents
+                $this->status = 200;
+            } elseif ($this->body === false) {
+                // if the body is false without any other contents
+                $this->status = 500;
+            } elseif (is_array($this->body) && key($this->body) === 401) {
+                // if authentication has errors
+                $this->status = 401;
+                $this->output->set_output(json_encode(current($this->body))); // 128 for JSON_PRETTY_PRINT
+            } elseif ($this->body !== null && $this->body !== false) {
+                // if nothing goes wrong
+                $this->status = 200;
+                $this->output->set_output(json_encode($this->body)); // 128 for JSON_PRETTY_PRINT
+            }
+            // Set content type
+            $this->output->set_content_type($this->contentType);
         }
-
-        $this->output
-        ->set_status_header($this->status)
-        ->set_content_type($this->contentType);
+        // Set status code
+        $this->output->set_status_header($this->status);
     }
 
     /**
@@ -145,8 +140,7 @@ class REST_Controller extends CI_Controller
     {
         $isLogin = $this->Auth_service->isLogin($this->token);
         if ($required && !$isLogin) {
-            $this->status = 401;
-            exit;
+            $this->exitWithStatus(401);
         } elseif ($required && $isLogin) {
             // Get logined user information
             $this->user = $this->Auth_service->getLoginedUser();
@@ -166,15 +160,68 @@ class REST_Controller extends CI_Controller
     }
 
     /**
+     * Validate number
+     * Only for integers >= 0
+     *
+     * @param request parameter, default value
+     * @return number if valid, false if not valid
+     *
+     * @author Leon
+     */
+    protected function validateInteger($param, $default = 0)
+    {
+        if ($param) {
+            // if the request param is not empty or null
+            if (preg_match('/^\d+$/', $param) && (int)$param >= 0) {
+                // check param is non-negative integer
+                return (int)$param;
+            } else {
+                // the parameter is not valid
+                $this->exitWithStatus(400);
+            }
+        } else {
+            return (int)$default;
+        }
+    }
+
+    /**
      * Validate request parameters
      *
      * @author Leon
      */
-    private function validateRequestParameters()
+    private function validateRequestMethods()
     {
         if (!in_array(strtoupper($this->method), array_map('strtoupper', $this->allowed_http_methods))) {
-            $this->status = 400;
-            exit;
+            $this->exitWithStatus(405);
         }
     }
+
+    /**
+     * Exit with status code
+     *
+     * @param type $param
+     * @return $value
+     *
+     * @author Leon
+     */
+    private function exitWithStatus($status = 400)
+    {
+        $this->output->set_status_header($status);
+        exit;
+    }
+
+    /**
+     * Use this function to replace the default output function in
+     * 'system/core/Output.php/_display:441', we are
+     * using RESTful style and we need to
+     * output as json
+     *
+     * @param bool $require
+     *
+     * @author Leon
+     */
+    // public function _output($output)
+    // {
+    //     echo json_encode($this->body); // 128 for JSON_PRETTY_PRINT
+    // }
 }

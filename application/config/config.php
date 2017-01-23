@@ -365,6 +365,7 @@ $config['proxy_ips'] = '';
 |
 | Nothing to do with config/autoload.php, this allows PHP autoload to work
 | for base controllers and some third-party libraries.
+| Require file name to be all lower case.
 |
 | @author Leon
 |

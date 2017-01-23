@@ -7,7 +7,7 @@ if (!defined('BASEPATH')) {
 /**
  * Model Service.
  */
-class Model_service extends CI_Model
+class Model_service extends Base_service
 {
     public function __construct()
     {
@@ -152,15 +152,27 @@ class Model_service extends CI_Model
         if ($count == 1) {
             array_push($randomKey, array_rand($models, $count));
         } elseif ($count > 1) {
-            if ($count > count($models)) {
-                $count = count($models);
-            }
-            $randomKey = array_rand($models, $count);
+            $randomKey = array_rand($models, min($count, count($models)));
+        } else {
+            return false;
         }
         foreach ($randomKey as $value) {
             array_push($result, $models[$value]);
         }
-
         return $result;
+    }
+
+    /**
+     * Get user experience.
+     *
+     * @param  $count, $offset
+     *
+     * @return user experience
+     *
+     * @author Leon
+     */
+    public function getUserExperience($count)
+    {
+        return $this->Model_repository->getUserExperience($count);
     }
 }

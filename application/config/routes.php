@@ -53,25 +53,26 @@ $route['auth/login'] = "auth/login";
 $route['auth/logout'] = "auth/logout";
 
 // Users
-$route['user'] = "user/index";
-$route['user/brief'] = "user/getUserBriefInfo";
-$route['user/library'] = "user/userLibrary";
+$route['account'] = "account/index";
+$route['account/brief'] = "account/getUserBriefInfo";
+$route['account/library'] = "account/userLibrary";
 
 // Models
 $route['models'] = "models/index";
 $route['models/(:num)'] = "models/index/$1";
 $route['models/random'] = "models/getRandomModels";
-$route['models/random/(:num)'] = "models/getRandomModels/$1";
 
 // Resources
-$route['experiences'] = "resources/index/userExperiences";
-$route['experiences/(:num)'] = "resources/index/userExperiences/(:num)";
 $route['activities'] = "resources/index/activities";
-$route['activities/(:num)'] = "resources/index/activities/(:num)";
-$route['news'] = "resources/index/news";
-$route['news/(:num)'] = "resources/index/news/(:num)";
+$route['activities/(:num)'] = "resources/index/activities/$1";
 $route['events'] = "resources/index/events";
-$route['events/(:num)'] = "resources/index/events/(:num)";
+$route['events/(:num)'] = "resources/index/events/$1";
+$route['events/upcoming'] = "resources/index/upcomingEvents";
+$route['events/past'] = "resources/index/pastEvents";
+$route['news'] = "resources/index/news";
+$route['news/(:num)'] = "resources/index/news/$1";
+$route['experiences'] = "resources/index/userExperiences";
+
 
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";

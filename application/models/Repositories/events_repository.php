@@ -7,40 +7,78 @@ if (!defined('BASEPATH')) {
 /**
  * Events repository.
  */
-class Events_repository extends CI_Model
+class Events_repository extends Base_repository
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
-
     /**
-     * Get Events.
+     * Get by id
      *
-     * @param $limit(count), $past(showpast), $offset(pageOffset), $showDeleted
-     *
-     * @return events
+     * @param $id
+     * @return $event
      *
      * @author Leon
      */
-    public function getEvents($limit = null, $past = true, $offset = 0, $showDeleted = 0)
+    public function getById($id)
     {
-        if ($limit == null) {
-            $this->db->select('id, name, full_name, location, website, start_date, end_date')
-            ->from('events')
-            ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
-            ->order_by('start_date '.($past ? 'desc' : 'asc'))
-            ->where('end_date '.($past ? '<' : '>=').' CURDATE()');
-        } else {
-            $this->db->select('id, name, full_name, location, website, start_date, end_date')
-            ->from('events')
-            ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
-            ->order_by('start_date '.($past ? 'desc' : 'asc'))
-            ->where('end_date '.($past ? '<' : '>=').' CURDATE()')
-            ->limit($limit, $offset);
-        }
+        $this->db
+        ->select('id, name, full_name, location, website, start_date, end_date')
+        ->from('events')
+        ->where('id', $id);
+        return $this->db->get()->row();
+    }
 
+    /**
+     * Get by options
+     *
+     * @param count, pageOffset, showDeleted
+     * @return activities
+     *
+     * @author Leon
+     */
+    public function getByOptions($limit = 0, $offset = 0, $showDeleted = 0)
+    {
+        $this->db
+        ->select('id, name, full_name, location, website, start_date, end_date')
+        ->from('events')
+        ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
+        ->order_by('start_date desc')
+        ->limit($limit, $offset);
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Get all upcoming events
+     *
+     * @return $events
+     *
+     * @author Leon
+     */
+    public function getUpcoming($showDeleted = 0)
+    {
+        $this->db
+        ->select('id, name, full_name, location, website, start_date, end_date')
+        ->from('events')
+        ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
+        ->where('end_date >= CURDATE()')
+        ->order_by('start_date asc');
+        return $this->db->get()->result();
+    }
+
+    /**
+     * Get past events by options
+     *
+     * @return $events
+     *
+     * @author Leon
+     */
+    public function getPastByOptions($limit = 0, $offset = 0, $showDeleted = 0)
+    {
+        $this->db
+        ->select('id, name, full_name, location, website, start_date, end_date')
+        ->from('events')
+        ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
+        ->where('end_date < CURDATE()')
+        ->order_by('start_date desc')
+        ->limit($limit, $offset);
         return $this->db->get()->result();
     }
 }

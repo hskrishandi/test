@@ -7,7 +7,7 @@ if (!defined('BASEPATH')) {
 /**
  * This is a template service for example, showing you how to write a service.
  */
-class Template_service extends CI_Model
+class Template_service extends Base_service
 {
     public function __construct()
     {

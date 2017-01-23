@@ -7,12 +7,11 @@ if (!defined('BASEPATH')) {
 /**
  * Model Repositories.
  */
-class Model_repository extends CI_Model
+class Model_repository extends Base_repository
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->database();
         $this->load->helper('file');
     }
 
@@ -181,5 +180,25 @@ class Model_repository extends CI_Model
         $description->information = read_file('application/views/models/descriptions/' . $name . '/information.php');
         $description->reference = read_file('application/views/models/descriptions/' . $name . '/reference.php');
         return $description;
+    }
+
+    /**
+     * Get user experience.
+     *
+     * @param $limit = 2, $offset = 0
+     *
+     * @return user experience
+     *
+     * @author Leon
+     */
+    public function getUserExperience($limit = 2, $offset = 0)
+    {
+        $this->db->select('ue.id, ue.comment, ue.date, u.first_name, u.last_name, u.organization')
+        ->from('user_experience ue')
+        ->join('users u', 'u.id = ue.user_id', 'inner')
+        ->where('ue.approval_status', 1)
+        ->order_by('ue.date desc')
+        ->limit($limit, $offset);
+        return $this->db->get()->result();
     }
 }

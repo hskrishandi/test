@@ -7,38 +7,41 @@ if (!defined('BASEPATH')) {
 /**
  * Activities Repository.
  */
-class Activities_repository extends CI_Model
+class Activities_repository extends Base_repository
 {
-    public function __construct()
+    /**
+     * Get by id
+     *
+     * @param $id
+     * @return $activity
+     *
+     * @author Leon
+     */
+    public function getById($id)
     {
-        parent::__construct();
-        $this->load->database();
+        $this->db
+        ->select('id, date, content')
+        ->from('activities')
+        ->where('id', $id);
+        return $this->db->get()->row();
     }
 
     /**
-     * Get activities.
+     * Get by options
      *
      * @param count, pageOffset, showDeleted
-     *
      * @return activities
      *
      * @author Leon
      */
-    public function getActivities($limit = null, $offset = 0, $showDeleted = 0)
+    public function getByOptions($limit = 0, $offset = 0, $showDeleted = 0)
     {
-        if ($limit == null) {
-            $this->db->select('id, UNIX_TIMESTAMP(date) as date, content')
-            ->from('activities')
-            ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
-            ->order_by('date desc');
-        } else {
-            $this->db->select('id, UNIX_TIMESTAMP(date) as date, content')
-            ->from('activities')
-            ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
-            ->order_by('date desc')
-            ->limit($limit, $offset);
-        }
-
+        $this->db
+        ->select('id, date, content')
+        ->from('activities')
+        ->where(array('approval_status' => 1, 'del_status' => $showDeleted))
+        ->order_by('date desc')
+        ->limit($limit, $offset);
         return $this->db->get()->result();
     }
 }

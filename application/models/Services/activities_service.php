@@ -7,7 +7,7 @@ if (!defined('BASEPATH')) {
 /**
  * Activities service.
  */
-class Activities_service extends CI_Model
+class Activities_service extends Base_service
 {
     public function __construct()
     {
@@ -16,16 +16,28 @@ class Activities_service extends CI_Model
     }
 
     /**
-     * Get activities.
+     * Get by id
      *
-     * @param count
-     *
-     * @return activities
+     * @param $id
+     * @return $activity
      *
      * @author Leon
      */
-    public function getActivities($count)
+    public function getById($id)
     {
-        return $this->Activities_repository->getActivities($count);
+        return $this->Activities_repository->getById($id);
+    }
+
+    /**
+     * Get latest activities by count
+     *
+     * @param $count
+     * @return $activities
+     *
+     * @author Leon
+     */
+    public function getByOptions($count, $page)
+    {
+        return $this->Activities_repository->getByOptions($count, $count * ($page - 1));
     }
 }

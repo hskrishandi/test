@@ -7,14 +7,8 @@ if (!defined('BASEPATH')) {
 /**
  * This is a template repository, showing you how to write a repository.
  */
-class Template_repository extends CI_Model
+class Template_repository extends Base_repository
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
-    
     /**
      * This is a example function.
      *
