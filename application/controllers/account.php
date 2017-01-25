@@ -196,13 +196,8 @@ class account extends REST_Controller
      */
     private function deleteModelFromUserLibrary($userId)
     {
-        $modelId = $this->input->delete('modelId');
-        $name = $this->input->delete('name');
-
-        if ($userId != null) {
-            $this->body = $this->Account_Service->deleteModelFromUserLibrary($userId, $modelId, $name);
-        } else {
-            $this->status = 401;
-        }
+        $modelId = $this->delete('modelId');
+        $name = $this->delete('name');
+        $this->body = $this->Account_Service->deleteModelFromUserLibrary($userId, $modelId, $name);
     }
 }

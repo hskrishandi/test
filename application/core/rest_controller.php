@@ -177,6 +177,49 @@ class REST_Controller extends CI_Controller
         }
     }
 
+    private $delete = null;
+    /**
+     * Handle delete request
+     *
+     * @param $index
+     * @return $delete parameters
+     *
+     * @author Leon
+     */
+    protected function delete($index)
+    {
+        if ($this->delete) {
+            return $this->delete[$index];
+        } elseif ($this->method === 'DELETE') {
+            parse_str(file_get_contents("php://input"), $this->delete);
+            return $this->delete[$index];
+        } else {
+            return false;
+        }
+    }
+
+    private $put = null;
+    /**
+     * Handle put request
+     *
+     * @param $index
+     * @return $put parameters
+     *
+     * @author Leon
+     */
+    protected function put($index)
+    {
+        if ($this->put) {
+            return $this->put[$index];
+        } elseif ($this->method === 'PUT') {
+            parse_str(file_get_contents("php://input"), $this->put);
+            return $this->put[$index];
+        } else {
+            return false;
+        }
+    }
+
+
     /**
      * Check the request header
      *
@@ -188,7 +231,7 @@ class REST_Controller extends CI_Controller
         $this->method = strtoupper($this->input->server('REQUEST_METHOD'));
 
         // Validate the request headers
-        if (strtoupper($this->method) === "OPTIONS") {
+        if ($this->method === "OPTIONS") {
             //Handle CORS preflight, preflight request is using 'OPTION' method.
             // TODO: should verify this preflight header
             // Set response status code
@@ -201,10 +244,10 @@ class REST_Controller extends CI_Controller
             // How long the response to the preflight request can be cached
             header('Access-Control-Max-Age: 3600');
             // Allow custom headers, don't need right now.
-            header('Access-Control-Allow-Headers: Authorization');
+            header('Access-Control-Allow-Headers: Authorization, Content-Type');
             // DON'T USE $this->output->set_header('xxx') cuz we use exit.
             exit;
-        } elseif (!in_array(strtoupper($this->method), array_map('strtoupper', $this->allowed_http_methods))) {
+        } elseif (!in_array($this->method, array_map('strtoupper', $this->allowed_http_methods))) {
             // Check the HTTP methods, if not allowed, response 400 not supported.
             $this->exitWithStatus(405);
         }
