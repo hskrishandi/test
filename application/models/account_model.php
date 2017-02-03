@@ -5,7 +5,11 @@ class Account_model extends CI_Model {
 	{
 		parent::__construct();
 		require_once dirname(__FILE__) . '/includes/bootstrap.inc';
-		require_once dirname(__FILE__) . '/includes/password.inc';
+
+        // Change require_once password.inc to library Leon@20170203
+		// require_once dirname(__FILE__) . '/includes/password.inc';
+        $this->load->library('Password');
+
 		$this->load->database();
 		$this->load->library('email');
 		$this->load->library('session');

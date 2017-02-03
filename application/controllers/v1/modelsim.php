@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class modelsim extends CI_Controller {
+class modelsim extends REST_Controller {
 	private $uploadConfig;
 
 	public function __construct()
@@ -721,7 +721,11 @@ class modelsim extends CI_Controller {
     {
         //$this->output->set_header('Content-Type: application/json; charset=utf-8');
         //$this->output->set_output(json_encode($output));
-       	echo json_encode($output);
+        //echo json_encode($output);
+        
+        // To make the minimum changes to apply REST_Controller
+        $this->body = $output;
+        $this->response();
     }
 
 	private function getcsv($input, $delimiter=',', $enclosure='"', $escape=null, $eol=null) {
