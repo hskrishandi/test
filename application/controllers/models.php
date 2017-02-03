@@ -111,4 +111,34 @@ class models extends REST_Controller
         }
         $this->response();
     }
+
+    /**
+     * Simulate
+     *
+     * @return simulation id
+     *
+     * @author Leon
+     */
+    public function simulate()
+    {
+        $this->requireAuth();
+        if ($this->method == "POST") {
+            $modelId = $this->validateInteger($this->input->post('modelID'));
+            $biases = $this->input->post('biases', true);
+            $params = $this->input->post('params', true);
+            $biasingMode = $this->input->post('biasingMode', true);
+            $benchmarkingId = $this->input->post('$benchmarkingId', true);
+
+            $response = $this->Model_service->simulate($modelId, $biases, $params, $biasingMode, $benchmarkingId);
+
+            if ($response === false) {
+                $this->exitWithStatus(400);
+            } else {
+                $this->body = $response;
+            }
+        } else {
+            $this->status = 405;
+        }
+        $this->response();
+    }
 }

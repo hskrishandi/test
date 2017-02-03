@@ -173,9 +173,9 @@ class account extends REST_Controller
      */
     private function addModelToUserLibrary($userId)
     {
-        $modelId = $this->input->post('modelId');
-        $name = $this->input->post('name');
-        $data = $this->input->post('data');
+        $modelId = $this->validateInteger($this->input->post('modelId'));
+        $name = $this->validateString($this->input->post('name'));
+        $data = $this->validateString($this->input->post('data'));
 
         // TODO: may need data validation here
 
@@ -196,8 +196,8 @@ class account extends REST_Controller
      */
     private function deleteModelFromUserLibrary($userId)
     {
-        $modelId = $this->delete('modelId');
-        $name = $this->delete('name');
+        $modelId = $this->validateInteger($this->delete('modelId'));
+        $name = $this->validateString($this->delete('name'));
         $this->body = $this->Account_Service->deleteModelFromUserLibrary($userId, $modelId, $name);
     }
 }

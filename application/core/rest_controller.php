@@ -177,6 +177,24 @@ class REST_Controller extends CI_Controller
         }
     }
 
+    /**
+     * Validate string
+     *
+     * @param request parameter, default value
+     * @return number if valid, false if not valid
+     *
+     * @author Leon
+     */
+    protected function validateString($param, $default = '')
+    {
+        if ($param) {
+            // escape quotes
+            return mysql_real_escape_string($param);
+        } else {
+            return $default;
+        }
+    }
+
     private $delete = null;
     /**
      * Handle delete request
@@ -267,7 +285,7 @@ class REST_Controller extends CI_Controller
      *
      * @author Leon
      */
-    private function exitWithStatus($status = 400)
+    protected function exitWithStatus($status = 400)
     {
         $this->output->set_status_header($status);
         exit;

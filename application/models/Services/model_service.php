@@ -12,7 +12,10 @@ class Model_service extends Base_service
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Ngspice_model');
+        $this->load->model('Modelsim_model');
         $this->load->model('Repositories/Model_repository');
+        $this->load->library('parser');
         $this->load->helper('url');
     }
 
@@ -174,5 +177,173 @@ class Model_service extends Base_service
     public function getUserExperience($count)
     {
         return $this->Model_repository->getUserExperience($count);
+    }
+
+
+    /**
+     * Model simulaiton
+     *
+     * @note This funciton uses the 'old model' like Ngspice_model instead of
+     * Service and Repository.
+     * Modify from application/controllers/modelsim.php:520
+     *
+     * @param $modelId, $biases, $params, $biasingMode, $benchmarkingId
+     *
+     * @return simulation id
+     *
+     * @author Leon
+     */
+    public function simulate($modelId, $biases, $params, $biasingMode, $benchmarkingId = null)
+    {
+        if (!$modelID || !is_array($biases) || !is_array($params || !is_array($biases["variable"]))) {
+            return false;
+        }
+
+        //To prevent user wrongly type step = 0 or < 0.00001 which make server overload
+        foreach ($biases["variable"] as $vars) {
+            if (!is_numeric($var["step"]) || $var["step"] == 0 || abs($var["step"]) < 0.00001) {
+                return false;
+            } else {
+                $var["step"] = abs($var["step"]);
+                if (!isset($biases["fixed"])) {
+                    $biases["fixed"] = array();
+                }
+                if (!isset($params["model"])) {
+                    $params["model"] = array();
+                }
+                if (!isset($params["instance"])) {
+                    $params["instance"] = array();
+                }
+                foreach (array("model", "instance") as $arr) {
+                    foreach ($params[$arr] as $key => $param) {
+                        if (!isset($param["value"]) || trim($param["value"]) == '') {
+                            unset($params[$arr][$key]);
+                        }
+                    }
+                }
+                // Check biasing mode, and get netlist
+                if ($biasingMode == "General Biasing") {
+                    $netlist = $this->composeNetlist($modelID, $biases, $params);
+                } elseif ($biasingMode == "Benchmarking") {
+                    if ($benchmarkingId) {
+                        $netlist = $this->composeNetlist($modelID, $biases, $params, $benchmarkingId);
+                    } else {
+                        // No benchmarking id
+                        return false;
+                    }
+                } else {
+                    // No biasing mode, skip
+                    return false;
+                }
+                // Run simulation
+                if ($netlist != null) {
+                    $response = $this->Ngspice_model->simulate($netlist);
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        // $response would be simulation id
+        return $response;
+    }
+
+    /**
+     * Compose netlist using data
+     *
+     * @note This funciton uses the 'old model' like Ngspice_model instead of
+     * Service and Repository.
+     * modify from application/controllers/modelsim.php:638
+     * 
+     * @param $modelID, $biases, $params, $benchmarkID
+     *
+     * @return netlist
+     *
+     * @author Leon
+     */
+    private function composeNetlist($modelID, $biases, $params, $benchmarkID = -1)
+    {
+        // Get model info
+        $model_info = $this->Modelsim_model->getModelInfoById($modelID);
+        if ($model_info == null) {
+            return null;
+        }
+        // Check benchmarking info if benchmarkID exists
+        if ($benchmarkID != -1) {
+            $benchmark_info = $this->Modelsim_model->getBenchmarkingInfoById($benchmarkID);
+            if ($benchmark_info == null) {
+                return null;
+            }
+        }
+
+        // Construct input data for composing netlist
+        $input = array();
+        $input["prefix"] = $model_info->prefix;
+        $input["suffix"] = $model_info->suffix;
+        $input["mname"] = $input["type"] = $model_info->type;
+        //if $params["type"] != null, this means the model-id is 9 and need to set the type in netlist manually.
+        if ($params["type"] != null) {
+            $input["mname"] = $input["type"] = $params["type"];
+        }
+        $input["iname"] = substr($model_info->name, 0, 7 - strlen($input["suffix"]));
+
+        if ($benchmarkID == -1) {
+            $model_biases = $this->Modelsim_model->getModelBiases($modelID);
+            $model_outputs = $this->Modelsim_model->getModelOutputs($modelID);
+        } else {
+            $model_biases = $this->Modelsim_model->getBenchmarkingBiases($benchmarkID);
+            $model_outputs = $this->Modelsim_model->getBenchmarkingOutputs($benchmarkID, $modelID);
+            $model_ctrl = $this->Modelsim_model->getBenchmarkingControlSrc($benchmarkID, $modelID);
+            $m_outputs = $this->Modelsim_model->getModelOutputs($modelID);//newly added
+            foreach ($model_ctrl as $ctrl) {
+                $input['ctrlsources'][] = array("ctrlname" => $ctrl->ctrl_src, "bias" => $ctrl->bias, "indsource" => $ctrl->ind_src, "ctrlval" => $ctrl->ctrl_val);
+            }
+        }
+
+        $fixed_params = $this->Modelsim_model->getModelParams($modelID, false);
+
+        $outputs = ' ';
+        foreach ($model_outputs as $output) {
+            $outputs .= $this->parser->parse_string($output->variable, $input, true) . ' ';
+        }
+
+        //this part is newly added, $moutputs is added to fix bugs, $moutputs stand for model output while $outputs stand for model output when benchmarkID = -1 and benchmark output when benchmarkID != -1
+        if ($benchmarkID != -1) {
+            $outputs1 = ' ';
+            foreach ($m_outputs as $output) {
+                $outputs1 .= $this->parser->parse_string($output->variable, $input, true) . ' ';
+            }
+            $input['moutputs'] = $outputs1;
+        }
+
+        $input['outputs'] = $outputs;
+        $input['iparams'] = $params["instance"];
+        $input['mparams'] = $params["model"];
+        $input['varsources'] = $biases["variable"];
+        foreach ($fixed_params["instance"] as $param) {
+            $input['iparams'][] = array("name" => $param->name, "value" => $param->default);
+        }
+        foreach ($fixed_params["model"] as $param) {
+            $input['mparams'][] = array("name" => $param->name, "value" => $param->default);
+        }
+        $input['sources'] = array();
+        foreach ($model_biases as $bias) {
+            $input['sources'][] = array("name" => $bias->name, "value" => $bias->default);
+        }
+        foreach ($biases["fixed"] as $b2) {
+            foreach ($input['sources'] as $key => $bias) {
+                if ($b2["name"] == $bias["name"]) {
+                    $input['sources'][$key]["value"] = $b2["value"];
+                    break;
+                }
+            }
+        }
+
+        // Get netlist
+        if ($benchmarkID != -1) {
+            return $this->Ngspice_model->getNetlistForModelSim($input, $benchmark_info->name);
+        } else {
+            return $this->Ngspice_model->getNetlistForModelSim($input);
+        }
     }
 }

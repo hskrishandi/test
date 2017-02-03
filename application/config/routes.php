@@ -61,6 +61,9 @@ $route['account/library'] = "account/userLibrary";
 $route['models'] = "models/index";
 $route['models/(:num)'] = "models/index/$1";
 $route['models/random'] = "models/getRandomModels";
+$route['models/simulation'] = "models/simulate";
+$route['models/simulation/status'] = "v1/modelsim/simulationStatus";
+$route['models/simulation/data'] = "v1/modelsim/getData";
 
 // Resources
 $route['activities'] = "resources/index/activities";
