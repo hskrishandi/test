@@ -51,6 +51,8 @@ $route['404_override'] = 'home/notFound';
 // Auth
 $route['auth/login'] = "auth/login";
 $route['auth/logout'] = "auth/logout";
+$route['auth/register'] = "auth/register";
+$route['auth/reset'] = "auth/reset";
 
 // Users
 $route['account'] = "account/index";
