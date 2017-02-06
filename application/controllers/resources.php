@@ -114,7 +114,7 @@ class resources extends REST_Controller
      */
     public function getEvents()
     {
-        $count = $this->validateInteger($this->input->get('count'));
+        $count = $this->validateInteger($this->input->get('count'), 5);
         $page = $this->validateInteger($this->input->get('page'), 1);
         $this->body = $this->Events_service->getByOptions($count, $page);
     }
