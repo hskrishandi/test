@@ -84,6 +84,9 @@ $route['news/(:num)'] = "news/index/$1";
 $route['articles'] = "articles/index";
 $route['articles/(:num)'] = "articles/index/$1";
 
+// Device models
+$route['deviceModels'] = "deviceModels/getDeviceModels";
+
 
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";
