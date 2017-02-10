@@ -113,6 +113,26 @@ class models extends REST_Controller
     }
 
     /**
+     * Get user experiences
+     *
+     * @param $count
+     *
+     * @author Leon
+     */
+    public function getUserExperiences()
+    {
+        // TODO: add user experiences
+        if ($this->method == 'GET') {
+            $count = $this->validateInteger($this->input->get('count'), 2);
+            $this->body = $this->Model_service->getUserExperience($count);
+
+        } else {
+            $this->status = 405
+        }
+        $this->response();
+    }
+
+    /**
      * Simulate
      *
      * @return simulation id

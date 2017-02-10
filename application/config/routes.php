@@ -64,17 +64,25 @@ $route['models/random'] = "models/getRandomModels";
 $route['models/simulation'] = "v1/modelsim/simulate";
 $route['models/simulation/status'] = "v1/modelsim/simulationStatus";
 $route['models/simulation/data/(:any)/(:any)'] = "v1/modelsim/getData/$1/$2";
+$route['experiences'] = "models/getUserExperiences";
 
-// Resources
-$route['activities'] = "resources/index/activities";
-$route['activities/(:num)'] = "resources/index/activities/$1";
-$route['events'] = "resources/index/events";
-$route['events/(:num)'] = "resources/index/events/$1";
-$route['events/upcoming'] = "resources/index/upcomingEvents";
-$route['events/past'] = "resources/index/pastEvents";
-$route['news'] = "resources/index/news";
-$route['news/(:num)'] = "resources/index/news/$1";
-$route['experiences'] = "resources/index/userExperiences";
+// Activities
+$route['activities'] = "activities/index";
+$route['activities/(:num)'] = "activities/index/$1";
+
+// Events
+$route['events'] = "events/index";
+$route['events/(:num)'] = "events/index/$1";
+$route['events/upcoming'] = "events/getUpcomingEvents";
+$route['events/past'] = "events/getPastEvents";
+
+// News
+$route['news'] = "news/index";
+$route['news/(:num)'] = "news/index/$1";
+
+// Articles
+$route['articles'] = "articles/index";
+$route['articles/(:num)'] = "articles/index/$1";
 
 
 // All other not registerd routes
