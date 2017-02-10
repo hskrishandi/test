@@ -127,7 +127,7 @@ class models extends REST_Controller
             $this->body = $this->Model_service->getUserExperience($count);
 
         } else {
-            $this->status = 405
+            $this->status = 405;
         }
         $this->response();
     }
