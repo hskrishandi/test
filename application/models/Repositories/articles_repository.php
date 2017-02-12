@@ -20,7 +20,7 @@ class Articles_repository extends Base_repository
     public function getById($id)
     {
         $this->db
-        ->select('*')
+        ->select('id, name, author, publisher, year, summary, website, article_name, article_link, type')
         ->from('articles')
         ->where('id', $id);
         return $this->db->get()->row();
@@ -36,7 +36,8 @@ class Articles_repository extends Base_repository
      */
     public function getByOptions($limit = 0, $offset = 0, $showDeleted = 0)
     {
-        $this->db->select('*')
+        $this->db
+        ->select('id, name, author, publisher, year, summary, website, article_name, article_link, type')
         ->from('articles')
         ->where(array("approval_status"=> 1,"del_status"=>$showDeleted))
         ->order_by("year desc")
