@@ -85,7 +85,12 @@ $route['articles'] = "articles/index";
 $route['articles/(:num)'] = "articles/index/$1";
 
 // Device models
+// TODO: handle post
 $route['deviceModels'] = "deviceModels/getDeviceModels";
+
+// Tools
+// TODO: handle post
+$route['tools'] = "tools/getTools";
 
 
 // All other not registerd routes
