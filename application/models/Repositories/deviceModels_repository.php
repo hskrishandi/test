@@ -19,7 +19,7 @@ class DeviceModels_repository extends Base_repository
     public function getByOptions($limit = 0, $offset = 0, $showDeleted = 0)
     {
         $this->db
-        ->select('*')
+        ->select('id, name, author, website, status')
         ->from('device_models')
         ->order_by("name asc")
         ->limit($limit, $offset);
