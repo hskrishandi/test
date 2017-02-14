@@ -49,6 +49,8 @@ class Account_repository extends Base_repository
      */
     public function addModelToUserLibrary($userId, $modelId, $name, $data)
     {
+        $name = $this->db->escape_str($name);
+        $data = $this->db->escape_str($data);
         return $this->db->query("
             INSERT INTO
                 user_param_sets
@@ -68,6 +70,7 @@ class Account_repository extends Base_repository
      */
     public function deleteModelFromUserLibrary($userId, $modelId, $name)
     {
+        $name = $this->db->escape_str($name);
         return $this->db->query("
             DELETE FROM
                 user_param_sets

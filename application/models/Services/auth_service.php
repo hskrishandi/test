@@ -23,6 +23,8 @@ class Auth_service extends CI_Model
         $this->load->model('Repositories/Auth_repository');
         $this->load->library('Password');
         $this->load->library('session');
+        $this->load->library('email');
+        $this->load->helper('url');
     }
 
     /**
@@ -135,5 +137,90 @@ class Auth_service extends CI_Model
     public function getLoginedUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Register
+     *
+     * @param register data
+     * @return bool
+     *
+     * @author Leon
+     */
+    public function register($data)
+    {
+        // Check the email if registered
+        if ($this->isRegisteredEmail($data['email'])) {
+            log_message('error', 'Register failed: The E-MAIL ADDRESS is ready registered. ' . $data['email']);
+            return array(406 => 'The E-MAIL ADDRESS is already registered. Please enter another E-MAIL address. If you forgot the password of this account, please request new password.');
+        }
+
+        unset($data['retypepassword']);
+        $password = new Password($data['password']);
+        // Encrypt plain text password
+        $data['password'] = $password->encrypt();
+        // Create user and get user id.
+        $id = $this->Auth_repository->createUser($data);
+        if ($id) {
+            // Create activation with uuid
+            $uuid = uniqid();
+            $success = $this->Auth_repository->createActivation($uuid, $id);
+            if ($success) {
+                // Send activation email
+                $this->sendActivationEmail($data['email'], $data['last_name'], $data['first_name'], $uuid);
+            } else {
+                log_message('error', 'Register failed: failed to create activation' . $data['email']);
+                return false;
+            }
+        } else {
+            log_message('error', 'Register failed: failed to create user. ' . $data['email']);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Send activation email
+     *
+     * @param email, lastname, firstname, uuid
+     * @return bool
+     *
+     * @author Leon
+     */
+    private function sendActivationEmail($email, $lastname, $firstname, $uuid)
+    {
+        $config['mailtype']='html';
+        $this->email->initialize($config);
+        $this->email->from("info@i-mos.org", 'i-MOS');
+        $this->email->to($email);
+        $this->email->subject("[i-MOS]Account Activation");
+        $url = base_url('/auth/activate/') . "/$uuid";
+        $msg = "Dear $firstname $lastname, <br /> <br />
+                Thank you for registering with i-MOS. Please click the following link to activate your account: <br />
+                $url<br /><br />
+                Best Regards,<br />
+                i-MOS Team";
+        $this->email->message($msg);
+        if (!$this->email->send()) {
+            log_message('error', 'Register failed: failed to send activation email ' . $email);
+        }
+    }
+
+    /**
+     * Is registered email
+     *
+     * @param email
+     * @return bool
+     *
+     * @author Leon
+     */
+    private function isRegisteredEmail($email)
+    {
+        $user = $this->Auth_repository->fetchUserByEmail($email);
+        if (count($user) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

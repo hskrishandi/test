@@ -9,6 +9,13 @@ if (!defined('BASEPATH')) {
  */
 class auth extends REST_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('form_validation');
+        $this->config->load('account_create_form');
+    }
+
     /**
      * Login
      *
@@ -62,7 +69,25 @@ class auth extends REST_Controller
      */
     public function register()
     {
-        // TODO: register
+        if ($this->method == "POST") {
+            // Form validation
+            $form = $this->config->item('account_create_form');
+            $this->form_validation->set_rules($form);
+            $valid = $this->form_validation->run();
+            if ($valid) {
+                // Valid input
+                foreach ($form as $key) {
+                    $registerData[$key['field']] = $this->input->post($key['field']);
+                }
+                $this->body = $this->Auth_service->register($registerData);
+            } else {
+                // Invalid input
+                $this->status = 400;
+            }
+        } else {
+            $this->status = 405;
+        }
+        $this->response();
     }
 
     /**
@@ -86,7 +111,7 @@ class auth extends REST_Controller
      *
      * @author Leon
      */
-    public function activate()
+    public function activate($uuid)
     {
         // TODO: activate account
     }

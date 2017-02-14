@@ -4,7 +4,8 @@ class Account_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		require_once dirname(__FILE__) . '/includes/bootstrap.inc';
+        // Change require_once bootstrap.inc to application/libraries Leon@20170214
+		// require_once dirname(__FILE__) . '/includes/bootstrap.inc';
 
         // Change require_once password.inc to library Leon@20170203
 		// require_once dirname(__FILE__) . '/includes/password.inc';
