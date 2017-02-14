@@ -75,6 +75,53 @@ class REST_Controller extends CI_Controller
     protected $allowed_http_methods = array('get', 'delete', 'post', 'put');
 
     /**
+     * List of allowed HTTP status codes
+     *
+     * @author Leon
+     */
+    protected $httpStatusCodes = array(
+        200 => 'OK',
+        201 => 'Created',
+        202 => 'Accepted',
+        203 => 'Non-Authoritative Information',
+        204 => 'No Content',
+        205 => 'Reset Content',
+        206 => 'Partial Content',
+
+        300 => 'Multiple Choices',
+        301 => 'Moved Permanently',
+        302 => 'Found',
+        304 => 'Not Modified',
+        305 => 'Use Proxy',
+        307 => 'Temporary Redirect',
+
+        400 => 'Bad Request',
+        401 => 'Unauthorized',
+        403 => 'Forbidden',
+        404 => 'Not Found',
+        405 => 'Method Not Allowed',
+        406 => 'Not Acceptable',
+        407 => 'Proxy Authentication Required',
+        408 => 'Request Timeout',
+        409 => 'Conflict',
+        410 => 'Gone',
+        411 => 'Length Required',
+        412 => 'Precondition Failed',
+        413 => 'Request Entity Too Large',
+        414 => 'Request-URI Too Long',
+        415 => 'Unsupported Media Type',
+        416 => 'Requested Range Not Satisfiable',
+        417 => 'Expectation Failed',
+
+        500 => 'Internal Server Error',
+        501 => 'Not Implemented',
+        502 => 'Bad Gateway',
+        503 => 'Service Unavailable',
+        504 => 'Gateway Timeout',
+        505 => 'HTTP Version Not Supported'
+    );
+
+    /**
      * Constructor
      * Get header data such as method and token
      * Init some data
@@ -106,14 +153,18 @@ class REST_Controller extends CI_Controller
             } elseif ($this->body === false) {
                 // if the body is false without any other contents
                 $this->status = 500;
-            } elseif (is_array($this->body) && key($this->body) === 401) {
-                // if authentication has errors
-                $this->status = 401;
-                $this->output->set_output(json_encode(current($this->body))); // 128 for JSON_PRETTY_PRINT
+                log_message('error', 'Response error: content body is false.');
+            } elseif (is_array($this->body) && is_numeric(key($this->body)) && array_key_exists(key($this->body), $this->httpStatusCodes)) {
+                // if body contains http code, such as array(401 => "Invalid password")
+                $this->status = key($this->body);
+                $this->output->set_output(json_encode(current($this->body)));
             } elseif ($this->body !== null && $this->body !== false) {
                 // if nothing goes wrong
                 $this->status = 200;
-                $this->output->set_output(json_encode($this->body)); // 128 for JSON_PRETTY_PRINT
+                $this->output->set_output(json_encode($this->body));
+            } else {
+                $this->status = 500;
+                log_message('error', 'Response error: unknown situation for response.');
             }
             // Set content type
             $this->output->set_content_type($this->contentType);
@@ -181,12 +232,13 @@ class REST_Controller extends CI_Controller
      * Validate string
      *
      * @param request parameter, default value
-     * @return number if valid, false if not valid
+     * @return string if valid, false if not valid
      *
      * @author Leon
      */
     protected function validateString($param, $default = '')
     {
+        // TODO: add RE here to validate string
         if ($param) {
             // escape quotes
             return mysql_real_escape_string($param);

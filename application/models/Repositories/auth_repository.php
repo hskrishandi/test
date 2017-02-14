@@ -113,4 +113,45 @@ class Auth_repository extends CI_Model
                 sessionid = '$token';
         ")->result();
     }
+
+    /**
+     * Fetch user by email
+     *
+     * @param type $param
+     * @return $value
+     *
+     * @author Leon
+     */
+    public function fetchUserByEmail($email)
+    {
+        $this->db->select('id')->from('users')->where(array("email" => $email));
+        return $this->db->get()->result_array();
+    }
+
+    /**
+     * Create user
+     *
+     * @param data
+     * @return $id
+     *
+     * @author Leon
+     */
+    public function createUser($data)
+    {
+        $this->db->insert('users', $data);
+        return $this->db->insert_id();
+    }
+
+    /**
+     * Create activation
+     *
+     * @param $uuid, $userId
+     * @return bool
+     *
+     * @author Leon
+     */
+    public function createActivation($uuid, $userId)
+    {
+        return $this->db->insert('activation_page', array("page" => $uuid, "id" => $userId));
+    }
 }

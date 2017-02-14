@@ -53,6 +53,7 @@ $route['auth/login'] = "auth/login";
 $route['auth/logout'] = "auth/logout";
 $route['auth/register'] = "auth/register";
 $route['auth/reset'] = "auth/reset";
+$route['auth/activate/(:any)'] = "auth/activate/$1";
 
 // Users
 $route['account'] = "account/index";
