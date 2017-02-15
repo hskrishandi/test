@@ -173,7 +173,6 @@ class Auth_repository extends CI_Model
             SET isactivated = 1
             WHERE id = $userId;
         ");
-        // return $this->db->update_string('users', array('isactivated' => 1), "id = $userId");
     }
 
     /**
