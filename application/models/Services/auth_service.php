@@ -223,4 +223,32 @@ class Auth_service extends CI_Model
             return false;
         }
     }
+
+    /**
+     * Activate account
+     *
+     * @param $uuid
+     * @return bool
+     *
+     * @author Leon
+     */
+    public function activateAccount($uuid)
+    {
+        // Get user by uuid
+        $user = $this->Auth_repository->fetchActivation($uuid);
+        // If user exists in activation
+        if (count($user) > 0) {
+            // Update the user to activated
+            $success = $this->Auth_repository->activateAccount(current($user)->id);
+            if ($success) {
+                // Delete the the activation
+                $this->Auth_repository->deleteActivation($uuid);
+                return array(200 => "Congratulations, your account is activated!");
+            } else {
+                return array(406 => "Oops! Something went wrong while activating your account, please contact us.");
+            }
+        } else {
+            return array(406 => "Oops! Something went wrong while activating your account, please contact us.");
+        }
+    }
 }

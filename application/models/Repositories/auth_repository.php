@@ -124,7 +124,10 @@ class Auth_repository extends CI_Model
      */
     public function fetchUserByEmail($email)
     {
-        $this->db->select('id')->from('users')->where(array("email" => $email));
+        $this->db
+        ->select('id')
+        ->from('users')
+        ->where(array("email" => $email));
         return $this->db->get()->result_array();
     }
 
@@ -153,5 +156,57 @@ class Auth_repository extends CI_Model
     public function createActivation($uuid, $userId)
     {
         return $this->db->insert('activation_page', array("page" => $uuid, "id" => $userId));
+    }
+
+    /**
+     * Activate account
+     *
+     * @param $userId
+     * @return $value
+     *
+     * @author Leon
+     */
+    public function activateAccount($userId)
+    {
+        return $this->db->query("
+            UPDATE users
+            SET isactivated = 1
+            WHERE id = $userId;
+        ");
+        // return $this->db->update_string('users', array('isactivated' => 1), "id = $userId");
+    }
+
+    /**
+     * Fetch activation
+     *
+     * @param $uuid
+     * @return $userId
+     *
+     * @author Leon
+     */
+    public function fetchActivation($uuid)
+    {
+        return $this->db->query("
+            SELECT
+                id
+            FROM
+                activation_page
+            WHERE
+                page = '$uuid';
+        ")->result();
+    }
+
+    /**
+     * Delete activation
+     *
+     * @param $uuid
+     * @return bool
+     *
+     * @author Leon
+     */
+    public function deleteActivation($uuid)
+    {
+        return $this->db
+        ->delete("activation_page", array("page" => $uuid));
     }
 }
