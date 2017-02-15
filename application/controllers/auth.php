@@ -62,8 +62,7 @@ class auth extends REST_Controller
     /**
      * Register
      *
-     * @param $param
-     * @return $value
+     * @param register data
      *
      * @author Leon
      */
@@ -94,7 +93,6 @@ class auth extends REST_Controller
      * Reset passord
      *
      * @param type $param
-     * @return $value
      *
      * @author Leon
      */
@@ -106,13 +104,19 @@ class auth extends REST_Controller
     /**
      * Activate account
      *
-     * @param type $param
-     * @return $value
+     * @param $uuid
      *
      * @author Leon
      */
     public function activate($uuid)
     {
-        // TODO: activate account
+        // User will click the activation email, so it will be a 'GET' mehod
+        if ($this->method == "GET") {
+                // TODO: Should do some redirect to frontend
+            $this->body = $this->Auth_service->activateAccount($uuid);
+        } else {
+            $this->status = 405;
+        }
+        $this->response();
     }
 }
