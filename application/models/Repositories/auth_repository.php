@@ -7,14 +7,8 @@ if (!defined('BASEPATH')) {
 /**
  * Auth repository.
  */
-class Auth_repository extends CI_Model
+class Auth_repository extends Base_repository
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
-
     /**
      * Fetch auth user by email
      *
@@ -115,20 +109,24 @@ class Auth_repository extends CI_Model
     }
 
     /**
-     * Fetch user by email
+     * Fetch user id by email
      *
-     * @param type $param
-     * @return $value
+     * @param $email
+     * @return userId
      *
      * @author Leon
      */
     public function fetchUserByEmail($email)
     {
-        $this->db
-        ->select('id')
-        ->from('users')
-        ->where(array("email" => $email));
-        return $this->db->get()->result_array();
+        return $this->db->query("
+            SELECT
+                id,
+                displayname
+            FROM
+                users
+            WHERE
+                email = '$email';
+        ")->result();
     }
 
     /**
@@ -207,5 +205,22 @@ class Auth_repository extends CI_Model
     {
         return $this->db
         ->delete("activation_page", array("page" => $uuid));
+    }
+
+    /**
+     * Update password
+     *
+     * @param $userId, $password
+     * @return bool
+     *
+     * @author Leon
+     */
+    public function updatePassword($userId, $password)
+    {
+        return $this->db->query("
+            UPDATE users
+            SET password = '$password'
+            WHERE id = $userId;
+        ");
     }
 }

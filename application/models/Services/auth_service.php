@@ -7,7 +7,7 @@ if (!defined('BASEPATH')) {
 /**
  * This is a auth service.
  */
-class Auth_service extends CI_Model
+class Auth_service extends Base_service
 {
 
     /**
@@ -180,6 +180,24 @@ class Auth_service extends CI_Model
     }
 
     /**
+     * Is registered email
+     *
+     * @param email
+     * @return bool
+     *
+     * @author Leon
+     */
+    private function isRegisteredEmail($email)
+    {
+        $user = $this->Auth_repository->fetchUserByEmail($email);
+        if (count($user) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Send activation email
      *
      * @param email, lastname, firstname, uuid
@@ -207,24 +225,6 @@ class Auth_service extends CI_Model
     }
 
     /**
-     * Is registered email
-     *
-     * @param email
-     * @return bool
-     *
-     * @author Leon
-     */
-    private function isRegisteredEmail($email)
-    {
-        $user = $this->Auth_repository->fetchUserByEmail($email);
-        if (count($user) > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Activate account
      *
      * @param $uuid
@@ -248,7 +248,70 @@ class Auth_service extends CI_Model
                 return array(406 => "Oops! Something went wrong while activating your account, please contact us.");
             }
         } else {
-            return array(406 => "Oops! Something went wrong while activating your account, please contact us.");
+            return array(406 => "Oops! The link is invalid, please contact us.");
+        }
+    }
+
+    /**
+     * Reset password
+     *
+     * @param $email
+     * @return bool
+     *
+     * @author Leon
+     */
+    public function resetPassword($email)
+    {
+        $user = $this->Auth_repository->fetchUserByEmail($email);
+        if (count($user) > 0) {
+            // Create new password class
+            $password = new Password();
+            // Generate password, length is 8
+            $password->generate(8);
+            // Update password, the password is encrypted
+            $user = current($user);
+            $success = $this->Auth_repository->updatePassword($user->id, $password->encrypt());
+            if ($success) {
+                // Send email
+                $this->sendResetPasswordEmail($email, $user->displayname, $password->pass);
+                return array(200 => "Congratulations, your password is reset, please check the email.");
+            } else {
+                return array(406 => "Oops! Something went wrong while reseting your password, please contact us.");
+            }
+        } else {
+            return array(406 => "Oops! Something went wrong while reseting your password, please contact us.");
+        }
+    }
+
+    /**
+     * Send reset password email
+     *
+     * @param $email $name, $password
+     * @return bool
+     *
+     * @author Leon
+     */
+    private function sendResetPasswordEmail($email, $name, $password)
+    {
+        $config['mailtype']='html';
+        $this->email->initialize($config);
+        $this->email->from("info@i-mos.org", 'i-MOS');
+        $this->email->to($email);
+        $this->email->subject("[i-MOS]New Password");
+        $msg = "Dear $name, <br />
+                <br />
+                The new password of your i-MOS account is given below: <br />
+                <br />
+                Email: $email <br />
+                Password: $password <br />
+                <br />
+                Please change your password as soon as possible.<br />
+                <br />
+                Best Regards,<br />
+                i-MOS Team";
+        $this->email->message($msg);
+        if (!$this->email->send()) {
+            log_message('error', 'Reset password failed: failed to send reset password email. ' . $email);
         }
     }
 }

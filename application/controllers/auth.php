@@ -90,18 +90,6 @@ class auth extends REST_Controller
     }
 
     /**
-     * Reset passord
-     *
-     * @param type $param
-     *
-     * @author Leon
-     */
-    public function resetPassword()
-    {
-        // TODO: reset password
-    }
-
-    /**
      * Activate account
      *
      * @param $uuid
@@ -112,8 +100,30 @@ class auth extends REST_Controller
     {
         // User will click the activation email, so it will be a 'GET' mehod
         if ($this->method == "GET") {
-                // TODO: Should do some redirect to frontend
+            // TODO: Should do some redirect to frontend, or the link should be frontend link
             $this->body = $this->Auth_service->activateAccount($uuid);
+        } else {
+            $this->status = 405;
+        }
+        $this->response();
+    }
+
+    /**
+     * Reset passord
+     *
+     * @param type $param
+     *
+     * @author Leon
+     */
+    public function resetPassword()
+    {
+        if ($this->method == "POST") {
+            $email = $this->input->post('email');
+            if ($email) {
+                $this->body = $this->Auth_service->resetPassword($email);
+            } else {
+                $this->status = 400;
+            }
         } else {
             $this->status = 405;
         }
