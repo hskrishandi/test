@@ -95,6 +95,7 @@ $route['deviceModels'] = "deviceModels/getDeviceModels";
 // TODO: handle post
 $route['tools'] = "tools/getTools";
 
+$route['organizations']= "organizations/getOrganizations";
 
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";
