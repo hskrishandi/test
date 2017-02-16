@@ -7,11 +7,11 @@ if (!defined('BASEPATH')) {
 class Organizations_repository extends Base_repository
 {
     /**
-     * Get tools
+     * Get Organizations
      *
-     * @return tools
+     * @return Organizations
      *
-     * @author Leon
+     * @author Alex
      */
     public function getByOptions($limit = 0, $offset = 0, $showDeleted = 0)
     {

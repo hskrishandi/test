@@ -13,11 +13,11 @@ class Organizations extends REST_Controller
     }
 
     /**
-     * Get tools
+     * Get Organizations
      *
-     * @author Leon
+     * @author Alex
      */
-    public function getTools()
+    public function getOrganizations()
     {
         if ($this->method = 'GET') {
             $count = $this->validateInteger($this->input->get('count'), 5);

@@ -13,11 +13,11 @@ class Organizations_service extends Base_service
     }
 
     /**
-     * Get tools
+     * Get Organizations
      *
-     * @return tools
+     * @return Organizations
      *
-     * @author Leon
+     * @author Alex
      */
     public function getByOptions($count, $page)
     {
