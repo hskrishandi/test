@@ -60,6 +60,9 @@ $route['account'] = "account/index";
 $route['account/brief'] = "account/getUserBriefInfo";
 $route['account/library'] = "account/userLibrary";
 
+// Contact us
+$route['contacts'] = "contacts/createContact";
+
 // Models
 $route['models'] = "models/index";
 $route['models/(:num)'] = "models/index/$1";
@@ -95,6 +98,7 @@ $route['deviceModels'] = "deviceModels/getDeviceModels";
 // TODO: handle post
 $route['tools'] = "tools/getTools";
 
+// organizations
 $route['organizations']= "organizations/getOrganizations";
 
 // All other not registerd routes
