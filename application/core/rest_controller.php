@@ -241,7 +241,7 @@ class REST_Controller extends CI_Controller
         // TODO: add RE here to validate string
         if ($param) {
             // escape quotes
-            return mysql_real_escape_string($param);
+            return $param;
         } else {
             return $default;
         }
