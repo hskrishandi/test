@@ -174,6 +174,7 @@ class Model_repository extends Base_repository
      */
     public function getDescriptionByName($name)
     {
+        $name = $this->db->escape_str($name);
         $description = new stdClass(); // Create new class
         // Read model descriptions
         $description->description = read_file('application/views/models/descriptions/' . $name . '/description.php');

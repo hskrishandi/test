@@ -17,6 +17,11 @@ class Contacts_repository extends Base_repository
      */
     public function saveContact($email, $name, $affiliation, $subject, $message)
     {
+        $email = $this->db->escape_str($email);
+        $name = $this->db->escape_str($name);
+        $affiliation = $this->db->escape_str($affiliation);
+        $subject = $this->db->escape_str($subject);
+        $message = $this->db->escape_str($message);
         $data = array('name' => $name, 'affiliation' => $affiliation, 'email' => $email, 'subject' => $subject, 'msg' => $message);
         return $this->db->insert('contacts', $data);
     }
