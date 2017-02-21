@@ -20,6 +20,7 @@ class Auth_repository extends Base_repository
      */
     public function getAuthUserByEmail($email = '')
     {
+        $email = $this->db->escape_str($email);
         return $this->db->query("
             SELECT
                 id,
@@ -83,6 +84,7 @@ class Auth_repository extends Base_repository
      */
     public function fetchAuthUserByToken($token = '')
     {
+        $token = $this->db->escape_str($token);
         return $this->db->query("
             SELECT
                 id,
@@ -118,6 +120,7 @@ class Auth_repository extends Base_repository
      */
     public function fetchUserByEmail($email)
     {
+        $email = $this->db->escape_str($email);
         return $this->db->query("
             SELECT
                 id,
@@ -139,6 +142,7 @@ class Auth_repository extends Base_repository
      */
     public function createUser($data)
     {
+        $data = $this->db->escape_str($data);
         $this->db->insert('users', $data);
         return $this->db->insert_id();
     }
@@ -183,6 +187,7 @@ class Auth_repository extends Base_repository
      */
     public function fetchActivation($uuid)
     {
+        $uuid = $this->db->escape_str($uuid);
         return $this->db->query("
             SELECT
                 id
@@ -203,6 +208,7 @@ class Auth_repository extends Base_repository
      */
     public function deleteActivation($uuid)
     {
+        $uuid = $this->db->escape_str($uuid);
         return $this->db
         ->delete("activation_page", array("page" => $uuid));
     }
@@ -217,6 +223,7 @@ class Auth_repository extends Base_repository
      */
     public function updatePassword($userId, $password)
     {
+        $password = $this->db->escape_str($password);
         return $this->db->query("
             UPDATE users
             SET password = '$password'
