@@ -66,7 +66,7 @@ class activities extends REST_Controller
      */
     public function getActivities()
     {
-        $count = $this->validateInteger($this->input->get('count'));
+        $count = $this->validateInteger($this->input->get('count'), 6);
         $page = $this->validateInteger($this->input->get('page'), 1);
         $this->body = $this->Activities_service->getByOptions($count, $page);
     }
