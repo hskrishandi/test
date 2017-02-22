@@ -101,6 +101,10 @@ $route['tools'] = "tools/getTools";
 // organizations
 $route['organizations']= "organizations/getOrganizations";
 
+// Discussion
+$route['discussion'] = "discussion/index";
+$route['discussion/(:num)'] = "discussion/index/$1";
+
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";
 
