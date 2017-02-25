@@ -359,7 +359,7 @@ class REST_Controller extends CI_Controller
     private function utf8_encode_all($dat)
     {
         if (is_string($dat)) {
-            return utf8_encode($dat);
+            return mb_convert_encoding($dat, 'UTF-8', 'UTF-8');
         }
         if (!is_array($dat)) {
             return $dat;
@@ -367,29 +367,6 @@ class REST_Controller extends CI_Controller
         $ret = array();
         foreach ($dat as $i=>$d) {
             $ret[$i] = $this->utf8_encode_all($d);
-        }
-        return $ret;
-    }
-
-    /**
-     * It returns $dat decoded from UTF8
-     *
-     * @param utf8 string/array
-     * @return origin string/array
-     *
-     * @source http://php.net/manual/en/function.json-encode.php
-     */
-    private function utf8_decode_all($dat)
-    {
-        if (is_string($dat)) {
-            return utf8_decode($dat);
-        }
-        if (!is_array($dat)) {
-            return $dat;
-        }
-        $ret = array();
-        foreach ($dat as $i=>$d) {
-            $ret[$i] = $this->utf8_decode_all($d);
         }
         return $ret;
     }
