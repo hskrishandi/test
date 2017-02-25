@@ -144,7 +144,6 @@ class REST_Controller extends CI_Controller
      */
     protected function response()
     {
-        $this->body = $this->utf8_encode_all($this->body);
         // Status code is not set, else just response the error code, so
         // we say that "status code > body"
         if ($this->status === null) {
@@ -342,32 +341,5 @@ class REST_Controller extends CI_Controller
     {
         $this->output->set_status_header($status);
         exit;
-    }
-
-    /**
-     * Because json_encode() only deals with utf8, it is often necessary to
-     * convert all the string values inside an array to utf8.
-     * I've created these two functions:
-     *
-     * It returns $dat encoded to UTF8
-     *
-     * @param string/array
-     * @return utf8 string/array
-     *
-     * @source http://php.net/manual/en/function.json-encode.php
-     */
-    private function utf8_encode_all($dat)
-    {
-        if (is_string($dat)) {
-            return mb_convert_encoding($dat, 'UTF-8', 'UTF-8');
-        }
-        if (!is_array($dat)) {
-            return $dat;
-        }
-        $ret = array();
-        foreach ($dat as $i=>$d) {
-            $ret[$i] = $this->utf8_encode_all($d);
-        }
-        return $ret;
     }
 }

@@ -30,6 +30,7 @@ class Discussions_service extends Base_service
             $discussion->avatar = !empty($discussion->avatar) ? resource_url('user_img', $discussion->avatar) : resource_url('img', 'usericon.gif');
             // Remove html tags and html entity, trim the content to be shorter
             $discussion->content = preg_replace('/\s+?(\S+)?$/', '', substr(strip_tags(html_entity_decode($discussion->content)), 0, 100)).' ...';
+            $discussion->content = trim($discussion->content, chr(0xC2).chr(0xA0));
         }
         return $discussions;
     }
