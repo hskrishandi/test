@@ -305,7 +305,7 @@ ko.bindingHandlers.showExamples = {
 			type: 'GET',
 			success: function(data){
 				try {
-					data = JSON.parse(data);
+					data = _safelyParseJSON(data);
 				} catch(err) { alert("cannot parse");}
 				if(data.length){
 					//viewModels.sim.hasExampleBoxFileList(true);
@@ -525,7 +525,7 @@ ko.bindingHandlers.modelLibEntry = {
 								$("#model-tabs").tabs("option", "active", 1);
 								$("#param-tabs").tabs("option", "active", 1);
 								try {
-									result = JSON.parse(result);
+									result = _safelyParseJSON(result);
 								} catch (err) {
 								}
 								viewModels.sim.loadParams(result);
@@ -685,4 +685,16 @@ ko.bindingHandlers.modelLibMenu = {
  function onVersionSelectionChanged(selected) {
  	var model_id = selected.value;
  	window.location = ROOT + "/model/" + model_id;
+ }
+
+ function _safelyParseJSON(json) {
+     let parsed = null
+     try {
+         // if it is json string
+         parsed = JSON.parse(json)
+     } catch (e) {
+         // if it is json object
+         parsed = json
+     }
+     return parsed
  }

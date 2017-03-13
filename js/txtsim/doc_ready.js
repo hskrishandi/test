@@ -223,7 +223,7 @@ $(document).ready(function() {
 		url: CI_ROOT + "txtsim/loadNetlist",
 		load: function(data) {
 			try {
-				result = JSON.parse(data.netlist);
+				result = _safelyParseJSON(data.netlist);
 				$('#srcNetlist').val(result.netlist);
 				$("#srcNetlist").trigger('autosize');
 				$('#srcAnalyses').val(result.analyses);
@@ -286,7 +286,7 @@ $.fn.RAWUpload = function(url, callback) {
 	$('iframe[name=my_iframe]').html("").unbind("load").load(function() {
 		var result = $('iframe[name=my_iframe]').contents().text();
 		try {
-			result = JSON.parse(result);
+			result = _safelyParseJSON(result);
 			callback(result);
 		} catch (err) {};
 	});
@@ -550,7 +550,7 @@ var MODEL_ID = 0;
 				},
 				success: function(data) {
 					try {
-						data = JSON.parse(data);
+						data = _safelyParseJSON(data);
 					} catch (err) {}
 					if (_statushandler(sender, data)) {
 						console.log(data);
@@ -661,7 +661,7 @@ var MODEL_ID = 0;
 				}).done(function(data) {
 					try {
 						console.log(data);
-						data = JSON.parse(data);
+						data = _safelyParseJSON(data);
 					} catch (err) {
 						console.log("fail!!!");
 					}
@@ -710,3 +710,15 @@ var MODEL_ID = 0;
 	};
 
 }(jQuery));
+
+function _safelyParseJSON(json) {
+    let parsed = null
+    try {
+        // if it is json string
+        parsed = JSON.parse(json)
+    } catch (e) {
+        // if it is json object
+        parsed = json
+    }
+    return parsed
+}

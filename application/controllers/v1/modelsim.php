@@ -124,7 +124,7 @@ class modelsim extends REST_Controller {
 	public function modelCardinfo2($card_name)
 	{
 		// $user_info = $this->Account_model->isLogin();
-        $this->requireAuthForOldSystem();
+        $this->requireAuth();
 		$user_info = $this->getAuthUser(); // Leon
 		$response = null;
 
@@ -152,7 +152,7 @@ class modelsim extends REST_Controller {
     public function modelLibrary($method, $id = 0)
     {
         // $user_info = $this->Account_model->isLogin();
-        $this->requireAuthForOldSystem();
+        $this->requireAuth();
         $user_info = $this->getAuthUser(); // Leon
         $response = null;
         if ($user_info) {
@@ -487,7 +487,7 @@ class modelsim extends REST_Controller {
 
 	public function modelDetails($model_id)
 	{
-        $this->requireAuthForOldSystem(); // Leon
+        $this->requireAuth(); // Leon
 		$response = null;
 		// if ($this->Account_model->isLogin()) {
 				$model_info = $this->Modelsim_model->getModelInfoById($model_id);
@@ -510,7 +510,7 @@ class modelsim extends REST_Controller {
 	public function modelInstanceParams($model_id)
 	{
         $response = null;
-        $this->requireAuthForOldSystem(); // Leon
+        $this->requireAuth(); // Leon
 		// if ($this->Account_model->isLogin()) {
 			$model_info = $this->Modelsim_model->getModelInfoById($model_id);
 			$response = array(

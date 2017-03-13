@@ -14,7 +14,7 @@ class txtsim extends REST_Controller {
 	{
 		// if (!$this->Account_model->isAuth()) return;
 		// $user_info = $this->Account_model->isLogin();
-		$this->requireAuthForOldSystem();
+		$this->requireAuth();
         $user_info = $this->getAuthUser();
 		$data = array(
 			'models' => ($user_info ? $this->Simulation_model->getModelLibrary($user_info->id) : array()),
@@ -26,7 +26,7 @@ class txtsim extends REST_Controller {
 	public function convNetlistToRAW()
 	{
 		// if (!$this->Account_model->isAuth()) return;
-        $this->requireAuthForOldSystem();
+        $this->requireAuth();
 		$modelcard = $this->Txtsim_model->getAllModelCard();
 		$netlist = $this->Txtsim_model->netlistGen($modelcard);
 		echo json_encode(array("error" => false, "netlist"=>$netlist),JSON_NUMERIC_CHECK);
@@ -35,7 +35,7 @@ class txtsim extends REST_Controller {
 	public function getModelCard()
 	{
 		// if (!$this->Account_model->isAuth()) return;
-        $this->requireAuthForOldSystem();
+        $this->requireAuth();
 		$modelcard = $this->Txtsim_model->getAllModelCard();
 		echo json_encode(array("error" => false, "modelcard"=>$modelcard),JSON_NUMERIC_CHECK);
 	}
@@ -43,7 +43,7 @@ class txtsim extends REST_Controller {
 
 	public function runNetlistSIM() {
 		// if (!$this->Account_model->isAuth()) return;
-        $this->requireAuthForOldSystem();
+        $this->requireAuth();
 		$netlist = null;
 		$modelcard = $this->Txtsim_model->getAllModelCard();
 		$netlist = $this->Txtsim_model->netlistGen($modelcard);
@@ -53,7 +53,7 @@ class txtsim extends REST_Controller {
 	}
 	public function runRAWSIM(){
 		// if (!$this->Account_model->isAuth()) return;
-        $this->requireAuthForOldSystem();
+        $this->requireAuth();
 		$netlist = $this->input->post('RAWlist');
 		$netlist = $this->Txtsim_model->NetlistCheck($netlist);
 		$netlist_file = $this->Txtsim_model->replacePlotToWRDATA($netlist);
@@ -74,7 +74,7 @@ class txtsim extends REST_Controller {
 
 	public function simulationStop()
 	{
-        $this->requireAuthForOldSystem();
+        $this->requireAuth();
 		if(!$this->input->post()) {
             $this->output->set_status_header('405');
         } else {

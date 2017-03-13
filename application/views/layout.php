@@ -43,6 +43,7 @@
 
 
         <script src="https://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo resource_url('js', 'token.js'); ?>" type="text/javascript"></script>
 
 		<script src="<?php echo resource_url('js', 'scripts.js'); ?>" type="text/javascript" charset="utf-8"></script>
 		<script src="<?php echo resource_url('js', 'menuBar.js'); ?>" type="text/javascript" charset="utf-8"></script>

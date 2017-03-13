@@ -132,6 +132,7 @@ class REST_Controller extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Services/Auth_service');
+        $this->load->helper('url');
         $this->preflight();
     }
 
@@ -324,6 +325,13 @@ class REST_Controller extends CI_Controller
 
         // If everything valid, get the token.
         $this->token = $this->input->get_request_header('Authorization', true);
+        // This get is for Simulation Platform iframe
+        // FIXME: Here we have potential security issue, exposing token in url
+        if (!$this->token) {
+            if ($this->method === 'GET' && uri_string() === 'simulation') {
+                $this->token = $this->input->get('SimulationAuthorization');
+            }
+        }
 
         // Set default header
         $this->contentType = $this->supported_format['json'];
@@ -341,24 +349,5 @@ class REST_Controller extends CI_Controller
     {
         $this->output->set_status_header($status);
         exit;
-    }
-
-    /**
-     * Set Require Authentication
-     *
-     * @param bool $require
-     *
-     * @author Leon
-     */
-    protected function requireAuthForOldSystem($required = true)
-    {
-        $token = array_key_exists("token", $_COOKIE) ? $_COOKIE["token"] : "";
-        if ($token) {
-            $this->token = $token;
-        } else {
-            $this->exitWithStatus(401);
-        }
-        $this->requireAuth();
-        return $this->getAuthUser();
     }
 }
