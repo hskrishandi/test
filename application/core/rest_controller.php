@@ -342,4 +342,23 @@ class REST_Controller extends CI_Controller
         $this->output->set_status_header($status);
         exit;
     }
+
+    /**
+     * Set Require Authentication
+     *
+     * @param bool $require
+     *
+     * @author Leon
+     */
+    protected function requireAuthForOldSystem($required = true)
+    {
+        $token = array_key_exists("token", $_COOKIE) ? $_COOKIE["token"] : "";
+        if ($token) {
+            $this->token = $token;
+        } else {
+            $this->exitWithStatus(401);
+        }
+        $this->requireAuth();
+        return $this->getAuthUser();
+    }
 }

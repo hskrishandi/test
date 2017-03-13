@@ -54,8 +54,22 @@ class Account_Service extends Base_service
                 foreach ($models as $modelIndex => $model) {
                     // compare the model id
                     if ($model->model_id == $value['id']) {
+                        // Format user library data
+                        $userLibrary = json_decode($model->data, true);
+                        $formatedParameters = array();
+                        if (count($userLibrary) > 0) {
+                            foreach ($userLibrary as $parameter) {
+                                $title = $parameter['title'];
+                                if (!array_key_exists($title, $formatedParameters)) {
+                                    $formatedParameters[$title] = array();
+                                }
+                                unset($parameter['title']);
+                                array_push($formatedParameters[$title], $parameter);
+                            }
+                        }
+
                         // if id is same, push it to the library array
-                        array_push($library, array('alias' => $model->nick_name, 'data' => $model->data));
+                        array_push($library, array('alias' => $model->nick_name, 'data' => $formatedParameters));
                         // remove the model after pushing to reduce the loop
                         unset($models[$modelIndex]);
                     }
@@ -77,8 +91,20 @@ class Account_Service extends Base_service
      */
     public function addModelToUserLibrary($userId, $modelId, $name, $data)
     {
+        $parameters = array();
+        foreach (json_decode($data, true) as $title => $group) {
+            if (strtolower($title) !== 'instance parameters' && strtolower($title) !== 'instance') {
+                foreach ($group as $row) {
+                    $row['title'] = $title;
+                    unset($row['description']);
+                    unset($row['unit']);
+                    unset($row['default']);
+                    array_push($parameters, $row);
+                }
+            }
+        }
         $this->deleteModelFromUserLibrary($userId, $modelId, $name);
-        $result = $this->Account_repository->addModelToUserLibrary($userId, $modelId, $name, $data);
+        $result = $this->Account_repository->addModelToUserLibrary($userId, $modelId, $name, json_encode($parameters));
         return $result;
     }
 

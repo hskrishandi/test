@@ -1,5 +1,5 @@
 function setCookie(name,value){
-    var exp  = new Date();  
+    var exp  = new Date();
     exp.setTime(exp.getTime() + 10000*24*60);
     document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
 }

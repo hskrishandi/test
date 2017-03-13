@@ -143,11 +143,11 @@ $(document).ready(function() {
 		//Analyze which "Run Simlution" clicked (Netlist or RAW input?)
 		if ($(this).attr('id') == "runNetlistModeSim") {
 			shandler.submitData = $('#netlistModeForm').serialize();
-			shandler.submitpath = "/txtsim/runNetlistSIM";
+			shandler.submitpath = "txtsim/runNetlistSIM";
 			shandler.simmode = 0;
 		} else {
 			shandler.submitData = $('#RAWModeForm').serialize();
-			shandler.submitpath = "/txtsim/runRAWSIM";
+			shandler.submitpath = "txtsim/runRAWSIM";
 			shandler.simmode = 1;
 		}
 		//Create AJAX connection

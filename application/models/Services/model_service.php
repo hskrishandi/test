@@ -70,15 +70,16 @@ class Model_service extends Base_service
      * @param  $id
      *
      * @return After reconstruction, the data structure will look like:
-     ** [{
-     **     "title": $title,
-     **     "parameters": [{
-     **         "name": $name,
-     **         "description": $description,
-     **         "unit": $unit,
-     **         "default": $default
-     **     }]
-     ** }]
+     **{
+     **  $title(e.g. Model Parameters): [
+     **  {
+     **    "name": $name,
+     **    "description": $description,
+     **    "unit": $unit,
+     **    "default": $default
+     **  },
+     **  ],
+     **}
      *
      * @author Leon
      */
@@ -86,6 +87,15 @@ class Model_service extends Base_service
     {
         $parameters = $this->Model_repository->getParametersById($id);
         $result = array();
+        if (count($parameters) > 0) {
+            foreach ($parameters as $parameter) {
+                if (!array_key_exists($parameter->title, $result)) {
+                    $result[$parameter->title] = array();
+                }
+                array_push($result[$parameter->title], array('name' => $parameter->name, 'description' => $parameter->description, 'unit' => $parameter->unit, 'value' => $parameter->default, 'default' => $parameter->default));
+            }
+        }
+        /*
         if (count($parameters) > 0) {
             $resultTmp = array();
             $parameterArrayTmp = array();
@@ -102,7 +112,7 @@ class Model_service extends Base_service
         } else {
             $result = null;
         }
-
+        */
         return $result;
     }
 
@@ -254,7 +264,7 @@ class Model_service extends Base_service
      * @note This funciton uses the 'old model' like Ngspice_model instead of
      * Service and Repository.
      * modify from application/controllers/modelsim.php:638
-     * 
+     *
      * @param $modelID, $biases, $params, $benchmarkID
      *
      * @return netlist

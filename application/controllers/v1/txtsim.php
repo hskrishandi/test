@@ -1,21 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class txtsim extends CI_Controller {
+class txtsim extends REST_Controller {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library(array('jsonRPCServer'));
 		$this->load->helper(array('template_inheritance', 'html', 'credits', 'form', 'url', 'download','file'));
 		$this->load->model(array('Account_model', 'Discussion_model',"Txtsim_model",'Simulation_model'));
-		
+
 	}
-	
+
 	public function index()
 	{
-		if (!$this->Account_model->isAuth()) return;
-		$user_info = $this->Account_model->isLogin();
+		// if (!$this->Account_model->isAuth()) return;
+		// $user_info = $this->Account_model->isLogin();
+		$this->requireAuthForOldSystem();
+        $user_info = $this->getAuthUser();
 		$data = array(
-			'models' => ($user_info ? $this->Simulation_model->getModelLibrary($user_info->id) : array()), 
+			'models' => ($user_info ? $this->Simulation_model->getModelLibrary($user_info->id) : array()),
 			'model_list' => $this->Simulation_model->getModels()
 		);
 		//var_dump($data);
@@ -23,7 +25,8 @@ class txtsim extends CI_Controller {
 	}
 	public function convNetlistToRAW()
 	{
-		if (!$this->Account_model->isAuth()) return;
+		// if (!$this->Account_model->isAuth()) return;
+        $this->requireAuthForOldSystem();
 		$modelcard = $this->Txtsim_model->getAllModelCard();
 		$netlist = $this->Txtsim_model->netlistGen($modelcard);
 		echo json_encode(array("error" => false, "netlist"=>$netlist),JSON_NUMERIC_CHECK);
@@ -31,14 +34,16 @@ class txtsim extends CI_Controller {
 
 	public function getModelCard()
 	{
-		if (!$this->Account_model->isAuth()) return;
+		// if (!$this->Account_model->isAuth()) return;
+        $this->requireAuthForOldSystem();
 		$modelcard = $this->Txtsim_model->getAllModelCard();
 		echo json_encode(array("error" => false, "modelcard"=>$modelcard),JSON_NUMERIC_CHECK);
 	}
 
-	
-	public function runNetlistSIM(){
-		if (!$this->Account_model->isAuth()) return;
+
+	public function runNetlistSIM() {
+		// if (!$this->Account_model->isAuth()) return;
+        $this->requireAuthForOldSystem();
 		$netlist = null;
 		$modelcard = $this->Txtsim_model->getAllModelCard();
 		$netlist = $this->Txtsim_model->netlistGen($modelcard);
@@ -47,13 +52,14 @@ class txtsim extends CI_Controller {
 		echo json_encode($this->Txtsim_model->runSPICES($netlist_file),JSON_NUMERIC_CHECK);
 	}
 	public function runRAWSIM(){
-		if (!$this->Account_model->isAuth()) return;
+		// if (!$this->Account_model->isAuth()) return;
+        $this->requireAuthForOldSystem();
 		$netlist = $this->input->post('RAWlist');
 		$netlist = $this->Txtsim_model->NetlistCheck($netlist);
 		$netlist_file = $this->Txtsim_model->replacePlotToWRDATA($netlist);
 		echo json_encode($this->Txtsim_model->runSPICES($netlist_file, $netlist),JSON_NUMERIC_CHECK);
 	}
-	
+
 	public function simulationStatus()
 	{
 		if (!$this->Account_model->isAuth()) $this->output->set_status_header('401');
@@ -65,18 +71,18 @@ class txtsim extends CI_Controller {
 			echo json_encode($response,JSON_NUMERIC_CHECK);
 		}
 	}
-	
+
 	public function simulationStop()
 	{
-		if (!$this->Account_model->isAuth()) $this->output->set_status_header('401');
-		else if(!$this->input->post()) $this->output->set_status_header('405');
-		else
-		{
+        $this->requireAuthForOldSystem();
+		if(!$this->input->post()) {
+            $this->output->set_status_header('405');
+        } else {
 			$uuid = $this->input->post('session', true);
 			$response = $this->Txtsim_model->spiceStop($uuid);
 		}
 	}
-	
+
 	public function loadRAW(){
 		$config['upload_path'] = './uploads/txtsim';
 		$config['allowed_types'] = 'sp';
@@ -109,7 +115,7 @@ class txtsim extends CI_Controller {
 		$name = 'data.csv';
 		force_download($name, $CSV);
 	}
-	
+
 	public function saveNetlist($filename = 'netlist'){
 		$a['netlist'] = $this->input->post('netlist');
 		$a['analyses'] = $this->input->post('analyses');
@@ -120,14 +126,14 @@ class txtsim extends CI_Controller {
 		$netlist =json_encode($a,JSON_NUMERIC_CHECK);
 		force_download($filename . '.isp', $netlist);
 	}
-	
+
 	public function saveasNetlist() {
 		if(($filename = $this->input->post('saveas_name')) != '')
 			$this->saveNetlist($filename);
 		else
 			$this->saveNetlist();
 	}
-	
+
 	public function loadNetlist(){
 		$config['upload_path'] = './uploads/txtsim';
 		$config['allowed_types'] = 'isp';
@@ -136,8 +142,8 @@ class txtsim extends CI_Controller {
 		$data = $this->upload->data();
 		$string = read_file($data['full_path']);
 		//echo $this->upload->display_errors('<p>', '</p>');
-		//var_dump($data); 
-		
+		//var_dump($data);
+
 		if ($string && $this->upload->file_ext ===".isp"){
 			echo json_encode(array_merge(array("error" => false, "type"=> $this->upload->file_ext, "netlist"=>$string)),JSON_NUMERIC_CHECK);
 		}else{
@@ -161,13 +167,13 @@ class txtsim extends CI_Controller {
 			$height = imagesy($im);
 			$bg = imagecreatetruecolor($width, $height);
 			$white = imagecolorallocate($bg, 255, 255, 255);
-			imagefill($bg, 0, 0, $white);			
+			imagefill($bg, 0, 0, $white);
 			imagecopyresampled(
 			$bg, $im,
 			0, 0, 0, 0,
 			$width, $height,
 			$width, $height);
-			
+
 			//force download
 			header('Content-type: octet/stream');
 			header('Content-disposition: attachment; filename=' . $filename . '.png;');
@@ -176,13 +182,13 @@ class txtsim extends CI_Controller {
 			imagedestroy($bg);
 		}
 	}
-	
+
 // 	public function savePNGfromVML(){
 // 		return;
 // 		$uuid = uniqid('v2p.', true);
 // 		$path["vml"] = dirname(__FILE__) . "/../vmltopng/";
 // 		$path["lib"] = dirname(__FILE__) . "/../third_party/VectorConverter1.2/";
-// 		$vml = $this->input->post('png'); 
+// 		$vml = $this->input->post('png');
 // 		//return;
 // 		exec("rm " . $path["vml"] . "* -r");
 // 		if(mkdir($path["vml"] . $uuid))
@@ -206,7 +212,7 @@ class txtsim extends CI_Controller {
 // 				"\"" . $path["vml"] . $uuid . "/gif" . "\""
 // 			);
 // 			exec(implode(" ", $arg), $output, $result);
-// 			
+//
 // 			$txt = file_get_contents($path["vml"] . $uuid . "/temp.html");
 // 			$txt = str_replace("xxx:", "", $txt);
 // 			$fs = fopen($path["vml"] . $uuid . "/temp.html", "w");

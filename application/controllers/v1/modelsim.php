@@ -123,7 +123,9 @@ class modelsim extends REST_Controller {
 
 	public function modelCardinfo2($card_name)
 	{
-		$user_info = $this->Account_model->isLogin();
+		// $user_info = $this->Account_model->isLogin();
+        $this->requireAuthForOldSystem();
+		$user_info = $this->getAuthUser(); // Leon
 		$response = null;
 
 		$infos = $this->Modelsim_model->getModelCardInfo2($card_name, $user_info->id) ;
@@ -149,9 +151,10 @@ class modelsim extends REST_Controller {
 
     public function modelLibrary($method, $id = 0)
     {
-        $user_info = $this->Account_model->isLogin();
+        // $user_info = $this->Account_model->isLogin();
+        $this->requireAuthForOldSystem();
+        $user_info = $this->getAuthUser(); // Leon
         $response = null;
-
         if ($user_info) {
 			switch ($method) {
 			case "GET":
@@ -484,8 +487,9 @@ class modelsim extends REST_Controller {
 
 	public function modelDetails($model_id)
 	{
+        $this->requireAuthForOldSystem(); // Leon
 		$response = null;
-		if ($this->Account_model->isLogin()) {
+		// if ($this->Account_model->isLogin()) {
 				$model_info = $this->Modelsim_model->getModelInfoById($model_id);
 				$response = array(
                     'name' => $this->Modelsim_model->getModelInfoById($model_id)->name,
@@ -497,23 +501,24 @@ class modelsim extends REST_Controller {
 				'hasCollection' => $model_info->hasCollection,
 				'collection_info' => $model_info->collection_info
 			);
-        } else {
-            $this->output->set_status_header('401');
-        }
+        // } else {
+        //     $this->output->set_status_header('401');
+        // }
         $this->outputJSON($response);
 	}
 
 	public function modelInstanceParams($model_id)
 	{
-		$response = null ;
-		if ($this->Account_model->isLogin()) {
+        $response = null;
+        $this->requireAuthForOldSystem(); // Leon
+		// if ($this->Account_model->isLogin()) {
 			$model_info = $this->Modelsim_model->getModelInfoById($model_id);
 			$response = array(
 				'ins_params' => $this->Modelsim_model->getModelInstanceParams($model_id)
 			);
-		} else {
-			$this->output->set_status_header('401');
-		}
+		// } else {
+		// 	$this->output->set_status_header('401');
+		// }
 		$this->outputJSON($response);
 	}
 
@@ -722,7 +727,7 @@ class modelsim extends REST_Controller {
         //$this->output->set_header('Content-Type: application/json; charset=utf-8');
         //$this->output->set_output(json_encode($output));
         //echo json_encode($output);
-        
+
         // To make the minimum changes to apply REST_Controller
         $this->body = $output;
         $this->response();

@@ -106,6 +106,20 @@ $route['discussions'] = "discussions/index";
 $route['discussions/(:num)'] = "discussions/index/$1";
 $route['discussions/my'] = "discussions/discussionsByUser";
 
+
+// Temp solution for old txtsim request
+// Simulation
+$route['simulation'] = "v1/txtsim/index";
+$route['modelsim/modelLibrary/(:any)'] = "v1/modelsim/modelLibrary/$1";
+$route['modelsim/modelInstanceParams/(:num)'] = "v1/modelsim/modelInstanceParams/$1";
+$route['modelsim/modelCardinfo2/(:any)'] = "v1/modelsim/modelCardinfo2/$1";
+$route['modelsim/modelDetails/(:num)'] = "v1/modelsim/modelDetails/$1";
+$route['txtsim/getModelCard'] = "v1/txtsim/getModelCard";
+$route['txtsim/convNetlistToRAW'] = "v1/txtsim/convNetlistToRAW";
+$route['txtsim/runNetlistSIM'] = "v1/txtsim/runNetlistSIM";
+$route['txtsim/simulationStop'] = "v1/txtsim/simulationStop";
+$route['txtsim/runRAWSIM'] = "v1/txtsim/runRAWSIM";
+
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";
 

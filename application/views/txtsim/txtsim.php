@@ -884,10 +884,10 @@
 
         <script src="<?php echo resource_url('js', 'scripts.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo resource_url('js', 'menuBar.js'); ?>" type="text/javascript" charset="utf-8"></script>
-        <script src="<?php echo resource_url('js', 'login.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php //echo resource_url('js', 'login.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo resource_url('js', 'constant.js'); ?>" type="text/javascript" charset="utf-8"></script>
-        <script src="<?php echo resource_url('js', 'layouts/header.js'); ?>" type="text/javascript" charset="utf-8"></script>
-        <?php $this->load->view('layouts/header'); ?>
+        <script src="<?php //echo resource_url('js', 'layouts/header.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <?php /*$this->load->view('layouts/header');*/ // Remove header?>
 
 	<?php endblock(); ?>
 
@@ -1205,4 +1205,4 @@
 
 <?php end_extend(); ?>
 
-<?php $this->load->view('layouts/footer'); ?>
+<?php /*$this->load->view('layouts/footer');*/ //Remove  ?>

@@ -596,7 +596,7 @@ function drawComponent(event) {
                     url: ROOT + "/modelDetails/" + model2id[modelShortName],
                     success: function(data) {
                         try {
-                            var parsedData = JSON.parse(data);
+                            var parsedData = _safelyParseJSON(data);
                             console.log(parsedData);
                             // var parsedName = parsedData.name;
                             var parsedInfo = parsedData.params.instance;
@@ -724,7 +724,7 @@ function drawComponent(event) {
     //             success: function(data) {
     //                 console.log(data);
     //                 try {
-    //                     var output_result = JSON.parse(data).ins_params.instance;
+    //                     var output_result = _safelyParseJSON(data).ins_params.instance;
     //                     var instanceVal = "";
     //                     instanceVal += $current.attr("type").substring(5) + "." + $("#sel option:selected").val() + " ";
     //                     $.each(output_result, function(i, item) {
@@ -1061,7 +1061,7 @@ function changeParam(event) {
             type: 'GET',
             success: function(result) {
                 try {
-                    result = JSON.parse(result);
+                    result = _safelyParseJSON(result);
                 } catch (err) {
                     // alert(err);
                 }
@@ -1080,7 +1080,7 @@ function changeParam(event) {
                                 url: ROOT + "/modelCardinfo2/" + card_name,
                                 success: function(result) {
                                     try {
-                                        result = JSON.parse(result);
+                                        result = _safelyParseJSON(result);
                                         var card_info = JSON.stringify(result);
                                         card_info = card_info.toLowerCase();
 
@@ -3117,7 +3117,7 @@ function get_netlist(event) {
         type: 'GET',
         success: function(result) {
             try {
-                result = JSON.parse(result);
+                result = _safelyParseJSON(result);
             } catch (err) {
                 alert(k);
             }
@@ -3145,7 +3145,7 @@ function get_netlist(event) {
                             url: ROOT + "/modelDetails/" + model2id[modelShortName],
                             success: function(data) {
                                 try {
-                                    var parsedData = JSON.parse(data);
+                                    var parsedData = _safelyParseJSON(data);
                                     var parsedName = parsedData.type;
                                     // Solve the bsim3 & bsim4 problem
                                     if (parsedName == "nmos" && modelType == -1) {
@@ -3455,4 +3455,16 @@ function moveLine(event) {
             setTimeout(check_on_lineinter(), 250);
         }
     });
+}
+
+function _safelyParseJSON(json) {
+    let parsed = null
+    try {
+        // if it is json string
+        parsed = JSON.parse(json)
+    } catch (e) {
+        // if it is json object
+        parsed = json
+    }
+    return parsed
 }

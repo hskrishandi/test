@@ -1,6 +1,6 @@
 /**
 * @fileOverview Controller scripts
-*/ 
+*/
 
 // Exports
 var ROOT = CI_ROOT + "modelsim";
@@ -9,7 +9,7 @@ var MODEL_ID = 0;
 (function ($) {
 // var viewModels;		// view model collection
 
-			
+
 // Entry point
 $(document).ready(function() {
 	MODEL_ID = $("#model-lib-list").data("current");
@@ -21,16 +21,16 @@ $(document).ready(function() {
 
 	viewModels.lib.load();
 	viewModels.sim.init();
-	ko.applyBindings(viewModels.sim, $(".model-benchmark-side-menu")[0]);	
+	ko.applyBindings(viewModels.sim, $(".model-benchmark-side-menu")[0]);
 	ko.applyBindings(viewModels.lib, $(".model-library")[0]);
 	ko.applyBindings(viewModels.sim, $("#model-page")[0]);
 
-	
-	$("#model-page").on('change', "#param-tab-model input", function() {			
+
+	$("#model-page").on('change', "#param-tab-model input", function() {
 		viewModels.sim.selectedSet(null);		// invalidated selection
 		return false;
 	});
-					
+
 	// Save As Parameters
 	$(".param-save-as").click(function() {
 		prompt("Filename: ", function(filename) {
@@ -46,7 +46,7 @@ $(document).ready(function() {
 			note: downloadAsNote
 		});
 	});
-	
+
 	$(".model-param-load").fileupload({
 		name: "file",
 		uploadStart: function() {
@@ -60,50 +60,50 @@ $(document).ready(function() {
 			if (data.success) {
 				var params = viewModels.sim.loadParams(data.data);
 				params.error += data.error.length;
-				
+
 				if (params.error == 0) {
-					var msg = "File uploaded and parsed successfully!";	
+					var msg = "File uploaded and parsed successfully!";
 				} else {
 					var msg = "File uploaded successfully with " + params.error + " minor error(s) during parsing: <br /><br />";
-					
+
 					msg += "<blockquote>";
-				
+
 					if (data.error.length > 0) {
 						$(data.error).each(function() {
 							msg += "<li>";
 							msg += this;
-							msg += "</li>";									
+							msg += "</li>";
 						});
-					
+
 					}
-					
+
 					if (params.missing.length > 0) {
 						msg += "<li>" + params.missing.length + " parameter(s) missing: ";
 						msg += viewModels.sim.paramSelectList(params.missing, "missingParamList");
 						msg += "</li>";
-						
+
 						// Switch to the tab of the first missing parameter
 						viewModels.sim.paramSelect(params.missing[0], false);
 					}
 					if (params.extra.length > 0) {
 						msg += "<li>" + params.extra.length + " extra parameter(s) detected: ";
-						msg += viewModels.sim.paramSelectList(params.extra, "extraParamList"); 
-						msg += "</li>";	
+						msg += viewModels.sim.paramSelectList(params.extra, "extraParamList");
+						msg += "</li>";
 					}
-					
+
 					msg += "</blockquote>";
-				
+
 				}
-				
+
 				alert("<br />" + msg);
-				
+
 				$("#missingParamList").change(function() {
 					viewModels.sim.paramSelect($(this).val());
 				});
 			} else {
 				alert(data.error);
 			}
-						
+
 		}
 	});
 
@@ -121,7 +121,7 @@ $(document).ready(function() {
 		viewModels.sim.searchParamsInit();
 	});
 
-	//  Bad style for positioning this variable. 
+	//  Bad style for positioning this variable.
 
 	var upload_flag=false;
 
@@ -137,17 +137,17 @@ $(document).ready(function() {
 			url: ROOT + "/clientPlotData/UPLOAD",
 			load: function (data) {
 				if (data.success){
-					temp_store_for_user_data = data.data; 
+					temp_store_for_user_data = data.data;
 					viewModels.sim.selectedPlot().customData(data.data);
 					// console.log(viewModels.sim.selectedPlot());
 					upload_flag = true;
-				} 
+				}
 				else
 					alert(failUploadMsg);
 			}
 		});
 	});
-	
+
 	//clearup
 	window.onunload = function() {
 		if(viewModels.sim.isSimulating())
@@ -161,13 +161,13 @@ $(document).ready(function() {
 			$("#customdata_check").click();
 			viewModels.sim.selectedPlot().customData(temp_store_for_user_data);
 			console.log("upload again");
-			
+
 		}
 	}
 });
 
 
-	
+
 // jQuery UI tabs handler
 ko.bindingHandlers.tabs = {
 	init: function(element, valueAccessor) {
@@ -210,7 +210,7 @@ ko.bindingHandlers.checkbox = {
 		var observable = valueAccessor();
 		var $checkbox = $ele.find("input[type=checkbox]");
 		var $i = $("<i />").prependTo($ele).addClass("icon-checkbox");
-		
+
 		$ele.data("_checkHandler", function(value) {
 			$i.remove();
 			$i = $("<i />").prependTo($ele).addClass("icon-checkbox");
@@ -222,7 +222,7 @@ ko.bindingHandlers.checkbox = {
 				$checkbox.attr('checked', false);
 			}
 		});
-		
+
 		$checkbox.change(function() {
 			if ($(this).attr('checked')) {
 				observable(true);
@@ -230,13 +230,13 @@ ko.bindingHandlers.checkbox = {
 				observable(false);
 			}
 		});
-		
+
 		$checkbox.css("opacity", 0);
 		$ele.data("_checkHandler")(valueAccessor());
 	},
 	update: function(element, valueAccessor) {
 		$(element).data("_checkHandler")(valueAccessor());
-	}		
+	}
 };
 
 // Select all button handler
@@ -254,7 +254,7 @@ ko.bindingHandlers.checkAll = {
 };
 
 // Deselect all button handler
-ko.bindingHandlers.uncheckAll = {		
+ko.bindingHandlers.uncheckAll = {
 	init: function(element, valueAccessor) {
 		$(element).click(function() {
 			$(valueAccessor()).each(function() {
@@ -273,10 +273,10 @@ ko.bindingHandlers.addToLib = {
 		$(element).click(function() {
 			prompt("Name of model card: ", function(name) {
 				if (name == '') return;
-				
+
 				var data = viewModels.sim.modelParams.getData();
 				viewModels.lib.isLoading(true);
-				
+
 				$.ajax({
 					url: ROOT + "/modelLibrary/ADD/",
 					type: 'POST',
@@ -288,12 +288,12 @@ ko.bindingHandlers.addToLib = {
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						console.log("Error: " + textStatus + "; " + errorThrown);
-					}, 
+					},
 					complete: function() { viewModels.lib.isLoading(false); }
-				}); 
+				});
 			});
-			
-			return false;					
+
+			return false;
 		});
 	}
 };
@@ -322,11 +322,11 @@ ko.bindingHandlers.showExamples = {
 }
 
 // Load a parameter set
-ko.bindingHandlers.loadParams = {			
+ko.bindingHandlers.loadParams = {
 	update: function(element, valueAccessor) {
 		var set = valueAccessor();
 		if (!set()) return;
-		
+
 		confirm("Do you wish to load the parameter set \"" + set().name + "\" ?", function(load) {
 			if (load) {
 				$.ajax({
@@ -336,9 +336,9 @@ ko.bindingHandlers.loadParams = {
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						console.log("Error: " + textStatus + "; " + errorThrown);
-					}, 
+					},
 					complete: function() { viewModels.sim.isLoading(false); }
-				}); 
+				});
 			}
 		});
 	}
@@ -358,8 +358,8 @@ ko.bindingHandlers.downloadParams = {
 						console.log("Error: " + data.error);
 					}
 				}
-			}); 
-			return false;					
+			});
+			return false;
 		});
 	}
 };
@@ -374,7 +374,7 @@ ko.bindingHandlers.uploadParams = {
 			}
 			var input = ko.bindingHandlers.uploadParams.input;
 			input.parent().css("visibility", "hidden");
-			
+
 			input.change(function() {
 				var that = $(this);
 				confirm("Do you wish to upload the parameter set ?", function(load) {
@@ -386,7 +386,7 @@ ko.bindingHandlers.uploadParams = {
 							type: 'POST',
 							form: input.parent(),
 							load: function(data) {
-								if (data.success) {	
+								if (data.success) {
 									viewModels.sim.loadParams(data.data);
 								} else {
 									//console.log("Error: " + data.error);
@@ -394,12 +394,12 @@ ko.bindingHandlers.uploadParams = {
 								viewModels.sim.isLoading(false);
 								input.parent().remove();
 							}
-						}); 
+						});
 					}
 				});
 			}).click();
-			
-			return false;				
+
+			return false;
 		});
 	}
 };
@@ -415,7 +415,7 @@ ko.bindingHandlers.uploadPlot = {
 			}
 			var input = ko.bindingHandlers.uploadPlot.input;
 			input.parent().css("visibility", "hidden");
-			
+
 			input.change(function() {
 				viewModels.sim.isLoading(true);
 				var that = $(this);
@@ -425,18 +425,18 @@ ko.bindingHandlers.uploadPlot = {
 					type: 'POST',
 					form: input.parent(),
 					load: function(data) {
-						if (data.success) {	
+						if (data.success) {
 							viewModels.sim.selectedPlot().customData(data.data);
-						} else {								
+						} else {
 							console.log("Error: " + data.error);
 						}
 						viewModels.sim.isLoading(false);
 						input.parent().remove();
 					}
-				}); 
+				});
 			}).click();
-			
-			return false;				
+
+			return false;
 		});
 	}
 };
@@ -466,7 +466,7 @@ ko.bindingHandlers.graph = {
 		var data = ko.dataFor(element);
 		$(element).graph(ko.toJS(data)).data("init", true);
 	},
-	update: function(element, valueAccessor) {	
+	update: function(element, valueAccessor) {
 		var selected = ko.utils.unwrapObservable(valueAccessor());
 		if (ko.dataFor(element) == selected) {
 			$(element).graph("replot");
@@ -476,9 +476,9 @@ ko.bindingHandlers.graph = {
 
 // Replot graph button
 ko.bindingHandlers.replot = {
-	update: function(element, valueAccessor) {	
+	update: function(element, valueAccessor) {
 		var graph = ko.dataFor(element);
-		var show = valueAccessor();	
+		var show = valueAccessor();
 		if ($(element).data("init")) {
 			$(element).graph("option", "customData", (show() ? graph.customData() : []));
 		}
@@ -510,9 +510,9 @@ ko.bindingHandlers.modelLibExpandable = {
 
 // Model library entry
 ko.bindingHandlers.modelLibEntry = {
-	init: function(element, valueAccessor, allBindingsAccessor, entry, bindingContext) {	
+	init: function(element, valueAccessor, allBindingsAccessor, entry, bindingContext) {
 		// Load model library entry
-		var loadHandler;			
+		var loadHandler;
 		if (entry.modelID == MODEL_ID) {
 			loadHandler = function() {
 				//confirm("Do you wish to load the model card \"" + entry.name + "\" ?", function(load) {
@@ -532,20 +532,20 @@ ko.bindingHandlers.modelLibEntry = {
 							},
 							error: function(jqXHR, textStatus, errorThrown) {
 								console.log("Error: " + textStatus + "; " + errorThrown);
-							}, 
+							},
 							complete: function() { viewModels.sim.isLoading(false); }
-						}); 					
+						});
 					}
-				});					
+				});
 				return false;
 			};
 		} else {
-			loadHandler = function() {	
+			loadHandler = function() {
 				return false;
 			};
 		}
 		$(element).find(".load").click(loadHandler);
-		
+
 		$(element).attr("model-name", entry.name);
 		$(element).attr("model-id", entry.id);
 		// Remove model library entry
@@ -563,17 +563,17 @@ ko.bindingHandlers.modelLibEntry = {
 							},
 							error: function(jqXHR, textStatus, errorThrown) {
 								console.log("Error: " + textStatus + "; " + errorThrown);
-							}, 
+							},
 							complete: function() { viewModels.lib.isLoading(false); }
 						});
 					}
-			});					
+			});
 			return false;
 		});
 		*/
 	}
 };
-	
+
 // Model library menu
 ko.bindingHandlers.modelLibMenu = {
 	init: function(element, valueAccessor) {
@@ -584,12 +584,12 @@ ko.bindingHandlers.modelLibMenu = {
 		pos.left -= $menu.offset().left + 1;
 		$menu.offset(pos);
 
-		$ele.click(function() {				
+		$ele.click(function() {
 			if ($menu.is(":visible")) {
 				$ele.removeClass("active");
 				$menu.hide();
-			} else {							
-				$menu.show();	
+			} else {
+				$menu.show();
 				$ele.addClass("active");
 				$("html").one("click", function() {
 					if ($menu.is(":visible")) {
@@ -597,15 +597,15 @@ ko.bindingHandlers.modelLibMenu = {
 					}
 				});
 			}
-			
+
 			return false;
 		});
-		
+
 		ko.bindingHandlers.modelLibMenu.initActions(valueAccessor());
 	},
 	initActions: function(element) {
 		var $ele = $(element);
-		
+
 		/*
 		// Download
 		$ele.find('.download').click(function() {
@@ -617,11 +617,11 @@ ko.bindingHandlers.modelLibMenu = {
 						console.log("Error: " + data.error);
 					}
 				}
-			}); 
-			return false;					
+			});
+			return false;
 		});
 		*/
-		
+
 		// Upload
 		/*
 		$ele.find('.upload').click(function() {
@@ -630,7 +630,7 @@ ko.bindingHandlers.modelLibMenu = {
 				ko.bindingHandlers.modelLibMenu.input.parent().css("visibility", "hidden");
 			}
 			var input = ko.bindingHandlers.modelLibMenu.input;
-			
+
 			var input = $("<input type='file' name='file' />")
 			.appendTo('body')
 			.change(function() {
@@ -640,9 +640,9 @@ ko.bindingHandlers.modelLibMenu = {
 					type: 'POST',
 					form: input.parent(),
 					load: function(data) {
-						if (data.success) {	
+						if (data.success) {
 							viewModels.lib.load();
-						} else {								
+						} else {
 							console.log("Error: " + data.error);
 						}
 						input.parent().remove();
@@ -650,10 +650,10 @@ ko.bindingHandlers.modelLibMenu = {
 				});
 			})
 			.click();
-			return false;				
+			return false;
 		});
 		*/
-		
+
 		// New library
 		$ele.find('.new').click(function() {
 			confirm("Do you wish to create a new model library? Your existing library will be erased.", function(load) {
@@ -666,7 +666,7 @@ ko.bindingHandlers.modelLibMenu = {
 						error: function(jqXHR, textStatus, errorThrown) {
 							console.log("Error: " + textStatus + "; " + errorThrown);
 						}
-					}); 
+					});
 				}
 			});
 			return false;
