@@ -3,14 +3,14 @@
 class Txtsim_model extends CI_Model{
 
 	private $_simuroot = "/local/html/tmp/ngspice";
-	
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->helper('file');
 		$this->load->model('process_model');
 	}
-	
+
 	public function netlistGen($modelCard)
 	{
 		return $this->load->view('txtsim/txtsim_temple.php',array_merge($this->input->post(), array("modelCard"=>$modelCard)),true);
@@ -27,7 +27,7 @@ class Txtsim_model extends CI_Model{
 		if (count($matches) === 0) $netlist .= "\n.end";*///simplified
 		if (!preg_match("/\.end$/i", $netlist))
 			$netlist .= "\n.end";
-		
+
 		//Check if no control card
 		global $plotstring;
 		/*$matches = null;
@@ -40,7 +40,7 @@ class Txtsim_model extends CI_Model{
 			$pos = stripos($netlist,'.end');
 			$netlist = substr($netlist, 0, $pos)."\n.CONTROL\nsave all\nrun\n.endc\n".substr($netlist, $pos);
 		}
-		
+
 		//replace all the comment plot
 		$netlist = preg_replace("/\*( +)?\.plot.+/im", "", $netlist);
 		//MOVE .plot to .CONTROL card
@@ -48,18 +48,19 @@ class Txtsim_model extends CI_Model{
 		//append the control card
 		$pos = stripos($netlist,'.endc');
 		$netlist = substr($netlist, 0, $pos).$plotstring.substr($netlist, $pos);
-		
+
 		//Command out the Harard Commard
 		$hazard_commands = array("edit", "shell", "cd", "jobs", "while", "repeat", "dowhile", "foreach");
 		foreach($hazard_commands as $command) {
 			$netlist = preg_replace_callback('/(?<= |\n|\r)' . $command . '( |\n|\r)/im',create_function('$matchs','return "*".$matchs[0];'),$netlist);
 		}
-		
-		
+
+
 		return $netlist;
 	}
-	public function getAllModelCard(){
-		$user_id = $this->Account_model->islogin()->id;
+	public function getAllModelCard($userid){
+		// $user_id = $this->Account_model->islogin()->id;
+		$user_id = $userid;
 		$this->db->select('user_param_sets.model_id AS "model_id", model_info.short_name  AS "model_short_name",model_info.name AS "model_name", user_param_sets.name AS "library_name", user_param_sets.data AS "user_param_data"')
 		->from('user_param_sets')->join('model_info', 'user_param_sets.model_id=model_info.id')
 		->where(array('user_param_sets.user_id' => $user_id));
@@ -80,7 +81,7 @@ class Txtsim_model extends CI_Model{
 						$modelParamNameSet[] = $ParamSet;
 				}
 			}
-			
+
 			//$stringModel = ".MODEL ".$modelset->model_short_name.".".$modelset->library_name." ". $modelset->model_name;
 			$stringModel = ".MODEL ".$modelset->model_short_name.".".$modelset->library_name." ";
 			if(($modelset->model_id == '9' || $modelset->model_id == '10' || $modelset->model_id == '11') && $modelType != null){
@@ -88,7 +89,7 @@ class Txtsim_model extends CI_Model{
 			}
 			else
 				$stringModel = $stringModel. $modelset->model_name;
-			
+
 			if ($modelParamNameSet!==null){
 				foreach ($modelParamNameSet as $value)
 					$stringModel .= (" ".strtolower($value->name) . "=" . $value->value);
@@ -97,7 +98,7 @@ class Txtsim_model extends CI_Model{
 		}
 		//$stringModels;
 		return $stringModels;
-		
+
 	}
 
 	public function getModelParamName($model_id)
@@ -108,7 +109,7 @@ class Txtsim_model extends CI_Model{
 		if ($query->num_rows() > 0) {
 			return $query->result();
 		}
-		
+
 		return null;
 	}
 	public function spice_result_to_table($path){
@@ -147,7 +148,7 @@ class Txtsim_model extends CI_Model{
 
 		return $result_array;
 	}
-	
+
 	public function spice_result_to_CSV($uuid, $file){
 		$data = $this->spice_result_to_table($this->_simuroot . $uuid . "/" . $file);
 		$string = null;
@@ -166,10 +167,10 @@ class Txtsim_model extends CI_Model{
 		}
 		return $string;
 	}
-	
+
 	public function spiceStatus($uuid)
 	{
-		$folder = $this->_simuroot . $uuid; 
+		$folder = $this->_simuroot . $uuid;
 		$response = array("status" => "NULL");
 		$this->process_model->SetWorkingFolder($folder);
 		if($this->process_model->GetPID($pid))
@@ -185,13 +186,13 @@ class Txtsim_model extends CI_Model{
 				$this->parseOutput($uuid, $response);
 			}
 		}
-		
+
 		return $response;
 	}
-	
+
 	public function spiceStop($uuid)
 	{
-		$folder = $this->_simuroot . $uuid; 
+		$folder = $this->_simuroot . $uuid;
 		$this->process_model->SetWorkingFolder($folder);
 		if($this->process_model->GetPID($pid))
 		{
@@ -199,7 +200,7 @@ class Txtsim_model extends CI_Model{
 		}
 		return true;
 	}
-	
+
 	private function parseOutput($uuid, &$result)
 	{
 		$netlist = file_get_contents($this->_simuroot . $uuid . "/netlist.sp");
@@ -212,12 +213,12 @@ class Txtsim_model extends CI_Model{
 			if ($value == "Note: can't find init file.") continue;
 			$result['log'] .= $value . "</br>";
 		}
-		
+
 		if($netlist)
 			$result['netlist'] = $netlist;
 		else
 			$result['netlist'] = "error";
-		
+
 		$match = null;
 		$result['dataset'] = null;
 		$result["error"] = false;
@@ -243,15 +244,15 @@ class Txtsim_model extends CI_Model{
 			//read data
 		}
 	}
-	
+
 	public function runSPICES($netlistfile, $netlist = null){
 		$uuid = uniqid('', true);
-		$folder = $this->_simuroot . $uuid; 
+		$folder = $this->_simuroot . $uuid;
 		mkdir($folder,0777);
 		write_file($folder.'/netlist.sp',$netlistfile);
 		if($netlist !== null)
 			write_file($folder."/netlist", $netlist);
-		
+
 		$this->process_model->SetWorkingFolder($folder);
 		$this->process_model->RunBgProcess($this->config->item('ngspice') . " -b netlist.sp", $pid, true); //the config is loaded in Simulation_model
 		if($pid != -1) {

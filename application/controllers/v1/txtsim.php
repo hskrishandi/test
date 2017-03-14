@@ -27,7 +27,8 @@ class txtsim extends REST_Controller {
 	{
 		// if (!$this->Account_model->isAuth()) return;
         $this->requireAuth();
-		$modelcard = $this->Txtsim_model->getAllModelCard();
+        $user_info = $this->getAuthUser();
+		$modelcard = $this->Txtsim_model->getAllModelCard($user_info->id);
 		$netlist = $this->Txtsim_model->netlistGen($modelcard);
 		echo json_encode(array("error" => false, "netlist"=>$netlist),JSON_NUMERIC_CHECK);
 	}
@@ -36,7 +37,8 @@ class txtsim extends REST_Controller {
 	{
 		// if (!$this->Account_model->isAuth()) return;
         $this->requireAuth();
-		$modelcard = $this->Txtsim_model->getAllModelCard();
+        $user_info = $this->getAuthUser();
+		$modelcard = $this->Txtsim_model->getAllModelCard($user_info->id);
 		echo json_encode(array("error" => false, "modelcard"=>$modelcard),JSON_NUMERIC_CHECK);
 	}
 
@@ -44,8 +46,9 @@ class txtsim extends REST_Controller {
 	public function runNetlistSIM() {
 		// if (!$this->Account_model->isAuth()) return;
         $this->requireAuth();
+        $user_info = $this->getAuthUser();
 		$netlist = null;
-		$modelcard = $this->Txtsim_model->getAllModelCard();
+		$modelcard = $this->Txtsim_model->getAllModelCard($user_info->id);
 		$netlist = $this->Txtsim_model->netlistGen($modelcard);
 		$netlist = $this->Txtsim_model->NetlistCheck($netlist);
 		$netlist_file = $this->Txtsim_model->replacePlotToWRDATA($netlist);
