@@ -325,13 +325,8 @@ class REST_Controller extends CI_Controller
 
         // If everything valid, get the token.
         $this->token = $this->input->get_request_header('Authorization', true);
-        // This get is for Simulation Platform iframe
-        // FIXME: Here we have potential security issue, exposing token in url
-        if (!$this->token) {
-            if ($this->method === 'GET' && uri_string() === 'simulation') {
-                $this->token = $this->input->get('SimulationAuthorization');
-            }
-        }
+        // FIXME: remove this function after new simulation platform
+        $this->handleTokenForOldSystem();
 
         // Set default header
         $this->contentType = $this->supported_format['json'];
@@ -340,8 +335,7 @@ class REST_Controller extends CI_Controller
     /**
      * Exit with status code
      *
-     * @param type $param
-     * @return $value
+     * @param status
      *
      * @author Leon
      */
@@ -349,5 +343,33 @@ class REST_Controller extends CI_Controller
     {
         $this->output->set_status_header($status);
         exit;
+    }
+
+    /**
+     * Handle token for old Simulation Platform system
+     *
+     * @author Leon
+     */
+    private function handleTokenForOldSystem()
+    {
+        // This get is for Simulation Platform iframe
+        // FIXME: Here we have potential security issue, exposing token in url
+        if (!$this->token) {
+            if ($this->method === 'GET' && uri_string() === 'simulation') {
+                $this->token = $this->input->get('SimulationAuthorization');
+                // For cross-domain situation, token are stores in two different
+                // domains, we need to manually handle this for old
+                // Simulation Platform system
+                $token = array_key_exists("token", $_COOKIE) ? $_COOKIE["token"] : "";
+                // If the token cookie is empty, we need to write the token to
+                // client browser for other requests to use
+                if (!$token && $this->token) {
+                    setcookie("token", $this->token, time() + (86400 * 30), "/"); // 86400 = 1 day
+                    log_message('TOKEN', 'Writing token to cookie: ' . $this->token);
+                }
+
+                log_message('TOKEN', 'Token from simulaiton request: ' . $this->token);
+            }
+        }
     }
 }
