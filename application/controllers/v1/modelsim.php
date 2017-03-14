@@ -20,7 +20,7 @@ class modelsim extends REST_Controller {
 
 	public function index()
 	{
-		$user_info = $this->Account_model->isLogin();
+		// $user_info = $this->Account_model->isLogin();
 		$data = array(
 			//'models' => ($user_info ? $this->Modelsim_model->getModelLibrary($user_info->id) : array()), //not in use
 			'model_list' => $this->Modelsim_model->getModels()
@@ -31,7 +31,8 @@ class modelsim extends REST_Controller {
 
 	public function model($id)
 	{
-		if (!$this->Account_model->isAuth()) return;
+		// if (!$this->Account_model->isAuth()) return;
+        $this->requireAuth();
 
         $model_info = $this->Modelsim_model->getModelInfoById($id);
         if ($model_info == null) {
@@ -522,123 +523,112 @@ class modelsim extends REST_Controller {
 		$this->outputJSON($response);
 	}
 
-	public function simulate()
-	{
-		$response = null;
+    public function simulate()
+    {
+        $response = null;
+        $this->requireAuth();
+        if (!$this->input->post()) {
+            $this->output->set_status_header('405');
+        } else {
+            $modelID = $this->input->post('modelID', true);
+            $biases = $this->input->post('biases', true);
+            $params = $this->input->post('params', true);
 
-		// if (!$this->Account_model->isLogin()) {
-        //     $this->output->set_status_header('401');
-        // } else if (!$this->input->post()) {
-		// 	$this->output->set_status_header('405');
-		// } else {
-			$modelID = $this->input->post('modelID', true);
-			$biases = $this->input->post('biases', true);
-			$params = $this->input->post('params', true);
+            if (!$modelID || !is_array($biases) || !is_array($params)
+            || !is_array($biases["variable"])) {
+                $this->output->set_status_header('400');
+            } else {
+                //To prevent user wrongly type step = 0 or < 0.00001 which make server overload
+                foreach($biases["variable"] as $vars)
+                if(!is_numeric($vars["step"]) || $vars["step"] == 0 || abs($vars["step"]) < 0.00001)
+                {
+                    $this->output->set_status_header('400');
+                    return;
+                }
+                $vars["step"] = abs($vars["step"]);
 
-			if (!$modelID || !is_array($biases) || !is_array($params)
-					|| !is_array($biases["variable"])) {
-				$this->output->set_status_header('400');
-			} else {
-				//To prevent user wrongly type step = 0 or < 0.00001 which make server overload
-				foreach($biases["variable"] as $vars)
-					if(!is_numeric($vars["step"]) || $vars["step"] == 0 || abs($vars["step"]) < 0.00001)
-					{
-						$this->output->set_status_header('400');
-						return;
-					}
-				$vars["step"] = abs($vars["step"]);
+                if (!isset($biases["fixed"])) {
+                    $biases["fixed"] = array();
+                }
+                if (!isset($params["model"])) {
+                    $params["model"] = array();
+                }
+                if (!isset($params["instance"])) {
+                    $params["instance"] = array();
+                }
 
-				if (!isset($biases["fixed"])) {
-					$biases["fixed"] = array();
-				}
-				if (!isset($params["model"])) {
-					$params["model"] = array();
-				}
-				if (!isset($params["instance"])) {
-					$params["instance"] = array();
-				}
+                foreach (array("model", "instance") as $arr) {
+                    foreach($params[$arr] as $key => $param) {
+                        if (!isset($param["value"]) || trim($param["value"]) == '') {
+                            unset($params[$arr][$key]);
+                        }
+                    }
+                }
 
-				foreach (array("model", "instance") as $arr) {
-					foreach($params[$arr] as $key => $param) {
-						if (!isset($param["value"]) || trim($param["value"]) == '') {
-							unset($params[$arr][$key]);
-						}
-					}
-				}
+                //check biasing mode
+                $biasingMode = $this->input->post('biasingMode', true);
+                if($biasingMode == "General Biasing")
+                $netlist = $this->getNetlist($modelID, $biases, $params);
+                else if($biasingMode == "Benchmarking") {
+                    $benchmarkingId = $this->input->post('benchmarkingId', true);
+                    if($benchmarkingId)
+                    $netlist = $this->getNetlist($modelID, $biases, $params, $benchmarkingId);
+                    else {
+                        //no benchmarking id
+                        $this->output->set_status_header('400');
+                        return;
+                    }
+                }
+                else {
+                    //no biasing mode, skip
+                    $this->output->set_status_header('400');
+                    return;
+                }
 
-				//check biasing mode
-				$biasingMode = $this->input->post('biasingMode', true);
-				if($biasingMode == "General Biasing")
-					$netlist = $this->getNetlist($modelID, $biases, $params);
-				else if($biasingMode == "Benchmarking") {
-					$benchmarkingId = $this->input->post('benchmarkingId', true);
-					if($benchmarkingId)
-						$netlist = $this->getNetlist($modelID, $biases, $params, $benchmarkingId);
-					else {
-						//no benchmarking id
-						$this->output->set_status_header('400');
-						return;
-					}
-				}
-				else {
-					//no biasing mode, skip
-					$this->output->set_status_header('400');
-					return;
-				}
-
-				if ($netlist != null) {
-					$response = $this->Ngspice_model->simulate($netlist);
-				}
-			}
-		// }
+                if ($netlist != null) {
+                    $response = $this->Ngspice_model->simulate($netlist);
+                }
+            }
+        }
 
         $this->outputJSON($response);
-	}
+    }
 
-        public function simulationStatus()
-        {
-				// if (!$this->Account_model->isLogin())
-                //         $this->output->set_status_header('401');
-                // else
-                if (!$this->input->post())
-                        $this->output->set_status_header('405');
-                else
-                {
-                        $uuid = $this->input->post('session', true);
-                        $response = $this->Ngspice_model->spiceStatus($uuid);
-                        $this->outputJSON($response);
-                }
+    public function simulationStatus()
+    {
+        $this->requireAuth();
+        if (!$this->input->post()) {
+            $this->output->set_status_header('405');
+        } else {
+            $uuid = $this->input->post('session', true);
+            $response = $this->Ngspice_model->spiceStatus($uuid);
+            $this->outputJSON($response);
+        }
+    }
+
+    public function simulationStop()
+    {
+        $this->requireAuth();
+        if (!$this->input->post()) {
+            $this->output->set_status_header('405');
+        } else {
+            $uuid = $this->input->post('session', true);
+            $response = $this->Ngspice_model->spiceStop($uuid);
+        }
+    }
+
+
+    public function getData($token, $column_id)
+    {
+        $this->requireAuth();
+        $response = null;
+        $response = $this->Ngspice_model->getData($token, $column_id);
+        if (empty($response)) {
+            $this->output->set_status_header('404');
         }
 
-        public function simulationStop()
-        {
-                if (!$this->Account_model->isLogin())
-                        $this->output->set_status_header('401');
-                else if (!$this->input->post())
-                        $this->output->set_status_header('405');
-                else
-                {
-                        $uuid = $this->input->post('session', true);
-                        $response = $this->Ngspice_model->spiceStop($uuid);
-                }
-        }
-
-
-	public function getData($token, $column_id)
-	{
-		$response = null;
-
-		// if (!$this->Account_model->isLogin()) {
-        //     $this->output->set_status_header('401');
-		// } else {
-			$response = $this->Ngspice_model->getData($token, $column_id);
-			if (empty($response)) {
-				$this->output->set_status_header('404');
-			}
-		// }
-
-		$this->outputJSON($response);
-	}
+        $this->outputJSON($response);
+    }
 
 	private function getNetlist($modelID, $biases, $params, $benchmarkID = -1)
 	{

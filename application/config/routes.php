@@ -110,16 +110,33 @@ $route['discussions/my'] = "discussions/discussionsByUser";
 // Temp solution for old txtsim request
 // Simulation
 $route['simulation'] = "v1/txtsim/index";
-$route['modelsim/modelLibrary/(:any)'] = "v1/modelsim/modelLibrary/$1";
-$route['modelsim/modelInstanceParams/(:num)'] = "v1/modelsim/modelInstanceParams/$1";
-$route['modelsim/modelCardinfo2/(:any)'] = "v1/modelsim/modelCardinfo2/$1";
-$route['modelsim/modelDetails/(:num)'] = "v1/modelsim/modelDetails/$1";
-$route['txtsim/getModelCard'] = "v1/txtsim/getModelCard";
-$route['txtsim/convNetlistToRAW'] = "v1/txtsim/convNetlistToRAW";
 $route['txtsim/runNetlistSIM'] = "v1/txtsim/runNetlistSIM";
-$route['txtsim/simulationStop'] = "v1/txtsim/simulationStop";
 $route['txtsim/runRAWSIM'] = "v1/txtsim/runRAWSIM";
 $route['txtsim/simulationStatus'] = "v1/txtsim/simulationStatus";
+$route['txtsim/simulationStop'] = "v1/txtsim/simulationStop";
+$route['txtsim/getModelCard'] = "v1/txtsim/getModelCard";
+$route['txtsim/convNetlistToRAW'] = "v1/txtsim/convNetlistToRAW";
+$route['txtsim/saveasRAW'] = "v1/txtsim/saveasRAW";
+$route['txtsim/saveasNetlist'] = "v1/txtsim/saveasNetlist";
+$route['txtsim/savePNG'] = "v1/txtsim/savePNG";
+$route['txtsim/loadRAW'] = "v1/txtsim/loadRAW";
+$route['txtsim/loadNetlist'] = "v1/txtsim/loadNetlist";
+$route['txtsim/CSVDownload'] = "v1/txtsim/CSVDownload";
+
+$route['modelsim/modelLibrary/(:any)'] = "v1/modelsim/modelLibrary/$1";
+$route['modelsim/modelDetails/(:num)'] = "v1/modelsim/modelDetails/$1";
+$route['modelsim/modelCardinfo2/(:any)'] = "v1/modelsim/modelCardinfo2/$1";
+$route['modelsim/modelInstanceParams/(:num)'] = "v1/modelsim/modelInstanceParams/$1";
+
+$route['modelsim/getExampleFilenames/(:num)'] = "v1/modelsim/getExampleFilenames/$1";
+$route['modelsim/readExampleFiles/(:num)/(:any)'] = "v1/modelsim/readExampleFiles/$1/$2";
+$route['modelsim/benchmarking/(:any)/(:num)'] = "v1/modelsim/benchmarking/$1/$2";
+$route['modelsim/paramSet/(:any)/(:num)'] = "v1/modelsim/paramSet/$1/$2";
+$route['modelsim/clientParamSet/(:any)/(:num)/(:any)'] = "v1/modelsim/clientParamSet/$1/$2/$3";
+$route['modelsim/clientPlotData/(:any)'] = "v1/modelsim/clientPlotData/$1";
+
+$route['modelsim/modelInstanceParams/(:num)'] = "v1/modelsim/modelInstanceParams/$1";
+$route['modelsim/modelInstanceParams/(:num)'] = "v1/modelsim/modelInstanceParams/$1";
 
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";

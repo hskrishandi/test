@@ -101,7 +101,8 @@ class txtsim extends REST_Controller {
 		}
 	}
 	public function saveRAW($filename = 'netlist'){
-		if (!$this->Account_model->isAuth()) return;
+		// if (!$this->Account_model->isAuth()) return;
+        $this->requireAuth();
 		$netlist1 = $this->input->post('RAWlist');
 		//conv the \n to \r\n at EOL for fitting the NOTEPAD in windows
 		$netlist = preg_replace("/\n/","\r\n", $netlist1);
