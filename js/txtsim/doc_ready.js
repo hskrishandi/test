@@ -195,7 +195,7 @@ $(document).ready(function() {
 	});
 
 	$("#functionRAWSave").click(function() {
-		$('#RAWModeForm').formAndDownload(CI_ROOT + "/txtsim/saveRAW");
+		$('#RAWModeForm').formAndDownload(CI_ROOT + "txtsim/saveRAW");
 		//event.preventDefault();
 		return false;
 	});
@@ -211,7 +211,7 @@ $(document).ready(function() {
 				}).appendTo('#RAWModeForm').addClass('raw-saveas-name');
 			} else
 				$('.raw-saveas-name').val(filename);
-			$('#RAWModeForm').formAndDownload(CI_ROOT + "/txtsim/saveasRAW");
+			$('#RAWModeForm').formAndDownload(CI_ROOT + "txtsim/saveasRAW");
 		}, {
 			note: downloadAsNote
 		});
@@ -242,7 +242,7 @@ $(document).ready(function() {
 	//Netlist Save
 	$("#functionNetlistSave").click(function() {
 		console.log($('#netlistModeForm').serialize());
-		$('#netlistModeForm').formAndDownload(CI_ROOT + "/txtsim/saveNetlist");
+		$('#netlistModeForm').formAndDownload(CI_ROOT + "txtsim/saveNetlist");
 		event.preventDefault();
 		return false;
 	});
@@ -259,7 +259,7 @@ $(document).ready(function() {
 				}).appendTo('#netlistModeForm').addClass('netlist-saveas-name');
 			} else
 				$('.netlist-saveas-name').val(filename);
-			$('#netlistModeForm').formAndDownload(CI_ROOT + "/txtsim/saveasNetlist");
+			$('#netlistModeForm').formAndDownload(CI_ROOT + "txtsim/saveasNetlist");
 		}, {
 			note: downloadAsNote
 		});

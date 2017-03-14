@@ -596,7 +596,7 @@ var ModelSimulation;
 					var png = jqplotToImg("imos-graph-" + self.selectedPlot().id);
 					if(png == "")	//FOR IE8 or lower version
 						return;
-					var form = $("form[name=uploadform]").attr('action',CI_ROOT + "/txtsim/savePNG");
+					var form = $("form[name=uploadform]").attr('action',CI_ROOT + "txtsim/savePNG");
 					var input = $("<input />").attr('name', 'png').val(png).appendTo(form);
 					var nameinput = $("<input />").attr("name", "filename").val(filename).appendTo(form);
 					form.submit();
