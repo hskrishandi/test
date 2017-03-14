@@ -65,10 +65,10 @@ class txtsim extends REST_Controller {
 
 	public function simulationStatus()
 	{
-		if (!$this->Account_model->isAuth()) $this->output->set_status_header('401');
-		else if(!$this->input->post()) $this->output->set_status_header('405');
-		else
-		{
+        $this->requireAuth();
+        if(!$this->input->post()) {
+            $this->output->set_status_header('405');
+        } else {
 			$uuid = $this->input->post('session', true);
 			$response = $this->Txtsim_model->spiceStatus($uuid);
 			echo json_encode($response,JSON_NUMERIC_CHECK);

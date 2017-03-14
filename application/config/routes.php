@@ -119,6 +119,7 @@ $route['txtsim/convNetlistToRAW'] = "v1/txtsim/convNetlistToRAW";
 $route['txtsim/runNetlistSIM'] = "v1/txtsim/runNetlistSIM";
 $route['txtsim/simulationStop'] = "v1/txtsim/simulationStop";
 $route['txtsim/runRAWSIM'] = "v1/txtsim/runRAWSIM";
+$route['txtsim/simulationStatus'] = "v1/txtsim/simulationStatus";
 
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";
