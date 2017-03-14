@@ -352,6 +352,8 @@ class REST_Controller extends CI_Controller
      */
     private function handleTokenForOldSystem()
     {
+        log_message('ERROR', 'Current domain: ' . $_SERVER['SERVER_NAME']);
+        
         // This get is for Simulation Platform iframe
         // FIXME: Here we have potential security issue, exposing token in url
         if (!$this->token) {
