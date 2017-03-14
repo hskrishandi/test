@@ -78,7 +78,6 @@ $route['activities/(:num)'] = "activities/index/$1";
 
 // Events
 $route['events'] = "events/index";
-$route['events/(:num)'] = "events/index/$1";
 $route['events/upcoming'] = "events/getUpcomingEvents";
 $route['events/past'] = "events/getPastEvents";
 
