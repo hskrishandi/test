@@ -135,9 +135,6 @@ $route['modelsim/paramSet/(:any)/(:num)'] = "v1/modelsim/paramSet/$1/$2";
 $route['modelsim/clientParamSet/(:any)/(:num)/(:any)'] = "v1/modelsim/clientParamSet/$1/$2/$3";
 $route['modelsim/clientPlotData/(:any)'] = "v1/modelsim/clientPlotData/$1";
 
-$route['modelsim/modelInstanceParams/(:num)'] = "v1/modelsim/modelInstanceParams/$1";
-$route['modelsim/modelInstanceParams/(:num)'] = "v1/modelsim/modelInstanceParams/$1";
-
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";
 
