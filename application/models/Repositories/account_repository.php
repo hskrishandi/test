@@ -80,4 +80,17 @@ class Account_repository extends Base_repository
                 AND name = '$name'
         ");
     }
+
+    /**
+     * Update account information
+     *
+     * @param $userId, (array)$data
+     *
+     * @author Leon
+     */
+    public function updateAccountInfo($userId, $data)
+    {
+        $this->db->where('id', $userId);
+        return $this->db->update('users', $data);
+    }
 }

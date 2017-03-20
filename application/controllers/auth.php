@@ -129,4 +129,26 @@ class auth extends REST_Controller
         }
         $this->response();
     }
+
+    /**
+     * Change password
+     *
+     * @author Leon
+     */
+    public function updatePassword()
+    {
+        $this->requireAuth();
+        if ($this->method == "PUT") {
+            $oldPassword = $this->put("oldPassword");
+            $newPassword = $this->put("newPassword");
+            if ($oldPassword && $newPassword) {
+                $this->body = $this->Auth_service->updatePassword($oldPassword, $newPassword);
+            } else {
+                $this->status = 400;
+            }
+        } else {
+            $this->status = 405;
+        }
+        $this->response();
+    }
 }

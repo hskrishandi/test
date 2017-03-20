@@ -18,7 +18,7 @@ class Auth_repository extends Base_repository
      *
      * @author Leon
      */
-    public function getAuthUserByEmail($email = '')
+    public function fetchAuthUserByEmail($email = '')
     {
         $email = $this->db->escape_str($email);
         return $this->db->query("
@@ -89,6 +89,7 @@ class Auth_repository extends Base_repository
             SELECT
                 id,
                 email,
+                password,
                 displayname as name,
                 first_name as firstName,
                 last_name as lastName,

@@ -200,4 +200,29 @@ class account extends REST_Controller
         $name = $this->validateString($this->delete('name'));
         $this->body = $this->Account_Service->deleteModelFromUserLibrary($userId, $modelId, $name);
     }
+
+    /**
+     * Update account information
+     *
+     * @author Leon
+     */
+    public function updateAccountInfo()
+    {
+        if ($this->method == "PUT") {
+            $lastName = $this->put('lastName');
+            $firstName= $this->put('firstName');
+            $displayName= $this->put('displayName');
+            $company= $this->put('company');
+            $position= $this->put('position');
+            $address= $this->put('address');
+            $tel= $this->put('tel');
+            $fax= $this->put('fax');
+            $photo= $this->put('photo');
+            $userId = $this->authUser != null ? $this->authUser->id : null;
+            $this->body = $this->Account_Service->updateAccountInfo($userId, $lastName, $firstName, $displayName, $company, $position, $address, $tel, $fax, $photo);
+        } else {
+            $this->status = 405;
+        }
+        $this->response();
+    }
 }

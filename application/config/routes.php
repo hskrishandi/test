@@ -53,11 +53,13 @@ $route['auth/login'] = "auth/login";
 $route['auth/logout'] = "auth/logout";
 $route['auth/register'] = "auth/register";
 $route['auth/activate/(:any)'] = "auth/activate/$1";
-$route['auth/reset'] = "auth/resetPassword";
+$route['auth/password/reset'] = "auth/resetPassword";
+$route['auth/password/update'] = "auth/updatePassword";
 
 // Users
 $route['account'] = "account/index";
 $route['account/brief'] = "account/getUserBriefInfo";
+$route['account/update'] = "account/updateAccountInfo";
 $route['account/library'] = "account/userLibrary";
 
 // Contact us

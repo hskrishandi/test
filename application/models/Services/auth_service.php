@@ -38,7 +38,7 @@ class Auth_service extends Base_service
      */
     public function login($email, $inputPassword)
     {
-        $users = $this->Auth_repository->getAuthUserByEmail($email);
+        $users = $this->Auth_repository->fetchAuthUserByEmail($email);
         $result = array();
         switch (count($users)) {
             case 0:
@@ -136,7 +136,9 @@ class Auth_service extends Base_service
      */
     public function getLoginedUser()
     {
-        return $this->user;
+        $returnUser = clone($this->user);
+        unset($returnUser->password);
+        return $returnUser;
     }
 
     /**
@@ -313,5 +315,31 @@ class Auth_service extends Base_service
         if (!$this->email->send()) {
             log_message('error', 'Reset password failed: failed to send reset password email. ' . $email);
         }
+    }
+
+    /**
+     * Change password
+     *
+     * @param $oldPassword, $newPassword
+     * @return change status
+     *
+     * @author Leon
+     */
+    public function updatePassword($oldPassword, $newPassword)
+    {
+        log_message('ERROR', $this->user->password);
+        $password = new Password($this->user->password);
+        if ($this->user && $password->isMatch($oldPassword)) {
+            $encryptedNewPassword = $password->encrypt($newPassword);
+            if ($this->Auth_repository->updatePassword($this->user->id, $encryptedNewPassword)) {
+                return true;
+            } else {
+                log_message('error', 'Failed to update password to database.');
+                return array(406 => "Oops! Something went wrong while updating password, please contact us.");
+            }
+        } else {
+            return array(406 => "Password not match.");
+        }
+        return true;
     }
 }

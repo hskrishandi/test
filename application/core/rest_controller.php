@@ -260,10 +260,10 @@ class REST_Controller extends CI_Controller
     protected function delete($index)
     {
         if ($this->delete) {
-            return $this->delete[$index];
+            return array_key_exists($index, $this->delete) ? $this->delete[$index] : '';
         } elseif ($this->method === 'DELETE') {
             parse_str(file_get_contents("php://input"), $this->delete);
-            return $this->delete[$index];
+            return array_key_exists($index, $this->delete) ? $this->delete[$index] : '';
         } else {
             return false;
         }
@@ -281,10 +281,10 @@ class REST_Controller extends CI_Controller
     protected function put($index)
     {
         if ($this->put) {
-            return $this->put[$index];
+            return array_key_exists($index, $this->put) ? $this->put[$index] : '';
         } elseif ($this->method === 'PUT') {
             parse_str(file_get_contents("php://input"), $this->put);
-            return $this->put[$index];
+            return array_key_exists($index, $this->put) ? $this->put[$index] : '';
         } else {
             return false;
         }
@@ -352,14 +352,14 @@ class REST_Controller extends CI_Controller
      */
     private function handleTokenForOldSystem()
     {
-        log_message('ERROR', 'Current domain: ' . $_SERVER['SERVER_NAME']);
-        
+        // log_message('ERROR', 'Current domain: ' . $_SERVER['SERVER_NAME']);
+
         // This get is for Simulation Platform iframe
         // FIXME: Here we have potential security issue, exposing token in url
         if (!$this->token) {
             if ($this->method === 'GET' && uri_string() === 'simulation') {
                 $this->token = $this->input->get('SimulationAuthorization');
-                log_message('ERROR', 'Getting token from simulaiton request parameters: ' . $this->token);
+                // log_message('ERROR', 'Getting token from simulaiton request parameters: ' . $this->token);
             }
         }
         // For cross-domain situation, token are stores in two different
@@ -370,9 +370,9 @@ class REST_Controller extends CI_Controller
         // client browser for other requests to use
         if (!$clientToken && $this->token) {
             setcookie("token", $this->token, time() + (86400 * 30), "/"); // 86400 = 1 day
-            log_message('ERROR', 'Writing token to client cookie: ' . $this->token);
+            // log_message('ERROR', 'Writing token to client cookie: ' . $this->token);
         } else {
-            log_message('ERROR', 'Token exists in client.');
+            // log_message('ERROR', 'Token exists in client.');
         }
     }
 }

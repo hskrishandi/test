@@ -121,4 +121,28 @@ class Account_Service extends Base_service
         $result = $this->Account_repository->deleteModelFromUserLibrary($userId, $modelId, $name);
         return $result;
     }
+
+    /**
+     * Update account information
+     *
+     * @param $lastName, $firstName, $displayName, $company, $position, $address, $tel, $fax, $photo
+     * @return bool
+     *
+     * @author Leon
+     */
+    public function updateAccountInfo($userId, $lastName, $firstName, $displayName, $company, $position, $address, $tel, $fax)
+    {
+        $data = array(
+            'last_name' => $lastName,
+            'first_name' => $firstName,
+            'displayname' => $displayName,
+            'organization' => $company,
+            'address' => $address,
+            'position' => $position,
+            'tel' => $tel,
+            'fax' => $fax
+        );
+        $result = $this->Account_repository->updateAccountInfo($userId, $data);
+        return $result;
+    }
 }
