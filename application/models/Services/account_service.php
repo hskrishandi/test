@@ -59,12 +59,14 @@ class Account_Service extends Base_service
                         $formatedParameters = array();
                         if (count($userLibrary) > 0) {
                             foreach ($userLibrary as $parameter) {
-                                $title = $parameter['title'];
-                                if (!array_key_exists($title, $formatedParameters)) {
-                                    $formatedParameters[$title] = array();
+                                if (array_key_exists('title', $parameter)) {
+                                    $title = $parameter['title'];
+                                    if (!array_key_exists($title, $formatedParameters)) {
+                                        $formatedParameters[$title] = array();
+                                    }
+                                    unset($parameter['title']);
+                                    array_push($formatedParameters[$title], $parameter);
                                 }
-                                unset($parameter['title']);
-                                array_push($formatedParameters[$title], $parameter);
                             }
                         }
 
