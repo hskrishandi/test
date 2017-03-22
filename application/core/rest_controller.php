@@ -356,11 +356,9 @@ class REST_Controller extends CI_Controller
 
         // This get is for Simulation Platform iframe
         // FIXME: Here we have potential security issue, exposing token in url
-        if (!$this->token) {
-            if ($this->method === 'GET' && uri_string() === 'simulation') {
-                $this->token = $this->input->get('SimulationAuthorization');
-                // log_message('ERROR', 'Getting token from simulaiton request parameters: ' . $this->token);
-            }
+        if ($this->method === 'GET' && uri_string() === 'simulation') {
+            $this->token = $this->input->get('SimulationAuthorization');
+            // log_message('ERROR', 'Getting token from simulaiton request parameters: ' . $this->token);
         }
         // For cross-domain situation, token are stores in two different
         // domains, we need to manually handle this for old
