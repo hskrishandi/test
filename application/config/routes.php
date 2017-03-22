@@ -111,6 +111,7 @@ $route['discussions/my'] = "discussions/discussionsByUser";
 // Temp solution for old txtsim request
 // Simulation
 $route['simulation'] = "v1/txtsim/index";
+$route['simulation/clear'] = "v1/txtsim/clearCookie";
 $route['txtsim/runNetlistSIM'] = "v1/txtsim/runNetlistSIM";
 $route['txtsim/runRAWSIM'] = "v1/txtsim/runRAWSIM";
 $route['txtsim/simulationStatus'] = "v1/txtsim/simulationStatus";

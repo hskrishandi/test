@@ -352,25 +352,17 @@ class REST_Controller extends CI_Controller
      */
     private function handleTokenForOldSystem()
     {
-        // log_message('ERROR', 'Current domain: ' . $_SERVER['SERVER_NAME']);
-
         // This get is for Simulation Platform iframe
         // FIXME: Here we have potential security issue, exposing token in url
-        if ($this->method === 'GET' && uri_string() === 'simulation') {
-            $this->token = $this->input->get('SimulationAuthorization');
-            // log_message('ERROR', 'Getting token from simulaiton request parameters: ' . $this->token);
-        }
-        // For cross-domain situation, token are stores in two different
-        // domains, we need to manually handle this for old
-        // Simulation Platform system
-        $clientToken = array_key_exists("token", $_COOKIE) ? $_COOKIE["token"] : "";
-        // If the token cookie is empty, we need to write the token to
-        // client browser for other requests to use
-        if (!$clientToken && $this->token) {
-            setcookie("token", $this->token, time() + (86400 * 30), "/"); // 86400 = 1 day
-            // log_message('ERROR', 'Writing token to client cookie: ' . $this->token);
-        } else {
-            // log_message('ERROR', 'Token exists in client.');
+        if (!$this->token) {
+            if ($this->method === 'GET' && uri_string() === 'simulation') {
+                $this->token = $this->input->get('SimulationAuthorization');
+                // For cross-domain situation, token are stores in two different
+                // domains, we need to manually handle this for old
+                // Simulation Platform system
+                // Set the token in cookie for later simulation requests use
+                setcookie("token", $this->token, time() + (86400 * 30), "/"); // 86400 = 1 day
+            }
         }
     }
 }
