@@ -134,16 +134,28 @@ class Account_Service extends Base_service
      */
     public function updateAccountInfo($userId, $lastName, $firstName, $displayName, $company, $position, $address, $tel, $fax)
     {
-        $data = array(
-            'last_name' => $lastName,
-            'first_name' => $firstName,
-            'displayname' => $displayName,
-            'organization' => $company,
-            'address' => $address,
-            'position' => $position,
-            'tel' => $tel,
-            'fax' => $fax
-        );
+        $data = array();
++       if($lastName !== ''){
++           $data['last_name'] = $lastName;
++       }
++       if($firstName !== ''){
++           $data['first_name'] = $firstName;
++       }
++       if($displayName !== ''){
++           $data['displayname'] = $displayName;
++       }
++       if($company !== ''){
++           $data['organization'] = $company;
++       }
++       if($position !== ''){
++           $data['address'] = $address;
++       }
++       if($tel !== ''){
++           $data['tel'] = $tel;
++       }
++       if($fax !== ''){
++           $data['fax'] = $fax;
++       }
         $result = $this->Account_repository->updateAccountInfo($userId, $data);
         return $result;
     }
