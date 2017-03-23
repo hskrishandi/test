@@ -24,20 +24,6 @@ class txtsim extends REST_Controller {
 		$this->load->view('txtsim/txtsim.php',$data);
 	}
 
-    /**
-     * Use this function to clear iframe cookie, so the old token won't be use
-     * in next login.
-     *
-     * @author Leon
-     */
-    public function clearCookie()
-    {
-        if (array_key_exists("token", $_COOKIE)) {
-            unset($_COOKIE["token"]);
-            setcookie('token', null, -1, '/');
-        }
-    }
-
 	public function convNetlistToRAW()
 	{
 		// if (!$this->Account_model->isAuth()) return;

@@ -361,7 +361,9 @@ class REST_Controller extends CI_Controller
                 // domains, we need to manually handle this for old
                 // Simulation Platform system
                 // Set the token in cookie for later simulation requests use
-                setcookie("token", $this->token, time() + (86400 * 30), "/"); // 86400 = 1 day
+                if ($this->token) {
+                    setcookie("token", $this->token, time() + (86400 * 1), "/"); // 86400 = 1 day
+                }
             }
         }
     }
