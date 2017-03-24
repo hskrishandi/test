@@ -45,7 +45,7 @@ class Auth_service extends Base_service
                 // Not registered
                 $result = array(401 => "Email and password are not matched.");
                 break;
-            case 1:
+            default:
                 // Registered user
                 $this->user = current($users);
                 // Using the Password library to check password
@@ -73,11 +73,13 @@ class Auth_service extends Base_service
                     $result = array(401 => "Email and password are not matched.");
                 }
                 break;
-
+            // FIXME: Allow same email exists in database, not a good approach
+            /*
             default:
                 // Multiple user email, error
                 $result = array(401 => "Account error.");
                 break;
+            */
         }
         return $result;
     }
@@ -111,7 +113,7 @@ class Auth_service extends Base_service
     {
         if (!$this->user) {
             $users = $this->Auth_repository->fetchAuthUserByToken($token);
-            if (count($users) == 1) {
+            if (count($users) > 0) {
                 // Save the user info
                 $this->user = current($users);
                 return true;
