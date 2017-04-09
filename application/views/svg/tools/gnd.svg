@@ -1,0 +1,11 @@
+<!-- <rect x="50" width="50" height="50" fill="white" stroke="gray" /> -->
+<g class="component" id="gnd">
+  <g class="drawing">
+    <rect fill="#ffffff" width="40" height="50" style="opacity:0" />
+    <path fill="#ffffff" stroke="#000000" d="M 20 20 L 35 20 L 20 35 L 5 20 L 20 20 L 20 0" stroke-width="1" />
+    <circle class="term" visibility="hidden" cx="20" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+  </g>
+  <g class="text">
+    <text x="0" y="0" font-family="sans-serif" font-size="14px" fill="black"></text>
+  </g>
+</g>

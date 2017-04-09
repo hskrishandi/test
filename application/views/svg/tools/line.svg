@@ -1,0 +1,7 @@
+<g id="line">
+<!-- <rect width="50" height="50" fill="white" stroke="gray" /> -->
+  <rect fill="#ffffff" width="40" height="50" style="opacity:0" />
+  <path fill="#ffffff" stroke="#000000" d="M 5 30 L 35 10" stroke-width="1" />
+  <circle class="term" cx="5" cy="30" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+  <circle class="term" cx="35" cy="10" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+</g>

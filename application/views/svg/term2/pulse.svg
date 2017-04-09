@@ -1,0 +1,14 @@
+<g class="component" id="pulse" term="2">
+  <g class="drawing">
+    <rect fill="#ffffff" width="40" height="40" style="opacity:0" />
+    <circle fill="#ffffff" cx="20" cy="20" r="10" stroke="#000000" stroke-width="1" />
+    <path order="1" fill="none" stroke="#000000" d="M 20 0 L 20 10" stroke-width="1" />
+    <path order="2" fill="none" stroke="#000000" d="M 20 30 L 20 40" stroke-width="1" />
+    <path fill="none" stroke="#000000" d="M 12.5 22.5 L 15 22.5 L 17.5 17.5 L 22.5 17.5 L 25 22.5 L 27.5 22.5"></path>
+    <circle order="1" class="term" visibility="hidden" cx="20" cy="0" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+    <circle order="2" class="term" visibility="hidden" cx="20" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+  </g>
+  <g class="text">
+    <text class="id" x="0" y="0" font-family="sans-serif" font-size="14px" fill="black"></text>
+  </g>
+</g>
