@@ -84,31 +84,39 @@ class Auth_repository extends Base_repository
      */
     public function fetchAuthUserByToken($token = '')
     {
-        $token = $this->db->escape_str($token);
-        return $this->db->query("
-            SELECT
-                id,
-                email,
-                password,
-                displayname as name,
-                first_name as firstName,
-                last_name as lastName,
-                organization,
-                country,
-                address,
-                position,
-                tel,
-                fax,
-                class,
-                status,
-                isactivated,
-                photo_path as photoPath,
-                photo_ext as photoExt
-            FROM
-                users
-            WHERE
-                sessionid = '$token';
-        ")->result();
+        // If token is not empty. We r using 32 sessionid(token), if this length
+        // is changed, we need to change this condition as well
+        if (is_string($token) && strlen($token) === 32) {
+            $token = $this->db->escape_str($token);
+            return $this->db->query("
+                SELECT
+                    id,
+                    email,
+                    password,
+                    displayname as name,
+                    first_name as firstName,
+                    last_name as lastName,
+                    organization,
+                    country,
+                    address,
+                    position,
+                    tel,
+                    fax,
+                    class,
+                    status,
+                    isactivated,
+                    photo_path as photoPath,
+                    photo_ext as photoExt
+                FROM
+                    users
+                WHERE
+                    sessionid = '$token';
+            ")->result();
+        } else {
+            // If the token is empty, return empty array
+            return array();
+        }
+
     }
 
     /**
