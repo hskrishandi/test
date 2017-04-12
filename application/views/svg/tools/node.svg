@@ -1,0 +1,14 @@
+<!-- <rect x="100" width="50" height="50" fill="white" stroke="gray" /> -->
+<g class="component" id="node">
+  <g class="drawing">
+    <rect fill="#ffffff" width="40" height="50" style="opacity:0" />
+    <path fill="none" stroke="#000000" d="M 10 5 L 10 25 L 0 40 L 25 30" stroke-width="1" />
+    <path order="1" fill="none" stroke="#000000" d="M 25 30 L 40 30" stroke-width="1" />
+    <path order="2" fill="none" stroke="#000000" d="M 40 30 L 40 5" stroke-width="1" />
+    <path order="3" fill="none" stroke="#000000" d="M 40 5 L 10 5" stroke-width="1" />
+    <circle class="term" visibility="hidden" cx="0" cy="40" r="2.5" fill="#999999" stroke="#3b4449" stroke-width="1" />
+  </g>
+  <g class="text">
+    <text class="id" x="0" y="0" font-family="sans-serif" font-size="14px" fill="black"></text>
+  </g>
+</g>

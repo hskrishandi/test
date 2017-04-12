@@ -1,0 +1,5 @@
+<g class="rotate_mirror" id="lrotate">
+  <rect fill="#ffffff" width="40" height="40" stroke="#ffffff" />
+  <path fill="none" stroke="#999999" d="M10 10 L 30 10 L 30 30 L 10 30" stroke-width="1" />
+  <path fill="none" stroke="#999999" d="M15 5 L 10 10 L 15 15" stroke-width="2" />
+</g>
