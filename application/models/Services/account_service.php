@@ -135,20 +135,20 @@ class Account_Service extends Base_service
     public function updateAccountInfo($userId, $lastName, $firstName, $displayName, $company, $position, $address, $tel, $fax)
     {
         $data = array();
-       if ($lastName !== '') {
-           $data['last_name'] = $lastName;
-       }
-       if ($firstName !== '') {
-           $data['first_name'] = $firstName;
-       }
-       if ($displayName !== '') {
-           $data['displayname'] = $displayName;
-       }
-       if ($company !== '') {
-           $data['organization'] = $company;
-       }
-       if ($position !== '') {
-           $data['address'] = $address;
+        if ($lastName !== '') {
+            $data['last_name'] = $lastName;
+        }
+        if ($firstName !== '') {
+            $data['first_name'] = $firstName;
+        }
+        if ($displayName !== '') {
+            $data['displayname'] = $displayName;
+        }
+        if ($company !== '') {
+            $data['organization'] = $company;
+        }
+        if ($position !== '') {
+            $data['address'] = $address;
         }
         if ($tel !== '') {
             $data['tel'] = $tel;
