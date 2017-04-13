@@ -139,9 +139,7 @@ $route['modelsim/clientPlotData/(:any)'] = "v1/modelsim/clientPlotData/$1";
 /**
  * Aninitio Project
  */
-$route['abinitio/simulation/first'] = "abinitio/simulation/firstsim";
-$route['abinitio/simulation/second'] = "abinitio/simulation/secondsim";
-$route['abinitio/simulation/third'] = "abinitio/simulation/thirdsim";
+$route['abinitio/simulation'] = "abinitio/simulation";
 
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";

@@ -18,6 +18,27 @@ class simulation extends REST_Controller
         $this->requireAuth();
     }
 
+    public function index()
+    {
+        if ($_POST['cmd1'] && !$_POST['cmd2'] && !$POST['cmd3']){
+        	$this->firstsim();
+        }
+        if ($_POST['cmd1'] && $_POST['cmd2']  && !$POST['cmd3']){
+        	$this->firstsim();
+        	$this->econdsim();
+        }
+        if (!$_POST['cmd1'] && $_POST['cmd2'] && $_POST['cmd3']){
+        	$this->econdsim();
+        	$this->thirdsim();
+        }
+        if (!$_POST['cmd1'] && !$_POST['cmd2'] && $_POST['cmd3']){
+        	$this->thirdsim();
+        }
+        if (!$_POST['cmd1'] && $_POST['cmd2'] && !$_POST['cmd3']){
+        	$this->econdsim();
+        }
+    }
+
     /**
     * First simulation
     *
