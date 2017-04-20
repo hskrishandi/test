@@ -15,7 +15,7 @@ class simulation extends REST_Controller
         // We put everything in controller first, later we can move logic to
         // service
         // $this->load->model('Services/Abinitio_service');
-        $this->requireAuth();
+        // $this->requireAuth();
     }
 
     public function index()
