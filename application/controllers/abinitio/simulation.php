@@ -25,17 +25,17 @@ class simulation extends REST_Controller
         }
         if ($_POST['cmd1'] && $_POST['cmd2']  && !$POST['cmd3']){
         	$this->firstsim();
-        	$this->econdsim();
+        	$this->secondsim();
         }
         if (!$_POST['cmd1'] && $_POST['cmd2'] && $_POST['cmd3']){
-        	$this->econdsim();
+        	$this->secondsim();
         	$this->thirdsim();
         }
         if (!$_POST['cmd1'] && !$_POST['cmd2'] && $_POST['cmd3']){
         	$this->thirdsim();
         }
         if (!$_POST['cmd1'] && $_POST['cmd2'] && !$_POST['cmd3']){
-        	$this->econdsim();
+        	$this->secondsim();
         }
     }
 
