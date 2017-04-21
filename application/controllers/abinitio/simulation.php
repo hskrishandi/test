@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('BASEPATH')) {
+if (!defined('BASEPATH')){
     exit('No direct script access allowed');
 }
 
@@ -20,21 +20,21 @@ class simulation extends REST_Controller
 
     public function index()
     {
-        if ($_POST['cmd1'] && !$_POST['cmd2'] && !$POST['cmd3']){
+        if ($this->input->post('cmd1') && !$this->input->post('cmd2') && !$this->input->post('cmd3')){
         	$this->firstsim();
         }
-        if ($_POST['cmd1'] && $_POST['cmd2']  && !$POST['cmd3']){
+        if ($this->input->post('cmd1') && $this->input->post('cmd2')  && !$this->input->post('cmd3')){
         	$this->firstsim();
         	$this->secondsim();
         }
-        if (!$_POST['cmd1'] && $_POST['cmd2'] && $_POST['cmd3']){
+        if (!$this->input->post('cmd1') && $this->input->post('cmd2') && $this->input->post('cmd3')){
         	$this->secondsim();
         	$this->thirdsim();
         }
-        if (!$_POST['cmd1'] && !$_POST['cmd2'] && $_POST['cmd3']){
+        if (!$this->input->post('cmd1') && !$this->input->post('cmd2') && $this->input->post('cmd3')){
         	$this->thirdsim();
         }
-        if (!$_POST['cmd1'] && $_POST['cmd2'] && !$_POST['cmd3']){
+        if (!$this->input->post('cmd1') && $this->input->post('cmd2') && !$this->input->post('cmd3')){
         	$this->secondsim();
         }
     }
@@ -49,163 +49,158 @@ class simulation extends REST_Controller
         $outfilename1="testing".time()."_scf.txt";
         $myfile=fopen(realpath(getcwd() . '/application/simulation/abinitio/') . '/' .$outfilename1, "w");
         //output anyway
-        fwrite ($myfile,"smi.status = ". $_POST{"smistatus"}.";\n");
+        fwrite ($myfile,"smi.status = ". $this->input->post("smistatus").";\n");
 
-        if ($_POST['latvecunit'])
-        {
-            // 	    echo $_POST{"latvecunit"}."<br>";
+        if ($this->input->post('latvecunit')){
+            //echo $this->input->post("latvecunit")."<br>";
         }
-        if ($_FILES["fileupload"]["name"])
-        {
+        if (isset($_FILES["fileupload"]["name"])){
             fwrite($myfile,"atom.xyz = '".$_FILES["fileupload"]["name"]."';\n");
-            //   echo $_FILES["fileupload"]["name"];
+            //echo $_FILES["fileupload"]["name"];
         }
-        if ($_POST['species1']){
-            fwrite($myfile,"element(1).species = '". $_POST{"species1"}."';\n");
-            fwrite($myfile,"element(1).path = '"."../PotentialData/". $_POST{"species1"}."_".$_POST{"path1"}.".mat"."';\n");
+        if ($this->input->post('species1')){
+            fwrite($myfile,"element(1).species = '". $this->input->post("species1")."';\n");
+            fwrite($myfile,"element(1).path = '"."../PotentialData/". $this->input->post("species1")."_".$this->input->post("path1").".mat"."';\n");
         }
-        if ($_POST['species2']){
-            fwrite($myfile,"element(2).species = '". $_POST{"species2"}."';\n");
-            fwrite($myfile,"element(2).path = '"."../PotentialData/". $_POST{"species2"}."_".$_POST{"path2"}.".mat"."';\n");
+        if ($this->input->post('species2')){
+            fwrite($myfile,"element(2).species = '". $this->input->post("species2")."';\n");
+            fwrite($myfile,"element(2).path = '"."../PotentialData/". $this->input->post("species2")."_".$this->input->post("path2").".mat"."';\n");
         }
-        if ($_POST['species3']){
-            fwrite($myfile,"element(3).species = '". $_POST{"species3"}."';\n");
-            fwrite($myfile,"element(3).path = '"."../PotentialData/". $_POST{"species3"}."_".$_POST{"path3"}.".mat"."';\n");
+        if ($this->input->post('species3')){
+            fwrite($myfile,"element(3).species = '". $this->input->post("species3")."';\n");
+            fwrite($myfile,"element(3).path = '"."../PotentialData/". $this->input->post("species3")."_".$this->input->post("path3").".mat"."';\n");
         }
-        if ($_POST['species4']){
-            fwrite($myfile,"element(4).species = '". $_POST{"species4"}."';\n");
-            fwrite($myfile,"element(4).path = '"."../PotentialData/". $_POST{"species4"}."_".$_POST{"path4"}.".mat"."';\n");
+        if ($this->input->post('species4')){
+            fwrite($myfile,"element(4).species = '". $this->input->post("species4")."';\n");
+            fwrite($myfile,"element(4).path = '"."../PotentialData/". $this->input->post("species4")."_".$this->input->post("path4").".mat"."';\n");
         }
-        if ($_POST['species5']){
-            fwrite($myfile,"element(5).species = '". $_POST{"species5"}."';\n");
-            fwrite($myfile,"element(5).path = '"."../PotentialData/". $_POST{"species5"}."_".$_POST{"path5"}.".mat"."';\n");
+        if ($this->input->post('species5')){
+            fwrite($myfile,"element(5).species = '". $this->input->post("species5")."';\n");
+            fwrite($myfile,"element(5).path = '"."../PotentialData/". $this->input->post("species5")."_".$this->input->post("path5").".mat"."';\n");
         }
-        if ($_POST['latvec1']||$_POST['latvec2']||$_POST['latvec3']||$_POST['latvec4']||$_POST['latvec5']||$_POST['latvec6']||$_POST['latvec7']||$_POST['latvec8']||$_POST['latvec9']){
-            if($_POST['latvec1']==NULL)
-            {
-                $_POST['latvec1']=0;
+        if ($this->input->post('latvec1')||$this->input->post('latvec2')||$this->input->post('latvec3')||$this->input->post('latvec4')||$this->input->post('latvec5')||$this->input->post('latvec6')||$this->input->post('latvec7')||$this->input->post('latvec8')||$this->input->post('latvec9')){
+            if($this->input->post('latvec1')==NULL){
+                $this->input->post('latvec1')=0;
             }
-            if($_POST['latvec2']==NULL)
-            {
-                $_POST['latvec2']=0;
+            if($this->input->post('latvec2')==NULL){
+                $this->input->post('latvec2')=0;
             }
-            if($_POST['latvec3']==NULL)
-            {
-                $_POST['latvec3']=0;
+            if($this->input->post('latvec3')==NULL){
+                $this->input->post('latvec3')=0;
             }
-            if($_POST['latvec4']==NULL)
-            {
-                $_POST['latvec4']=0;
+            if($this->input->post('latvec4')==NULL){
+                $this->input->post('latvec4')=0;
             }
-            if($_POST['latvec5']==NULL)
-            {
-                $_POST['latvec5']=0;
+            if($this->input->post('latvec5')==NULL){
+                $this->input->post('latvec5')=0;
             }
-            if($_POST['latvec6']==NULL)
-            {
-                $_POST['latvec6']=0;
+            if($this->input->post('latvec6')==NULL){
+                $this->input->post('latvec6')=0;
             }
-            if($_POST['latvec7']==NULL)
-            {
-                $_POST['latvec7']=0;
+            if($this->input->post('latvec7')==NULL){
+                $this->input->post('latvec7')=0;
             }
-            if($_POST['latvec8']==NULL)
-            {
-                $_POST['latvec8']=0;
+            if($this->input->post('latvec8')==NULL){
+                $this->input->post('latvec8')=0;
             }
-            if($_POST['latvec9']==NULL)
-            {
-                $_POST['latvec9']=0;
+            if($this->input->post('latvec9')==NULL){
+                $this->input->post('latvec9')=0;
             }
-
-            fwrite($myfile,"domain.latvec = [[".$_POST{"latvec1"}.",".$_POST{"latvec2"}.",".$_POST{"latvec3"}."];[".$_POST{"latvec4"}.",".$_POST{"latvec5"}.",".$_POST{"latvec6"}."];[".$_POST{"latvec7"}.",".$_POST{"latvec8"}.",".$_POST{"latvec9"}."]];\n");
-
+            fwrite($myfile,"domain.latvec = [[".$this->input->post("latvec1").",".$this->input->post("latvec2").",".$this->input->post("latvec3")."];[".$this->input->post("latvec4").",".$this->input->post("latvec5").",".$this->input->post("latvec6")."];[".$this->input->post("latvec7").",".$this->input->post("latvec8").",".$this->input->post("latvec9")."]];\n");
         }
-        if ($_POST['latvecunit'])
-        fwrite($myfile,"domain.latvec.units = '". $_POST{"latvecunit"}."';\n");
-        if ($_POST['bravaislat'])
-        fwrite($myfile, "domain.bravaislat = '". $_POST{"bravaislat"}."';\n");
-        //if ($_POST['savepath'])
-        //fwrite($myfile, "info.savepath = '". $_POST{"savepath"}."';\n");
+        if ($this->input->post('latvecunit'))
+			fwrite($myfile,"domain.latvec.units = '". $this->input->post("latvecunit")."';\n");
+        if ($this->input->post('bravaislat'))
+			fwrite($myfile, "domain.bravaislat = '". $this->input->post("bravaislat")."';\n");
+        //if ($this->input->post('savepath'))
+        //fwrite($myfile, "info.savepath = '". $this->input->post("savepath")."';\n");
         fwrite($myfile, "info.savepath = './tmp/".$outfilename1."';\n");
-        if ($_POST['lowres'])
-        fwrite($myfile,"domain.lowres = ". $_POST{"lowres"}.";\n");
-        if ($_POST['highres'])
-        fwrite($myfile,"domain.highres = ". $_POST{"highres"}.";\n");
-        if ($_POST['cgridn1']||$_POST['cgridn2']||$_POST['cgridn3'])
-        fwrite ($myfile,"domain.cgridn = [". $_POST{"cgridn1"}.",".$_POST{"cgridn2"}.",".$_POST{"cgridn3"}."];\n");
-        if ($_POST['fgridn1']||$_POST['fgridn2']||$_POST['fgridn3'])
-        fwrite ($myfile,"domain.fgridn = [". $_POST{"fgridn1"}.",".$_POST{"fgridn2"}.",".$_POST{"fgridn3"}."];\n");
-        if ($_POST['boundary1'])
-        fwrite ($myfile,"domain.boundary = [". $_POST{"boundary1"}.",".$_POST{"boundary2"}.",".$_POST{"boundary3"}."];\n");
+		
+        if ($this->input->post('lowres'))
+			fwrite($myfile,"domain.lowres = ". $this->input->post("lowres").";\n");
+        if ($this->input->post('highres'))
+			fwrite($myfile,"domain.highres = ". $this->input->post("highres").";\n");
+        if ($this->input->post('cgridn1')||$this->input->post('cgridn2')||$this->input->post('cgridn3'))
+			fwrite ($myfile,"domain.cgridn = [". $this->input->post("cgridn1").",".$this->input->post("cgridn2").",".$this->input->post("cgridn3")."];\n");
+        if ($this->input->post('fgridn1')||$this->input->post('fgridn2')||$this->input->post('fgridn3'))
+			fwrite ($myfile,"domain.fgridn = [". $this->input->post("fgridn1").",".$this->input->post("fgridn2").",".$this->input->post("fgridn3")."];\n");
+        if ($this->input->post('boundary1'))
+			fwrite ($myfile,"domain.boundary = [". $this->input->post("boundary1").",".$this->input->post("boundary2").",".$this->input->post("boundary3")."];\n");
 
-        if ($_POST['list']){
-            $listarr=explode(",",$_POST['list'] ); //split string into array
+        if ($this->input->post('list')){
+            $listarr=explode(",",$this->input->post('list') ); //split string into array
             $resultstr="";
-            foreach ($listarr as $value)
-            {
+            foreach ($listarr as $value){
                 $resultstr=$resultstr."'".$value."',"; //add commas between proceeded strings
             }
             $resultstr=substr($resultstr,0,-1); //delete the extra comma attached end
             fwrite ($myfile,"functional.list = {". $resultstr."};\n");
         }
+		
         //output libxc anyway
-        fwrite ($myfile,"functional.libxc = ". $_POST{"libxc"}.";\n");
-        if ($_POST['type'])
-        fwrite ($myfile,"mix.type = '". $_POST{"type"}."';\n");
-        if ($_POST['mixername'])
-        fwrite ($myfile,"mixing.mixername = '". $_POST{"mixername"}."';\n");
-        if ($_POST['tolerance1']||$_POST{"tolerance2"})
-        fwrite ($myfile,"mixing.tolerance = [". $_POST{"tolerance1"}.",".$_POST{"tolerance2"}."];\n");
-        if ($_POST['beta'])
-        fwrite ($myfile,"mixing.beta = ". $_POST{"beta"}.";\n");
-        if ($_POST['maxhistory'])
-        fwrite ($myfile,"mixing.maxhistory = ". $_POST{"maxhistory"}.";\n");
+        fwrite ($myfile,"functional.libxc = ". $this->input->post("libxc").";\n");
+		
+        if ($this->input->post('type'))
+			fwrite ($myfile,"mix.type = '". $this->input->post("type")."';\n");
+        if ($this->input->post('mixername'))
+			fwrite ($myfile,"mixing.mixername = '". $this->input->post("mixername")."';\n");
+        if ($this->input->post('tolerance1')||$this->input->post("tolerance2"))
+			fwrite ($myfile,"mixing.tolerance = [". $this->input->post("tolerance1").",".$this->input->post("tolerance2")."];\n");
+        if ($this->input->post('beta'))
+			fwrite ($myfile,"mixing.beta = ". $this->input->post("beta").";\n");
+        if ($this->input->post('maxhistory'))
+			fwrite ($myfile,"mixing.maxhistory = ". $this->input->post("maxhistory").";\n");
+		
         //output anyway
-        fwrite ($myfile,"LCAO.status = ". $_POST{"status"}.";\n");
+        fwrite ($myfile,"LCAO.status = ". $this->input->post("status").";\n");
         //output anyway
-        fwrite ($myfile,"symmetry.spacesymmetry = ". $_POST{"spacesymmetry"}.";\n");
-        if ($_POST['temperature'])
-        fwrite ($myfile,"smearing.temperature = ". $_POST{"temperature"}.";\n");
-        if ($_POST['intype'])
-        fwrite ($myfile,"interpolation.type = '". $_POST{"intype"}."';\n");
-        if ($_POST['order'])
-        fwrite ($myfile,"interpolation.order = ". $_POST{"order"}.";\n");
+        fwrite ($myfile,"symmetry.spacesymmetry = ". $this->input->post("spacesymmetry").";\n");
+		
+        if ($this->input->post('temperature'))
+			fwrite ($myfile,"smearing.temperature = ". $this->input->post("temperature").";\n");
+        if ($this->input->post('intype'))
+			fwrite ($myfile,"interpolation.type = '". $this->input->post("intype")."';\n");
+        if ($this->input->post('order'))
+			fwrite ($myfile,"interpolation.order = ". $this->input->post("order").";\n");
+		
         //output anyway
-        fwrite ($myfile,"interpolation.vnl = ". $_POST{"vnl"}.";\n");
-        if ($_POST['diffoptype'])
-        fwrite ($myfile,"diffop.type = '". $_POST{"diffoptype"}."';\n");
-        if ($_POST['accuracy'])
-        fwrite ($myfile,"diffop.accuracy = ". $_POST{"accuracy"}.";\n");
-        if ($_POST['algo'])
-        fwrite ($myfile,"eigensolver.algo = '". $_POST{"algo"}."';\n");
-        if ($_POST['algoproj'])
-        fwrite ($myfile,"eigensolver.algoproj = '". $_POST{"algoproj"}."';\n");
-        //output anyway
-        fwrite ($myfile,"eigensolver.adapCFD = ". $_POST{"adapCFD"}.";\n");
-        if ($_POST['init'])
-        fwrite ($myfile,"eigensolver.init = '". $_POST{"init"}."';\n");
-        if ($_POST['maxit'])
-        fwrite ($myfile,"eigensolver.maxit = ". $_POST{"maxit"}.";\n");
-        if ($_POST['tol1']||$_POST['tol2'])
-        fwrite ($myfile,"eigensolver.tol = [". $_POST{"tol1"}.",".$_POST{"tol2"}."];\n");
-        if ($_POST['extraEigen'])
-        fwrite ($myfile,"eigensolver.extraEigen = ". $_POST{"extraEigen"}.";\n");
-        if ($_POST['spintype'])
-        fwrite ($myfile,"spin.type ='". $_POST{"spintype"}."';\n");
-        if ($_POST['magmom'])
-        fwrite ($myfile,"spin.magmom = '". $_POST{"magmom"}."';\n");
-        if ($_POST['kpointtype'])
-        fwrite ($myfile,"kpoint.type = '". $_POST{"kpointtype"}."';\n");
-        if ($_POST['gridn1']||$_POST['gridn2']||$_POST['gridn3'])
-        fwrite ($myfile,"kpoint.gridn = [". $_POST{"gridn1"}.",".$_POST{"gridn2"}.",".$_POST{"gridn3"}."];\n");
-        if ($_POST['maxscit'])
-        fwrite ($myfile,"option.maxscit = ". $_POST{"maxscit"}.";\n");
-        if ($_POST['buffsize'])
-        fwrite ($myfile,"option.buffsize = ". $_POST{"buffsize"}.";\n");
+        fwrite ($myfile,"interpolation.vnl = ". $this->input->post("vnl").";\n");
+		
+        if ($this->input->post('diffoptype'))
+			fwrite ($myfile,"diffop.type = '". $this->input->post("diffoptype")."';\n");
+        if ($this->input->post('accuracy'))
+			fwrite ($myfile,"diffop.accuracy = ". $this->input->post("accuracy").";\n");
+        if ($this->input->post('algo'))
+			fwrite ($myfile,"eigensolver.algo = '". $this->input->post("algo")."';\n");
+        if ($this->input->post('algoproj'))
+			fwrite ($myfile,"eigensolver.algoproj = '". $this->input->post("algoproj")."';\n");
+        
+		//output anyway
+        fwrite ($myfile,"eigensolver.adapCFD = ". $this->input->post("adapCFD").";\n");
+		
+        if ($this->input->post('init'))
+			fwrite ($myfile,"eigensolver.init = '". $this->input->post("init")."';\n");
+        if ($this->input->post('maxit'))
+			fwrite ($myfile,"eigensolver.maxit = ". $this->input->post("maxit").";\n");
+        if ($this->input->post('tol1')||$this->input->post('tol2'))
+			fwrite ($myfile,"eigensolver.tol = [". $this->input->post("tol1").",".$this->input->post("tol2")."];\n");
+        if ($this->input->post('extraEigen'))
+			fwrite ($myfile,"eigensolver.extraEigen = ". $this->input->post("extraEigen").";\n");
+        if ($this->input->post('spintype'))
+			fwrite ($myfile,"spin.type ='". $this->input->post("spintype")."';\n");
+        if ($this->input->post('magmom'))
+			fwrite ($myfile,"spin.magmom = '". $this->input->post("magmom")."';\n");
+        if ($this->input->post('kpointtype'))
+			fwrite ($myfile,"kpoint.type = '". $this->input->post("kpointtype")."';\n");
+        if ($this->input->post('gridn1')||$this->input->post('gridn2')||$this->input->post('gridn3'))
+			fwrite ($myfile,"kpoint.gridn = [". $this->input->post("gridn1").",".$this->input->post("gridn2").",".$this->input->post("gridn3")."];\n");
+        if ($this->input->post('maxscit'))
+			fwrite ($myfile,"option.maxscit = ". $this->input->post("maxscit").";\n");
+        if ($this->input->post('buffsize'))
+			fwrite ($myfile,"option.buffsize = ". $this->input->post("buffsize").";\n");
 
         //echo  $_FILES["fileupload"]["name"];
-        move_uploaded_file($_FILES["fileupload"]["tmp_name"],"tmp/".$_FILES["fileupload"]["name"]);
+        move_uploaded_file(isset($_FILES["fileupload"]["tmp_name"],"tmp/".$_FILES["fileupload"]["name"]));
         if($myfile){
             fclose($myfile);
         }
