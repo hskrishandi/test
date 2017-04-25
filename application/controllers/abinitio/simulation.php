@@ -21,21 +21,21 @@ class simulation extends REST_Controller
     public function index()
     {
         if ($this->input->post('cmd1') && !$this->input->post('cmd2') && !$this->input->post('cmd3')){
-        	$this->firstsim();
+            $this->firstsim();
         }
         if ($this->input->post('cmd1') && $this->input->post('cmd2')  && !$this->input->post('cmd3')){
-        	$this->firstsim();
-        	$this->secondsim();
+            $this->firstsim();
+            $this->secondsim();
         }
         if (!$this->input->post('cmd1') && $this->input->post('cmd2') && $this->input->post('cmd3')){
-        	$this->secondsim();
-        	$this->thirdsim();
+            $this->secondsim();
+            $this->thirdsim();
         }
         if (!$this->input->post('cmd1') && !$this->input->post('cmd2') && $this->input->post('cmd3')){
-        	$this->thirdsim();
+            $this->thirdsim();
         }
         if (!$this->input->post('cmd1') && $this->input->post('cmd2') && !$this->input->post('cmd3')){
-        	$this->secondsim();
+            $this->secondsim();
         }
     }
 
@@ -109,23 +109,23 @@ class simulation extends REST_Controller
             fwrite($myfile,"domain.latvec = [[".$this->input->post("latvec1").",".$this->input->post("latvec2").",".$this->input->post("latvec3")."];[".$this->input->post("latvec4").",".$this->input->post("latvec5").",".$this->input->post("latvec6")."];[".$this->input->post("latvec7").",".$this->input->post("latvec8").",".$this->input->post("latvec9")."]];\n");
         }
         if ($this->input->post('latvecunit'))
-			fwrite($myfile,"domain.latvec.units = '". $this->input->post("latvecunit")."';\n");
+            fwrite($myfile,"domain.latvec.units = '". $this->input->post("latvecunit")."';\n");
         if ($this->input->post('bravaislat'))
-			fwrite($myfile, "domain.bravaislat = '". $this->input->post("bravaislat")."';\n");
+            fwrite($myfile, "domain.bravaislat = '". $this->input->post("bravaislat")."';\n");
         //if ($this->input->post('savepath'))
         //fwrite($myfile, "info.savepath = '". $this->input->post("savepath")."';\n");
         fwrite($myfile, "info.savepath = './tmp/".$outfilename1."';\n");
-		
+
         if ($this->input->post('lowres'))
-			fwrite($myfile,"domain.lowres = ". $this->input->post("lowres").";\n");
+            fwrite($myfile,"domain.lowres = ". $this->input->post("lowres").";\n");
         if ($this->input->post('highres'))
-			fwrite($myfile,"domain.highres = ". $this->input->post("highres").";\n");
+            fwrite($myfile,"domain.highres = ". $this->input->post("highres").";\n");
         if ($this->input->post('cgridn1')||$this->input->post('cgridn2')||$this->input->post('cgridn3'))
-			fwrite ($myfile,"domain.cgridn = [". $this->input->post("cgridn1").",".$this->input->post("cgridn2").",".$this->input->post("cgridn3")."];\n");
+            fwrite ($myfile,"domain.cgridn = [". $this->input->post("cgridn1").",".$this->input->post("cgridn2").",".$this->input->post("cgridn3")."];\n");
         if ($this->input->post('fgridn1')||$this->input->post('fgridn2')||$this->input->post('fgridn3'))
-			fwrite ($myfile,"domain.fgridn = [". $this->input->post("fgridn1").",".$this->input->post("fgridn2").",".$this->input->post("fgridn3")."];\n");
+            fwrite ($myfile,"domain.fgridn = [". $this->input->post("fgridn1").",".$this->input->post("fgridn2").",".$this->input->post("fgridn3")."];\n");
         if ($this->input->post('boundary1'))
-			fwrite ($myfile,"domain.boundary = [". $this->input->post("boundary1").",".$this->input->post("boundary2").",".$this->input->post("boundary3")."];\n");
+            fwrite ($myfile,"domain.boundary = [". $this->input->post("boundary1").",".$this->input->post("boundary2").",".$this->input->post("boundary3")."];\n");
 
         if ($this->input->post('list')){
             $listarr=explode(",",$this->input->post('list') ); //split string into array
@@ -136,68 +136,68 @@ class simulation extends REST_Controller
             $resultstr=substr($resultstr,0,-1); //delete the extra comma attached end
             fwrite ($myfile,"functional.list = {". $resultstr."};\n");
         }
-		
+
         //output libxc anyway
         fwrite ($myfile,"functional.libxc = ". $this->input->post("libxc").";\n");
-		
+
         if ($this->input->post('type'))
-			fwrite ($myfile,"mix.type = '". $this->input->post("type")."';\n");
+            fwrite ($myfile,"mix.type = '". $this->input->post("type")."';\n");
         if ($this->input->post('mixername'))
-			fwrite ($myfile,"mixing.mixername = '". $this->input->post("mixername")."';\n");
+            fwrite ($myfile,"mixing.mixername = '". $this->input->post("mixername")."';\n");
         if ($this->input->post('tolerance1')||$this->input->post("tolerance2"))
-			fwrite ($myfile,"mixing.tolerance = [". $this->input->post("tolerance1").",".$this->input->post("tolerance2")."];\n");
+            fwrite ($myfile,"mixing.tolerance = [". $this->input->post("tolerance1").",".$this->input->post("tolerance2")."];\n");
         if ($this->input->post('beta'))
-			fwrite ($myfile,"mixing.beta = ". $this->input->post("beta").";\n");
+            fwrite ($myfile,"mixing.beta = ". $this->input->post("beta").";\n");
         if ($this->input->post('maxhistory'))
-			fwrite ($myfile,"mixing.maxhistory = ". $this->input->post("maxhistory").";\n");
-		
+            fwrite ($myfile,"mixing.maxhistory = ". $this->input->post("maxhistory").";\n");
+
         //output anyway
         fwrite ($myfile,"LCAO.status = ". $this->input->post("status").";\n");
         //output anyway
         fwrite ($myfile,"symmetry.spacesymmetry = ". $this->input->post("spacesymmetry").";\n");
-		
+
         if ($this->input->post('temperature'))
-			fwrite ($myfile,"smearing.temperature = ". $this->input->post("temperature").";\n");
+            fwrite ($myfile,"smearing.temperature = ". $this->input->post("temperature").";\n");
         if ($this->input->post('intype'))
-			fwrite ($myfile,"interpolation.type = '". $this->input->post("intype")."';\n");
+            fwrite ($myfile,"interpolation.type = '". $this->input->post("intype")."';\n");
         if ($this->input->post('order'))
-			fwrite ($myfile,"interpolation.order = ". $this->input->post("order").";\n");
-		
+            fwrite ($myfile,"interpolation.order = ". $this->input->post("order").";\n");
+
         //output anyway
         fwrite ($myfile,"interpolation.vnl = ". $this->input->post("vnl").";\n");
-		
+
         if ($this->input->post('diffoptype'))
-			fwrite ($myfile,"diffop.type = '". $this->input->post("diffoptype")."';\n");
+            fwrite ($myfile,"diffop.type = '". $this->input->post("diffoptype")."';\n");
         if ($this->input->post('accuracy'))
-			fwrite ($myfile,"diffop.accuracy = ". $this->input->post("accuracy").";\n");
+            fwrite ($myfile,"diffop.accuracy = ". $this->input->post("accuracy").";\n");
         if ($this->input->post('algo'))
-			fwrite ($myfile,"eigensolver.algo = '". $this->input->post("algo")."';\n");
+            fwrite ($myfile,"eigensolver.algo = '". $this->input->post("algo")."';\n");
         if ($this->input->post('algoproj'))
-			fwrite ($myfile,"eigensolver.algoproj = '". $this->input->post("algoproj")."';\n");
-        
-		//output anyway
+            fwrite ($myfile,"eigensolver.algoproj = '". $this->input->post("algoproj")."';\n");
+
+        //output anyway
         fwrite ($myfile,"eigensolver.adapCFD = ". $this->input->post("adapCFD").";\n");
-		
+
         if ($this->input->post('init'))
-			fwrite ($myfile,"eigensolver.init = '". $this->input->post("init")."';\n");
+            fwrite ($myfile,"eigensolver.init = '". $this->input->post("init")."';\n");
         if ($this->input->post('maxit'))
-			fwrite ($myfile,"eigensolver.maxit = ". $this->input->post("maxit").";\n");
+            fwrite ($myfile,"eigensolver.maxit = ". $this->input->post("maxit").";\n");
         if ($this->input->post('tol1')||$this->input->post('tol2'))
-			fwrite ($myfile,"eigensolver.tol = [". $this->input->post("tol1").",".$this->input->post("tol2")."];\n");
+            fwrite ($myfile,"eigensolver.tol = [". $this->input->post("tol1").",".$this->input->post("tol2")."];\n");
         if ($this->input->post('extraEigen'))
-			fwrite ($myfile,"eigensolver.extraEigen = ". $this->input->post("extraEigen").";\n");
+            fwrite ($myfile,"eigensolver.extraEigen = ". $this->input->post("extraEigen").";\n");
         if ($this->input->post('spintype'))
-			fwrite ($myfile,"spin.type ='". $this->input->post("spintype")."';\n");
+            fwrite ($myfile,"spin.type ='". $this->input->post("spintype")."';\n");
         if ($this->input->post('magmom'))
-			fwrite ($myfile,"spin.magmom = '". $this->input->post("magmom")."';\n");
+            fwrite ($myfile,"spin.magmom = '". $this->input->post("magmom")."';\n");
         if ($this->input->post('kpointtype'))
-			fwrite ($myfile,"kpoint.type = '". $this->input->post("kpointtype")."';\n");
+            fwrite ($myfile,"kpoint.type = '". $this->input->post("kpointtype")."';\n");
         if ($this->input->post('gridn1')||$this->input->post('gridn2')||$this->input->post('gridn3'))
-			fwrite ($myfile,"kpoint.gridn = [". $this->input->post("gridn1").",".$this->input->post("gridn2").",".$this->input->post("gridn3")."];\n");
+            fwrite ($myfile,"kpoint.gridn = [". $this->input->post("gridn1").",".$this->input->post("gridn2").",".$this->input->post("gridn3")."];\n");
         if ($this->input->post('maxscit'))
-			fwrite ($myfile,"option.maxscit = ". $this->input->post("maxscit").";\n");
+            fwrite ($myfile,"option.maxscit = ". $this->input->post("maxscit").";\n");
         if ($this->input->post('buffsize'))
-			fwrite ($myfile,"option.buffsize = ". $this->input->post("buffsize").";\n");
+            fwrite ($myfile,"option.buffsize = ". $this->input->post("buffsize").";\n");
 
         //echo  $_FILES["fileupload"]["name"];
         move_uploaded_file(isset($_FILES["fileupload"]["tmp_name"],"tmp/".$_FILES["fileupload"]["name"]));
