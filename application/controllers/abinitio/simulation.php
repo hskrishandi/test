@@ -80,14 +80,14 @@ class simulation extends REST_Controller
         }
         if ($this->input->post('latvec1')||$this->input->post('latvec2')||$this->input->post('latvec3')||$this->input->post('latvec4')||$this->input->post('latvec5')||$this->input->post('latvec6')||$this->input->post('latvec7')||$this->input->post('latvec8')||$this->input->post('latvec9')){
             $latvec1 = $this->input->post('latvec1') === NULL ?: 0;
-      			$latvec2 = $this->input->post('latvec2') === NULL ?: 0;
-      			$latvec3 = $this->input->post('latvec3') === NULL ?: 0;
-      			$latvec4 = $this->input->post('latvec4') === NULL ?: 0;
-      			$latvec5 = $this->input->post('latvec5') === NULL ?: 0;
-      			$latvec6 = $this->input->post('latvec6') === NULL ?: 0;
-      			$latvec7 = $this->input->post('latvec7') === NULL ?: 0;
-      			$latvec8 = $this->input->post('latvec8') === NULL ?: 0;
-      			$latvec9 = $this->input->post('latvec9') === NULL ?: 0;
+            $latvec2 = $this->input->post('latvec2') === NULL ?: 0;
+            $latvec3 = $this->input->post('latvec3') === NULL ?: 0;
+            $latvec4 = $this->input->post('latvec4') === NULL ?: 0;
+            $latvec5 = $this->input->post('latvec5') === NULL ?: 0;
+            $latvec6 = $this->input->post('latvec6') === NULL ?: 0;
+            $latvec7 = $this->input->post('latvec7') === NULL ?: 0;
+            $latvec8 = $this->input->post('latvec8') === NULL ?: 0;
+            $latvec9 = $this->input->post('latvec9') === NULL ?: 0;
 
             fwrite($myfile,"domain.latvec = [[".$latvec1.",".$latvec2.",".$latvec3."];[".$latvec4.",".$latvec5.",".$latvec6."];[".$latvec7.",".$latvec8.",".$latvec9."]];\n");
         }
