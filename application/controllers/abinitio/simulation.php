@@ -79,15 +79,15 @@ class simulation extends REST_Controller
             fwrite($myfile,"element(5).path = '"."../PotentialData/". $this->input->post("species5")."_".$this->input->post("path5").".mat"."';\n");
         }
         if ($this->input->post('latvec1')||$this->input->post('latvec2')||$this->input->post('latvec3')||$this->input->post('latvec4')||$this->input->post('latvec5')||$this->input->post('latvec6')||$this->input->post('latvec7')||$this->input->post('latvec8')||$this->input->post('latvec9')){
-			$latvec1 = $this->input->post('latvec1') === NULL ?: 0;
-			$latvec2 = $this->input->post('latvec2') === NULL ?: 0;
-			$latvec3 = $this->input->post('latvec3') === NULL ?: 0;
-			$latvec4 = $this->input->post('latvec4') === NULL ?: 0;
-			$latvec5 = $this->input->post('latvec5') === NULL ?: 0;
-			$latvec6 = $this->input->post('latvec6') === NULL ?: 0;
-			$latvec7 = $this->input->post('latvec7') === NULL ?: 0;
-			$latvec8 = $this->input->post('latvec8') === NULL ?: 0;
-			$latvec9 = $this->input->post('latvec9') === NULL ?: 0;
+            $latvec1 = $this->input->post('latvec1') === NULL ?: 0;
+      			$latvec2 = $this->input->post('latvec2') === NULL ?: 0;
+      			$latvec3 = $this->input->post('latvec3') === NULL ?: 0;
+      			$latvec4 = $this->input->post('latvec4') === NULL ?: 0;
+      			$latvec5 = $this->input->post('latvec5') === NULL ?: 0;
+      			$latvec6 = $this->input->post('latvec6') === NULL ?: 0;
+      			$latvec7 = $this->input->post('latvec7') === NULL ?: 0;
+      			$latvec8 = $this->input->post('latvec8') === NULL ?: 0;
+      			$latvec9 = $this->input->post('latvec9') === NULL ?: 0;
 
             fwrite($myfile,"domain.latvec = [[".$latvec1.",".$latvec2.",".$latvec3."];[".$latvec4.",".$latvec5.",".$latvec6."];[".$latvec7.",".$latvec8.",".$latvec9."]];\n");
         }
@@ -183,13 +183,13 @@ class simulation extends REST_Controller
             fwrite ($myfile,"option.buffsize = ". $this->input->post("buffsize").";\n");
 
         //echo  $_FILES["fileupload"]["name"];
-		if(isset($_FILES["fileupload"]["tmp_name"])){
-			move_uploaded_file($_FILES["fileupload"]["tmp_name"],"tmp/".$_FILES["fileupload"]["name"]);
-			if($myfile){
-				fclose($myfile);
-			}
-			echo "<a href=\"tmp/$outfilename1\">Output text file scf</a>";
-		}
+        if(isset($_FILES["fileupload"]["tmp_name"])){
+            move_uploaded_file($_FILES["fileupload"]["tmp_name"],"tmp/".$_FILES["fileupload"]["name"]);
+                if($myfile){
+                    fclose($myfile);
+                }
+            echo "<a href=\"tmp/$outfilename1\">Output text file scf</a>";
+        }
     }
 
     /**
