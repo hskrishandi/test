@@ -199,7 +199,203 @@ class simulation extends REST_Controller
     */
     public function secondsim()
     {
-        //Write your code here
+        $outfilename2="testing".time()."_bs.txt";
+        $myfile2=fopen("tmp/".$outfilename2, "w");
+        //output anyway
+        fwrite ($myfile2,"smi.status = ". $_POST{"smistatus"}.";\n");
+
+        if ($_POST['latvecunit'])
+        {
+            // 	    echo $_POST{"latvecunit"}."<br>";
+        }
+        if ($_FILES["fileupload"]["name"])
+        {
+            fwrite($myfile2,"atom.xyz = '".$_FILES["fileupload"]["name"]."';\n");
+            //   echo $_FILES["fileupload"]["name"];
+        }
+        if ($_POST['species1']){
+            fwrite($myfile2,"element(1).species = '". $_POST{"species1"}."';\n");
+            fwrite($myfile2,"element(1).path = '"."../PotentialData/". $_POST{"species1"}."_".$_POST{"path1"}.".mat"."';\n");
+
+        }
+        if ($_POST['species2']){
+            fwrite($myfile2,"element(2).species = '". $_POST{"species2"}."';\n");
+            fwrite($myfile2,"element(2).path = '"."../PotentialData/". $_POST{"species2"}."_".$_POST{"path2"}.".mat"."';\n");
+        }
+        if ($_POST['species3']){
+            fwrite($myfile2,"element(3).species = '". $_POST{"species3"}."';\n");
+            fwrite($myfile2,"element(3).path = '"."../PotentialData/". $_POST{"species3"}."_".$_POST{"path3"}.".mat"."';\n");
+        }
+        if ($_POST['species4']){
+            fwrite($myfile2,"element(4).species = '". $_POST{"species4"}."';\n");
+            fwrite($myfile2,"element(4).path = '"."../PotentialData/". $_POST{"species4"}."_".$_POST{"path4"}.".mat"."';\n");
+        }
+        if ($_POST['species5']){
+            fwrite($myfile2,"element(5).species = '". $_POST{"species5"}."';\n");
+            fwrite($myfile2,"element(5).path = '"."../PotentialData/". $_POST{"species5"}."_".$_POST{"path5"}.".mat"."';\n");
+        }
+        if ($_POST['latvec1']||$_POST['latvec2']||$_POST['latvec3']||$_POST['latvec4']||$_POST['latvec5']||$_POST['latvec6']||$_POST['latvec7']||$_POST['latvec8']||$_POST['latvec9']){
+            if($_POST['latvec1']==NULL)
+            {
+                $_POST['latvec1']=0;
+            }
+            if($_POST['latvec2']==NULL)
+            {
+                $_POST['latvec2']=0;
+            }
+            if($_POST['latvec3']==NULL)
+            {
+                $_POST['latvec3']=0;
+            }
+            if($_POST['latvec4']==NULL)
+            {
+                $_POST['latvec4']=0;
+            }
+            if($_POST['latvec5']==NULL)
+            {
+                $_POST['latvec5']=0;
+            }
+            if($_POST['latvec6']==NULL)
+            {
+                $_POST['latvec6']=0;
+            }
+            if($_POST['latvec7']==NULL)
+            {
+                $_POST['latvec7']=0;
+            }
+            if($_POST['latvec8']==NULL)
+            {
+                $_POST['latvec8']=0;
+            }
+            if($_POST['latvec9']==NULL)
+            {
+                $_POST['latvec9']=0;
+            }
+
+            fwrite($myfile2,"domain.latvec = [[".$_POST{"latvec1"}.",".$_POST{"latvec2"}.",".$_POST{"latvec3"}."];[".$_POST{"latvec4"}.",".$_POST{"latvec5"}.",".$_POST{"latvec6"}."];[".$_POST{"latvec7"}.",".$_POST{"latvec8"}.",".$_POST{"latvec9"}."]];\n");
+
+        }
+        if ($_POST['latvecunit']){
+            fwrite($myfile2,"domain.latvec.units = '". $_POST{"latvecunit"}."';\n");
+        }
+        if ($_POST['bravaislat']){
+            fwrite($myfile2, "domain.bravaislat = '". $_POST{"bravaislat"}."';\n");
+        }
+        //if ($_POST['savepath'])
+        //fwrite($myfile, "info.savepath = '". $_POST{"savepath"}."';\n");
+        fwrite($myfile, "info.savepath = './tmp/".$outfilename2."';\n");
+        if ($_POST['lowres']){
+            fwrite($myfile2,"domain.lowres = ". $_POST{"lowres"}.";\n");
+        }
+        if ($_POST['highres']){
+            fwrite($myfile2,"domain.highres = ". $_POST{"highres"}.";\n");
+        }
+        if ($_POST['cgridn1']||$_POST['cgridn2']||$_POST['cgridn3']){
+            fwrite ($myfile2,"domain.cgridn = [". $_POST{"cgridn1"}.",".$_POST{"cgridn2"}.",".$_POST{"cgridn3"}."];\n");
+        }
+        if ($_POST['fgridn1']||$_POST['fgridn2']||$_POST['fgridn3']){
+            fwrite ($myfile2,"domain.fgridn = [". $_POST{"fgridn1"}.",".$_POST{"fgridn2"}.",".$_POST{"fgridn3"}."];\n");
+        }
+        if ($_POST['boundary1']){
+            fwrite ($myfile2,"domain.boundary = [". $_POST{"boundary1"}.",".$_POST{"boundary2"}.",".$_POST{"boundary3"}."];\n");
+        }
+        if ($_POST['list']){
+            $listarr=explode(",",$_POST['list'] ); //split string into array
+            $resultstr="";
+            foreach ($listarr as $value)
+            {
+                $resultstr=$resultstr."'".$value."',"; //add commas between proceeded strings
+            }
+            $resultstr=substr($resultstr,0,-1); //delete the extra comma attached end
+            fwrite ($myfile2,"functional.list = {". $resultstr."};\n");
+        }
+        //output anyway
+        fwrite ($myfile2,"functional.libxc = ". $_POST{"libxc"}.";\n");
+
+        if ($_POST['type']){
+            fwrite ($myfile2,"mix.type = '". $_POST{"type"}."';\n");
+        }
+        if ($_POST['mixername']){
+            fwrite ($myfile2,"mixing.mixername = '". $_POST{"mixername"}."';\n");
+        }
+        if ($_POST['tolerance1']||$_POST{"tolerance2"}){
+            fwrite ($myfile2,"mixing.tolerance = [". $_POST{"tolerance1"}.",".$_POST{"tolerance2"}."];\n");
+        }
+        if ($_POST['beta']){
+            fwrite ($myfile2,"mixing.beta = ". $_POST{"beta"}.";\n");
+        }
+        if ($_POST['maxhistory']){
+            fwrite ($myfile2,"mixing.maxhistory = ". $_POST{"maxhistory"}.";\n");
+        }
+        //output anyway
+        fwrite ($myfile2,"LCAO.status = ". $_POST{"status"}.";\n");
+
+        //output anyway
+        fwrite ($myfile2,"symmetry.spacesymmetry = ". $_POST{"spacesymmetry"}.";\n");
+
+        if ($_POST['temperature']){
+            fwrite ($myfile2,"smearing.temperature = ". $_POST{"temperature"}.";\n");
+        }
+        if ($_POST['intype']){
+            fwrite ($myfile2,"interpolation.type = '". $_POST{"intype"}."';\n");
+        }
+        if ($_POST['order']){
+            fwrite ($myfile2,"interpolation.order = ". $_POST{"order"}.";\n");
+        }
+        //output anyway
+        fwrite ($myfile2,"interpolation.vnl = ". $_POST{"vnl"}.";\n");
+
+        if ($_POST['diffoptype']){
+            fwrite ($myfile2,"diffop.type = '". $_POST{"diffoptype"}."';\n");
+        }
+        if ($_POST['accuracy']){
+            fwrite ($myfile2,"diffop.accuracy = ". $_POST{"accuracy"}.";\n");
+        }
+        if ($_POST['algo']){
+            fwrite ($myfile2,"eigensolver.algo = '". $_POST{"algo"}."';\n");
+        }
+        if ($_POST['algoproj']){
+            fwrite ($myfile2,"eigensolver.algoproj = '". $_POST{"algoproj"}."';\n");
+        }
+        //output anyway
+        fwrite ($myfile,"eigensolver.adapCFD = ". $_POST{"adapCFD"}.";\n");
+        fwrite ($myfile2,"eigensolver.adapCFD = ". $_POST{"adapCFD"}.";\n");
+
+        if ($_POST['init']){
+            fwrite ($myfile2,"eigensolver.init = '". $_POST{"init"}."';\n");
+        }
+        if ($_POST['maxit']){
+            fwrite ($myfile2,"eigensolver.maxit = ". $_POST{"maxit"}.";\n");
+        }
+        if ($_POST['tol1']||$_POST['tol2']){
+            fwrite ($myfile2,"eigensolver.tol = [". $_POST{"tol1"}.",".$_POST{"tol2"}."];\n");
+        }
+        if ($_POST['extraEigen']){
+            fwrite ($myfile2,"eigensolver.extraEigen = ". $_POST{"extraEigen"}.";\n");
+        }
+        if ($_POST['spintype']){
+            fwrite ($myfile2,"spin.type ='". $_POST{"spintype"}."';\n");
+        }
+        if ($_POST['magmom']){
+            fwrite ($myfile2,"spin.magmom = '". $_POST{"magmom"}."';\n");
+        }
+
+        if ($_POST['kpointtype2'])
+        fwrite ($myfile2,"kpoint.type = '". $_POST{"kpointtype2"}."';\n");
+        if ($_POST['sympoints'])
+        fwrite ($myfile2,"kpoint.sympoints = {". $_POST{"sympoints"}."};\n");
+        if ($_POST['kgridn2'])
+        fwrite ($myfile2,"kgrid.points = ". $_POST{"kgridn2"}.";\n");
+        if ($_POST['in1'])
+        fwrite ($myfile2,"rho.in{1} = ". $_POST{"in1"}.";\n");
+
+
+        //echo  $_FILES["fileupload"]["name"];
+        move_uploaded_file($_FILES["fileupload"]["tmp_name"],"tmp/".$_FILES["fileupload"]["name"]);
+        if($myfile2){
+            fclose($myfile2);
+        }
+        echo "<a href=\"tmp/$outfilename2\">Output text file bs</a>";
     }
 
     /**
@@ -209,6 +405,163 @@ class simulation extends REST_Controller
     */
     public function thirdsim()
     {
-        //Write your code here
+        $outfilename3="testing".time()."_dos.txt";
+        $myfile=fopen("tmp/".$outfilename3, "w");
+        //output anyway
+        fwrite ($myfile,"smi.status = ". $_POST{"smistatus"}.";\n");
+
+        if ($_POST['latvecunit'])
+        {
+            // 	    echo $_POST{"latvecunit"}."<br>";
+        }
+        if ($_FILES["fileupload"]["name"])
+        {
+            fwrite($myfile,"atom.xyz = '".$_FILES["fileupload"]["name"]."';\n");
+            //   echo $_FILES["fileupload"]["name"];
+        }
+        if ($_POST['species1']){
+            fwrite($myfile,"element(1).species = '". $_POST{"species1"}."';\n");
+            fwrite($myfile,"element(1).path = '"."../PotentialData/". $_POST{"species1"}."_".$_POST{"path1"}.".mat"."';\n");
+        }
+        if ($_POST['species2']){
+            fwrite($myfile,"element(2).species = '". $_POST{"species2"}."';\n");
+            fwrite($myfile,"element(2).path = '"."../PotentialData/". $_POST{"species2"}."_".$_POST{"path2"}.".mat"."';\n");
+        }
+        if ($_POST['species3']){
+            fwrite($myfile,"element(3).species = '". $_POST{"species3"}."';\n");
+            fwrite($myfile,"element(3).path = '"."../PotentialData/". $_POST{"species3"}."_".$_POST{"path3"}.".mat"."';\n");
+        }
+        if ($_POST['species4']){
+            fwrite($myfile,"element(4).species = '". $_POST{"species4"}."';\n");
+            fwrite($myfile,"element(4).path = '"."../PotentialData/". $_POST{"species4"}."_".$_POST{"path4"}.".mat"."';\n");
+        }
+        if ($_POST['species5']){
+            fwrite($myfile,"element(5).species = '". $_POST{"species5"}."';\n");
+            fwrite($myfile,"element(5).path = '"."../PotentialData/". $_POST{"species5"}."_".$_POST{"path5"}.".mat"."';\n");
+        }
+        if ($_POST['latvec1']||$_POST['latvec2']||$_POST['latvec3']||$_POST['latvec4']||$_POST['latvec5']||$_POST['latvec6']||$_POST['latvec7']||$_POST['latvec8']||$_POST['latvec9']){
+            if($_POST['latvec1']==NULL)
+            {
+                $_POST['latvec1']=0;
+            }
+            if($_POST['latvec2']==NULL)
+            {
+                $_POST['latvec2']=0;
+            }
+            if($_POST['latvec3']==NULL)
+            {
+                $_POST['latvec3']=0;
+            }
+            if($_POST['latvec4']==NULL)
+            {
+                $_POST['latvec4']=0;
+            }
+            if($_POST['latvec5']==NULL)
+            {
+                $_POST['latvec5']=0;
+            }
+            if($_POST['latvec6']==NULL)
+            {
+                $_POST['latvec6']=0;
+            }
+            if($_POST['latvec7']==NULL)
+            {
+                $_POST['latvec7']=0;
+            }
+            if($_POST['latvec8']==NULL)
+            {
+                $_POST['latvec8']=0;
+            }
+            if($_POST['latvec9']==NULL)
+            {
+                $_POST['latvec9']=0;
+            }
+
+            fwrite($myfile,"domain.latvec = [[".$_POST{"latvec1"}.",".$_POST{"latvec2"}.",".$_POST{"latvec3"}."];[".$_POST{"latvec4"}.",".$_POST{"latvec5"}.",".$_POST{"latvec6"}."];[".$_POST{"latvec7"}.",".$_POST{"latvec8"}.",".$_POST{"latvec9"}."]];\n");
+
+        }
+        if ($_POST['latvecunit'])
+        fwrite($myfile,"domain.latvec.units = '". $_POST{"latvecunit"}."';\n");
+        if ($_POST['bravaislat'])
+        fwrite($myfile, "domain.bravaislat = '". $_POST{"bravaislat"}."';\n");
+        //if ($_POST['savepath'])
+        //fwrite($myfile, "info.savepath = '". $_POST{"savepath"}."';\n");
+        fwrite($myfile, "info.savepath = './tmp/".$outfilename3."';\n");
+        if ($_POST['lowres'])
+        fwrite($myfile,"domain.lowres = ". $_POST{"lowres"}.";\n");
+        if ($_POST['highres'])
+        fwrite($myfile,"domain.highres = ". $_POST{"highres"}.";\n");
+        if ($_POST['cgridn1']||$_POST['cgridn2']||$_POST['cgridn3'])
+        fwrite ($myfile,"domain.cgridn = [". $_POST{"cgridn1"}.",".$_POST{"cgridn2"}.",".$_POST{"cgridn3"}."];\n");
+        if ($_POST['fgridn1']||$_POST['fgridn2']||$_POST['fgridn3'])
+        fwrite ($myfile,"domain.fgridn = [". $_POST{"fgridn1"}.",".$_POST{"fgridn2"}.",".$_POST{"fgridn3"}."];\n");
+        if ($_POST['boundary1'])
+        fwrite ($myfile,"domain.boundary = [". $_POST{"boundary1"}.",".$_POST{"boundary2"}.",".$_POST{"boundary3"}."];\n");
+
+        if ($_POST['list']){
+            $listarr=explode(",",$_POST['list'] ); //split string into array
+            $resultstr="";
+            foreach ($listarr as $value)
+            {
+                $resultstr=$resultstr."'".$value."',"; //add commas between proceeded strings
+            }
+            $resultstr=substr($resultstr,0,-1); //delete the extra comma attached end
+            fwrite ($myfile,"functional.list = {". $resultstr."};\n");
+        }
+        //output anyway
+        fwrite ($myfile,"functional.libxc = ". $_POST{"libxc"}.";\n");
+        if ($_POST['type'])
+        fwrite ($myfile,"mix.type = '". $_POST{"type"}."';\n");
+        if ($_POST['mixername'])
+        fwrite ($myfile,"mixing.mixername = '". $_POST{"mixername"}."';\n");
+        if ($_POST['tolerance1']||$_POST{"tolerance2"})
+        fwrite ($myfile,"mixing.tolerance = [". $_POST{"tolerance1"}.",".$_POST{"tolerance2"}."];\n");
+        if ($_POST['beta'])
+        fwrite ($myfile,"mixing.beta = ". $_POST{"beta"}.";\n");
+        if ($_POST['maxhistory'])
+        fwrite ($myfile,"mixing.maxhistory = ". $_POST{"maxhistory"}.";\n");
+        //output anyway
+        fwrite ($myfile,"LCAO.status = ". $_POST{"status"}.";\n");
+        //output anyway
+        fwrite ($myfile,"symmetry.spacesymmetry = ". $_POST{"spacesymmetry"}.";\n");
+        if ($_POST['temperature'])
+        fwrite ($myfile,"smearing.temperature = ". $_POST{"temperature"}.";\n");
+        if ($_POST['intype'])
+        fwrite ($myfile,"interpolation.type = '". $_POST{"intype"}."';\n");
+        if ($_POST['order'])
+        fwrite ($myfile,"interpolation.order = ". $_POST{"order"}.";\n");
+        //output anyway
+        fwrite ($myfile,"interpolation.vnl = ". $_POST{"vnl"}.";\n");
+        if ($_POST['diffoptype'])
+        fwrite ($myfile,"diffop.type = '". $_POST{"diffoptype"}."';\n");
+        if ($_POST['accuracy'])
+        fwrite ($myfile,"diffop.accuracy = ". $_POST{"accuracy"}.";\n");
+        if ($_POST['algo'])
+        fwrite ($myfile,"eigensolver.algo = '". $_POST{"algo"}."';\n");
+        if ($_POST['algoproj'])
+        fwrite ($myfile,"eigensolver.algoproj = '". $_POST{"algoproj"}."';\n");
+        //output anyway
+        fwrite ($myfile,"eigensolver.adapCFD = ". $_POST{"adapCFD"}.";\n");
+        if ($_POST['init'])
+        fwrite ($myfile,"eigensolver.init = '". $_POST{"init"}."';\n");
+        if ($_POST['maxit'])
+        fwrite ($myfile,"eigensolver.maxit = ". $_POST{"maxit"}.";\n");
+        if ($_POST['tol1']||$_POST['tol2'])
+        fwrite ($myfile,"eigensolver.tol = [". $_POST{"tol1"}.",".$_POST{"tol2"}."];\n");
+        if ($_POST['extraEigen'])
+        fwrite ($myfile,"eigensolver.extraEigen = ". $_POST{"extraEigen"}.";\n");
+        if ($_POST['spintype'])
+        fwrite ($myfile,"spin.type ='". $_POST{"spintype"}."';\n");
+        if ($_POST['magmom'])
+        fwrite ($myfile,"spin.magmom = '". $_POST{"magmom"}."';\n");
+        if ($_POST['resolution'])
+        fwrite ($myfile,"dos.resolution = ". $_POST{"resolution"}.";\n");
+
+        //echo  $_FILES["fileupload"]["name"];
+        move_uploaded_file($_FILES["fileupload"]["tmp_name"],"tmp/".$_FILES["fileupload"]["name"]);
+        if($myfile){
+            fclose($myfile);
+        }
+        echo "<a href=\"tmp/$outfilename3\">Output text file dos</a>";
     }
 }
