@@ -180,11 +180,9 @@ class Realcas_service extends Base_service
     {
         $folder = $this->_simuroot . $uuid;
         $response = array("status" => "NULL");
-        $response["uuid"] = $uuid;
         $this->SetWorkingFolder($folder);
         if($this->GetPID($pid))
         {
-            $response["pid"] = $pid;
             if($this->IsProcessRunning($pid, "ngspice"))
                 $response["status"] = "RUNNING";
             else if($this->IsProcessKilled())
