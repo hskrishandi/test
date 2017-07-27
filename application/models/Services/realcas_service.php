@@ -295,6 +295,30 @@ class Realcas_service extends Base_service
         }
     }
 
+    public function spice_result_to_array($path) {
+        $string = read_file($path);
+        $rows = explode("\n",$string);
+        $process_array = null;
+        foreach($rows as $row){
+            if ($row == "") continue;
+            //$row = substr($row, 0, -1);
+            preg_match_all('/([-+]*[\d.]+e[-+]*[\d]+)+/m',$row, $match);
+            //var_dump($match[0]);
+            $process_array[] = $match[0];
+        }
+        $result_array = null;
+        for ($i = 0; $i < count($process_array[0])/2; $i++){
+            foreach($process_array as $row){
+                $result = null;
+                $result[0] =$row[2*$i];
+                $result[1] = $row[(2*$i)+1];
+                $result_array[] = $result;
+            }
+        }
+
+        return $result_array;
+    }
+
     /**
      * The following functions are used for process
      */
