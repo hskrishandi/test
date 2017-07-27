@@ -52,7 +52,7 @@ class Realcas_service extends Base_service
 
     public function addModelLibraryEntry($userId, $modelId, $name, $data)
     {
-        return $this->Realcas_service->addModelLibraryEntry($userId, $modelId, $name, $data);
+        return $this->Realcas_repository->addModelLibraryEntry($userId, $modelId, $name, $data);
     }
 
     public function deleteModelLibraryEntry($userId, $modelId) {
@@ -170,7 +170,7 @@ class Realcas_service extends Base_service
         $this->SetWorkingFolder($folder);
         $this->RunBgProcess($this->config->item('realcas') . " -b netlist.sp", $pid, true);
         if($pid != -1) {
-            $this->process_model->RecordPID($pid);
+            $this->RecordPID($pid);
             return array("id" => $uuid);
         }
         return null;
@@ -180,9 +180,11 @@ class Realcas_service extends Base_service
     {
         $folder = $this->_simuroot . $uuid;
         $response = array("status" => "NULL");
+        $response["uuid"] = $uuid;
         $this->SetWorkingFolder($folder);
         if($this->GetPID($pid))
         {
+            $response["pid"] = $pid;
             if($this->IsProcessRunning($pid, "ngspice"))
                 $response["status"] = "RUNNING";
             else if($this->IsProcessKilled())
