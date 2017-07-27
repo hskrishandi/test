@@ -207,9 +207,10 @@ class realcas extends REST_Controller {
             $this->output->set_status_header('405');
         } else {
             $uuid = $this->input->post('session', true);
-            $this->body = $this->Realcas_service->spiceStatus($uuid);
+            $response = $this->Realcas_service->spiceStatus($uuid);
         }
-        $this->response();
+        // We need to encode the data using JSON_NUMERIC_CHECK option. Leon@20170728
+        echo json_encode($response, JSON_NUMERIC_CHECK);
     }
 
     public function simulationStop()
