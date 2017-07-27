@@ -141,6 +141,20 @@ $route['modelsim/clientPlotData/(:any)'] = "v1/modelsim/clientPlotData/$1";
  */
 $route['abinitio/simulation'] = "abinitio/simulation";
 
+/**
+ * Realcas
+ */
+$route['realcas'] = "realcas/realcas";
+$route['realcas/modelLibrary/(:any)'] = "realcas/realcas/modelLibrary/$1";
+$route['realcas/benchmarking/(:any)/(:any)'] = "realcas/realcas/benchmarking/$1/$2";
+$route['realcas/paramSet/(:any)'] = "realcas/realcas/paramSet/$1";
+$route['realcas/modelDetails/(:any)'] = "realcas/realcas/modelDetails/$1";
+$route['realcas/runNetlistSIM'] = "realcas/realcas/runNetlistSIM";
+$route['realcas/simulationStatus'] = "realcas/realcas/simulationStatus";
+$route['realcas/simulationStop'] = "realcas/realcas/simulationStop";
+$route['realcas/saveasNetlist'] = "realcas/realcas/saveasNetlist";
+$route['realcas/loadNetlist'] = "realcas/realcas/loadNetlist";
+
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";
 

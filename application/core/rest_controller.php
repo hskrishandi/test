@@ -364,6 +364,11 @@ class REST_Controller extends CI_Controller
                 if ($this->token) {
                     setcookie("token", $this->token, time() + (86400 * 1), "/"); // 86400 = 1 day
                 }
+            } else if ($this->method === 'GET' && uri_string() === 'realcas') {
+                $this->token = $this->input->get('RealcasAuthorization');
+                if ($this->token) {
+                    setcookie("token", $this->token, time() + (86400 * 1), "/"); // 86400 = 1 day
+                }
             }
         }
     }
