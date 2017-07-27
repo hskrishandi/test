@@ -176,7 +176,7 @@ class realcas extends REST_Controller {
             if ($set_id == 0) {
                 $response = $this->Modelsim_model->getParamSets($model_id);
             } else {
-                $response = json_decode($this->Modelsim_model->getParamSet($model_id, $set_id));
+                $response = $this->Modelsim_model->getParamSet($model_id, $set_id);
             }
             break;
         default:
@@ -195,9 +195,9 @@ class realcas extends REST_Controller {
         $netlist = $this->load->view('realcas/realcas_temple.php', array_merge($this->input->post(), array("modelCard"=>$modelcard)), true);
         $netlist = $this->Realcas_service->netlistCheck($netlist);
         $netlist_file = $this->Realcas_service->replacePlotToWRDATA($netlist);
-        $response = json_encode($this->Realcas_service->runSPICES($netlist_file), JSON_NUMERIC_CHECK);
+        $this->body = $this->Realcas_service->runSPICES($netlist_file);
         //log_message('error', $response);
-        $this->outputJSON($response);
+        $this->response();
     }
 
     public function simulationStatus()
@@ -256,7 +256,7 @@ class realcas extends REST_Controller {
         //echo $this->upload->display_errors('<p>', '</p>');
         //var_dump($data);
 
-        log_message('error', $string);
+        //log_message('error', $string);
         if ($string && $this->upload->file_ext ===".isp") {
             $this->body = array_merge(array("error" => false, "type"=> $this->upload->file_ext, "netlist"=>$string));
         } else {
