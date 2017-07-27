@@ -313,7 +313,6 @@ $(function() {
 	$(".model-library-save-as").click(function() {
 		prompt('Filename: ', function(filename) {
 			if(filename == '') return;
-            var anchor = $('<a href="#">test</a>').appendTo('body');
             $.ajax({
                 url: ROOT + '/modelLibrary/DOWNLOADAS',
                 type: 'POST',
