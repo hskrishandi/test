@@ -344,7 +344,7 @@ $(function() {
     $(".model-library-upload").fileupload({
         name: "file",
         url: ROOT + "/modelLibrary/UPLOAD",
-        success: function(data) {
+        load: function(data) {
             if (data.success)
                 viewModels.lib.load();
             else
