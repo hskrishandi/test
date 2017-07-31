@@ -251,6 +251,7 @@ class Realcas_service extends Base_service
             //read data
         }
         $this->parseHCI($uuid, $result);
+        $this->parseBTI($uuid, $result);
     }
 
     /**
@@ -274,6 +275,46 @@ class Realcas_service extends Base_service
                 if (count($column) >= 3) {
                     if (!$devices[$column[0]]['filename']) {
                         $devices[$column[0]]['filename'] = $this->config->item('hci');
+                    }
+                    if (!$devices[$column[0]]['ylabel']) {
+                        $devices[$column[0]]['ylabel'] = $column[0] . "[dVth]";
+                    }
+                    if (!$devices[$column[0]]['xlabel']) {
+                        $devices[$column[0]]['xlabel'] = "year";
+                    }
+                    $devices[$column[0]]['error'] = "false";
+                    $devices[$column[0]]['data'][] = array($column[3], $column[2]);
+                } else {
+                    $devices[$column[0]]['error'] = "true";
+                }
+            }
+            foreach ($devices as $key => $device) {
+                $result['dataset'][] = $device;
+            }
+        }
+    }
+
+    /**
+     * Parse BTI output file
+     *
+     * @param $uuid - simulation id, used to locate simulation folder under /local/html/tmp
+     * @param &$result - $result address, passing address will directly modify $result within this function
+     *
+     * @author Leon
+     */
+    public function parseBTI($uuid, &$result)
+    {
+        $path = $this->_simuroot . $uuid . "/" . $this->config->item('bti');
+        $data = read_file($path);
+        if ($data) {
+            $rows = explode("\n", $data);
+            $devices = array();
+            foreach ($rows as $row) {
+                if ($row == "") continue; // remove empty lines
+                $column = preg_split('/\s+/', $row);
+                if (count($column) >= 3) {
+                    if (!$devices[$column[0]]['filename']) {
+                        $devices[$column[0]]['filename'] = $this->config->item('bti');
                     }
                     if (!$devices[$column[0]]['ylabel']) {
                         $devices[$column[0]]['ylabel'] = $column[0] . "[dVth]";
