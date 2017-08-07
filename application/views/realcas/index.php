@@ -36,11 +36,11 @@ var backend_url = "<?php echo ''/*$backend_url;*/ ?>" + model_name;
     <script src="<?php echo resource_url('js', 'realcas/jquery/jquery.autosize-min.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo resource_url('js', 'realcas/jquery/jquery.form.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jquery.jqplot.min.js'); ?>" type="text/javascript"></script>
-    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.canvasTextRenderer.min.js'); ?>" type="text/javascript"></script>
-    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.canvasAxisTickRenderer.min.js'); ?>" type="text/javascript"></script>
-    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.canvasAxisLabelRenderer.min.js'); ?>" type="text/javascript"></script>
-    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.highlighter.min.js'); ?>" type="text/javascript"></script>	
-    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.logAxisRenderer.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.canvasTextRenderer.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.canvasAxisTickRenderer.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.canvasAxisLabelRenderer.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.highlighter.js'); ?>" type="text/javascript"></script>	
+    <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.logAxisRenderer.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.cursor.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo resource_url('js', 'realcas/jquery/jqplot/jqplot.plugins.pack.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo resource_url('js', 'library/knockout.js'); ?>" type="text/javascript"></script>
