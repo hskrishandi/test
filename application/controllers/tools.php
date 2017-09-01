@@ -4,7 +4,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class tools extends REST_Controller
+class manuals extends REST_Controller
 {
     public function __construct()
     {

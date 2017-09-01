@@ -155,6 +155,10 @@ $route['realcas/simulationStop'] = "realcas/realcas/simulationStop";
 $route['realcas/saveasNetlist'] = "realcas/realcas/saveasNetlist";
 $route['realcas/loadNetlist'] = "realcas/realcas/loadNetlist";
 
+// Manuals
+$route['manuals/imos'] = "manuals/imos";
+$route['manuals/realcas'] = "manuals/realcas";
+
 // All other not registerd routes
 $route['(:any)'] = "home/notFound";
 
