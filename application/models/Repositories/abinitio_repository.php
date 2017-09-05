@@ -22,8 +22,18 @@ class Abinitio_repository extends Base_repository
         $this->db
         ->select('*')
         ->from('Abinitio')
-        ->where('Username', $userId)
+        ->where('UserName', $userId)
         ->order_by('Abinitio.location desc');
+        return $this->db->get()->result();
+    }
+
+    public function result($userId, $pid)
+    {
+        $this->db
+        ->select('location')
+        ->from('Abinitio')
+        ->where('UserName', $userId)
+        ->where('Pid',$pid);
         return $this->db->get()->result();
     }
 

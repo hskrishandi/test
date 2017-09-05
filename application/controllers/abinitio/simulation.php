@@ -17,6 +17,7 @@ class simulation extends REST_Controller
         $this->load->model('Services/Abinitio_service');
         $this->requireAuth();
         $this->authUser = $this->getAuthUser();
+        $this->load->helper('download');
     }
 
     public function index()
@@ -56,6 +57,8 @@ class simulation extends REST_Controller
             exec($cmd2,$output2);
             $pid=$output2[0];
 
+            //$path = '/' .$folder. '/' .$outfilename1. '_output.txt';
+            //$pathpic = '/' .$folder. '/' .$outfilename1. '.png';
             $this->addRecord($folder,$pid,$path,$pathpic);
         }
 
@@ -553,6 +556,19 @@ class simulation extends REST_Controller
           $userId = $this->authUser != null ? $this->authUser->name : "";
           //echo $userId;
           $this->body = $this->Abinitio_service->checkstatus($userId);
+      } else {
+          $this->status = 405;
+      }
+      $this->response();
+    }
+
+    public function result($pid)
+    {
+      if ($this->method == 'GET') {
+          $userId = $this->authUser != null ? $this->authUser->name : "";
+          //echo $userId;
+          $file = $this->Abinitio_service->result($userId, $pid);
+          force_download('i-MOS Users Manual.pdf', file_get_contents($file));
       } else {
           $this->status = 405;
       }

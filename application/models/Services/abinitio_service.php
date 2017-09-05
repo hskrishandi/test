@@ -28,6 +28,11 @@ class Abinitio_service extends Base_service
         return $this->Abinitio_repository->checkstatus($userId);
     }
 
+    public function result($userId,$pid)
+    {
+        return current($this->Abinitio_repository->result($userId, $pid))->location;
+    }
+
     public function addRecord($folder, $pid, $path, $pathpic)
     {
         return $this->Abinitio_repository->addRecord($folder, $pid, $path, $pathpic);
