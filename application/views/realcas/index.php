@@ -102,7 +102,7 @@ var backend_url = "<?php echo ''/*$backend_url;*/ ?>" + model_name;
                             <font class="model-page-direct" data-bind="attr: { href: id }, text: name"></font>
                             <ul class="model-lib" data-bind="modelLibExpandable: expanded, foreach: library">
                                 <li class="model-lib-entry" data-bind="modelLibEntry: true">
-                                    <a href="#" title="Select model library" class="load" data-bind="text: name"></a>
+                                    <a href="#" class="load" data-bind="text: name"></a>
                                     <a href="#" class="action model-lib-entry-remove delete icon-trash" title="Delete model library"></a>
                                 </li>
                             </ul>
