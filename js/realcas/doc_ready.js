@@ -248,6 +248,19 @@ $(document).ready(function(){
                 $('#txtsim_txtOutVar').val(result.outvar);
                 $("#txtsim_txtOutVar").trigger('autosize');
 
+                $("#bti").val(result.bti);
+                $("#bti").trigger('autosize');
+                $("#tcyc").val(result.tcyc);
+                $("#tcyc").trigger('autosize');
+                $("#hci").val(result.hci);
+                $("#hci").trigger('autosize');
+                $("#tstep").val(result.tstep);
+                $("#tstep").trigger('autosize');
+                $("#tpre").val(result.tpre);
+                $("#tpre").trigger('autosize');
+                $("#np").val(result.np);
+                $("#np").trigger('autosize');
+
                 $('.data-persist').change();
             } catch (err) {
                 alert(failUploadMsg);

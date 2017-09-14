@@ -240,6 +240,12 @@ class realcas extends REST_Controller {
         $a['source'] = $this->input->post('source');
         $a['outvar'] = $this->input->post('outvar');
         $a['setup'] = $this->input->post('setup');
+        $a['bti'] = $this->input->post('bti');
+        $a['tcyc'] = $this->input->post('tcyc');
+        $a['hci'] = $this->input->post('hci');
+        $a['tstep'] = $this->input->post('tstep');
+        $a['tpre'] = $this->input->post('tpre');
+        $a['np'] = $this->input->post('np');
 
         //conv the \n to \r\n at EOL for fitting the NOTEPAD in windows
         $netlist = json_encode($a, JSON_NUMERIC_CHECK);
