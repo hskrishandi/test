@@ -106,7 +106,7 @@ class realcas extends REST_Controller {
 
                 // assume correct format
                 if ($data_array) {
-                    $this->Realcas_service->newModelLibrary($user_info->id);	
+                    $this->Realcas_service->newModelLibrary($user_info->id);
                     $response = array(
                         'success' => true,
                         'data' => $this->Realcas_service->loadModelLibrary($user_info->id, $data_array)

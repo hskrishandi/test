@@ -49,8 +49,8 @@ class Realcas_repository extends Base_repository
         return $this->db->affected_rows() > 0;
     }
 
-    public function newModelLibrary($userId) {
-        $this->db->where('user_id', $userId);
+    public function deleteModelLibrary($userId, $realcasModels) {
+        $this->db->where('user_id', $userId)->where_in('model_id', $realcasModels);
         $this->db->delete('user_param_sets');
         return $this->db->affected_rows();
     }

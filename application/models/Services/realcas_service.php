@@ -12,7 +12,7 @@ class Realcas_service extends Base_service
     {
         parent::__construct();
         $this->load->model('Repositories/Realcas_repository');
-        $this->realcasModels = array(10);
+        $this->realcasModels = array(10, 11);
     }
 
     /**
@@ -60,7 +60,7 @@ class Realcas_service extends Base_service
     }
 
     public function newModelLibrary($userId) {
-        return $this->Realcas_repository->newModelLibrary($userId);
+        return $this->Realcas_repository->deleteModelLibrary($userId, $this->realcasModels);
     }
 
     public function loadModelLibrary($userId, $data) {
