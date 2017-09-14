@@ -177,29 +177,29 @@ var backend_url = "<?php echo ''/*$backend_url;*/ ?>" + model_name;
                                         <div class="broader setup">
                                             <div class="form-group">
                                                 <label for="bti">BTI=</label>
-                                                <input type="text" class="form-control" id="bti" name="bti" value="1" placeholder="BTI">
+                                                <input type="text" class="form-control" id="bti" name="bti">
                                             </div>
                                             <div class="form-group">
                                                 <label for="tcyc">TCYC=</label>
-                                                <input type="text" class="form-control" id="tcyc" name="tcyc" value="2" placeholder="TCYC"> ns
+                                                <input type="text" class="form-control" id="tcyc" name="tcyc"> ns
                                             </div>
                                             <div class="form-group">
                                                 <label for="hci">HCI=</label>
-                                                <input type="text" class="form-control" id="hci" name="hci" value="1" placeholder="HCI">
+                                                <input type="text" class="form-control" id="hci" name="hci">
                                             </div>
                                         </div>
                                         <div class="broader setup">
                                             <div class="form-group">
                                                 <label for="tstep">tstep=</label>
-                                                <input type="text" class="form-control" id="tstep" name="tstep" value="0.005" placeholder="tstep"> ns
+                                                <input type="text" class="form-control" id="tstep" name="tstep"> ns
                                             </div>
                                             <div class="form-group">
                                                 <label for="tpre">tpre=</label>
-                                                <input type="text" class="form-control" id="tpre" name="tpre" value="10" placeholder="tpre"> year
+                                                <input type="text" class="form-control" id="tpre" name="tpre"> year
                                             </div>
                                             <div class="form-group">
                                                 <label for="np">NP=</label>
-                                                <input type="text" class="form-control" id="np" name="np" value="10" placeholder="NP">
+                                                <input type="text" class="form-control" id="np" name="np">
                                             </div>
                                         </div>
                                         <div class="clearFloat" style="clear:both"></div>
