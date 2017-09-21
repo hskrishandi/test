@@ -14,17 +14,56 @@ class simulation extends REST_Controller
         parent::__construct();
         // We put everything in controller first, later we can move logic to
         // service
-        // $this->load->model('Services/Abinitio_service');
-        // $this->requireAuth();
+        $this->load->model('Services/Abinitio_service');
+        $this->requireAuth();
+        $this->authUser = $this->getAuthUser();
+        $this->load->helper('download');
     }
 
     public function index()
     {
-        if ($this->input->post('cmd1') && !$this->input->post('cmd2') && !$this->input->post('cmd3')){
-            $this->firstsim();
+        $folder = $this->authUser->name;
+        //echo $folder;exit; //This line is for test
+        //$location = realpath(getcwd() . '/abinitio/tmp');
+        //if (!file_exists($location)) {
+        //    mkdir($location, 0777, true);
+        //}
+        //else {
+        //    chown($location, "apache");
+        //}
+        //chmod($location, 0777);
+        //$output = shell_exec('sudo chmod 777 ' .$location);
+        //echo $output;
+
+        $location = realpath(getcwd() . '/abinitio/tmp') . '/' .$folder;
+        //echo $location;
+        if (!file_exists($location)) {
+            mkdir($location, 0777, true);
         }
+
+        if ($this->input->post('cmd1') && !$this->input->post('cmd2') && !$this->input->post('cmd3')){
+            $outfilename1=$folder.time()."_scf.txt";
+            $this->firstsim($folder,$outfilename1);
+
+            chdir(realpath(getcwd() . '/abinitio/tmp'));
+            $path = $location . '/' .$outfilename1. '_output.txt';
+            $pathpic = $location . '/' .$outfilename1. '.png';
+
+            putenv('LD_LIBRARY_PATH='.getenv('LD_LIBRARY_PATH').':/usr/local/MATLAB/MATLAB_Runtime/v90/runtime/glnxa64:/usr/local/MATLAB/MATLAB_Runtime/v90/bin/glnxa64:/usr/local/MATLAB/MATLAB_Runtime/v90/sys/os/glnxa64');
+            $cmd='./rescu '.$location.'/'.$outfilename1.' > '.$location.'/'.$outfilename1.'_output.txt 2>&1 & echo $!';
+            $cmd2='./rescu -plot '.$location.'/'.$outfilename1.'_0.mat '.$location.'/'.$outfilename1.'.png > /dev/null 2>&1 & echo $!';
+
+            exec($cmd,$output);
+            exec($cmd2,$output2);
+            $pid=$output2[0];
+
+            //$path = '/' .$folder. '/' .$outfilename1. '_output.txt';
+            //$pathpic = '/' .$folder. '/' .$outfilename1. '.png';
+            $this->addRecord($folder,$pid,$path,$pathpic);
+        }
+
         if ($this->input->post('cmd1') && $this->input->post('cmd2')  && !$this->input->post('cmd3')){
-            $this->firstsim();
+            $this->firstsim($folder,$outfilename1);
             $this->secondsim();
         }
         if (!$this->input->post('cmd1') && $this->input->post('cmd2') && $this->input->post('cmd3')){
@@ -44,10 +83,9 @@ class simulation extends REST_Controller
     *
     * @author Alex
     */
-    public function firstsim()
+    public function firstsim($folder,$outfilename1)
     {
-        $outfilename1="testing".time()."_scf.txt";
-        $myfile=fopen(realpath(getcwd() . '/application/simulation/abinitio/') . '/' .$outfilename1, "w");
+        $myfile=fopen(realpath(getcwd() . '/abinitio/tmp') . '/' .$folder. '/' .$outfilename1, "w");
         //output anyway
         fwrite ($myfile,"smi.status = ". $this->input->post("smistatus").";\n");
 
@@ -511,4 +549,39 @@ class simulation extends REST_Controller
             echo "<a href=\"tmp/$outfilename3\">Output text file dos</a>";
         }
     }
+
+    public function checkstatus()
+    {
+      if ($this->method == 'GET') {
+          $userId = $this->authUser != null ? $this->authUser->name : "";
+          //echo $userId;
+          $this->body = $this->Abinitio_service->checkstatus($userId);
+      } else {
+          $this->status = 405;
+      }
+      $this->response();
+    }
+
+    public function result($pid)
+    {
+      if ($this->method == 'GET') {
+          $userId = $this->authUser != null ? $this->authUser->name : "";
+          //echo $userId;
+          $file = $this->Abinitio_service->result($userId, $pid);
+          force_download('i-MOS Users Manual.pdf', file_get_contents($file));
+      } else {
+          $this->status = 405;
+      }
+      $this->response();
+    }
+
+    public function addRecord($folder,$pid,$path,$pathpic)
+    {
+        if ($folder != null) {
+            $this->body = $this->Abinitio_service->addRecord($folder, $pid, $path, $pathpic);
+        } else {
+            $this->status = 401;
+        }
+    }
+
 }

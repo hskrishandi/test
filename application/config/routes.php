@@ -139,7 +139,9 @@ $route['modelsim/clientPlotData/(:any)'] = "v1/modelsim/clientPlotData/$1";
 /**
  * Aninitio Project
  */
-$route['abinitio/simulation'] = "abinitio/simulation";
+$route['abinitio/simulation'] = "abinitio/simulation/index";
+$route['abinitio/simulation/checkstatus'] = "abinitio/simulation/checkstatus";
+$route['abinitio/simulation/result/(:any)'] = "abinitio/simulation/result/$1";
 
 /**
  * Realcas
